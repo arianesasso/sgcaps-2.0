@@ -17,6 +17,7 @@
         <?= $this->Html->css('devoops/style_v1.css') ?>
 
         <?= $this->Html->script('devoops/jquery.min') ?>
+        <?= $this->Html->script('devoops/bootstrap') ?>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>

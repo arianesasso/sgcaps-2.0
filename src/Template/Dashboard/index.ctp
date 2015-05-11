@@ -25,7 +25,7 @@
     <div class="container-fluid expanded-panel">
         <div class="row">
             <div id="logo" class="col-xs-12 col-sm-2">
-                <?= $this->Html->link('Logout', ['controller' => 'users', 'action' => 'logout']); ?>
+                <?= $this->Html->link('SGCaps', ['controller' => 'dashboard', 'action' => 'index']); ?>
             </div>
             <div id="top-panel" class="col-xs-12 col-sm-10">
                 <div class="row">
@@ -36,8 +36,8 @@
                         </div>
                     </div>
                     <div class="col-xs-4 col-sm-8 top-panel-right">
-                        <a href="#" class="about">about</a>
-                        <a href="index.html" class="style2"></a>
+                        <!--                        <a href="#" class="about">about</a>
+                                                    <a href="index.html" class="style2"></a>-->
                         <ul class="nav navbar-nav pull-right panel-menu">
                             <li class="hidden-xs">
                                 <a href="index.html" class="modal-link">
@@ -100,7 +100,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="usuario/logout">
                                             <i class="fa fa-power-off"></i>
                                             <span>Logout</span>
                                         </a>
@@ -114,8 +114,8 @@
         </div>
     </div>
 </header>
-End Header
-Start Container
+<!-- End Header -->
+<!--Start Container -->
 <div id="main" class="container-fluid">
     <div class="row">
         <div id="sidebar-left" class="col-xs-2 col-sm-2">
