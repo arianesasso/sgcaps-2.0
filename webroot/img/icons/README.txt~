@@ -1,0 +1,1 @@
+Free license, the original blog post - http://splashyfish.com/sketches/comments/splashy-icons-an-icon-library-for-prototyping/
