@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\User;
@@ -10,8 +11,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  */
-class UsersTable extends Table
-{
+class UsersTable extends Table {
 
     /**
      * Initialize method
@@ -19,8 +19,7 @@ class UsersTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         $this->table('users');
         $this->displayField('id');
         $this->primaryKey('id');
@@ -28,16 +27,13 @@ class UsersTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('Organizations', [
+        $this->hasOne('Organizations', [
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Permissions', [
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Users', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('Validities', [
             'foreignKey' => 'user_id'
         ]);
     }
@@ -48,29 +44,23 @@ class UsersTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
-            
+                ->add('id', 'valid', ['rule' => 'numeric'])
+                ->allowEmpty('id', 'create');
+
         $validator
-            ->requirePresence('username', 'create')
-            ->notEmpty('username');
-            
+                ->requirePresence('username', 'create')
+                ->notEmpty('username');
+
         $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
-            
+                ->requirePresence('password', 'create')
+                ->notEmpty('password');
+
         $validator
-            ->add('active', 'valid', ['rule' => 'boolean'])
-            ->requirePresence('active', 'create')
-            ->notEmpty('active');
-            
-        $validator
-            ->add('blocked', 'valid', ['rule' => 'boolean'])
-            ->requirePresence('blocked', 'create')
-            ->notEmpty('blocked');
+                ->add('active', 'valid', ['rule' => 'boolean'])
+                ->requirePresence('active', 'create')
+                ->notEmpty('active');
 
         return $validator;
     }
@@ -82,10 +72,10 @@ class UsersTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
+
 }

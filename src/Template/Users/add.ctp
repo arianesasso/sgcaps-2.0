@@ -6,8 +6,6 @@
         <li><?= $this->Html->link(__('New Organization'), ['controller' => 'Organizations', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Validities'), ['controller' => 'Validities', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Validity'), ['controller' => 'Validities', 'action' => 'add']) ?> </li>
     </ul>
 </div>
 <div class="users form large-10 medium-9 columns">
@@ -18,7 +16,6 @@
             echo $this->Form->input('username');
             echo $this->Form->input('password');
             echo $this->Form->input('active');
-            echo $this->Form->input('blocked');
             echo $this->Form->input('user_id');
         ?>
     </fieldset>

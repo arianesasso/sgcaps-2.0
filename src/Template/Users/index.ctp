@@ -6,8 +6,6 @@
         <li><?= $this->Html->link(__('New Organization'), ['controller' => 'Organizations', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Validities'), ['controller' => 'Validities', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Validity'), ['controller' => 'Validities', 'action' => 'add']) ?> </li>
     </ul>
 </div>
 <div class="users index large-10 medium-9 columns">
@@ -18,9 +16,9 @@
             <th><?= $this->Paginator->sort('username') ?></th>
             <th><?= $this->Paginator->sort('password') ?></th>
             <th><?= $this->Paginator->sort('active') ?></th>
-            <th><?= $this->Paginator->sort('blocked') ?></th>
             <th><?= $this->Paginator->sort('user_id') ?></th>
             <th><?= $this->Paginator->sort('created') ?></th>
+            <th><?= $this->Paginator->sort('modified') ?></th>
             <th class="actions"><?= __('Actions') ?></th>
         </tr>
     </thead>
@@ -31,9 +29,9 @@
             <td><?= h($user->username) ?></td>
             <td><?= h($user->password) ?></td>
             <td><?= h($user->active) ?></td>
-            <td><?= h($user->blocked) ?></td>
             <td><?= $this->Number->format($user->user_id) ?></td>
             <td><?= h($user->created) ?></td>
+            <td><?= h($user->modified) ?></td>
             <td class="actions">
                 <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>

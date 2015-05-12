@@ -9,8 +9,6 @@
         <li><?= $this->Html->link(__('New Organization'), ['controller' => 'Organizations', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Validities'), ['controller' => 'Validities', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Validity'), ['controller' => 'Validities', 'action' => 'add']) ?> </li>
     </ul>
 </div>
 <div class="users view large-10 medium-9 columns">
@@ -37,8 +35,6 @@
         <div class="large-2 columns booleans end">
             <h6 class="subheader"><?= __('Active') ?></h6>
             <p><?= $user->active ? __('Yes') : __('No'); ?></p>
-            <h6 class="subheader"><?= __('Blocked') ?></h6>
-            <p><?= $user->blocked ? __('Yes') : __('No'); ?></p>
         </div>
     </div>
 </div>
@@ -86,6 +82,11 @@
             <th><?= __('User Id') ?></th>
             <th><?= __('Organization Id') ?></th>
             <th><?= __('Role Id') ?></th>
+            <th><?= __('Beginning') ?></th>
+            <th><?= __('Ending') ?></th>
+            <th><?= __('Created') ?></th>
+            <th><?= __('Modified') ?></th>
+            <th><?= __('Admin Id') ?></th>
             <th class="actions"><?= __('Actions') ?></th>
         </tr>
         <?php foreach ($user->permissions as $permissions): ?>
@@ -94,6 +95,11 @@
             <td><?= h($permissions->user_id) ?></td>
             <td><?= h($permissions->organization_id) ?></td>
             <td><?= h($permissions->role_id) ?></td>
+            <td><?= h($permissions->beginning) ?></td>
+            <td><?= h($permissions->ending) ?></td>
+            <td><?= h($permissions->created) ?></td>
+            <td><?= h($permissions->modified) ?></td>
+            <td><?= h($permissions->admin_id) ?></td>
 
             <td class="actions">
                 <?= $this->Html->link(__('View'), ['controller' => 'Permissions', 'action' => 'view', $permissions->id]) ?>
@@ -101,46 +107,6 @@
                 <?= $this->Html->link(__('Edit'), ['controller' => 'Permissions', 'action' => 'edit', $permissions->id]) ?>
 
                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Permissions', 'action' => 'delete', $permissions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permissions->id)]) ?>
-
-            </td>
-        </tr>
-
-        <?php endforeach; ?>
-    </table>
-    <?php endif; ?>
-    </div>
-</div>
-<div class="related row">
-    <div class="column large-12">
-    <h4 class="subheader"><?= __('Related Validities') ?></h4>
-    <?php if (!empty($user->validities)): ?>
-    <table cellpadding="0" cellspacing="0">
-        <tr>
-            <th><?= __('Id') ?></th>
-            <th><?= __('Beginning') ?></th>
-            <th><?= __('Ending') ?></th>
-            <th><?= __('Created') ?></th>
-            <th><?= __('Modified') ?></th>
-            <th><?= __('User Id') ?></th>
-            <th><?= __('Permission Id') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
-        </tr>
-        <?php foreach ($user->validities as $validities): ?>
-        <tr>
-            <td><?= h($validities->id) ?></td>
-            <td><?= h($validities->beginning) ?></td>
-            <td><?= h($validities->ending) ?></td>
-            <td><?= h($validities->created) ?></td>
-            <td><?= h($validities->modified) ?></td>
-            <td><?= h($validities->user_id) ?></td>
-            <td><?= h($validities->permission_id) ?></td>
-
-            <td class="actions">
-                <?= $this->Html->link(__('View'), ['controller' => 'Validities', 'action' => 'view', $validities->id]) ?>
-
-                <?= $this->Html->link(__('Edit'), ['controller' => 'Validities', 'action' => 'edit', $validities->id]) ?>
-
-                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Validities', 'action' => 'delete', $validities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $validities->id)]) ?>
 
             </td>
         </tr>

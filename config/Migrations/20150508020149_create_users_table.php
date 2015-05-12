@@ -24,7 +24,6 @@ class CreateUsersTable extends AbstractMigration {
                 ->addColumn('username', 'string', ['length' => 60, 'null' => false])
                 ->addColumn('password', 'string', ['length' => 256, 'null' => false])
                 ->addColumn('active', 'boolean', ['null' => false, 'default' => 1])
-                ->addColumn('blocked', 'boolean', ['null' => false, 'default' => 0])
                 ->addColumn('user_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
