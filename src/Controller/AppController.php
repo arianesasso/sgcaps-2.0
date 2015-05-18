@@ -30,8 +30,11 @@ class AppController extends Controller {
 
     /**
      * Initialization hook method.
+     * Método de inicialização
      *
-     * Use this method to add common initialization code like loading components.
+     * Use this method to add common initialization code like loading components
+     * Esse método pode ser utilizado para adicionar alguns códigos comums 
+     * de inicialização. Por exemplo: carregar componentes como o Auth e o Flash
      *
      * @return void
      */
@@ -39,25 +42,29 @@ class AppController extends Controller {
         parent::initialize();
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
+            //'authorize' => 'Controller',
             'authenticate' => [
                 'Form' => [
-                    'fields' => ['username' => 'username',
-                                 'password' => 'password'],
+                    'fields' => ['username' => 'username', 'password' => 'password'],
                     'scope' => ['active' => 1]
                 ]
             ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            'loginRedirect' => [
-                'controller' => 'Dashboard',
-                'action' => 'index'
-            ]
+            'loginAction' => ['controller' => 'Users', 'action' => 'login'],
+            'loginRedirect' => ['controller' => 'Users', 'action' => 'organizations']
         ]);
-        // Allows the display action so we can see:
-        // Home and Inactive User's Pages
+        // Allows the display action so we can see the Home
+        // Permite que a página inicial (Home) seja exibida antes da autenticação
         $this->Auth->allow(['display']);
     }
 
+    /**
+     * In the beggining no user is authorized
+     * No início, nenhum usuário está autorizado
+     * 
+     * @param type $user
+     * @return boolean
+     */
+//    public function isAuthorized($user) {
+//        return false;
+//    }
 }
