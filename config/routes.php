@@ -42,6 +42,7 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('Route');
 
 Router::scope('/usuario', ['controller' => 'Users'], function ($routes) {
+    $routes->connect('/unidades', ['action' => 'organizations']);
     $routes->connect('/sem-permissao', ['action' => 'inactiveUser']);
     $routes->connect('/login', ['action' => 'login']);
     $routes->connect('/logout', ['action' => 'logout']);
