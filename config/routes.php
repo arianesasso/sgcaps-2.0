@@ -42,10 +42,13 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('Route');
 
 Router::scope('/usuario', ['controller' => 'Users'], function ($routes) {
-    $routes->connect('/unidades', ['action' => 'organizations']);
     $routes->connect('/sem-permissao', ['action' => 'inactiveUser']);
     $routes->connect('/login', ['action' => 'login']);
     $routes->connect('/logout', ['action' => 'logout']);
+});
+
+Router::scope('/permissao', ['controller' => 'Permissions'], function ($routes) {
+    $routes->connect('/unidade', ['action' => 'organizations']);
 });
 
 Router::scope('/', function ($routes) {
