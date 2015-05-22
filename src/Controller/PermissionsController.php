@@ -12,19 +12,6 @@ use App\Controller\AppController;
 class PermissionsController extends AppController {
 
     /**
-     * Action that is executed before the user authentication. 
-     * This is needed so the user that is not active may see 
-     * the inactive users page
-     * 
-     * @param \Cake\Event\Event $event
-     * @return type
-     */
-    public function beforeFilter(\Cake\Event\Event $event) {
-        $this->Auth->allow(['view']);
-        return parent::beforeFilter($event);
-    }
-
-    /**
      * Shows the organizations that the user has permission to access
      * Mostra as unidades que o usuário tem permissão de acessar
      * 
@@ -35,9 +22,23 @@ class PermissionsController extends AppController {
     public function organizations() {
         $this->layout = 'devoops_minimal';
         $userId = $this->request->session()->read('Auth.User.id');
+        //Se houve uma requisicão do tipo POST, salvar o nome da organizacão
+        //na variável de sessão Auth.User e redirecionar para o dashboard
+        if ($this->request->is('post')) {
+            list($organization['id'], $organization['name']) = explode('/', $this->request->data['unidade']);
+            $permissions = $this->Permissions->find('validyroles', ['user_id' => $userId, 'organization_id' => $organization['id']]);
 
+            //Array com as Permissões do Usuário | Array with the user permissions   
+            $this->request->session()->write('Auth.User.roles', $permissions->toArray());
+            //Array com o nome da unidade atual do usuário 
+            //Array with the name of the current user organization
+            $this->request->session()->write('Auth.User.organization', $organization['name']);
+            return $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
+        }
+
+        //Esta porcão decódigo está relacionada a criacão da interface
+        //Related to the creation of the interface for the organization selection
         $permissions = $this->Permissions->find('validyorganizations', ['user_id' => $userId]);
-
         if (empty($permissions->toArray())) {
             $this->Auth->logout();
             return $this->redirect('usuario/sem-permissao');
