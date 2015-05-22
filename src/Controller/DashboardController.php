@@ -23,6 +23,20 @@ class DashboardController extends AppController {
 //        }
 //        return parent::isAuthorized($user);
 //    }
+    
+     /**
+     * If the organization was not selected, redirect the user so he can choose it
+     * Se a organizaćão não foi selecionada, redireciona o usuário para selecioná-la
+     * 
+     * @param \Cake\Event\Event $event
+     * @return type
+     */
+    public function beforeFilter(\Cake\Event\Event $event) {
+        if(empty($this->request->session()->read('Auth.User.organization'))) {
+            $this->redirect('permissao/unidade');
+        }
+        return parent::beforeFilter($event);
+    }
 
     /**
      * Creates the main structure of the page
