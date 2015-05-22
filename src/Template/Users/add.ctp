@@ -1,24 +1,18 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Organizations'), ['controller' => 'Organizations', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Organization'), ['controller' => 'Organizations', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="users form large-10 medium-9 columns">
+<div class="col-xs-12 col-md-6 col-sm-8" style='margin-top: 20px'>
     <?= $this->Form->create($user); ?>
     <fieldset>
-        <legend><?= __('Add User') ?></legend>
-        <?php
-            echo $this->Form->input('username');
-            echo $this->Form->input('password');
-            echo $this->Form->input('active');
-            echo $this->Form->input('user_id');
+        <legend><?= __('Cadastrar Novo Usuário') ?></legend>    
+        <div class="form-group">
+            <label class="control-label"><?= __('Nome de Usuário') ?></label>
+            <?php echo $this->Form->input('username', ['class' => 'form-control', 'label' => false]); ?>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><?= __('Senha') ?></label>
+            <?php echo $this->Form->input('password', ['class' => 'form-control', 'label' => false]); ?>
+        </div>
+        <?php echo $this->Form->input('user_id', ['type' => 'hidden', 'value' => '1']);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->submit(__('Salvar'), ['class' => 'btn btn-success']) ?>
     <?= $this->Form->end() ?>
 </div>
