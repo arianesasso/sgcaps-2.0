@@ -140,12 +140,10 @@ class UsersController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $this->layout = 'ajax';
-            
+        $this->layout = 'ajax';           
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
-            //pr($user);exit;
             if ($this->Users->save($user)) {
                 $this->Flash->bootstrapSuccess('O usuário foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
