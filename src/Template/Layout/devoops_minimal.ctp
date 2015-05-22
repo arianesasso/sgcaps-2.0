@@ -12,7 +12,7 @@
         </title>
 
         <?= $this->Html->css('devoops/bootstrap') ?>
-        <?= $this->Html->css('devoops/font-awesome.min.css') ?>
+        <?= $this->Html->css('devoops/font-awesome.css') ?>
         <?= $this->Html->css('devoops/righteous.css') ?>
         <?= $this->Html->css('devoops/style_v1.css') ?>
 

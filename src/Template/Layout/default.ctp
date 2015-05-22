@@ -4,8 +4,7 @@
         <?= $this->Html->charset('') ?>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            <?= 'SGCaps' ?>:
-            <?= $this->fetch('title') ?>
+            <?= 'SGCaps' ?>
         </title>
         <?= $this->Html->meta('icon') ?>
 
@@ -19,15 +18,10 @@
     <body>
         <header>
             <div class="header-title">
-                <span><?= $this->fetch('title') ?></span>
-            </div>
-            <div class="header-help">
-                <span><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></span>
-                <span><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></span>
+                <span>SGCaps</span>
             </div>
         </header>
         <div id="container">
-
             <div id="content">
                 <?= $this->Flash->render() ?>
                 <div class="row">
