@@ -40,12 +40,20 @@
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('script') ?>
+        
+        <?php $user =$this->request->session()->read('Auth.User'); ?>
     </head>
     <body>
-        <div id="container">
-            <div id="content">
-                <?= $this->Flash->render() ?>
-                <div class="row">
+        <header class="navbar">
+            <?= $this->element('Dashboard/dashboard_header', ['user' => $user]); ?>
+        </header>
+        <div id="main" class="container-fluid">
+            <div class="row">
+                <div id="sidebar-left" class="col-xs-2 col-sm-2">
+                    <?= $this->element('Dashboard/dashboard_sidebar'); ?>
+                </div>
+                <div id="content" class="col-xs-12 col-sm-10">
+                    <?= $this->Flash->render() ?>           
                     <?= $this->fetch('content') ?>
                 </div>
             </div>
