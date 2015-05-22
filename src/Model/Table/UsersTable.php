@@ -24,16 +24,15 @@ class UsersTable extends Table {
         $this->displayField('id');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
-        ]);
+
         $this->hasOne('Organizations', [
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Permissions', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('Users', [
+        $this->belongsTo('Admins', [
+            'classname' => 'Users',
             'foreignKey' => 'user_id'
         ]);
     }
@@ -57,11 +56,6 @@ class UsersTable extends Table {
                 ->requirePresence('password', 'create')
                 ->notEmpty('password');
 
-        $validator
-                ->add('active', 'valid', ['rule' => 'boolean'])
-                ->requirePresence('active', 'create')
-                ->notEmpty('active');
-
         return $validator;
     }
 
@@ -74,7 +68,6 @@ class UsersTable extends Table {
      */
     public function buildRules(RulesChecker $rules) {
         $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
 
