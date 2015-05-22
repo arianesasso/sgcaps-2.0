@@ -50,7 +50,7 @@ class AppController extends Controller {
                 ]
             ],
             'loginAction' => ['controller' => 'Users', 'action' => 'login'],
-            'loginRedirect' => ['controller' => 'Users', 'action' => 'organizations']
+            'loginRedirect' => ['controller' => 'Permissions', 'action' => 'organizations']
         ]);
         // Allows the display action so we can see the Home
         // Permite que a página inicial (Home) seja exibida antes da autenticação
