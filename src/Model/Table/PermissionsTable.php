@@ -81,6 +81,28 @@ class PermissionsTable extends Table {
     }
 
     /**
+     * Finds the user validy roles for a given organization
+     * Encontra os papéis válidos de um usuário em uma dada organizaćão
+     * 
+     * @param Query $query
+     * @param array $options
+     * @return type
+     */
+    public function findValidyRoles(Query $query, array $options) {
+        $fields = [
+            'Roles.name',
+        ];
+        return $this->find('list', ['valueField' => 'Roles.name'])
+                        ->select($fields)
+                        ->distinct($fields)
+                        ->where(['Permissions.user_id' => $options['user_id'],
+                            'Permissions.ending >=' => date('Y-m-d H:i:s'),
+                            'Permissions.organization_id' => $options['organization_id']
+                        ])
+                        ->contain('Roles');
+    }
+
+    /**
      * Finds the Organizations in which the user has validy permissions
      * Encontra as organizaćões nas quais o usuário tem permissões válidas
      * 
@@ -96,7 +118,8 @@ class PermissionsTable extends Table {
         return $this->find()
                         ->select($fields)
                         ->distinct($fields)
-                        ->where(['Permissions.user_id' => $options['user_id'], 'Permissions.ending >=' => date('Y-m-d H:i:s')])
+                        ->where(['Permissions.user_id' => $options['user_id'],
+                                 'Permissions.ending >=' => date('Y-m-d H:i:s')])
                         ->contain('Organizations');
     }
 
