@@ -14,17 +14,17 @@ class UsersController extends AppController {
     /**
      * Action that is executed before the user authentication. 
      * This is needed so the user that is not active may see 
-     * the inactive users page
+     * the no permission page
      * 
      * Ação que é executada antes da autenticação do usuário.
      * Ela é necessária para que o usuário que não está ativo
-     * veja a página de usuários inativos
+     * veja a página de usuário sem permissão
      * 
      * @param \Cake\Event\Event $event
      * @return type
      */
     public function beforeFilter(\Cake\Event\Event $event) {
-        $this->Auth->allow(['inactiveUser']);
+        $this->Auth->allow(['noPermission']);
 
         return parent::beforeFilter($event);
     }
@@ -99,13 +99,13 @@ class UsersController extends AppController {
     }
 
     /**
-     * Displays a message for the inactive user
-     * Mostra uma mensagem para o usuário inativo
+     * Displays a message when the user has no access permission
+     * Mostra uma mensagem quando o usuário não possui permissão de acesso
      * 
      * @return void Shows a static page
      *              Exibe uma página estática
      */
-    public function inactiveUser() {
+    public function noPermission() {
         $this->layout = 'devoops_minimal';
     }
 
@@ -115,6 +115,7 @@ class UsersController extends AppController {
      * @return void
      */
     public function index() {
+        $this->layout = 'ajax';
         $this->set('users', $this->paginate($this->Users));
         $this->set('_serialize', ['users']);
     }
@@ -127,6 +128,7 @@ class UsersController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
+        $this->layout = 'ajax';
         $user = $this->Users->get($id, [
             'contain' => ['Permissions', 'Organizations']
         ]);
@@ -140,15 +142,18 @@ class UsersController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
+        if (!$this->request->is('ajax')) {
+            return $this->redirect('usuario/sem-permissao');
+        }
+        
         $this->layout = 'ajax';           
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->bootstrapSuccess('O usuário foi salvo com sucesso.');
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->bootstrapSuccess('O usuário foi criado com sucesso.');
             } else {
-                $this->Flash->bootstrapError('O usuário não pode ser salvo, por favor, tente novamente.');
+                $this->Flash->bootstrapError('Não foi possível criar o usuário.');
             }
         }
         $this->set(compact('user'));

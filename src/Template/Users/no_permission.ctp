@@ -7,7 +7,7 @@
             </ul>
         </div>
         <div class="modal-body">
-            <p>Você não tem permissão para acessar esse sistema.</p>
+            <p>Você não possui permissão de acesso à essa página ou ao sistema.</p>
             <p>
                 Se desejar, entre em contato com: <?= $this->Html->link('e-mail', '#'); ?>.
             </p>

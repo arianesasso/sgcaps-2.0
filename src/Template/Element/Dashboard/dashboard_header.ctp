@@ -6,14 +6,10 @@
         <div id="top-panel" class="col-xs-12 col-sm-10">
             <div class="row">
                 <div class="col-xs-8 col-sm-4">
-                    <div id="search">
-                        <input type="text" placeholder="search"/>
-                        <i class="fa fa-search"></i>
-                    </div>
+                    <span><strong>Unidade:</strong></span>
+                    <span><?php echo $user['organization']; ?></span>
                 </div>
                 <div class="col-xs-4 col-sm-8 top-panel-right">
-                    <span><strong>Você está logado em:<strong></span>
-                    <span><?php echo $user['organization']; ?></span>
                     <ul class="nav navbar-nav pull-right panel-menu">
                         <li class="hidden-xs">
                             <a href="index.html" class="modal-link">
@@ -36,7 +32,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
                                 <div class="avatar">
-                                    <img src="img/avatar.jpg" class="img-circle" alt="avatar" />
+                                    <img src="http://www.gravatar.com/avatar?d=mm" class="img-circle" alt="avatar" />
                                 </div>
                                 <i class="fa fa-angle-down pull-right"></i>
                                 <div class="user-mini pull-right">

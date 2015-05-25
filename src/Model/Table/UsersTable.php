@@ -50,11 +50,11 @@ class UsersTable extends Table {
 
         $validator
                 ->requirePresence('username', 'create')
-                ->notEmpty('username');
+                ->notEmpty('username', 'Campo obrigatório');
 
         $validator
                 ->requirePresence('password', 'create')
-                ->notEmpty('password');
+                ->notEmpty('password', 'Campo obrigatório');
 
         return $validator;
     }
@@ -67,7 +67,7 @@ class UsersTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->isUnique(['username']));
+        $rules->add($rules->isUnique(['username'], 'Usuário já existente.'));
         return $rules;
     }
 

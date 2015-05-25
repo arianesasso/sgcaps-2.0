@@ -9,7 +9,6 @@ use App\Controller\AppController;
  *
  */
 class DashboardController extends AppController {
-
 //    /**
 //     * 
 //     * @param type $user
@@ -23,8 +22,8 @@ class DashboardController extends AppController {
 //        }
 //        return parent::isAuthorized($user);
 //    }
-    
-     /**
+
+    /**
      * If the organization was not selected, redirect the user so he can choose it
      * Se a organizaćão não foi selecionada, redireciona o usuário para selecioná-la
      * 
@@ -32,7 +31,7 @@ class DashboardController extends AppController {
      * @return type
      */
     public function beforeFilter(\Cake\Event\Event $event) {
-        if(empty($this->request->session()->read('Auth.User.organization'))) {
+        if (empty($this->request->session()->read('Auth.User.organization'))) {
             $this->redirect('permissao/unidade');
         }
         return parent::beforeFilter($event);
@@ -45,15 +44,9 @@ class DashboardController extends AppController {
      */
     public function index() {
         $this->layout = 'devoops_complete';
-    }
-
-    /**
-     * Shows the dashboard
-     * 
-     * @return void
-     */
-    public function main() {
-        $this->layout = 'ajax';
+        if ($this->request->is('ajax')) {
+            $this->layout = 'ajax';
+        }
     }
 
 }

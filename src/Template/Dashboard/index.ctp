@@ -1,41 +1,33 @@
-<!--Start Header -->
-<div id="screensaver">
-    <canvas id="canvas"></canvas>
-    <i class="fa fa-lock" id="screen_unlock"></i>
-</div>
-<div id="modalbox">
-    <div class="devoops-modal">
-        <div class="devoops-modal-header">
-            <div class="modal-header-name">
-                <span>Basic table</span>
+<!-- Start Dashboard 1 -->
+<div id="dashboard-header" class="row">
+    <div class="col-xs-12 col-sm-4 col-md-5 col-md-offset-1">
+        <h3>Olá, Dashboard!</h3>
+    </div>
+    <div class="clearfix visible-xs"></div>
+    <div class="col-xs-12 col-sm-8 col-md-7 pull-right">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="sparkline-dashboard" id="sparkline-1"></div>
+                <div class="sparkline-dashboard-info">
+                    <i class="fa fa-usd"></i>756.45M
+                    <span class="txt-primary">Teste</span>
+                </div>
             </div>
-            <div class="box-icons">
-                <a class="close-link">
-                    <i class="fa fa-times"></i>
-                </a>
+            <div class="col-xs-4">
+                <div class="sparkline-dashboard" id="sparkline-2"></div>
+                <div class="sparkline-dashboard-info">
+                    <i class="fa fa-usd"></i>245.12M
+                    <span class="txt-info">Teste</span>
+                </div>
             </div>
-        </div>
-        <div class="devoops-modal-inner">
-        </div>
-        <div class="devoops-modal-bottom">
+            <div class="col-xs-4">
+                <div class="sparkline-dashboard" id="sparkline-3"></div>
+                <div class="sparkline-dashboard-info">
+                    <i class="fa fa-usd"></i>107.83M
+                    <span>Teste</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<!-- End Header -->
-<!-- Start Content -->
-<div id="about">
-    <div class="about-inner">
-        <h4 class="page-header">Open-source admin theme for you</h4>
-        <p>DevOOPS team</p>
-        <p>Homepage - <a href="http://devoops.me" target="_blank">http://devoops.me</a></p>
-        <p>Email - <a href="mailto:devoopsme@gmail.com">devoopsme@gmail.com</a></p>
-        <p>Twitter - <a href="http://twitter.com/devoopsme" target="_blank">http://twitter.com/devoopsme</a></p>
-        <p>Donate - BTC 123Ci1ZFK5V7gyLsyVU36yPNWSB5TDqKn3</p>
-    </div>
-</div>
-<div class="preloader">
-    <img src="img/devoops_getdata.gif" class="devoops-getdata" alt="preloader"/>
-</div>
-<div id="ajax-content"></div>
-
-<!-- End Content -->
+<!--End Dashboard 1-->

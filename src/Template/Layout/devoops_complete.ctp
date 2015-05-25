@@ -30,6 +30,7 @@
         <?= $this->Html->script('devoops/tinymce.min') ?>
         <?= $this->Html->script('devoops/jquery.tinymce.min') ?>
         <?= $this->Html->script('devoops/devoops') ?>
+        <?= $this->Html->script('sgcaps') ?>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -40,8 +41,8 @@
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('script') ?>
-        
-        <?php $user =$this->request->session()->read('Auth.User'); ?>
+
+        <?php $user = $this->request->session()->read('Auth.User'); ?>
     </head>
     <body>
         <header class="navbar">
@@ -53,7 +54,8 @@
                     <?= $this->element('Dashboard/dashboard_sidebar'); ?>
                 </div>
                 <div id="content" class="col-xs-12 col-sm-10">
-                    <?= $this->Flash->render() ?>           
+                    <?= $this->element('Dashboard/bread_crumbs'); ?>
+                    <?= $this->Flash->render() ?>   
                     <?= $this->fetch('content') ?>
                 </div>
             </div>

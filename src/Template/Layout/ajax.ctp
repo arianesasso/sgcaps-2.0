@@ -13,4 +13,9 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
+
+<?= $this->element('Dashboard/bread_crumbs') ?>
+<?= $this->Flash->render() ?>   
 <?= $this->fetch('content') ?>
+    
+
