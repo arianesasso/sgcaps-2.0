@@ -54,9 +54,11 @@
                     <?= $this->element('Dashboard/dashboard_sidebar'); ?>
                 </div>
                 <div id="content" class="col-xs-12 col-sm-10">
-                    <?= $this->element('Dashboard/bread_crumbs'); ?>
-                    <?= $this->Flash->render() ?>   
-                    <?= $this->fetch('content') ?>
+                    <?= $this->element('Dashboard/bread_crumbs', ['user' => $user]); ?>
+                    <div id ="ajax-contet">
+                        <?= $this->Flash->render() ?>   
+                        <?= $this->fetch('content') ?>
+                    </div>
                 </div>
             </div>
         </div>
