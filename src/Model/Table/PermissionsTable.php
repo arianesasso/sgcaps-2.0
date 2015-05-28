@@ -82,7 +82,7 @@ class PermissionsTable extends Table {
 
     /**
      * Finds the user validy roles for a given organization
-     * Encontra os papéis válidos de um usuário em uma dada organizaćão
+     * Encontra os papéis válidos de um usuário em uma dada organização
      * 
      * @param Query $query
      * @param array $options
@@ -104,7 +104,7 @@ class PermissionsTable extends Table {
 
     /**
      * Finds the Organizations in which the user has validy permissions
-     * Encontra as organizaćões nas quais o usuário tem permissões válidas
+     * Encontra as organizações nas quais o usuário tem permissões válidas
      * 
      * @param Query $query
      * @param array $options
