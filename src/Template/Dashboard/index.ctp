@@ -1,4 +1,4 @@
-<!-- Start Dashboard 1 -->
+<!-- Start Dashboard -->
 <div id="dashboard-header" class="row">
     <div class="col-xs-12 col-sm-4 col-md-5 col-md-offset-1">
         <h3>Olá, Dashboard!</h3>
@@ -30,4 +30,4 @@
         </div>
     </div>
 </div>
-<!--End Dashboard 1-->
+<!-- End Dashboard -->
