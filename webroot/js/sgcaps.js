@@ -16,7 +16,7 @@ $(document).ready(function () {
             url: url,
             type: 'get',
             success: function (result) {
-                $("#content").html(result);
+                $("#ajax-contet").html(result);
             }
         });
     });
@@ -41,7 +41,7 @@ $(document).ajaxComplete(function () {
             url: url,
             type: 'get',
             success: function (result) {
-                $("#content").html(result);
+                $("#ajax-contet").html(result);
             }
         });
     });
@@ -56,7 +56,7 @@ $(document).ajaxComplete(function () {
             type: 'post',
             data: form,
             success: function (result) {
-                $("#content").html(result);
+                $("#ajax-contet").html(result);
             }
         });
     });
