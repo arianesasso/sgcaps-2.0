@@ -1,15 +1,11 @@
 <div class="container-fluid expanded-panel">
     <div class="row">
-        <div id="logo" class="col-xs-12 col-sm-2">
+        <div id="logo" class="col-xs-12 col-sm-3 col-md-2">
             <?= $this->Html->link('SGCaps', ['controller' => 'dashboard', 'action' => 'index']); ?>
         </div>
-        <div id="top-panel" class="col-xs-12 col-sm-10">
+        <div id="top-panel" class="col-xs-12 col-sm-9 col-md-10">
             <div class="row">
-                <div class="col-xs-8 col-sm-4">
-                    <span><strong>Unidade:</strong></span>
-                    <span><?php echo $user['organization']; ?></span>
-                </div>
-                <div class="col-xs-4 col-sm-8 top-panel-right">
+                <div class="col-xs-12 top-panel-right">
                     <ul class="nav navbar-nav pull-right panel-menu">
                         <li class="hidden-xs">
                             <a href="index.html" class="modal-link">
