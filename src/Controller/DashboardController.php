@@ -39,6 +39,7 @@ class DashboardController extends AppController {
 
     /**
      * Creates the main structure of the page
+     * Cria a estrutura principal da página
      *
      * @return void
      */
