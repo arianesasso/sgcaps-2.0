@@ -17,19 +17,12 @@
         <?= $this->Html->css('devoops/font-awesome') ?>
         <?= $this->Html->css('devoops/righteous.css') ?>
         <?= $this->Html->css('devoops/jquery.fancybox.css') ?>
-        <?= $this->Html->css('devoops/fullcalendar.css') ?>
-        <?= $this->Html->css('devoops/xcharts.min.css') ?>
-        <?= $this->Html->css('devoops/select2.css') ?>
-        <?= $this->Html->css('devoops/justifiedGallery.css') ?>
         <?= $this->Html->css('devoops/style_v1.css') ?>
-        <?= $this->Html->css('devoops/chartist.min.css') ?>
+        <?= $this->Html->css('sgcaps.css') ?>
 
         <?= $this->Html->script('devoops/jquery.min') ?>
         <?= $this->Html->script('devoops/jquery-ui.min') ?>      
         <?= $this->Html->script('devoops/bootstrap') ?>
-        <?= $this->Html->script('devoops/jquery.justifiedGallery.min') ?>
-        <?= $this->Html->script('devoops/tinymce.min') ?>
-        <?= $this->Html->script('devoops/jquery.tinymce.min') ?>
         <?= $this->Html->script('devoops/devoops') ?>
         <?= $this->Html->script('sgcaps') ?>
 
