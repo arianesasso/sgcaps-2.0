@@ -14,7 +14,7 @@ class UsersController extends AppController {
     /**
      * Action that is executed before the user authentication. 
      * This is needed so the user that is not active may see 
-     * the no permission page
+     * the page for the users with no permissions
      * 
      * Ação que é executada antes da autenticação do usuário.
      * Ela é necessária para que o usuário que não está ativo
@@ -25,7 +25,6 @@ class UsersController extends AppController {
      */
     public function beforeFilter(\Cake\Event\Event $event) {
         $this->Auth->allow(['noPermission']);
-
         return parent::beforeFilter($event);
     }
 
@@ -49,7 +48,6 @@ class UsersController extends AppController {
 
     /**
      * Login method (using Auth component)
-     * 
      * Método de Login (estamos usando o componente Auth do Cake)
      * 
      * @return void Redirects on successful login 
@@ -58,7 +56,7 @@ class UsersController extends AppController {
     public function login() {
         //The redirectUrl needs to be null so the login will always redirect 
         //to the organzations action
-        //O atributo rirectUrl precisa ser null, assim o usuário semprre
+        //O atributo redirectUrl precisa ser null, assim o usuário semprre
         //será redirecionado do login para a página de escolha de unidades
         $this->Auth->redirectUrl(null);
         $this->layout = 'devoops_minimal';
@@ -77,7 +75,7 @@ class UsersController extends AppController {
             //If the user does not exists // Se o usuário não existe
             if ($users->count() === 0) {
                 $this->Flash->bootstrapError('Seu nome de usuário está incorreto.');
-                //If the user is not active
+                //If the user is not active // Se o usuário não está ativo
             } else if (empty($users->first()->active)) {
                 return $this->redirect('usuario/sem-permissao');
             } else {
@@ -142,10 +140,10 @@ class UsersController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
+        //Se a requisacão não é por ajax, uma mensagem de usuário sem permissão é exibida
         if (!$this->request->is('ajax')) {
             return $this->redirect('usuario/sem-permissao');
-        }
-        
+        }        
         $this->layout = 'ajax';           
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
