@@ -1,11 +1,14 @@
 <!-- Start Breadcrumb -->
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
-        <a href="#" class="show-sidebar" style="margin-left: 20px">
+        <a href="#" class="show-sidebar left-margin">
             <i class="fa fa-bars"></i>
         </a>
         <ol class="breadcrumb pull-left">
-            <li></li>
+            <li>    
+                <span class="breadcrumb-text"><strong>Unidade:</strong></span>
+                <span class="breadcrumb-text"><?php echo $user['organization']; ?></span>
+            </li>
         </ol>
     </div>
 </div>
