@@ -44,19 +44,19 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="ajax/page_messages.html" class="ajax-link">
+                                    <a href="#" class="ajax-link">
                                         <i class="fa fa-envelope"></i>
                                         <span><?= __('Mensagens') ?></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="ajax/gallery_simple.html" class="ajax-link">
+                                    <a href="#" class="ajax-link">
                                         <i class="fa fa-picture-o"></i>
                                         <span><?= __('Álbums') ?></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="ajax/calendar.html" class="ajax-link">
+                                    <a href="#" class="ajax-link">
                                         <i class="fa fa-tasks"></i>
                                         <span>Tarefas</span>
                                     </a>
