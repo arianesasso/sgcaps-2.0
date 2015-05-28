@@ -67,7 +67,7 @@ class UsersTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->isUnique(['username'], 'Usuário já existente.'));
+        $rules->add($rules->isUnique(['username'], 'Usuário já existente'));
         return $rules;
     }
 
