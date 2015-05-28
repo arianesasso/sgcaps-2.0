@@ -7,6 +7,7 @@
         <?= $this->Html->meta('keywords', 'keywords'); ?>
         <?= $this->Html->meta('viewport', 'width=device-width, initial-scale=1'); ?>
         <?= $this->Html->meta('icon') ?>
+        
         <title>
             <?= 'SGCaps' ?>
         </title>
