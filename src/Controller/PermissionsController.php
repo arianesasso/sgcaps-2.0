@@ -16,7 +16,7 @@ class PermissionsController extends AppController {
      * Mostra as unidades que o usuário tem permissão de acessar
      * 
      * @param integer $userId
-     * @return void Redirects the user if it has not validy permissions
+     * @return void Redirects the user if he/she has no validy permissions
      *              Redireciona o usuário se ele não tiver permissões válidas
      */
     public function organizations() {
@@ -36,7 +36,7 @@ class PermissionsController extends AppController {
             return $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
         }
 
-        //Esta porcão decódigo está relacionada a criacão da interface
+        //Esta porcão de código está relacionada a criacão da interface
         //Related to the creation of the interface for the organization selection
         $permissions = $this->Permissions->find('validyorganizations', ['user_id' => $userId]);
         if (empty($permissions->toArray())) {
