@@ -1,5 +1,5 @@
 <legend><?= __('Visualizar Permissões') ?></legend>
-<div class='row-fluid'>
+<div class='row'>
     <div class="col-xs-12">
         <ul class="list-inline">
             <li>

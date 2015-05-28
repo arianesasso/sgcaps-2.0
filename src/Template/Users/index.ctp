@@ -1,5 +1,5 @@
-<div class="row-fluid">
-    <legend><?= __('Visualizar Usuários') ?></legend>
+<legend><?= __('Visualizar Permissões') ?></legend>
+<div class="row">
     <div class="col-xs-12">
         <table cellpadding="0" cellspacing="0" class="table">
             <thead>
