@@ -1,6 +1,6 @@
-<div class="row-fluid">
-    <?= $this->Form->create($user); ?>
-    <legend><?= __('Cadastrar Novo Usuário') ?></legend>
+<?= $this->Form->create($user); ?>
+<legend><?= __('Cadastrar Novo Usuário') ?></legend>
+<div class="row"> 
     <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">     
         <fieldset>
             <br/>
