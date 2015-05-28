@@ -15,6 +15,7 @@
         <?= $this->Html->css('devoops/font-awesome.css') ?>
         <?= $this->Html->css('devoops/righteous.css') ?>
         <?= $this->Html->css('devoops/style_v1.css') ?>
+        <?= $this->Html->css('sgcaps') ?>
 
         <?= $this->Html->script('devoops/jquery.min') ?>
         <?= $this->Html->script('devoops/bootstrap') ?>

@@ -1,7 +1,8 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-md-8 col-md-offset-4 col-sm-10 col-sm-offset-1">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 top-margin sgcaps-home">
             <h3>Bem vindo ao projeto SGCaps</h3>
+            <br/>
             <p>Esse projeto foi desenvolvido por Ariane Morassi Sasso.</p>
             <p>   
                 <?php
@@ -10,5 +11,4 @@
             </p>
         </div>
     </div>
-</div>
 </div>
