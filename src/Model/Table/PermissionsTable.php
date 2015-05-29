@@ -96,9 +96,10 @@ class PermissionsTable extends Table {
                         ->select($fields)
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
-                            'Permissions.ending >=' => date('Y-m-d H:i:s'),
-                            'Permissions.organization_id' => $options['organization_id']
-                        ])
+                                 'Permissions.organization_id' => $options['organization_id'],
+                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
+                                          ['Permissions.ending IS' => null]],
+                                ])
                         ->contain('Roles');
     }
 
@@ -119,7 +120,9 @@ class PermissionsTable extends Table {
                         ->select($fields)
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
-                                 'Permissions.ending >=' => date('Y-m-d H:i:s')])
+                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')], 
+                                          ['Permissions.ending IS' => null]],
+                                ])
                         ->contain('Organizations');
     }
 
