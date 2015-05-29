@@ -8,19 +8,19 @@
                 <div class="col-xs-12 top-panel-right">
                     <ul class="nav navbar-nav pull-right panel-menu">
                         <li class="hidden-xs">
-                            <a href="index.html" class="modal-link">
+                            <a href="#" class="modal-link">
                                 <i class="fa fa-bell"></i>
                                 <span class="badge">7</span>
                             </a>
                         </li>
                         <li class="hidden-xs">
-                            <a class="ajax-link" href="ajax/calendar.html">
+                            <a class="ajax-link" href="#">
                                 <i class="fa fa-calendar"></i>
                                 <span class="badge">7</span>
                             </a>
                         </li>
                         <li class="hidden-xs">
-                            <a href="ajax/page_messages.html" class="ajax-link">
+                            <a href="#" class="ajax-link">
                                 <i class="fa fa-envelope"></i>
                                 <span class="badge">7</span>
                             </a>
@@ -40,7 +40,13 @@
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-user"></i>
-                                        <span><?= __('Perfil') ?></span>
+                                        <span><?= __('Meus Dados') ?></span>
+                                    </a>
+                                </li>
+                                 <li>
+                                    <a href="#">
+                                        <i class="fa fa-calendar"></i>
+                                        <span>Calendário</span>
                                     </a>
                                 </li>
                                 <li>
@@ -51,22 +57,10 @@
                                 </li>
                                 <li>
                                     <a href="#" class="ajax-link">
-                                        <i class="fa fa-picture-o"></i>
-                                        <span><?= __('Álbums') ?></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ajax-link">
                                         <i class="fa fa-tasks"></i>
                                         <span>Tarefas</span>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-cog"></i>
-                                        <span>Configurações</span>
-                                    </a>
-                                </li>
+                                </li>                               
                                 <li>
                                     <a href="usuario/logout">
                                         <i class="fa fa-power-off"></i>
