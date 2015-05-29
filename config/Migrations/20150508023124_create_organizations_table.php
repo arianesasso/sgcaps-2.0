@@ -21,11 +21,16 @@ class CreateOrganizationsTable extends AbstractMigration {
      */
     public function up() {
         $this->table('organizations')
-                ->addColumn('name', 'string', ['length' => 255, 'null' => false])
+                ->addColumn('organization_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('user_id', 'integer', ['null' => true, 'default' => null])
+                ->addColumn('name', 'string', ['length' => 255, 'null' => false])
+                ->addColumn('region', 'string', ['length' => 255, 'null' => true, 'default' => null])
+                ->addColumn('care_type', 'string', ['length' => 45, 'null' => true, 'default' => null])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addIndex('user_id')
+                ->addIndex('organization_id')
                 ->addForeignKey('user_id', 'users', 'id')
+                ->addForeignKey('organization_id', 'organizations', 'id')
                 ->save();
     }
 
