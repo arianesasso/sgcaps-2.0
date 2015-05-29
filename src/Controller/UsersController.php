@@ -77,7 +77,7 @@ class UsersController extends AppController {
                 $this->Flash->bootstrapError('Seu nome de usuário está incorreto.');
                 //If the user is not active // Se o usuário não está ativo
             } else if (empty($users->first()->active)) {
-                return $this->redirect('usuario/sem-permissao');
+                return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
             } else {
                 $this->Flash->bootstrapError('Senha incorreta.');
             }

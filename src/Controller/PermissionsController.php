@@ -41,7 +41,7 @@ class PermissionsController extends AppController {
         $permissions = $this->Permissions->find('validyorganizations', ['user_id' => $userId]);
         if (empty($permissions->toArray())) {
             $this->Auth->logout();
-            return $this->redirect('usuario/sem-permissao');
+            return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
         $this->set(compact('permissions'));
     }

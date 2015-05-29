@@ -32,7 +32,7 @@ class DashboardController extends AppController {
      */
     public function beforeFilter(\Cake\Event\Event $event) {
         if (empty($this->request->session()->read('Auth.User.organization'))) {
-            $this->redirect('permissao/unidade');
+            $this->redirect(['controller' => 'permissao', 'action' => 'unidade']);
         }
         return parent::beforeFilter($event);
     }
