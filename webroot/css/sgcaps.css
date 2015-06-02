@@ -1,13 +1,7 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : May 27, 2015, 10:44:06 PM
     Author     : ariane
 */
-
 .breadcrumb-text {
     color: white;
 }
@@ -25,4 +19,13 @@ and open the template in the editor.
     border-radius: 5px; 
     background-color: lightblue; 
     padding-top: 10px;
+}
+
+#user-type-professional {
+    margin-right: 5px;
+}
+
+#user-type-organization {
+    margin-left: 10px;
+    margin-right: 5px;
 }
