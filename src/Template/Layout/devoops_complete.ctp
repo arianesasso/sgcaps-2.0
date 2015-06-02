@@ -16,9 +16,9 @@
         <?= $this->Html->css('devoops/jquery-ui.min') ?>
         <?= $this->Html->css('devoops/font-awesome') ?>
         <?= $this->Html->css('devoops/righteous.css') ?>
-        <?= $this->Html->css('devoops/jquery.fancybox.css') ?>
-        <?= $this->Html->css('devoops/style_v1.css') ?>
-        <?= $this->Html->css('sgcaps.css') ?>
+        <?= $this->Html->css('devoops/jquery.fancybox') ?>
+        <?= $this->Html->css('devoops/style_v1') ?>
+        <?= $this->Html->css('sgcaps') ?>
 
         <?= $this->Html->script('devoops/jquery.min') ?>
         <?= $this->Html->script('devoops/jquery-ui.min') ?>      

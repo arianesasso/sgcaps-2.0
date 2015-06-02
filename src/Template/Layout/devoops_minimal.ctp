@@ -12,9 +12,9 @@
         </title>
 
         <?= $this->Html->css('devoops/bootstrap') ?>
-        <?= $this->Html->css('devoops/font-awesome.css') ?>
-        <?= $this->Html->css('devoops/righteous.css') ?>
-        <?= $this->Html->css('devoops/style_v1.css') ?>
+        <?= $this->Html->css('devoops/font-awesome') ?>
+        <?= $this->Html->css('devoops/righteous') ?>
+        <?= $this->Html->css('devoops/style_v1') ?>
         <?= $this->Html->css('sgcaps') ?>
 
         <?= $this->Html->script('devoops/jquery.min') ?>
