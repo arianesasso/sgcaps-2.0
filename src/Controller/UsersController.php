@@ -113,7 +113,7 @@ class UsersController extends AppController {
      * @return void
      */
     public function index() {
-        $this->layout = 'ajax';
+        $this->layout = 'devoops_complete';
         $this->set('users', $this->paginate($this->Users));
         $this->set('_serialize', ['users']);
     }
@@ -126,7 +126,7 @@ class UsersController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
-        $this->layout = 'ajax';
+        $this->layout = 'devoops_complete';
         $user = $this->Users->get($id, [
             'contain' => ['Permissions', 'Organizations']
         ]);
@@ -141,10 +141,10 @@ class UsersController extends AppController {
      */
     public function add() {
         //Se a requisacão não é por ajax, uma mensagem de usuário sem permissão é exibida
-        if (!$this->request->is('ajax')) {
-            return $this->redirect('usuario/sem-permissao');
-        }        
-        $this->layout = 'ajax';           
+//        if (!$this->request->is('ajax')) {
+//            return $this->redirect('usuario/sem-permissao');
+//        }        
+        $this->layout = 'devoops_complete';           
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);

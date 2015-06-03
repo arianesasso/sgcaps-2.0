@@ -5,9 +5,9 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('Profissional/Organização') ?></th>
-                    <th><?= $this->Paginator->sort('Usuário') ?></th>
-                    <th><?= $this->Paginator->sort('Ativo') ?></th>
-                    <th><?= $this->Paginator->sort('Criado') ?></th>
+                    <th><?= $this->Paginator->sort('username', 'Usuário') ?></th>
+                    <th><?= $this->Paginator->sort('active', 'Ativo') ?></th>
+                    <th><?= $this->Paginator->sort('created', 'Cadastro') ?></th>
                     <th class="actions"><?= __('Ações') ?></th>
                 </tr>
             </thead>

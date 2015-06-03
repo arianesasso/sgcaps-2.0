@@ -22,8 +22,10 @@
             <span class="hidden-xs">Usuários</span>
         </a>
         <ul class="dropdown-menu">
-            <li><a class="link-ajax" href="users/add">Cadastrar</a></li>
-            <li><a class="link-ajax" href="users/index">Visualizar</a></li>
+            <li><?php echo $this->Html->link('Cadastrar',['controller' => 'usuario', 'action' => 'cadastrar']) ?></li>
+            <li><?php echo $this->Html->link('Visualizar',['controller' => 'usuario', 'action' => 'visualizar']) ?></li>
+<!--        <li><a class="" href="users/add">Cadastrar</a></li>
+            <li><a class="" href="users/index">Visualizar</a></li>-->
         </ul>
     </li>
     <li class="dropdown">

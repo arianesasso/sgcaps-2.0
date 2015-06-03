@@ -45,6 +45,8 @@ Router::scope('/usuario', ['controller' => 'Users'], function ($routes) {
     $routes->connect('/sem-permissao', ['action' => 'noPermission']);
     $routes->connect('/login', ['action' => 'login']);
     $routes->connect('/logout', ['action' => 'logout']);
+    $routes->connect('/cadastrar', ['action' => 'add']);
+    $routes->connect('/visualizar', ['action' => 'index']);
 });
 
 Router::scope('/permissao', ['controller' => 'Permissions'], function ($routes) {
