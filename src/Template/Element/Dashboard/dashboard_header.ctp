@@ -62,7 +62,7 @@
                                     </a>
                                 </li>                               
                                 <li>
-                                    <a href="usuario/logout">
+                                    <a href="../usuario/logout">
                                         <i class="fa fa-power-off"></i>
                                         <span>Logout</span>
                                     </a>
