@@ -139,17 +139,22 @@ class UsersController extends AppController {
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add() {
-        //Se a requisacão não é por ajax, uma mensagem de usuário sem permissão é exibida
-//        if (!$this->request->is('ajax')) {
-//            return $this->redirect('usuario/sem-permissao');
-//        }        
+    public function add() {    
         $this->layout = 'devoops_complete';           
         $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
+        if ($this->request->is('post')) {       
+            if (!empty($this->request->data['professional_id'])) {
+                $id = $this->request->data['professional_id'];
+                $controller = 'people';
+            } elseif (!empty($this->request->data['organization_id'])) {
+                $id = $this->request->data['organization_id'];
+                $controller = 'organizations';
+            } else {
+                $this->Flash->bootstrapError('Não foi possível criar o usuário.');
+            }
+            $user = $this->Users->patchEntity($user, $this->request->data);           
             if ($this->Users->save($user)) {
-                $this->Flash->bootstrapSuccess('O usuário foi criado com sucesso.');
+                $this->redirect(['controller' => $controller, 'action' => 'addUser', $id, $user->id]);
             } else {
                 $this->Flash->bootstrapError('Não foi possível criar o usuário.');
             }

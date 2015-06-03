@@ -100,6 +100,26 @@ class OrganizationsController extends AppController
         $this->set(compact('organization', 'users'));
         $this->set('_serialize', ['organization']);
     }
+    
+    /**
+     * Adds user_id to the organization
+     *
+     * @param string $id Organization id.
+     * @param integer $userId User id.
+     * @return void Redirects on successful addition
+     */
+    public function addUser($id, $userId)
+    {
+        $this->autoRender = false;
+        $organization = $this->Organizations->patchEntity($this->Organizations->get($id), ['user_id' => $userId]);
+        if ($this->Organizations->save($organization)) {
+            $this->Flash->bootstrapSuccess('O usuário foi criado com sucesso.');
+            $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
+        } else {
+            $this->Flash->error('Não foi possível criar um usuário para essa organização.');
+            $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
+        }
+    }
 
     /**
      * Delete method

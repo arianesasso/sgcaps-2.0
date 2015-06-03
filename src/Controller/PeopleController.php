@@ -63,6 +63,26 @@ class PeopleController extends AppController
         $this->set(compact('person', 'users', 'states'));
         $this->set('_serialize', ['person']);
     }
+    
+     /**
+     * Adds user_id to the person
+     *
+     * @param string $id Person id.
+     * @param integer $userId User id.
+     * @return void Redirects on successful addition
+     */
+    public function addUser($id, $userId)
+    {
+        $this->autoRender = false;
+        $people = $this->People->patchEntity($this->People->get($id), ['user_id' => $userId]);
+        if ($this->People->save($people)) {
+            $this->Flash->bootstrapSuccess('O usuário foi criado com sucesso.');
+            $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
+        } else {
+            $this->Flash->error('Não foi possível criar um usuário para essa pessoa.');
+            $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
+        }
+    }
 
     /**
      * Edit method

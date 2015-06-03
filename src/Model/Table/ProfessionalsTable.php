@@ -67,4 +67,23 @@ class ProfessionalsTable extends Table
         $rules->add($rules->existsIn(['board_state_id'], 'States'));
         return $rules;
     }
+       
+    /**
+     * Finds the professionals that are not users
+     * Encontra os profissionais que não são usuários
+     * 
+     * @param Query $query
+     * @param array $options
+     * @return type
+     */
+    public function findNoUsers(Query $query, array $options) {
+        $fields = [
+            'People.id',
+            'People.name'
+        ];
+        return $this->find('list',['keyField' => 'People.id', 'valueField' => 'People.name'])
+                        ->select($fields)
+                        ->where(['user_id IS' => null])
+                        ->contain('People'  );
+    }
 }
