@@ -62,7 +62,10 @@
                                     </a>
                                 </li>                               
                                 <li>
-                                    <a href="../usuario/logout">
+                                    <a href="<?php echo $this->Url->build([
+                                                    "controller" => "usuario",
+                                                    "action" => "logout"]);
+                                             ?>">
                                         <i class="fa fa-power-off"></i>
                                         <span>Logout</span>
                                     </a>
