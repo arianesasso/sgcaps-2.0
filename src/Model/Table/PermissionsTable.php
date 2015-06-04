@@ -52,15 +52,31 @@ class PermissionsTable extends Table {
         $validator
                 ->add('id', 'valid', ['rule' => 'numeric'])
                 ->allowEmpty('id', 'create');
+        
+        $validator
+                ->requirePresence('organization_id', 'create')
+                ->notEmpty('organization_id', 'Campo obrigatório');
+        
+        $validator
+                ->requirePresence('role_id', 'create')
+                ->notEmpty('role_id', 'Campo obrigatório');
 
         $validator
-                ->add('beginning', 'valid', ['rule' => 'datetime'])
+                ->add('beginning', 'valid', ['rule' => 'date'])
                 ->requirePresence('beginning', 'create')
-                ->notEmpty('beginning');
+                ->notEmpty('beginning', 'Campo obrigatório');
 
         $validator
-                ->add('ending', 'valid', ['rule' => 'datetime'])
+                ->add('ending', 'valid', ['rule' => 'date'])
                 ->allowEmpty('ending');
+        
+        $validator->add('role_id', [
+            'unique' => [
+                'rule' => ['validateUnique', ['scope' => ['user_id', 'organization_id']]],
+                'provider' => 'table',
+                'message' => 'O usuário já possui esse papel nesta unidade.'
+            ]
+        ]);
 
         return $validator;
     }
