@@ -30,8 +30,8 @@ class PermissionsController extends AppController {
 
             //Array com as Permissões do Usuário | Array with the user permissions   
             $this->request->session()->write('Auth.User.roles', $permissions->toArray());
-            //Array com o nome da unidade atual do usuário 
-            //Array with the name of the current user organization
+            //Variável com o nome da unidade atual do usuário 
+            //Variable with the name of the current user organization
             $this->request->session()->write('Auth.User.organization', $organization['name']);
             return $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
         }

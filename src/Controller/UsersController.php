@@ -151,10 +151,11 @@ class UsersController extends AppController {
                 $controller = 'organizations';
             } else {
                 $this->Flash->bootstrapError('Não foi possível criar o usuário.');
+                return $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
             }
             $user = $this->Users->patchEntity($user, $this->request->data);           
             if ($this->Users->save($user)) {
-                $this->redirect(['controller' => $controller, 'action' => 'addUser', $id, $user->id]);
+                return $this->redirect(['controller' => $controller, 'action' => 'addUser', $id, $user->id]);
             } else {
                 $this->Flash->bootstrapError('Não foi possível criar o usuário.');
             }
