@@ -32,7 +32,8 @@
                     'minYear' => date('Y'),
                     'maxYear' => date('Y') + 5,
                     'class' => 'form-control',
-                    'label' => false]);
+                    'label' => false,
+                    'default' => date('Y-m-d', strtotime('+5 years'))]);
                 ?>
             </div>
             <?php echo $this->Form->input('user_id', ['type' => 'hidden', 'value' => $user_id]); ?>

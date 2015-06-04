@@ -70,14 +70,6 @@ class PermissionsTable extends Table {
                 ->add('ending', 'valid', ['rule' => 'date'])
                 ->allowEmpty('ending');
         
-        $validator->add('role_id', [
-            'unique' => [
-                'rule' => ['validateUnique', ['scope' => ['user_id', 'organization_id']]],
-                'provider' => 'table',
-                'message' => 'O usuário já possui esse papel nesta unidade.'
-            ]
-        ]);
-
         return $validator;
     }
 
@@ -141,5 +133,23 @@ class PermissionsTable extends Table {
                                 ])
                         ->contain('Organizations');
     }
+    
+    /**
+     * Finds if the permission that is going to be granted is still valid
+     * 
+     * @param Query $query
+     * @param array $options
+     * @return type
+     */
+    public function findStillValid(Query $query, array $options) {
+        return $this->find()
+                        ->where(['user_id' => $options['user_id'],
+                                 'role_id' => $options['role_id'],
+                                 'organization_id' => $options['role_id'],
+                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')], 
+                                          ['Permissions.ending IS' => null]],
+                                ]);
+    }
+
 
 }

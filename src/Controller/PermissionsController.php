@@ -84,6 +84,10 @@ class PermissionsController extends AppController {
         $this->layout = 'devoops_complete';
         $permission = $this->Permissions->newEntity();
         if ($this->request->is('post')) {
+            if(!empty($this->Permissions->find('stillValid', $this->request->data)->first())) {
+                $this->Flash->bootstrapError('O usuário já possui essa permissão.');
+                return $this->redirect(['action' => 'add', $userId]);
+            }
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
                 $this->Flash->bootstrapSuccess('A permissão foi adicionada com sucesso.');
@@ -92,10 +96,9 @@ class PermissionsController extends AppController {
                 $this->Flash->bootstrapError('A permissão não pode ser salva. Por favor, tente novamente.');
             }
         }
-        $users = $this->Permissions->Users->find('list', ['limit' => 200]);
-        $organizations = $this->Permissions->Organizations->find('list', ['limit' => 200]);
-        $roles = $this->Permissions->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('permission', 'users', 'organizations', 'roles'));
+        $organizations = $this->Permissions->Organizations->find('list');
+        $roles = $this->Permissions->Roles->find('list');
+        $this->set(compact('permission', 'organizations', 'roles'));
         $this->set('_serialize', ['permission']);
         $this->set('user_id', $userId);
     }
