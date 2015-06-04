@@ -145,7 +145,7 @@ class PermissionsTable extends Table {
         return $this->find()
                         ->where(['user_id' => $options['user_id'],
                                  'role_id' => $options['role_id'],
-                                 'organization_id' => $options['role_id'],
+                                 'organization_id' => $options['organization_id'],
                                  'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')], 
                                           ['Permissions.ending IS' => null]],
                                 ]);
