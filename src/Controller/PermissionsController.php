@@ -75,19 +75,21 @@ class PermissionsController extends AppController {
     }
 
     /**
-     * Add method
-     *
+     * Adds a permission to an specific user
+     * 
+     * @param integer $userId The user to grant the permission for
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add() {
+    public function add($userId) {
+        $this->layout = 'devoops_complete';
         $permission = $this->Permissions->newEntity();
         if ($this->request->is('post')) {
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
-                $this->Flash->success('The permission has been saved.');
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->bootstrapSuccess('A permissão foi adicionada com sucesso.');
+                return $this->redirect(['action' => 'add', $userId]);
             } else {
-                $this->Flash->error('The permission could not be saved. Please, try again.');
+                $this->Flash->bootstrapError('A permissão não pode ser salva. Por favor, tente novamente.');
             }
         }
         $users = $this->Permissions->Users->find('list', ['limit' => 200]);
@@ -95,6 +97,7 @@ class PermissionsController extends AppController {
         $roles = $this->Permissions->Roles->find('list', ['limit' => 200]);
         $this->set(compact('permission', 'users', 'organizations', 'roles'));
         $this->set('_serialize', ['permission']);
+        $this->set('user_id', $userId);
     }
 
     /**

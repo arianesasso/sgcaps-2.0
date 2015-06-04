@@ -110,12 +110,18 @@ class OrganizationsController extends AppController
      */
     public function addUser($id, $userId)
     {
+        if ($this->request->referer(true) != '/usuario/cadastrar') {
+            return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
+        }
         $this->autoRender = false;
         $organization = $this->Organizations->patchEntity($this->Organizations->get($id), ['user_id' => $userId]);
         if ($this->Organizations->save($organization)) {
             $this->Flash->bootstrapSuccess('O usuário foi criado com sucesso.');
-            $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
+            $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $userId]);
         } else {
+            /**
+             * @TODO tratar o usuário que já foi inserido, fazer rollback (?)
+             */
             $this->Flash->error('Não foi possível criar um usuário para essa organização.');
             $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
         }

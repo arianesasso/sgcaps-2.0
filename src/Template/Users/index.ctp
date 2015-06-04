@@ -1,4 +1,4 @@
-<legend><?= __('Visualizar Permissões') ?></legend>
+<legend><?= __('Visualizar Uuários') ?></legend>
 <div class="row">
     <div class="col-xs-12">
         <table cellpadding="0" cellspacing="0" class="table">
