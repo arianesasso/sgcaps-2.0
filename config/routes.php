@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /**
  * Routes configuration
@@ -51,6 +51,7 @@ Router::scope('/usuario', ['controller' => 'Users'], function ($routes) {
 
 Router::scope('/permissao', ['controller' => 'Permissions'], function ($routes) {
     $routes->connect('/unidade', ['action' => 'organizations']);
+    $routes->connect('/adicionar/*', ['action' => 'add']);
 });
 
 Router::scope('/', function ($routes) {
