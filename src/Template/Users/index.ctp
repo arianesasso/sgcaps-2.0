@@ -19,7 +19,7 @@
                         <td><?= h($user->active) ?></td>
                         <td><?= h($user->created) ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('Permissões'), ['action' => 'view', $user->id], ['class' => 'btn btn-default link-ajax']) ?>
+                            <?= $this->Html->link(__('Permissões'), ['action' => 'view', $user->id], ['class' => 'btn btn-default']) ?>
                             <?= $this->Html->link(__('Editar dados'), ['action' => 'edit', $user->id], ['class' => 'btn btn-default link-ajax']) ?>
                             <?= $this->Form->postLink(__('Desativar'), ['action' => 'delete', $user->id], ['class' => 'btn btn-default link-ajax'], ['confirm' => __('Tem certeza que deseja desativar? # {0}?', $user->usernname)]) ?>
                         </td>
