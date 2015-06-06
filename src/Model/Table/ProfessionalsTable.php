@@ -81,9 +81,9 @@ class ProfessionalsTable extends Table
             'People.id',
             'People.name'
         ];
-        return $this->find('list',['keyField' => 'People.id', 'valueField' => 'People.name'])
+        return $this->find()
                         ->select($fields)
-                        ->where(['user_id IS' => null])
-                        ->contain('People'  );
+                        ->matching('People.Organizations')
+                        ->where(['People.user_id IS' => null,'OrganizationsPeople.ended IS' => null]);
     }
 }

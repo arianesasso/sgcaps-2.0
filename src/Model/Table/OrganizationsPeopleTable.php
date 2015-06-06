@@ -1,16 +1,16 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Organization;
+use App\Model\Entity\OrganizationsPerson;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Organizations Model
+ * OrganizationsPeople Model
  */
-class OrganizationsTable extends Table
+class OrganizationsPeopleTable extends Table
 {
 
     /**
@@ -21,31 +21,17 @@ class OrganizationsTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('organizations');
-        $this->displayField('name');
+        $this->table('organizations_people');
+        $this->displayField('id');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
+        $this->belongsTo('People', [
+            'foreignKey' => 'person_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Organizations', [
-            'foreignKey' => 'organization_id'
-        ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('Addresses', [
-            'foreignKey' => 'organization_id'
-        ]);
-        $this->hasMany('Contacts', [
-            'foreignKey' => 'organization_id'
-        ]);
-        $this->hasMany('Sectors', [
-            'className' => 'Organizations',
-            'foreignKey' => 'organization_id'
-        ]);
-        $this->hasMany('Permissions', [
-            'foreignKey' => 'organization_id'
-        ]);
-        $this->belongsToMany('People', [
-            'through' => 'OrganizationsPeople',
+            'foreignKey' => 'organization_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -62,14 +48,8 @@ class OrganizationsTable extends Table
             ->allowEmpty('id', 'create');
             
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
-            
-        $validator
-            ->allowEmpty('region');
-            
-        $validator
-            ->allowEmpty('care_type');
+            ->add('ended', 'valid', ['rule' => 'datetime'])
+            ->allowEmpty('ended');
 
         return $validator;
     }
@@ -83,8 +63,8 @@ class OrganizationsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->existsIn(['person_id'], 'People'));
         $rules->add($rules->existsIn(['organization_id'], 'Organizations'));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
 }

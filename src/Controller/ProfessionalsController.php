@@ -31,7 +31,7 @@ class ProfessionalsController extends AppController
      * @return void
      */
     public function showNoUserList()
-    {
+    {  
         $this->layout = 'ajax';
         $this->set('professionals', $this->Professionals->find('NoUsers', []));
         $this->set('_serialize', ['professionals']);

@@ -36,7 +36,8 @@ class PermissionsTable extends Table {
             'foreignKey' => 'role_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Admins', [
+            'className' => 'Users',
             'foreignKey' => 'admin_id',
             'joinType' => 'INNER'
         ]);
@@ -105,6 +106,7 @@ class PermissionsTable extends Table {
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
                                  'Permissions.organization_id' => $options['organization_id'],
+                                 'Permissions.beginning <=' => date('Y-m-d H:i:s'),
                                  'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ])
@@ -128,7 +130,8 @@ class PermissionsTable extends Table {
                         ->select($fields)
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
-                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')], 
+                                 'Permissions.beginning <=' => date('Y-m-d H:i:s'),
+                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ])
                         ->contain('Organizations');
@@ -146,7 +149,8 @@ class PermissionsTable extends Table {
                         ->where(['user_id' => $options['user_id'],
                                  'role_id' => $options['role_id'],
                                  'organization_id' => $options['organization_id'],
-                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')], 
+                                 'Permissions.beginning <=' => date('Y-m-d H:i:s'),
+                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ]);
     }

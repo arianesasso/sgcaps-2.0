@@ -37,11 +37,14 @@ class PeopleTable extends Table
         $this->hasMany('Contacts', [
             'foreignKey' => 'person_id'
         ]);
-        $this->hasMany('Patients', [
+        $this->hasOne('Patients', [
             'foreignKey' => 'person_id'
         ]);
-        $this->hasMany('Professionals', [
+        $this->hasOne('Professionals', [
             'foreignKey' => 'person_id'
+        ]);
+        $this->belongsToMany('Organizations', [
+            'through' => 'OrganizationsPeople',
         ]);
     }
 
