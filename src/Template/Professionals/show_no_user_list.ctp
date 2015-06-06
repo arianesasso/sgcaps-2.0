@@ -1,8 +1,17 @@
+<?php
+$people = null;
+foreach($professionals as $professional) :
+    foreach($professional->_matchingData as $p):
+        $people[$p->id] = $p->name;
+    endforeach;
+endforeach;
+?>
+
 <label class="control-label"><?= __('Escolha um profissional: ') ?> *</label>
 <ul class="list-inline">
     <li>
         <?php
-        echo $this->Form->input('professional_id', ['options' => $professionals, 'empty' => true,
+        echo $this->Form->input('professional_id', ['options' => $people, 'empty' => true,
             'label' => false,
             'class' => 'form-control',
             'required' => true]);
