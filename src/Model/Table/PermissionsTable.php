@@ -154,6 +154,4 @@ class PermissionsTable extends Table {
                                           ['Permissions.ending IS' => null]],
                                 ]);
     }
-
-
 }

@@ -51,8 +51,8 @@ class RolesTable extends Table
     
      /**
      * Finds the roles a manager user can give
-     * If the user is a 'GestorCaps' it can only give Caps permissions
-     * If the user is a 'GestorGeral' it can give all kinds of permissions
+     * If the user is a 'gestor_caps' it can only give Caps permissions
+     * If the user is a 'gestor_geral' it can give all kinds of permissions
      * 
      * @param Query $query
      * @param array $options
@@ -61,7 +61,7 @@ class RolesTable extends Table
     public function findAllowed(Query $query, array $options) {
         $condition = ['name IS NOT' => null];
         
-        if(array_search('GestorCaps', $options['roles']) !== false) {
+        if(array_search('gestor_caps', $options['roles']) !== false) {
             $condition = ['name LIKE' => '%Caps%'];         
         }
         return $this->find('list')->where($condition);

@@ -69,14 +69,14 @@ class ProfessionalsTable extends Table
     }
        
     /**
-     * GestorCaps
+     * gestor_caps
      * 
      * Finds all the professionals that are not users yet and that are
      * linked to the organization that the current user is logged in.
      * Encontra os profissionais que não são usuários e que estão
      * vinculados à unidade na qual o usuário atual está logado.
      * 
-     * GestorGeral
+     * gestor_geral
      * 
      * Finds all the professionals that are not users yet.
      * 
@@ -92,7 +92,7 @@ class ProfessionalsTable extends Table
         $condition = ['People.user_id IS' => null];
         $matching = 'People';
 
-        if(array_search('GestorCaps', $options['roles']) !== false) {
+        if(array_search('gestor_caps', $options['roles']) !== false) {
             $condition[] = ['OR' => ['OrganizationsPeople.ended IS' => null, 
                                     'OrganizationsPeople.ended >=' => date('Y-m-d H:i:s')]];
             $matching = $matching . '.Organizations';          
