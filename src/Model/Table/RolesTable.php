@@ -62,7 +62,7 @@ class RolesTable extends Table
         $condition = ['name IS NOT' => null];
         
         if(array_search('gestor_caps', $options['roles']) !== false) {
-            $condition = ['name LIKE' => '%Caps%'];         
+            $condition = ['domain' => 'caps'];         
         }
         return $this->find('list')->where($condition);
     }
