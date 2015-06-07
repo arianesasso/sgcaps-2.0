@@ -55,6 +55,16 @@ $(document).ready(function () {
         });
     });
 
+    if ($('.load-organizations').is(':checked')) {
+        $.ajax({
+            url: '../organizations/showNoUserList',
+            type: 'get',
+            success: function (result) {
+                $(".users-list").html(result);
+            }
+        });
+    };
+    
     if ($('.load-professionals').is(':checked')) {
         $.ajax({
             url: '../professionals/showNoUserList',
@@ -63,9 +73,7 @@ $(document).ready(function () {
                 $(".users-list").html(result);
             }
         });
-    }
-    ;
-
+    };
 });
 
 /**
