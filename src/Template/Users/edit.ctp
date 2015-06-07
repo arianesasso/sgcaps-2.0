@@ -22,7 +22,6 @@
             echo $this->Form->input('username');
             echo $this->Form->input('password');
             echo $this->Form->input('active');
-            echo $this->Form->input('user_id');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

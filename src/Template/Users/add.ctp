@@ -23,7 +23,7 @@
                 ?>
             </div>
             <div class="form-group users-list" name="users_list_div"></div>
-            <?php echo $this->Form->input('user_id', ['type' => 'hidden', 'value' => $this->request->session()->read('Auth.User.id')]); ?>
+            <?php echo $this->Form->input('admin_id', ['type' => 'hidden', 'value' => $this->request->session()->read('Auth.User.id')]); ?>
         </fieldset>
         <?= $this->Form->submit(__('Salvar'), ['class' => 'btn btn-success']) ?>
         <?= $this->Form->end() ?>

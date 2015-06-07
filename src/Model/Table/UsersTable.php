@@ -33,7 +33,7 @@ class UsersTable extends Table {
         ]);
         $this->belongsTo('Admins', [
             'classname' => 'Users',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'admin_id'
         ]);
     }
 

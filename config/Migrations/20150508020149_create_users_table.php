@@ -24,12 +24,12 @@ class CreateUsersTable extends AbstractMigration {
                 ->addColumn('username', 'string', ['length' => 60, 'null' => false])
                 ->addColumn('password', 'string', ['length' => 256, 'null' => false])
                 ->addColumn('active', 'boolean', ['null' => false, 'default' => 1])
-                ->addColumn('user_id', 'integer', ['null' => true, 'default' => null])
+                ->addColumn('admin_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
-                ->addIndex('user_id')
+                ->addIndex('admin_id')
                 ->addIndex('username', ['unique' => true])
-                ->addForeignKey('user_id', 'users', 'id')
+                ->addForeignKey('admin_id', 'users', 'id')
                 ->save();
     }
 

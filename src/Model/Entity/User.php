@@ -19,7 +19,7 @@ class User extends Entity {
         'username' => true,
         'password' => true,
         'active' => true,
-        'user_id' => true,
+        'admin_id' => true,
         'users' => true,
         'organizations' => true,
         'permissions' => true,
