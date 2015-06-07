@@ -28,6 +28,9 @@ class UsersTable extends Table {
         $this->hasOne('Organizations', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasOne('People', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('Permissions', [
             'foreignKey' => 'user_id'
         ]);
@@ -69,6 +72,31 @@ class UsersTable extends Table {
     public function buildRules(RulesChecker $rules) {
         $rules->add($rules->isUnique(['username'], 'Usuário já existente'));
         return $rules;
+    }
+
+    /**
+     * Finds the users a manager can see
+     * If the manager is a 'gestor_caps' it can only see the users
+     * that had or still have permission to access his/her Caps
+     * If the user is a 'gestor_geral' he/she can see all users
+     * 
+     * @param Query $query
+     * @param array $options
+     * @return type
+     */
+    public function findAllowed(Query $query, array $options) {
+        $query = $this->find()->contain('People', 'Organizations');
+
+        if (array_search('gestor_caps', $options['roles']) !== false) {
+            $query = $this->find()
+                    ->distinct()
+                    ->contain(['People', 'Organizations'])
+                    ->matching('Permissions', function ($q) use ($options) {
+                return $q->where(['Permissions.organization_id' => $options['organization_id']]);
+            }
+            );
+        }
+        return $query;
     }
 
 }

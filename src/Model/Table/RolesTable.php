@@ -51,8 +51,8 @@ class RolesTable extends Table
     
      /**
      * Finds the roles a manager user can give
-     * If the user is a 'gestor_caps' it can only give Caps permissions
-     * If the user is a 'gestor_geral' it can give all kinds of permissions
+     * If the manager is a 'gestor_caps' it can only give Caps permissions
+     * If the manager is a 'gestor_geral' it can give all kinds of permissions
      * 
      * @param Query $query
      * @param array $options
