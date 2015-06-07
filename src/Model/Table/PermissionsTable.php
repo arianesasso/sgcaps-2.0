@@ -99,9 +99,9 @@ class PermissionsTable extends Table {
      */
     public function findValidyRoles(Query $query, array $options) {
         $fields = [
-            'Roles.name',
+            'Roles.alias',
         ];
-        return $this->find('list', ['valueField' => 'Roles.name'])
+        return $this->find('list', ['valueField' => 'Roles.alias'])
                         ->select($fields)
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
