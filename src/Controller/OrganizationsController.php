@@ -119,7 +119,8 @@ class OrganizationsController extends AppController
         $organization = $this->Organizations->patchEntity($this->Organizations->get($id), ['user_id' => $userId]);
         if ($this->Organizations->save($organization)) {
             $this->Flash->bootstrapSuccess('O usuário foi criado com sucesso.');
-            $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $userId]);
+            $controller = $this->request->params['controller'];
+            $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $userId, $controller]);
         } else {
             /**
              * @TODO tratar o usuário que já foi inserido, fazer rollback (?)

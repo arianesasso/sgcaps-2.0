@@ -79,9 +79,10 @@ class PermissionsController extends AppController {
      * Adds a permission to an specific user
      * 
      * @param integer $userId The user to grant the permission for
+     * @param integer $userType The type of user (organization or person)
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add($userId) {
+    public function add($userId, $userType) {
         $this->layout = 'devoops_complete';
         $permission = $this->Permissions->newEntity();
         if ($this->request->is('post')) {
@@ -92,16 +93,17 @@ class PermissionsController extends AppController {
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
                 $this->Flash->bootstrapSuccess('A permissão foi adicionada com sucesso.');
-                return $this->redirect(['action' => 'add', $userId]);
+                return $this->redirect(['action' => 'add', $userId, $userType]);
             } else {
                 $this->Flash->bootstrapError('A permissão não pode ser salva. Por favor, tente novamente.');
             }
         }
         $organizations = $this->Permissions->Organizations->find('list');
-        $roles = $this->Permissions->Roles->find('list');
+        $roles = $this->Permissions->Roles->find('Allowed', ['roles' => $this->request->session()->read('Auth.User.roles')]);
         $this->set(compact('permission', 'organizations', 'roles'));
         $this->set('_serialize', ['permission']);
         $this->set('user_id', $userId);
+        $this->set('user_type', $userType);
     }
 
     /**

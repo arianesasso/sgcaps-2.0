@@ -3,13 +3,15 @@
     <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">
         <?= $this->Form->create($permission); ?>
         <fieldset>
+            <?php if($user_type === 'People') { ?>
             <div class="form-group" >
                 <label class="control-label"><?= __('Unidade:') ?> *</label>
                 <?php
                 echo $this->Form->input(
                         'organization_id', ['options' => $organizations, 'class' => 'form-control', 'label' => false, 'empty' => true]);
-                ?>
-            </div>        
+            ?>
+            </div>
+            <?php }?>
             <div class="form-group" >
                 <label class="control-label"><?= __('Papel:') ?> *</label>
                 <?php echo $this->Form->input('role_id', ['options' => $roles, 'class' => 'form-control', 'label' => false, 'empty' => true]); ?>
