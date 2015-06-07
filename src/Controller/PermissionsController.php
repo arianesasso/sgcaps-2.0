@@ -80,20 +80,21 @@ class PermissionsController extends AppController {
      * 
      * @param integer $userId The user to grant the permission for
      * @param integer $userType The type of user (organization or person)
+     * @param integer $organizationId If the user is an organization
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add($userId, $userType) {
+    public function add($userId, $userType, $organizationId = null) {
         $this->layout = 'devoops_complete';
         $permission = $this->Permissions->newEntity();
         if ($this->request->is('post')) {
             if(!empty($this->Permissions->find('stillValid', $this->request->data)->first())) {
                 $this->Flash->bootstrapError('O usuário já possui essa permissão.');
-                return $this->redirect(['action' => 'add', $userId]);
+                return $this->redirect(['action' => 'add', $userId, $userType, $organizationId]);
             }
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
                 $this->Flash->bootstrapSuccess('A permissão foi adicionada com sucesso.');
-                return $this->redirect(['action' => 'add', $userId, $userType]);
+                return $this->redirect(['action' => 'add', $userId, $userType, $organizationId]);
             } else {
                 $this->Flash->bootstrapError('A permissão não pode ser salva. Por favor, tente novamente.');
             }
@@ -104,6 +105,7 @@ class PermissionsController extends AppController {
         $this->set('_serialize', ['permission']);
         $this->set('user_id', $userId);
         $this->set('user_type', $userType);
+        $this->set('organization_id', $organizationId);
     }
 
     /**
