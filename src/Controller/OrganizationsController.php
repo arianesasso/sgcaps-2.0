@@ -33,7 +33,9 @@ class OrganizationsController extends AppController
     public function showNoUserList()
     {
         $this->layout = 'ajax';
-        $this->set('organizations', $this->Organizations->find('list')->where(['user_id IS' => null]));
+        $roles = $this->request->session()->read('Auth.User.roles');
+        $organizationId = $this->request->session()->read('Auth.User.organization.id');
+        $this->set('organizations', $this->Organizations->find('NoUsers', ['roles' =>  $roles, 'organization_id' => $organizationId]));
         $this->set('_serialize', ['organizations']);
     }
 

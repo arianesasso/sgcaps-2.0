@@ -69,8 +69,16 @@ class ProfessionalsTable extends Table
     }
        
     /**
-     * Finds the professionals that are not users
-     * Encontra os profissionais que não são usuários
+     * GestorCaps
+     * 
+     * Finds all the professionals that are not users yet and that are
+     * linked to the organization that the current user is logged in.
+     * Encontra os profissionais que não são usuários e que estão
+     * vinculados à unidade na qual o usuário atual está logado.
+     * 
+     * GestorGeral
+     * 
+     * Finds all the professionals that are not users yet.
      * 
      * @param Query $query
      * @param array $options
@@ -81,9 +89,18 @@ class ProfessionalsTable extends Table
             'People.id',
             'People.name'
         ];
+        $condition = ['People.user_id IS' => null];
+        $matching = 'People';
+
+        if(array_search('GestorCaps', $options['roles']) !== false) {
+            $condition[] = ['OR' => ['OrganizationsPeople.ended IS' => null, 
+                                    'OrganizationsPeople.ended >=' => date('Y-m-d H:i:s')]];
+            $matching = $matching . '.Organizations';          
+        }
+              
         return $this->find()
                         ->select($fields)
-                        ->matching('People.Organizations')
-                        ->where(['People.user_id IS' => null,'OrganizationsPeople.ended IS' => null]);
+                        ->matching($matching)
+                        ->where($condition);
     }
 }
