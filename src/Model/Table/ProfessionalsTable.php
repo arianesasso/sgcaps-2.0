@@ -93,8 +93,9 @@ class ProfessionalsTable extends Table
         $matching = 'People';
 
         if(array_search('gestor_caps', $options['roles']) !== false) {
-            $condition[] = ['OR' => ['OrganizationsPeople.ended IS' => null, 
-                                    'OrganizationsPeople.ended >=' => date('Y-m-d H:i:s')]];
+            $condition[] = ['OrganizationsPeople.organization_id' => $options['organization_id'],
+                            'OR' => ['OrganizationsPeople.ended IS' => null, 
+                                     'OrganizationsPeople.ended >=' => date('Y-m-d H:i:s')]];
             $matching = $matching . '.Organizations';          
         }
               

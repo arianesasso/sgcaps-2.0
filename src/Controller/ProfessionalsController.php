@@ -33,7 +33,9 @@ class ProfessionalsController extends AppController
     public function showNoUserList()
     {  
         $this->layout = 'ajax';
-        $this->set('professionals', $this->Professionals->find('NoUsers', ['roles' =>  $this->request->session()->read('Auth.User.roles')]));
+        $roles = $this->request->session()->read('Auth.User.roles');
+        $organizationId = $this->request->session()->read('Auth.User.organization.id');
+        $this->set('professionals', $this->Professionals->find('NoUsers', ['roles' =>  $roles, 'organization_id' => $organizationId]));
         $this->set('_serialize', ['professionals']);
     }
     
