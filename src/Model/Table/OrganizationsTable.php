@@ -92,7 +92,7 @@ class OrganizationsTable extends Table
      * Finds the organzations that are not users yet.
      * Encontra as organizacões que ainda não são usuários.
      * 
-     * Se o usuário for do tipo GestorCaps ele poderá dar permissões somente à 
+     * Se o usuário for do tipo gestor_caps ele poderá dar permissões somente à 
      * sua unidade. No entanto, um gestor 'geral' pode dar permissões à todas.
      * 
      * @param Query $query
@@ -102,10 +102,9 @@ class OrganizationsTable extends Table
     public function findNoUsers(Query $query, array $options) {
         $condition = ['user_id IS' => null];
         
-        if(array_search('GestorCaps', $options['roles']) !== false) {
+        if(array_search('gestor_caps', $options['roles']) !== false) {
             $condition[] = ['id =' => $options['organization_id']];         
-        }
-        
-        return $this->Organizations->find('list')->where($condition);
+        }       
+        return $this->find('list')->where($condition);
     }
 }
