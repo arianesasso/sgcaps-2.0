@@ -80,7 +80,7 @@ class PeopleController extends AppController
         $people = $this->People->patchEntity($this->People->get($id), ['user_id' => $userId]);
         if ($this->People->save($people)) {
             $this->Flash->bootstrapSuccess('O usuário foi criado com sucesso.');
-            $controller = $this->request->params['controller'];
+            $controller = strtolower($this->request->params['controller']);
             $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $userId, $controller]);
         } else {
             $this->Flash->error('Não foi possível criar um usuário para essa pessoa.');
