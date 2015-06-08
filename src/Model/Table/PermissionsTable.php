@@ -154,4 +154,37 @@ class PermissionsTable extends Table {
                                           ['Permissions.ending IS' => null]],
                                 ]);
     }
+    
+    /**
+     * Finds the users a manager can see
+     * If the manager is a 'gestor_caps' it can only see the users
+     * that had or still have permission to access his/her Caps
+     * If the user is a 'gestor_geral' he/she can see all users
+     * 
+     * @param Query $query
+     * @param array $options
+     * @return type
+     */
+    public function findAllowedValidy(Query $query, array $options) {
+        $query = $this->find()
+                ->where(['Permissions.user_id' => $options['id'],
+                    'OR' => ['Permissions.ending IS' => null,
+                        'Permissions.ending >=' => date('Y-m-d H:i:s')
+                    ]
+                ])
+                ->contain(['Roles', 'Organizations', 'Admins.People'])
+                ->order(['Organizations.name', 'Permissions.beginning']);
+        
+        if (array_search('gestor_caps', $options['roles']) !== false) {
+            $query = $this->find()->where(['Permissions.user_id' => $options['id'],
+                             'Permissions.organization_id' => $options['organization_id'],
+                             'OR' => ['Permissions.ending IS' => null,
+                                      'Permissions.ending >=' => date('Y-m-d H:i:s')
+                            ]
+                        ])
+                 ->contain(['Roles', 'Organizations', 'Admins.People'])
+                 ->order(['Organizations.name', 'Permissions.beginning']);
+        }
+        return $query;
+    }
 }

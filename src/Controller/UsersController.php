@@ -129,11 +129,17 @@ class UsersController extends AppController {
      */
     public function view($id = null) {
         $this->layout = 'devoops_complete';
-        $user = $this->Users->get($id, [
-            'contain' => ['Permissions', 'Organizations']
-        ]);
+        $user = $this->Users->get($id, ['contain' => ['People', 'Organizations']]);
+        
+        $roles = $this->request->session()->read('Auth.User.roles');
+        $organizationId = $this->request->session()->read('Auth.User.organization.id');
+        $permissions = $this->Users->Permissions->find(
+                'AllowedValidy', ['id' => $id, 'roles' => $roles, 'organization_id' => $organizationId]);
+        
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
+        $this->set('permissions', $permissions);
+        $this->set('_serialize', ['permissions']);
     }
 
     /**

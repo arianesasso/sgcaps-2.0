@@ -21,6 +21,16 @@
     padding-top: 10px;
 }
 
+.blue-text {
+    color: #3366CC;
+}
+
+.gray-frame {
+    border: 2px solid white; 
+    border-radius: 5px; 
+    background-color: lightgray;
+}
+
 #user-type-professional {
     margin-right: 5px;
 }
