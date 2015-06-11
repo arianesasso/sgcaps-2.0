@@ -23,7 +23,7 @@
         </a>
         <ul class="dropdown-menu">
             <li><?php echo $this->Html->link('Cadastrar',['controller' => 'usuario', 'action' => 'cadastrar']) ?></li>
-            <li><?php echo $this->Html->link('Visualizar',['controller' => 'usuario', 'action' => 'visualizar']) ?></li>
+            <li><?php echo $this->Html->link('Visualizar',['controller' => 'usuario', 'action' => 'listar']) ?></li>
         </ul>
     </li>
     <li class="dropdown">
