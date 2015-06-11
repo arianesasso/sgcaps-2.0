@@ -18,12 +18,17 @@
         <?= $this->Html->css('devoops/righteous.css') ?>
         <?= $this->Html->css('devoops/jquery.fancybox') ?>
         <?= $this->Html->css('devoops/style_v1') ?>
+        <?= $this->Html->css('dataTables.bootstrap') ?>
+        <?= $this->Html->css('dataTables.fontAwesome') ?>
         <?= $this->Html->css('sgcaps') ?>
 
         <?= $this->Html->script('devoops/jquery.min') ?>
         <?= $this->Html->script('devoops/jquery-ui.min') ?>      
         <?= $this->Html->script('devoops/bootstrap') ?>
         <?= $this->Html->script('devoops/devoops') ?>
+        <?= $this->Html->script('jquery-1.11.1.min') ?>
+        <?= $this->Html->script('jquery.dataTables.min') ?>
+        <?= $this->Html->script('dataTables.bootstrap') ?>
         <?= $this->Html->script('sgcaps') ?>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

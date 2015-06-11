@@ -2,16 +2,25 @@
 <br/>
 <div class="row">
     <div class="col-xs-12">
-        <table cellpadding="0" cellspacing="0" class="table">
+        <table id="data-table" class="table table-striped" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th><?= 'Nome' ?></th>
-                    <th><?= $this->Paginator->sort('username', 'Usuário') ?></th>
-                    <th><?= $this->Paginator->sort('active', 'Ativo') ?></th>
-                    <th><?= $this->Paginator->sort('created', 'Cadastro') ?></th>
+                    <th><?= __('Nome') ?></th>
+                    <th><?= __('Usuário') ?></th>
+                    <th><?= __('Ativo') ?></th>
+                    <th><?= __('Cadastro') ?></th>
                     <th class="actions"><?= __('Ações') ?></th>
                 </tr>
             </thead>
+            <tfoot>
+                <tr>
+                    <th><?= __('Nome') ?></th>
+                    <th><?= __('Usuário') ?></th>
+                    <th><?= __('Ativo') ?></th>
+                    <th><?= __('Cadastro') ?></th>
+                    <th class="actions"><?= __('Ações') ?></th>
+                </tr>
+            </tfoot>
             <tbody>
                 <?php foreach ($users as $user): ?>
                     <tr>
@@ -25,17 +34,8 @@
                             <?= $this->Form->postLink(__('Desativar'), ['action' => 'delete', $user->id], ['class' => 'btn btn-default link-ajax'], ['confirm' => __('Tem certeza que deseja desativar? # {0}?', $user->username)]) ?>
                         </td>
                     </tr>
-
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div class="paginator">
-            <ul class="pagination">
-                <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                <?= $this->Paginator->numbers() ?>
-                <?= $this->Paginator->next(__('next') . ' >') ?>
-            </ul>
-            <p><?= $this->Paginator->counter() ?></p>
-        </div>
     </div>
 </div>

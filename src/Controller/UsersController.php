@@ -116,7 +116,7 @@ class UsersController extends AppController {
         $this->layout = 'devoops_complete';
         $roles = $this->request->session()->read('Auth.User.roles');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
-        $this->set('users', $this->paginate($this->Users->find('Allowed', ['roles' => $roles, 'organization_id' => $organizationId])));
+        $this->set('users', $this->Users->find('Allowed', ['roles' => $roles, 'organization_id' => $organizationId]));
         $this->set('_serialize', ['users']);
     }
 

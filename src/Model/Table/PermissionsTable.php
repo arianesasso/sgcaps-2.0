@@ -156,10 +156,10 @@ class PermissionsTable extends Table {
     }
     
     /**
-     * Finds the users a manager can see
-     * If the manager is a 'gestor_caps' it can only see the users
-     * that had or still have permission to access his/her Caps
-     * If the user is a 'gestor_geral' he/she can see all users
+     * Finds the permissions a manager can see
+     * If the manager is a 'gestor_caps' he/she can only see the permissions
+     * that the user has in her/his unit
+     * If the user is a 'gestor_geral' he/she can see all the users permissions
      * 
      * @param Query $query
      * @param array $options
