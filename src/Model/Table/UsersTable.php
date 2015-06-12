@@ -87,7 +87,7 @@ class UsersTable extends Table {
     public function findAllowed(Query $query, array $options) {
         $query = $this->find()->contain(['People', 'Organizations']);
 
-        if (array_search('gestor_caps', $options['roles']) !== false) {
+        if (array_search('gestor', $options['roles']) === 'caps') {
             $query = $this->find()
                     ->distinct()
                     ->contain(['People', 'Organizations'])

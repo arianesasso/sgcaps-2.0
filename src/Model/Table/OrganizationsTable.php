@@ -102,7 +102,7 @@ class OrganizationsTable extends Table
     public function findNoUsers(Query $query, array $options) {
         $condition = ['user_id IS' => null];
         
-        if(array_search('gestor_caps', $options['roles']) !== false) {
+        if(array_search('gestor', $options['roles']) === 'caps') {
             $condition[] = ['id =' => $options['organization_id']];         
         }       
         return $this->find('list')->where($condition);

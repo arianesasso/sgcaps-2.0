@@ -100,8 +100,9 @@ class PermissionsTable extends Table {
     public function findValidyRoles(Query $query, array $options) {
         $fields = [
             'Roles.alias',
+            'Roles.domain'
         ];
-        return $this->find('list', ['valueField' => 'Roles.alias'])
+        return $this->find('list', ['keyField' => 'Roles.domain', 'valueField' => 'Roles.alias'])
                         ->select($fields)
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
@@ -175,7 +176,7 @@ class PermissionsTable extends Table {
                 ->contain(['Roles', 'Organizations', 'Admins.People'])
                 ->order(['Organizations.name', 'Permissions.beginning']);
         
-        if (array_search('gestor_caps', $options['roles']) !== false) {
+        if (array_search('gestor', $options['roles']) === 'caps') {
             $query = $this->find()->where(['Permissions.user_id' => $options['id'],
                              'Permissions.organization_id' => $options['organization_id'],
                              'OR' => ['Permissions.ending IS' => null,

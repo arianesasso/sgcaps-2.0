@@ -92,7 +92,7 @@ class ProfessionalsTable extends Table
         $condition = ['People.user_id IS' => null];
         $matching = 'People';
 
-        if(array_search('gestor_caps', $options['roles']) !== false) {
+        if(array_search('gestor', $options['roles']) === 'caps') {
             $condition[] = ['OrganizationsPeople.organization_id' => $options['organization_id'],
                             'OR' => ['OrganizationsPeople.ended IS' => null, 
                                      'OrganizationsPeople.ended >=' => date('Y-m-d H:i:s')]];
