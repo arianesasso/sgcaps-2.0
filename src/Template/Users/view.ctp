@@ -46,7 +46,7 @@
                                 ?></td>
                             <td><?= h($permission->admin->person->name) ?></td>
                             <td class="actions">
-                                <?= $user->active ? $this->Form->postLink(__('Remover'), ['action' => 'delete', $permission->id], ['class' => 'btn btn-default'], ['confirm' => __('Tem certeza que deseja desativar? # {0}?', $user->username)]) : ''; ?>
+                                <?= $user->active ? $this->Form->postLink(__('Cancelar'), ['controller' => 'permissions', 'action' => 'cancel', $permission->id, $user->id], ['confirm' => __('Tem certeza que deseja cancelar esta permissão?'), 'class' => 'btn btn-default']) : ''; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

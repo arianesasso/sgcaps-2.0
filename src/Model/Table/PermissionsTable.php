@@ -68,7 +68,7 @@ class PermissionsTable extends Table {
                 ->notEmpty('beginning', 'Campo obrigatório');
 
         $validator
-                ->add('ending', 'valid', ['rule' => 'date'])
+                ->add('ending', 'valid', ['rule' => 'date', 'on' => 'create'])
                 ->allowEmpty('ending');
         
         return $validator;
