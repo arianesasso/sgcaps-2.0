@@ -12,15 +12,6 @@
                     <th class="actions"><?= __('Ações') ?></th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th><?= __('Nome') ?></th>
-                    <th><?= __('Usuário') ?></th>
-                    <th><?= __('Ativo') ?></th>
-                    <th><?= __('Cadastro') ?></th>
-                    <th class="actions"><?= __('Ações') ?></th>
-                </tr>
-            </tfoot>
             <tbody>
                 <?php foreach ($users as $user): ?>
                     <tr>
