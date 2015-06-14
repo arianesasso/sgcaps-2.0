@@ -110,8 +110,13 @@ class OrganizationsTable extends Table
     
     /**
      * Finds the organizations in which a manager user can give permissions
-     * If the manager is a 'gestor_caps' it can only give permission in its Caps
-     * If the manager is a 'gestor_geral' it can give all kinds of permissions
+     * If the manager is a 'gestor_geral' it can give permissions in all organizations
+     * Otherwise it can give permissions only in its own organization
+     * 
+     * Encontra a organização para a qual um gestor pode dar permissões
+     * Se o gestor for um 'gestor_geral' ele pode dar permissões em qualquer unidade,
+     * se ele for um gestor mais restrito (ex.: gestor_caps) só poderá dar permissões
+     * para a sua unidade
      * 
      * @param Query $query
      * @param array $options
