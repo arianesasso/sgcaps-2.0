@@ -61,7 +61,7 @@ class RolesTable extends Table
     public function findAllowed(Query $query, array $options) {
         $condition = ['name IS NOT' => null];
         
-        if(array_search('gestor', $options['roles']) === 'caps') {
+        if(array_search('gestor_geral', $options['roles']) === false && array_search('gestor_caps', $options['roles']) !== false) {
             $condition = ['domain' => 'caps'];         
         }
         return $this->find('list')->where($condition);

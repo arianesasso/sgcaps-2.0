@@ -102,9 +102,27 @@ class OrganizationsTable extends Table
     public function findNoUsers(Query $query, array $options) {
         $condition = ['user_id IS' => null];
         
-        if(array_search('gestor', $options['roles']) === 'caps') {
+        if(array_search('gestor_geral', $options['roles']) === false) {
             $condition[] = ['id =' => $options['organization_id']];         
         }       
+        return $this->find('list')->where($condition);
+    }
+    
+    /**
+     * Finds the organizations in which a manager user can give permissions
+     * If the manager is a 'gestor_caps' it can only give permission in its Caps
+     * If the manager is a 'gestor_geral' it can give all kinds of permissions
+     * 
+     * @param Query $query
+     * @param array $options
+     * @return type
+     */
+    public function findAllowed(Query $query, array $options) {
+        $condition = ['name IS NOT' => null];
+        
+        if(array_search('gestor_geral', $options['roles']) === false) {
+            $condition = ['id' => $options['organization_id']];         
+        }
         return $this->find('list')->where($condition);
     }
 }
