@@ -76,9 +76,9 @@ class UsersTable extends Table {
 
     /**
      * Finds the users a manager can see
-     * If the manager is not a gestor_geral it can only see the users
+     * If the manager is not a gestor.geral it can only see the users
      * that had or still have permission to access his/her Caps
-     * If the user is a 'gestor_geral' he/she can see all users
+     * If the user is a 'gestor.geral' he/she can see all users
      * 
      * @param Query $query
      * @param array $options
@@ -91,7 +91,7 @@ class UsersTable extends Table {
                       ->distinct($fields)
                       ->contain(['People', 'Organizations']);
 
-        if (array_search('gestor_geral', $options['roles']) === false) {
+        if (array_search('gestor.geral', $options['roles']) === false) {
             $query = $this->find()->distinct($fields)
                     ->contain(['People', 'Organizations'])
                     ->matching('Permissions', function ($q) use ($options) {

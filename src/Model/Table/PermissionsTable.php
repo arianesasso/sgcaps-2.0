@@ -99,9 +99,10 @@ class PermissionsTable extends Table {
      */
     public function findValidyRoles(Query $query, array $options) {
         $fields = [
-            'Roles.alias'
+            'Roles.alias',
+            'Roles.domain'
         ];
-        return $this->find('list', ['valueField' => 'Roles.alias'])
+        return $this->find()->hydrate(false)
                         ->select($fields)
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
@@ -157,9 +158,9 @@ class PermissionsTable extends Table {
     
     /**
      * Finds the permissions a manager can see
-     * If the manager is a 'gestor_caps' he/she can only see the permissions
+     * If the manager is a 'gestor.caps' he/she can only see the permissions
      * that the user has in her/his unit
-     * If the user is a 'gestor_geral' he/she can see all the users permissions
+     * If the user is a 'gestor.geral' he/she can see all the users permissions
      * 
      * @param Query $query
      * @param array $options
@@ -175,7 +176,7 @@ class PermissionsTable extends Table {
                 ->contain(['Roles', 'Organizations', 'Admins.People'])
                 ->order(['Organizations.name', 'Permissions.beginning']);
         
-        if (array_search('gestor_geral', $options['roles']) === false) {
+        if (array_search('gestor.geral', $options['roles']) === false) {
             $query = $this->find()->where(['Permissions.user_id' => $options['id'],
                              'Permissions.organization_id' => $options['organization_id'],
                              'OR' => ['Permissions.ending IS' => null,
