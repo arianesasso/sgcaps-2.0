@@ -1,26 +1,39 @@
 <legend><?= __('Visualizar Permissões Válidas') ?></legend>
 <div class='row'>
-    <div class="col-xs-12">
-        <ul class="list-inline gray-frame">
-            <li>
-                <h4><?= __('Nome') ?></h4>
-                <p class="blue-text"><?php echo (!empty($user->person->name) ? h($user->person->name) : h($user->organization->name)); ?></p>
-            </li>
-            <li>
-                <h4><?= __('Cadastro') ?></h4>
-                <p class="blue-text"><?= h($user->created->format('d/m/Y')) ?></p>
-            </li>
-            <li>
-                <h4><?= __('Ativo') ?></h4>
-                <p class="blue-text"><?= $user->active ? __('Sim') : __('Não'); ?></p>
-            </li>
-        </ul>
+    <div class="col-xs-12 gray-frame">
+        <div clas="row">
+            <div class="col-xs-8">
+                <ul class="list-inline" style="display: inline-block">
+                    <li>
+                        <h4><?= __('Nome') ?></h4>
+                        <p class="blue-text"><?php echo (!empty($user->person->name) ? h($user->person->name) : h($user->organization->name)); ?></p>
+                    </li>
+                    <li>
+                        <h4><?= __('Cadastro') ?></h4>
+                        <p class="blue-text"><?= h($user->created->format('d/m/Y')) ?></p>
+                    </li>
+                    <li>
+                        <h4><?= __('Ativo') ?></h4>
+                        <p class="blue-text"><?= $user->active ? __('Sim') : __('Não'); ?></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-4 action-bar">
+                <a href="<?= $this->Url->build(["controller" => "permissao", "action" => "adicionar", $user->id, ($user->person ? 'people' : 'organizations'), ($user->organization ? $user->organization->id : false)]) ?>" class="btn btn-success action-button">
+                    <i class="fa fa-plus-square"></i> Nova permissão
+                </a>
+                <a href="#" class="btn btn-success action-button">
+                    <i class="fa fa-clock-o"></i> Histórico
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
+        <br/>
         <?php if (!empty($permissions)): ?>
-            <table cellpadding="0" cellspacing="0" class="table table-striped">
+            <table id="data-table" cellpadding="0" cellspacing="0" class="table table-striped">
                 <thead>
                     <tr>
                         <th><?= __('Unidade') ?></th>
