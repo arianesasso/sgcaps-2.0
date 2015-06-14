@@ -1,4 +1,10 @@
 <legend><?= __('Adicionar Nova Permissão') ?></legend>
+<div class='row'>
+    <div class="col-xs-12 gray-frame">
+        <?php echo $this->element('user_info', ['user' => $user])?>
+    </div>
+</div>
+<br/>
 <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">
         <?= $this->Form->create($permission); ?>
@@ -40,7 +46,7 @@
                         'default' => date('Y-m-d', strtotime('+5 years'))]);
                     ?>
                 </div>
-                <?php echo $this->Form->input('user_id', ['type' => 'hidden', 'value' => $user_id]); ?>
+                <?php echo $this->Form->input('user_id', ['type' => 'hidden', 'value' => $user->id]); ?>
             <?php echo $this->Form->input('admin_id', ['type' => 'hidden', 'value' => $this->request->session()->read('Auth.User.id')]); ?>
             </fieldset>
             <?= $this->Form->submit(__('Salvar'), ['class' => 'btn btn-success']) ?>
