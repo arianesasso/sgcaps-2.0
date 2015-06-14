@@ -98,11 +98,13 @@ class PermissionsController extends AppController {
                 $this->Flash->bootstrapError('A permissão não pode ser salva. Por favor, tente novamente.');
             }
         }
-        $organizations = $this->Permissions->Organizations->find('Allowed', ['roles' => $this->request->session()->read('Auth.User.roles'), 'organization_id' => $this->request->session()->read('Auth.Organization.id')]);
+        $organizations = $this->Permissions->Organizations->find('Allowed', ['roles' => $this->request->session()->read('Auth.User.roles'), 'organization_id' => $this->request->session()->read('Auth.User.organization.id')]);
         $roles = $this->Permissions->Roles->find('Allowed', ['roles' => $this->request->session()->read('Auth.User.roles')]);
+        $user = $user = $this->Permissions->Users->get($userId, ['contain' => ['People', 'Organizations']]);;
         $this->set(compact('permission', 'organizations', 'roles'));
         $this->set('_serialize', ['permission']);
-        $this->set('user_id', $userId);
+        $this->set('user', $user);
+        $this->set('_serialize', ['user']);
         $this->set('user_type', $userType);
         $this->set('organization_id', $organizationId);
     }
