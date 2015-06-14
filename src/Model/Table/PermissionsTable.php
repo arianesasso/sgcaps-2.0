@@ -158,9 +158,9 @@ class PermissionsTable extends Table {
     
     /**
      * Finds the permissions a manager can see
-     * If the manager is a 'gestor.caps' he/she can only see the permissions
-     * that the user has in her/his unit
      * If the user is a 'gestor.geral' he/she can see all the users permissions
+     * Otherwise he/she can only see the permissions that the user has in 
+     * her/his unit
      * 
      * @param Query $query
      * @param array $options

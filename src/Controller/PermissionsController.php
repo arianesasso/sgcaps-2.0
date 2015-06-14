@@ -105,6 +105,8 @@ class PermissionsController extends AppController {
                 $this->Flash->bootstrapError('A permissão não foi cancelada, por favor, tente novamente,');
                 $this->redirect(['controller' => 'usuario', 'action' => 'visualizar', $userId]);
             }
+        } else {
+            $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
     }
 }
