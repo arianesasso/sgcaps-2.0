@@ -85,16 +85,19 @@ class UsersTable extends Table {
      * @return type
      */
     public function findAllowed(Query $query, array $options) {
-        $query = $this->find()->contain(['People', 'Organizations']);
+        $fields = ['Users.id'];
+        
+        $query = $this->find()
+                      ->distinct($fields)
+                      ->contain(['People', 'Organizations']);
 
         if (array_search('gestor', $options['roles']) === 'caps') {
-            $query = $this->find()
-                    ->distinct()
+            $query = $this->find()->distinct($fields)
                     ->contain(['People', 'Organizations'])
                     ->matching('Permissions', function ($q) use ($options) {
-                return $q->where(['Permissions.organization_id' => $options['organization_id']]);
-        }
-            );
+                        return $q->where(['Permissions.organization_id' => $options['organization_id']])
+                    ->distinct();
+            });
         }
         return $query;
     }
