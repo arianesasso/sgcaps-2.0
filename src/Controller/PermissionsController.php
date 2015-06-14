@@ -27,11 +27,7 @@ class PermissionsController extends AppController {
         //Redirecionar para o dashboard
         if ($this->request->is('post')) {
             list($organization['id'], $organization['name']) = explode('/', $this->request->data['unidade']);
-            $permissions = $this->Permissions->find('validyroles', ['user_id' => $userId, 'organization_id' => $organization['id']]);
-            $userRoles = array();
-            foreach ($permissions as $permission):
-                $userRoles[] = $permission['Roles']['alias'] . '.' . $permission['Roles']['domain'];
-            endforeach;
+            $userRoles = $this->UserPemissions->validyRoles($userId, $organization['id']);
             //Array com as Permissões do Usuário | Array with the user permissions   
             $this->request->session()->write('Auth.User.roles', $userRoles);
             //Variável com o nome e a id da unidade atual do usuário
