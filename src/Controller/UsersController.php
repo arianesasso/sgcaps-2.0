@@ -29,24 +29,6 @@ class UsersController extends AppController {
     }
 
     /**
-     * 
-     * @param type $user
-     * @return boolean
-     */
-//    public function isAuthorized($user) {
-//        $action = $this->request->params['action'];
-//        // The add and index actions are always allowed.
-//        if (in_array($action, ['login', 'logout'])) {
-//            return true;
-//        }
-//
-//        if ($user['id'] == 1) {
-//            return true;
-//        }
-//        return parent::isAuthorized($user);
-//    }
-
-    /**
      * Login method (using Auth component)
      * Método de Login (estamos usando o componente Auth do Cake)
      * 
@@ -109,6 +91,7 @@ class UsersController extends AppController {
 
     /**
      * Index method
+     * Mostra todos os usuários
      *
      * @return void
      */
@@ -122,12 +105,13 @@ class UsersController extends AppController {
 
     /**
      * View method
+     * Exibe um usuário específico
      *
-     * @param string|null $id User id.
+     * @param integer $id User id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null) {
+    public function view($id) {
         $this->layout = 'devoops_complete';
         $user = $this->Users->get($id, ['contain' => ['People', 'Organizations']]);
         
@@ -144,6 +128,7 @@ class UsersController extends AppController {
 
     /**
      * Add method
+     * Adiciona um usuário
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
@@ -180,38 +165,51 @@ class UsersController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $user = $this->Users->get($id, [
-            'contain' => []
-        ]);
+        $this->layout = 'devoops_complete';
+        $user = $this->Users->get($id, ['fields' => 'username']);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
+            $userComplete = $this->Users->get($id);
+            $user = $this->Users->patchEntity($userComplete, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success('The user has been saved.');
+                $this->Flash->bootstrapSuccess('Os dados do usuário foram editados com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('The user could not be saved. Please, try again.');
+                $this->Flash->bootstrapError('Os dados não foram salvos, tente novamente.');
             }
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Delete method
+     /**
+     * Muda a ativação de um usuário
+     * Se está inativo fica ativo e vice-versa
      *
-     * @param string|null $id User id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @param integer $id Id do Usuário
+     * @param bool $active Status do Usuário (ativo/inativo)
+     * @return void Redireciona para a página de visualizacão 
+     *              das Permissões do usário
      */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success('The user has been deleted.');
+    public function changeActivation($id, $active) {
+        $this->autoRender = false;
+        if(empty($active)) {
+           $change = 1;
         } else {
-            $this->Flash->error('The user could not be deleted. Please, try again.');
+           $change = 0;
         }
-        return $this->redirect(['action' => 'index']);
+        $permission = $this->Users->get($id);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $permission = $this->Users->patchEntity($permission, ['active' => $change]);
+            if ($this->Users->save($permission)) {
+                $this->Flash->bootstrapSuccess('Status do usuário modificado com sucesso.');
+                $this->redirect(['controller' => 'usuario', 'action' => 'listar']);
+            } else {
+                $this->Flash->bootstrapError('O status do usuário não foi modificado, por favor, tente novamente,');
+                $this->redirect(['controller' => 'usuario', 'action' => 'listar']);
+            }
+        } else {
+            $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
+        }
     }
 
 }

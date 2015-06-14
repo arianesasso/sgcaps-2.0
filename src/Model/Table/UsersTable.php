@@ -53,11 +53,11 @@ class UsersTable extends Table {
 
         $validator
                 ->requirePresence('username', 'create')
-                ->notEmpty('username', 'Campo obrigatório');
+                ->notEmpty('username', 'Campo obrigatório', 'create');
 
         $validator
                 ->requirePresence('password', 'create')
-                ->notEmpty('password', 'Campo obrigatório');
+                ->notEmpty('password', 'Campo obrigatório', 'create');
 
         return $validator;
     }

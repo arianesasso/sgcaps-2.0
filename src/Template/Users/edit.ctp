@@ -1,29 +1,19 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Organizations'), ['controller' => 'Organizations', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Organization'), ['controller' => 'Organizations', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="users form large-10 medium-9 columns">
-    <?= $this->Form->create($user); ?>
-    <fieldset>
-        <legend><?= __('Edit User') ?></legend>
-        <?php
-            echo $this->Form->input('username');
-            echo $this->Form->input('password');
-            echo $this->Form->input('active');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<legend><?= __('Editar informações do Usuário') ?></legend>
+<?php echo $this->Form->create($user); ?>
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">
+        <fieldset>
+            <br/>
+            <div class="form-group" name="username_div">
+                <label class="control-label"><?= __('Nome de Usuário') ?></label>
+                <?php echo $this->Form->input('username', ['class' => 'form-control', 'label' => false]); ?>
+            </div>
+            <div class="form-group" name="password_div">
+                <label class="control-label"><?= __('Senha') ?></label>
+                <?php echo $this->Form->input('password', ['class' => 'form-control', 'label' => false]); ?>
+            </div>
+        </fieldset>
+        <?= $this->Form->submit(__('Salvar'), ['class' => 'btn btn-success']) ?>
+        <?= $this->Form->end() ?>
+    </div>
 </div>
