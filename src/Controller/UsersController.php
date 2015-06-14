@@ -202,7 +202,8 @@ class UsersController extends AppController {
             $permission = $this->Users->patchEntity($permission, ['active' => $change]);
             if ($this->Users->save($permission)) {
                 $this->Flash->bootstrapSuccess('Status do usuário modificado com sucesso.');
-                $this->redirect(['controller' => 'usuario', 'action' => 'listar']);
+                //Se o usuário desativado for o usuário logado, realizar logout
+                return (($this->request->session()->read('Auth.User.id') == $id && $change === 0) ? $this->redirect(['action' => 'logout']) : $this->redirect(['action' => 'index']));
             } else {
                 $this->Flash->bootstrapError('O status do usuário não foi modificado, por favor, tente novamente,');
                 $this->redirect(['controller' => 'usuario', 'action' => 'listar']);
