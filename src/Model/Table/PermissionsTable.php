@@ -68,7 +68,7 @@ class PermissionsTable extends Table {
                 ->notEmpty('beginning', 'Campo obrigatório');
 
         $validator
-                ->add('ending', 'valid', ['rule' => 'date'])
+                ->add('ending', 'valid', ['rule' => 'date', 'on' => 'create'])
                 ->allowEmpty('ending');
         
         return $validator;
@@ -102,13 +102,13 @@ class PermissionsTable extends Table {
             'Roles.alias',
             'Roles.domain'
         ];
-        return $this->find('list', ['keyField' => 'Roles.domain', 'valueField' => 'Roles.alias'])
+        return $this->find()->hydrate(false)
                         ->select($fields)
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
                                  'Permissions.organization_id' => $options['organization_id'],
                                  'Permissions.beginning <=' => date('Y-m-d H:i:s'),
-                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
+                                 'OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ])
                         ->contain('Roles');
@@ -132,7 +132,7 @@ class PermissionsTable extends Table {
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
                                  'Permissions.beginning <=' => date('Y-m-d H:i:s'),
-                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
+                                 'OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ])
                         ->contain('Organizations');
@@ -151,16 +151,16 @@ class PermissionsTable extends Table {
                                  'role_id' => $options['role_id'],
                                  'organization_id' => $options['organization_id'],
                                  'Permissions.beginning <=' => date('Y-m-d H:i:s'),
-                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
+                                 'OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ]);
     }
     
     /**
      * Finds the permissions a manager can see
-     * If the manager is a 'gestor_caps' he/she can only see the permissions
-     * that the user has in her/his unit
-     * If the user is a 'gestor_geral' he/she can see all the users permissions
+     * If the user is a 'gestor.geral' he/she can see all the users permissions
+     * Otherwise he/she can only see the permissions that the user has in 
+     * her/his unit
      * 
      * @param Query $query
      * @param array $options
@@ -170,20 +170,20 @@ class PermissionsTable extends Table {
         $query = $this->find()
                 ->where(['Permissions.user_id' => $options['id'],
                     'OR' => ['Permissions.ending IS' => null,
-                        'Permissions.ending >=' => date('Y-m-d H:i:s')
+                        'Permissions.ending >' => date('Y-m-d H:i:s')
                     ]
                 ])
-                ->contain(['Roles', 'Organizations', 'Admins.People'])
+                ->contain(['Roles', 'Organizations', 'Admins.People', 'Admins.Organizations'])
                 ->order(['Organizations.name', 'Permissions.beginning']);
         
-        if (array_search('gestor', $options['roles']) === 'caps') {
+        if (array_search('gestor.geral', $options['roles']) === false) {
             $query = $this->find()->where(['Permissions.user_id' => $options['id'],
                              'Permissions.organization_id' => $options['organization_id'],
                              'OR' => ['Permissions.ending IS' => null,
-                                      'Permissions.ending >=' => date('Y-m-d H:i:s')
+                                      'Permissions.ending >' => date('Y-m-d H:i:s')
                             ]
                         ])
-                 ->contain(['Roles', 'Organizations', 'Admins.People'])
+                 ->contain(['Roles', 'Organizations', 'Admins.People', 'Admins.Organizations'])
                  ->order(['Organizations.name', 'Permissions.beginning']);
         }
         return $query;

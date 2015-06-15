@@ -53,11 +53,11 @@ class UsersTable extends Table {
 
         $validator
                 ->requirePresence('username', 'create')
-                ->notEmpty('username', 'Campo obrigatório');
+                ->notEmpty('username', 'Campo obrigatório', 'create');
 
         $validator
                 ->requirePresence('password', 'create')
-                ->notEmpty('password', 'Campo obrigatório');
+                ->notEmpty('password', 'Campo obrigatório', 'create');
 
         return $validator;
     }
@@ -76,25 +76,28 @@ class UsersTable extends Table {
 
     /**
      * Finds the users a manager can see
-     * If the manager is a 'gestor_caps' it can only see the users
+     * If the manager is not a gestor.geral it can only see the users
      * that had or still have permission to access his/her Caps
-     * If the user is a 'gestor_geral' he/she can see all users
+     * If the user is a 'gestor.geral' he/she can see all users
      * 
      * @param Query $query
      * @param array $options
      * @return type
      */
     public function findAllowed(Query $query, array $options) {
-        $query = $this->find()->contain(['People', 'Organizations']);
+        $fields = ['Users.id'];
+        
+        $query = $this->find()
+                      ->distinct($fields)
+                      ->contain(['People', 'Organizations']);
 
-        if (array_search('gestor', $options['roles']) === 'caps') {
-            $query = $this->find()
-                    ->distinct()
+        if (array_search('gestor.geral', $options['roles']) === false) {
+            $query = $this->find()->distinct($fields)
                     ->contain(['People', 'Organizations'])
                     ->matching('Permissions', function ($q) use ($options) {
-                return $q->where(['Permissions.organization_id' => $options['organization_id']]);
-        }
-            );
+                        return $q->where(['Permissions.organization_id' => $options['organization_id']])
+                    ->distinct();
+            });
         }
         return $query;
     }

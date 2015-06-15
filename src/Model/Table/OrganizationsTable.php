@@ -92,7 +92,7 @@ class OrganizationsTable extends Table
      * Finds the organzations that are not users yet.
      * Encontra as organizacões que ainda não são usuários.
      * 
-     * Se o usuário for do tipo gestor_caps ele poderá dar permissões somente à 
+     * Se o usuário for do tipo gestor.caps ele poderá dar permissões somente à 
      * sua unidade. No entanto, um gestor 'geral' pode dar permissões à todas.
      * 
      * @param Query $query
@@ -102,9 +102,32 @@ class OrganizationsTable extends Table
     public function findNoUsers(Query $query, array $options) {
         $condition = ['user_id IS' => null];
         
-        if(array_search('gestor', $options['roles']) === 'caps') {
+        if(array_search('gestor.geral', $options['roles']) === false) {
             $condition[] = ['id =' => $options['organization_id']];         
         }       
+        return $this->find('list')->where($condition);
+    }
+    
+    /**
+     * Finds the organizations in which a manager user can give permissions
+     * If the manager is a 'gestor.geral' it can give permissions in all organizations
+     * Otherwise it can give permissions only in its own organization
+     * 
+     * Encontra a organização para a qual um gestor pode dar permissões
+     * Se o gestor for um 'gestor.geral' ele pode dar permissões em qualquer unidade,
+     * se ele for um gestor mais restrito (ex.: gestor.caps) só poderá dar permissões
+     * para a sua unidade
+     * 
+     * @param Query $query
+     * @param array $options
+     * @return type
+     */
+    public function findAllowed(Query $query, array $options) {
+        $condition = ['name IS NOT' => null];
+        
+        if(array_search('gestor.geral', $options['roles']) === false) {
+            $condition = ['id' => $options['organization_id']];         
+        }
         return $this->find('list')->where($condition);
     }
 }

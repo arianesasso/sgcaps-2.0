@@ -31,6 +31,15 @@
     background-color: lightgray;
 }
 
+.action-bar {
+    margin-top: 1em;
+}
+
+.action-button {
+   float: right; 
+   margin-left: 0.2em;
+}
+
 #user-type-professional {
     margin-right: 5px;
 }
