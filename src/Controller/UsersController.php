@@ -20,11 +20,25 @@ class UsersController extends AppController {
      * Ela é necessária para que o usuário que não está ativo
      * veja a página de usuário sem permissão
      * 
+     * Além disso, os papéis válidos precisam ser atualizados, caso seja
+     * adicionada ou removida uma nova permissão ao usuário logado
+     * 
      * @param \Cake\Event\Event $event
      * @return type
      */
     public function beforeFilter(\Cake\Event\Event $event) {
         $this->Auth->allow(['noPermission']);
+        $userId = $this->request->session()->read('Auth.User.id');
+        $organizationId = $this->request->session()->read('Auth.User.organization.id');
+        if (!empty($organizationId)) {
+            $userRoles = $this->UserPermissions->validyRoles($userId, $organizationId);
+            if (!empty($userRoles)) {
+                //Array com as Permissões do Usuário | Array with the user permissions   
+                $this->request->session()->write('Auth.User.roles', $userRoles);
+            } else {
+                return $this->redirect($this->Auth->logout());
+            }
+        }
         return parent::beforeFilter($event);
     }
 
@@ -114,12 +128,12 @@ class UsersController extends AppController {
     public function view($id) {
         $this->layout = 'devoops_complete';
         $user = $this->Users->get($id, ['contain' => ['People', 'Organizations']]);
-        
+
         $roles = $this->request->session()->read('Auth.User.roles');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
         $permissions = $this->Users->Permissions->find(
                 'AllowedValidy', ['id' => $id, 'roles' => $roles, 'organization_id' => $organizationId]);
-        
+
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
         $this->set('permissions', $permissions);
@@ -132,10 +146,10 @@ class UsersController extends AppController {
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add() {    
-        $this->layout = 'devoops_complete';           
+    public function add() {
+        $this->layout = 'devoops_complete';
         $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {       
+        if ($this->request->is('post')) {
             if (!empty($this->request->data['professional_id'])) {
                 $id = $this->request->data['professional_id'];
                 $controller = 'people';
@@ -146,7 +160,7 @@ class UsersController extends AppController {
                 $this->Flash->bootstrapError('Não foi possível criar o usuário.');
                 return $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
             }
-            $user = $this->Users->patchEntity($user, $this->request->data);           
+            $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 return $this->redirect(['controller' => $controller, 'action' => 'addUser', $id, $user->id]);
             } else {
@@ -181,7 +195,7 @@ class UsersController extends AppController {
         $this->set('_serialize', ['user']);
     }
 
-     /**
+    /**
      * Muda a ativação de um usuário
      * Se está inativo fica ativo e vice-versa
      *
@@ -192,10 +206,10 @@ class UsersController extends AppController {
      */
     public function changeActivation($id, $active) {
         $this->autoRender = false;
-        if(empty($active)) {
-           $change = 1;
+        if (empty($active)) {
+            $change = 1;
         } else {
-           $change = 0;
+            $change = 0;
         }
         $permission = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {

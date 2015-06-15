@@ -44,7 +44,7 @@
                                     echo h($permission->ending);
                                 }
                                 ?></td>
-                            <td><?= h($permission->admin->person->name) ?></td>
+                            <td><?php echo (!empty($permission->admin->person->name) ? h($permission->admin->person->name) : h($permission->admin->organization->name)); ?></td>
                             <td class="actions">
                                 <?= $user->active ? $this->Form->postLink(__('Cancelar'), ['controller' => 'permissions', 'action' => 'cancel', $permission->id, $user->id], ['confirm' => __('Tem certeza que deseja cancelar esta permissão?'), 'class' => 'btn btn-default']) : ''; ?>
                             </td>

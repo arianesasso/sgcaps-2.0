@@ -13,6 +13,26 @@ use Cake\I18n\Time;
 class PermissionsController extends AppController {
 
     /**
+     * Se o usuário não possui permissões válidas em nenhuma organização ele
+     * será deslogado
+     * 
+     * @param \Cake\Event\Event $event
+     * @return type
+     */
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $userId = $this->request->session()->read('Auth.User.id');
+        if(empty($userId)) {
+            return $this->redirect(['controller' => 'usuario', 'action' => 'login']);
+        }
+        $permissions = $this->Permissions->find('validyorganizations', ['user_id' => $userId]);
+        if (empty($permissions->toArray())) {
+            $this->Auth->logout();
+            return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
+        }
+        return parent::beforeFilter($event);
+    }
+
+    /**
      * Shows the organizations that the user has permission to access
      * Mostra as unidades que o usuário tem permissão de acessar
      * 
@@ -27,7 +47,7 @@ class PermissionsController extends AppController {
         //Redirecionar para o dashboard
         if ($this->request->is('post')) {
             list($organization['id'], $organization['name']) = explode('/', $this->request->data['unidade']);
-            $userRoles = $this->UserPemissions->validyRoles($userId, $organization['id']);
+            $userRoles = $this->UserPermissions->validyRoles($userId, $organizationId);
             //Array com as Permissões do Usuário | Array with the user permissions   
             $this->request->session()->write('Auth.User.roles', $userRoles);
             //Variável com o nome e a id da unidade atual do usuário
@@ -37,10 +57,6 @@ class PermissionsController extends AppController {
         }
         //Esta porcão de código está relacionada a criacão da interface
         $permissions = $this->Permissions->find('validyorganizations', ['user_id' => $userId]);
-        if (empty($permissions->toArray())) {
-            $this->Auth->logout();
-            return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
-        }
         $this->set(compact('permissions'));
     }
 
@@ -96,13 +112,14 @@ class PermissionsController extends AppController {
             $permission = $this->Permissions->patchEntity($permission, ['ending' => Time::now()]);
             if ($this->Permissions->save($permission)) {
                 $this->Flash->bootstrapSuccess('Permissão cancelada com sucesso.');
-                $this->redirect(['controller' => 'usuario', 'action' => 'visualizar', $userId]);
+                return $this->redirect(['controller' => 'usuario', 'action' => 'visualizar', $userId]);
             } else {
                 $this->Flash->bootstrapError('A permissão não foi cancelada, por favor, tente novamente,');
-                $this->redirect(['controller' => 'usuario', 'action' => 'visualizar', $userId]);
+                return $this->redirect(['controller' => 'usuario', 'action' => 'visualizar', $userId]);
             }
         } else {
-            $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
+            return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
     }
+
 }

@@ -41,7 +41,7 @@ class AppController extends Controller {
     public function initialize() {
         parent::initialize();
         $this->loadComponent('Flash');
-        $this->loadComponent('UserPemissions');
+        $this->loadComponent('UserPermissions');
         $this->loadComponent('Auth', [
             //'authorize' => 'Controller',
             'authenticate' => [

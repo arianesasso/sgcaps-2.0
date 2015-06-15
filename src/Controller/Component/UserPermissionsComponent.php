@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Controller\Component;
+
 use Cake\Controller\Component;
 use Cake\ORM\TableRegistry;
 
-class UserPemissionsComponent extends Component {
-    
+class UserPermissionsComponent extends Component {
+
     /**
      * Encontra os papéis válidos para um usuário em uma dada unidade
      * 
@@ -13,7 +14,7 @@ class UserPemissionsComponent extends Component {
      * @param type $organizationId
      * @return string
      */
-    public static function validyRoles($userId, $organizationId) {
+    public function validyRoles($userId, $organizationId) {
         $Permissions = TableRegistry::get('Permissions');
         $permissions = $Permissions->find('validyroles', ['user_id' => $userId, 'organization_id' => $organizationId]);
         $userRoles = array();
@@ -24,4 +25,3 @@ class UserPemissionsComponent extends Component {
     }
 
 }
-

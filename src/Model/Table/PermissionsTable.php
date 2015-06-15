@@ -108,7 +108,7 @@ class PermissionsTable extends Table {
                         ->where(['Permissions.user_id' => $options['user_id'],
                                  'Permissions.organization_id' => $options['organization_id'],
                                  'Permissions.beginning <=' => date('Y-m-d H:i:s'),
-                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
+                                 'OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ])
                         ->contain('Roles');
@@ -132,7 +132,7 @@ class PermissionsTable extends Table {
                         ->distinct($fields)
                         ->where(['Permissions.user_id' => $options['user_id'],
                                  'Permissions.beginning <=' => date('Y-m-d H:i:s'),
-                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
+                                 'OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ])
                         ->contain('Organizations');
@@ -151,7 +151,7 @@ class PermissionsTable extends Table {
                                  'role_id' => $options['role_id'],
                                  'organization_id' => $options['organization_id'],
                                  'Permissions.beginning <=' => date('Y-m-d H:i:s'),
-                                 'OR' => [['Permissions.ending >=' => date('Y-m-d H:i:s')],
+                                 'OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
                                           ['Permissions.ending IS' => null]],
                                 ]);
     }
@@ -170,20 +170,20 @@ class PermissionsTable extends Table {
         $query = $this->find()
                 ->where(['Permissions.user_id' => $options['id'],
                     'OR' => ['Permissions.ending IS' => null,
-                        'Permissions.ending >=' => date('Y-m-d H:i:s')
+                        'Permissions.ending >' => date('Y-m-d H:i:s')
                     ]
                 ])
-                ->contain(['Roles', 'Organizations', 'Admins.People'])
+                ->contain(['Roles', 'Organizations', 'Admins.People', 'Admins.Organizations'])
                 ->order(['Organizations.name', 'Permissions.beginning']);
         
         if (array_search('gestor.geral', $options['roles']) === false) {
             $query = $this->find()->where(['Permissions.user_id' => $options['id'],
                              'Permissions.organization_id' => $options['organization_id'],
                              'OR' => ['Permissions.ending IS' => null,
-                                      'Permissions.ending >=' => date('Y-m-d H:i:s')
+                                      'Permissions.ending >' => date('Y-m-d H:i:s')
                             ]
                         ])
-                 ->contain(['Roles', 'Organizations', 'Admins.People'])
+                 ->contain(['Roles', 'Organizations', 'Admins.People', 'Admins.Organizations'])
                  ->order(['Organizations.name', 'Permissions.beginning']);
         }
         return $query;
