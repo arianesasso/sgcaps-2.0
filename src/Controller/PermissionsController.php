@@ -80,7 +80,7 @@ class PermissionsController extends AppController {
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
                 $this->Flash->bootstrapSuccess('A permissão foi adicionada com sucesso.');
-                return $this->redirect(['action' => 'add', $userId, $userType, $organizationId]);
+                return $this->redirect(['controller' => 'usuario', 'action' => 'visualizar', $userId]);
             } else {
                 $this->Flash->bootstrapError('A permissão não pode ser salva. Por favor, tente novamente.');
             }
