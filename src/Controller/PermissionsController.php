@@ -11,25 +11,19 @@ use Cake\I18n\Time;
  * @property \App\Model\Table\PermissionsTable $Permissions
  */
 class PermissionsController extends AppController {
-
-    /**
-     * Se o usuário não possui permissões válidas em nenhuma organização ele
-     * será deslogado
+    
+     /**
      * 
-     * @param \Cake\Event\Event $event
-     * @return type
+     * @param type $user
+     * @return boolean
      */
-    public function beforeFilter(\Cake\Event\Event $event) {
-        $userId = $this->request->session()->read('Auth.User.id');
-        if(empty($userId)) {
-            return $this->redirect(['controller' => 'usuario', 'action' => 'login']);
+    public function isAuthorized($user) {
+        $action = $this->request->params['action'];
+        // A 
+        if (in_array($action, ['organizations'])) {
+            return true;
         }
-        $permissions = $this->Permissions->find('validyorganizations', ['user_id' => $userId]);
-        if (empty($permissions->toArray())) {
-            $this->Auth->logout();
-            return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
-        }
-        return parent::beforeFilter($event);
+        return parent::isAuthorized($user);
     }
 
     /**

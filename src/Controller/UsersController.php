@@ -28,17 +28,6 @@ class UsersController extends AppController {
      */
     public function beforeFilter(\Cake\Event\Event $event) {
         $this->Auth->allow(['noPermission']);
-        $userId = $this->request->session()->read('Auth.User.id');
-        $organizationId = $this->request->session()->read('Auth.User.organization.id');
-        if (!empty($organizationId)) {
-            $userRoles = $this->UserPermissions->validyRoles($userId, $organizationId);
-            if (!empty($userRoles)) {
-                //Array com as Permissões do Usuário | Array with the user permissions   
-                $this->request->session()->write('Auth.User.roles', $userRoles);
-            } else {
-                return $this->redirect($this->Auth->logout());
-            }
-        }
         return parent::beforeFilter($event);
     }
 
@@ -215,14 +204,15 @@ class UsersController extends AppController {
         $permission = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $permission = $this->Users->patchEntity($permission, ['active' => $change]);
-            if ($this->Users->save($permission)) {
-                $this->Flash->bootstrapSuccess('Status do usuário modificado com sucesso.');
-                //Se o usuário desativado for o usuário logado, realizar logout
-                return (($this->request->session()->read('Auth.User.id') == $id && $change === 0) ? $this->redirect(['action' => 'logout']) : $this->redirect(['action' => 'index']));
-            } else {
+            if (!$this->Users->save($permission)) {
                 $this->Flash->bootstrapError('O status do usuário não foi modificado, por favor, tente novamente,');
                 $this->redirect(['controller' => 'usuario', 'action' => 'listar']);
             }
+            $this->Flash->bootstrapSuccess('Status do usuário modificado com sucesso.');
+            if ($this->request->session()->read('Auth.User.id') == $id && $change === 0) {
+                $this->request->session()->write('Auth.User.id', null);
+            }
+            return $this->redirect(['action' => 'index']);
         } else {
             $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
