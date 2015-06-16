@@ -26,7 +26,8 @@ class ProfessionalsController extends AppController
     }
     
      /**
-     * Shows a list of professionals that are not users
+     * Shows a list of professionals that are not users yet
+     * Mostra uma lista de profissionais que ainda não são usuários
      *
      * @return void
      */

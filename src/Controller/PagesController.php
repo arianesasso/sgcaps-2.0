@@ -31,6 +31,7 @@ class PagesController extends AppController {
 
     /**
      * Displays a view
+     * Exibe uma página estática
      *
      * @return void|\Cake\Network\Response
      * @throws \Cake\Network\Exception\NotFoundException When the view file could not

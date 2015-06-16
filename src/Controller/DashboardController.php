@@ -18,9 +18,6 @@ class DashboardController extends AppController {
      */
     public function index() {
         $this->layout = 'devoops_complete';
-        if ($this->request->is('ajax')) {
-            $this->layout = 'ajax';
-        }
     }
 
 }

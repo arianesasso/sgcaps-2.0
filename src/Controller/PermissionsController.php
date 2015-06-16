@@ -11,15 +11,17 @@ use Cake\I18n\Time;
  * @property \App\Model\Table\PermissionsTable $Permissions
  */
 class PermissionsController extends AppController {
-    
-     /**
+
+    /**
+     * A única página que qualquer usuário logado tem autorização de acessar
+     * é a página que permite a ele escolher a organização na qual deseja realizar
+     * ações
      * 
      * @param type $user
      * @return boolean
      */
     public function isAuthorized($user) {
         $action = $this->request->params['action'];
-        // A 
         if (in_array($action, ['organizations'])) {
             return true;
         }
@@ -30,21 +32,18 @@ class PermissionsController extends AppController {
      * Shows the organizations that the user has permission to access
      * Mostra as unidades que o usuário tem permissão de acessar
      * 
-     * @param integer $userId Id do Usuário
-     * @return void Redirects the user if he/she has no validy permissions
-     *              Redireciona o usuário se ele não tiver permissões válidas
+     * @return void Redireciona o usuário para o dashboard após escolha da organização
      */
     public function organizations() {
         $this->layout = 'devoops_minimal';
         $userId = $this->request->session()->read('Auth.User.id');
-        //Se houve uma requisicão do tipo POST, salvar o nome da organizacão 
-        //Redirecionar para o dashboard
+        //Caso seja uma requisicão do tipo POST, salvar dados da organizacão e os papéis do usuário
         if ($this->request->is('post')) {
             list($organization['id'], $organization['name']) = explode('/', $this->request->data['unidade']);
-            $userRoles = $this->UserPermissions->validyRoles($userId, $organizationId);
-            //Array com as Permissões do Usuário | Array with the user permissions   
+            $userRoles = $this->UserPermissions->validyRoles($userId, $organization['id']);
+            //Array com as Permissões do Usuário  
             $this->request->session()->write('Auth.User.roles', $userRoles);
-            //Variável com o nome e a id da unidade atual do usuário
+            //Variável com o nome e o id da unidade atual do usuário
             $this->request->session()->write('Auth.User.organization.id', $organization['id']);
             $this->request->session()->write('Auth.User.organization.name', $organization['name']);
             return $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
@@ -58,15 +57,17 @@ class PermissionsController extends AppController {
      * Adds a permission to an specific user
      * Adiciona uma permissão a um usuário específico
      * 
-     * @param integer $userId The user to grant the permission for
-     * @param integer $userType The type of user (organization or person)
-     * @param integer $organizationId If the user is an organization
-     * @return void Redirects on successful add, renders view otherwise.
+     * @param integer $userId O usuário que terá a permissão garantida
+     * @param integer $userType Tipo de usuário (organização ou pessoa)
+     * @param integer $organizationId Se o usuário for uma organização
+     * @return void Carrega a view ou redireciona para a página do usuário após
+     *              garantir a permissão
      */
     public function add($userId, $userType, $organizationId = null) {
         $this->layout = 'devoops_complete';
         $permission = $this->Permissions->newEntity();
         if ($this->request->is('post')) {
+            //Se a permissão em questão for válida atualmente
             if (!empty($this->Permissions->find('stillValid', $this->request->data)->first())) {
                 $this->Flash->bootstrapError('O usuário já possui essa permissão.');
                 return $this->redirect(['action' => 'add', $userId, $userType, $organizationId]);
@@ -79,10 +80,13 @@ class PermissionsController extends AppController {
                 $this->Flash->bootstrapError('A permissão não pode ser salva. Por favor, tente novamente.');
             }
         }
+        //Encontra as organizações para as quais um determinado usuário pode garantir permissões
         $organizations = $this->Permissions->Organizations->find('Allowed', ['roles' => $this->request->session()->read('Auth.User.roles'), 'organization_id' => $this->request->session()->read('Auth.User.organization.id')]);
+        //Encontra os papéis que um determinado usuário pode garantir
         $roles = $this->Permissions->Roles->find('Allowed', ['roles' => $this->request->session()->read('Auth.User.roles')]);
-        $user = $user = $this->Permissions->Users->get($userId, ['contain' => ['People', 'Organizations']]);
-        ;
+        //Recupera dados do usuário que está tendo a permissão garantida
+        $user = $this->Permissions->Users->get($userId, ['contain' => ['People', 'Organizations']]);
+        
         $this->set(compact('permission', 'organizations', 'roles'));
         $this->set('_serialize', ['permission']);
         $this->set('user', $user);
@@ -96,8 +100,7 @@ class PermissionsController extends AppController {
      *
      * @param integer $id Id da Permissão
      * @param integer $userId Id do Usuário
-     * @return void Redireciona para a página de visualizacão 
-     *              das Permissões do usário
+     * @return void Redireciona para a página de visualizacão das Permissões do usário
      */
     public function cancel($id, $userId) {
         $this->autoRender = false;

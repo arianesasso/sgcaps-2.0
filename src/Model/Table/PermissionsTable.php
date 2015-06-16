@@ -140,6 +140,7 @@ class PermissionsTable extends Table {
     
     /**
      * Finds if the permission that is going to be granted is still valid
+     * Descobre se a permissão a ser garantida é válida ainda
      * 
      * @param Query $query
      * @param array $options
@@ -157,10 +158,15 @@ class PermissionsTable extends Table {
     }
     
     /**
-     * Finds the permissions a manager can see
+     * Finds the validy permissions a manager can see
      * If the user is a 'gestor.geral' he/she can see all the users permissions
      * Otherwise he/she can only see the permissions that the user has in 
      * her/his unit
+     * 
+     * Encontra as permissões válidas que um gestor pode ver.
+     * Se ele for um 'gestor.geral' poderá ver todas as permissões de um usuário.
+     * Caso contrário, ele só poderá ver as permissões do usuário na unidade na qual
+     * está logado.
      * 
      * @param Query $query
      * @param array $options

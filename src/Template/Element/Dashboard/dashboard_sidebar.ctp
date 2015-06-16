@@ -1,6 +1,6 @@
 <ul class="nav main-menu">
     <li>
-        <a class="link-ajax" href="dashboard">
+        <a href="<?php echo $this->Url->build(["controller" => "dashboard", "action" => "index"]); ?>">
             <i class="fa fa-dashboard"></i>
             <span class="hidden-xs">Dashboard</span>
         </a>

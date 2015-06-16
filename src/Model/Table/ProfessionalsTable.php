@@ -69,16 +69,12 @@ class ProfessionalsTable extends Table
     }
        
     /**
-     * gestor.caps
+     * Se o usuário logado for um 'gestor.geral' o método busca
+     * todos os profissionais que não são usuários ainda
      * 
-     * Finds all the professionals that are not users yet and that are
-     * linked to the organization that the current user is logged in.
-     * Encontra os profissionais que não são usuários e que estão
-     * vinculados à unidade na qual o usuário atual está logado.
-     * 
-     * gestor.geral
-     * 
-     * Finds all the professionals that are not users yet.
+     * Caso o gestor seja mais restrito o método busca os profissionais que 
+     * não são usuários e que estão vinculados à unidade na qual o usuário atual 
+     * está logado
      * 
      * @param Query $query
      * @param array $options

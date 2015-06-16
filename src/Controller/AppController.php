@@ -53,7 +53,7 @@ class AppController extends Controller {
             'loginRedirect' => ['controller' => 'Permissions', 'action' => 'organizations'],
             'logoutRedirect' => ['controller' => 'Pages', 'action' => 'display']
         ]);
-        // Permite que a página inicial (home) seja exibida antes da autenticação
+        //Permite que a página inicial (home) seja exibida antes da autenticação
         $this->Auth->allow(['display']);
     }
 
@@ -74,7 +74,7 @@ class AppController extends Controller {
         }
 
         $organizations = $this->UserPermissions->validyOrganizations($user['id']);
-        //Se o usuário não possui permissões válidas em nenhuma organização
+        //Se o usuário não possuir permissões válidas em nenhuma organização
         if (empty($organizations)) {
             return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
@@ -83,7 +83,7 @@ class AppController extends Controller {
         //Isso faz com que o usuário seja obrigado a ter uma organização selecionada
         if (!empty($organizationId)) {
             $userRoles = $this->UserPermissions->validyRoles($user['id'], $organizationId);
-            //Se o usuário não possuir papéis válidos na unidade em questão.
+            //Se o usuário não possuir papéis válidos na unidade em questão
             //Ex.: o gestor cancelou a permissão do usuário enquanto ele ainda estava logado
             if (empty($userRoles)) {
                 return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
@@ -91,9 +91,9 @@ class AppController extends Controller {
 
             //Array com as Permissões do Usuário
             $sessionRoles = $this->request->session()->read('Auth.User.roles');
-            
+
             //Se em algum momento as permissões válidas para uma dada unidade
-            //forem modificadas, é preciso atualizar o Auth.User.roles
+            //forem modificadas é preciso atualizar o Auth.User.roles
             if ($sessionRoles != $userRoles) {
                 $this->request->session()->write('Auth.User.roles', $userRoles);
             }

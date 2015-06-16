@@ -26,7 +26,8 @@ class OrganizationsController extends AppController
     }
     
     /**
-     * Shows a list of organizations that are not users
+     * Shows a list of organizations that are not users yet
+     * Mostra uma lista de organizações que não são usuárias ainda
      *
      * @return void
      */
