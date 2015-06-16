@@ -75,10 +75,10 @@ class UsersTable extends Table {
     }
 
     /**
-     * Finds the users a manager can see
-     * If the manager is not a gestor.geral it can only see the users
-     * that had or still have permission to access his/her Caps
-     * If the user is a 'gestor.geral' he/she can see all users
+     * Encontra os usuários que um gestor pode ver.
+     * Se o gestor for do tipo 'gestor.geral' poderá ver todos os usuários.
+     * Se não, só poderá ver os usuários que tem ou já tiveram permissões na sua
+     * unidade.
      * 
      * @param Query $query
      * @param array $options
