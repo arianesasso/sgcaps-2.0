@@ -23,7 +23,13 @@ class PermissionsController extends AppController {
     public function isAuthorized($user) {
         $action = $this->request->params['action'];
         if (in_array($action, ['organizations'])) {
-            return true;
+            $organizations = $this->UserPermissions->validyOrganizations($user['id']);
+            //Se o usuário não possuir permissões válidas em nenhuma organização
+            if (empty($organizations)) {
+                return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
+            } else {
+                return true;
+            }
         }
         return parent::isAuthorized($user);
     }
