@@ -167,7 +167,9 @@ class UsersController extends AppController {
             $userComplete = $this->Users->get($id);
             $user = $this->Users->patchEntity($userComplete, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->request->session()->write('Auth.User.username', $this->request->data['username']);
+                /**
+                 * @TODO Pensar na melhor forma de atualizar o username para o usuário logado
+                 */
                 $this->Flash->bootstrapSuccess('Os dados do usuário foram editados com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
