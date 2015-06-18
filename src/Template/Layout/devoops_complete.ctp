@@ -23,10 +23,10 @@
         <?= $this->Html->css('sgcaps') ?>
 
         <?= $this->Html->script('devoops/jquery.min') ?>
-        <?= $this->Html->script('devoops/jquery-ui.min') ?>      
+        <?= $this->Html->script('devoops/jquery-ui.min') ?>
+        <?= $this->Html->script('devoops/jquery.ui.datepicker-pt-BR') ?>
         <?= $this->Html->script('devoops/bootstrap') ?>
         <?= $this->Html->script('devoops/devoops') ?>
-        <?= $this->Html->script('jquery-1.11.1.min') ?>
         <?= $this->Html->script('jquery.dataTables.min') ?>
         <?= $this->Html->script('dataTables.bootstrap') ?>
         <?= $this->Html->script('sgcaps') ?>

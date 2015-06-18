@@ -2,6 +2,19 @@
     Created on : May 27, 2015, 10:44:06 PM
     Author     : ariane
 */
+div.ui-datepicker{
+ font-size:11px;
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+      color: black;
+}
+
+.ui-datepicker-trigger {
+      margin-left: 5px;
+      margin-right: 10px;
+}
+
 .breadcrumb-text {
     color: white;
 }

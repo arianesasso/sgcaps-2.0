@@ -11,7 +11,11 @@
             <span class="hidden-xs">Paciente</span>
         </a>
         <ul class="dropdown-menu">
-            <li><a class="" href="#">Cadastrar</a></li>
+            <li><a class="" href="<?php
+                echo $this->Url->build([
+                    "controller" => "people",
+                    "action" => "add"]);
+                ?>">Cadastrar</a></li>
             <li><a class="" href="#">Acolhimento</a></li>
             <li><a class="" href="#">Projeto Terapêutico</a></li>
         </ul>
@@ -22,8 +26,8 @@
             <span class="hidden-xs">Usuários</span>
         </a>
         <ul class="dropdown-menu">
-            <li><?php echo $this->Html->link('Cadastrar',['controller' => 'usuario', 'action' => 'cadastrar']) ?></li>
-            <li><?php echo $this->Html->link('Listar',['controller' => 'usuario', 'action' => 'listar']) ?></li>
+            <li><?php echo $this->Html->link('Cadastrar', ['controller' => 'usuario', 'action' => 'cadastrar']) ?></li>
+            <li><?php echo $this->Html->link('Listar', ['controller' => 'usuario', 'action' => 'listar']) ?></li>
         </ul>
     </li>
     <li class="dropdown">

@@ -108,6 +108,17 @@ $(document).ready(function () {
             }
         }
     });
+    
+    //Jquery Datepicker - Data de Nascimento
+    $("#birthdate").datepicker({
+      showOn: "button",
+      buttonImage: "../img/icons/splashy_icons/calendar_month.png",
+      maxDate: '-1Y',
+      buttonImageOnly: true,
+      buttonText: "Selecione uma data",
+      changeMonth: true,
+      changeYear: true
+    }, $.datepicker.regional[ "pt-BR" ]);
 });
 
 /**

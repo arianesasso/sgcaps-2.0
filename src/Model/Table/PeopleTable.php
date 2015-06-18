@@ -75,7 +75,7 @@ class PeopleTable extends Table
             ->allowEmpty('rg');
             
         $validator
-            ->add('birthdate', 'valid', ['rule' => 'datetime'])
+            ->add('birthdate', 'valid', ['rule' => ['date', 'dmy']])
             ->allowEmpty('birthdate');
             
         $validator

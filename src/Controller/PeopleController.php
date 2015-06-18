@@ -48,6 +48,7 @@ class PeopleController extends AppController
      */
     public function add()
     {
+        $this->layout = 'devoops_complete';
         $person = $this->People->newEntity();
         if ($this->request->is('post')) {
             $person = $this->People->patchEntity($person, $this->request->data);

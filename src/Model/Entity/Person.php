@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\Time;
 
 /**
  * Person Entity.
@@ -30,4 +31,9 @@ class Person extends Entity
         'patients' => true,
         'professionals' => true,
     ];
+    
+    protected function _setBirthdate($value) {
+        $data = new \Datetime($value);
+        return $data->format('Y-m-d');
+    }
 }
