@@ -92,8 +92,8 @@ class OrganizationsTable extends Table
      * Finds the organzations that are not users yet
      * Encontra as organizacões que ainda não são usuários
      * 
-     * Se o usuário for um gestor 'geral' ele poderá dar permissões à todas as unidades.
-     * Caso contrário, ele poderá dar permissões somente à sua unidade.
+     * Se o usuário for um gestor 'geral' ele poderá dar permissões à todas as unidades
+     * Caso contrário, ele poderá dar permissões somente à sua unidade
      * 
      * @param Query $query
      * @param array $options
@@ -110,7 +110,7 @@ class OrganizationsTable extends Table
     
     /**
      * Encontra a organização na qual um gestor pode dar permissões
-     * Se o gestor for um 'gestor.geral' ele pode dar permissões em qualquer unidade,
+     * Se o gestor for um 'gestor.geral' ele poderá dar permissões em qualquer unidade,
      * se ele for um gestor mais restrito (ex.: gestor.caps) só poderá dar permissões
      * para a sua unidade
      * 

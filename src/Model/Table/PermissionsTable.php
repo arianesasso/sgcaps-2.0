@@ -158,10 +158,10 @@ class PermissionsTable extends Table {
     }
     
     /**
-     * Finds the validy permissions a manager can see
+     * Finds the validy permissions a manager can see.
      * If the user is a 'gestor.geral' he/she can see all the users permissions
      * Otherwise he/she can only see the permissions that the user has in 
-     * her/his unit
+     * her/his current unit.
      * 
      * Encontra as permissões válidas que um gestor pode ver.
      * Se ele for um 'gestor.geral' poderá ver todas as permissões de um usuário.
