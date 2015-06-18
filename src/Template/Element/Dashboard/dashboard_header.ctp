@@ -38,7 +38,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">
+                                    <a href="<?php echo $this->Url->build([
+                                                    "controller" => "usuario",
+                                                    "action" => "editar", $user['id']]);
+                                             ?>">
                                         <i class="fa fa-user"></i>
                                         <span><?= __('Meus Dados') ?></span>
                                     </a>

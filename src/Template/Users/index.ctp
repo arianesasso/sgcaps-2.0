@@ -21,7 +21,7 @@
                         <td><?= h($user->created->format('d/m/Y')) ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('Permissões'), ['controller' => 'usuario' , 'action' => 'visualizar', $user->id], ['class' => 'btn btn-default']) ?>
-                            <?= $this->Html->link(__('Editar dados'), ['action' => 'edit', $user->id], ['class' => 'btn btn-default']) ?>
+                            <?= $this->Html->link(__('Editar dados'), ['controller' => 'usuario', 'action' => 'editar', $user->id], ['class' => 'btn btn-default']) ?>
                             <?= $this->Form->postLink(($user->active? __('Desativar') : __('Ativar')), ['controller' => 'users', 'action' => 'changeActivation', $user->id, $user->active], ['confirm' => __('Tem certeza que deseja mudar o status do usuário: {0}?', $user->username), 'class' => 'btn btn-default']) ?>
                         </td>
                     </tr>

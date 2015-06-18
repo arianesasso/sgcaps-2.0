@@ -48,6 +48,7 @@ Router::scope('/usuario', ['controller' => 'Users'], function ($routes) {
     $routes->connect('/cadastrar', ['action' => 'add']);
     $routes->connect('/listar', ['action' => 'index']);
     $routes->connect('/visualizar/*', ['action' => 'view']);
+    $routes->connect('/editar/*', ['action' => 'edit']);
 });
 
 Router::scope('/permissao', ['controller' => 'Permissions'], function ($routes) {
