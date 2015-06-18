@@ -73,33 +73,28 @@ class AppController extends Controller {
             return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
 
-        $organizations = $this->UserPermissions->validyOrganizations($user['id']);
-        //Se o usuário não possuir permissões válidas em nenhuma organização
-        if (empty($organizations)) {
+        $organizationId = $this->request->session()->read('Auth.User.organization.id');
+        //Isso faz com que o usuário seja obrigado a ter uma organização selecionada
+        if (empty($organizationId)) {
+           return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
+        }
+        
+        $userRoles = $this->UserPermissions->validyRoles($user['id'], $organizationId);
+        //Se o usuário não possuir papéis válidos na unidade em questão
+        //Ex.: o gestor cancelou a permissão do usuário enquanto ele ainda estava logado
+        if (empty($userRoles)) {
             return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
 
-        $organizationId = $this->request->session()->read('Auth.User.organization.id');
-        //Isso faz com que o usuário seja obrigado a ter uma organização selecionada
-        if (!empty($organizationId)) {
-            $userRoles = $this->UserPermissions->validyRoles($user['id'], $organizationId);
-            //Se o usuário não possuir papéis válidos na unidade em questão
-            //Ex.: o gestor cancelou a permissão do usuário enquanto ele ainda estava logado
-            if (empty($userRoles)) {
-                return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
-            }
+        //Array com as Permissões do Usuário
+        $sessionRoles = $this->request->session()->read('Auth.User.roles');
 
-            //Array com as Permissões do Usuário
-            $sessionRoles = $this->request->session()->read('Auth.User.roles');
-
-            //Se em algum momento as permissões válidas para uma dada unidade
-            //forem modificadas é preciso atualizar o Auth.User.roles
-            if ($sessionRoles != $userRoles) {
-                $this->request->session()->write('Auth.User.roles', $userRoles);
-            }
-            return true;
+        //Se em algum momento as permissões válidas para uma dada unidade
+        //forem modificadas é preciso atualizar o Auth.User.roles
+        if ($sessionRoles != $userRoles) {
+            $this->request->session()->write('Auth.User.roles', $userRoles);
         }
-        return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
+        
+        return true;
     }
-
 }
