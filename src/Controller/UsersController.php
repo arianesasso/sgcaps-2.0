@@ -20,9 +20,6 @@ class UsersController extends AppController {
      * Ela é necessária para que o usuário que não está ativo
      * veja a página de usuário sem permissão
      * 
-     * Além disso, os papéis válidos precisam ser atualizados, caso seja
-     * adicionada ou removida uma nova permissão ao usuário logado
-     * 
      * @param \Cake\Event\Event $event
      * @return type
      */
@@ -39,8 +36,6 @@ class UsersController extends AppController {
      *              Redireciona em caso de sucesso no login
      */
     public function login() {
-        //The redirectUrl needs to be null so the login will always redirect 
-        //to the organzations action
         //O atributo redirectUrl precisa ser null, assim o usuário semprre
         //será redirecionado do login para a página de escolha de unidades
         $this->Auth->redirectUrl(null);
@@ -48,19 +43,17 @@ class UsersController extends AppController {
 
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
-            //Redirects the user so he can choose the unity he wants to log into
             //Redireciona o usuário para que ele possa escolher a unidade para logar
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            //Verifies whether the problem is the username, inactive user or password
             //Verifica se o problema é o nome de usuário, usuário inativo ou a senha
             $users = $this->Users->findByUsername($this->request->data['username']);
-            //If the user does not exists // Se o usuário não existe
+            //Se o usuário não existe
             if ($users->count() === 0) {
                 $this->Flash->bootstrapError('Seu nome de usuário está incorreto.');
-                //If the user is not active // Se o usuário não está ativo
+                //Se o usuário não está ativo
             } else if (empty($users->first()->active)) {
                 return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
             } else {

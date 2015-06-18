@@ -101,6 +101,7 @@ class PermissionsController extends AppController {
      * @param integer $id Id da Permissão
      * @param integer $userId Id do Usuário
      * @return void Redireciona para a página de visualizacão das Permissões do usário
+     *              em caso de sucesso
      */
     public function cancel($id, $userId) {
         $this->autoRender = false;
