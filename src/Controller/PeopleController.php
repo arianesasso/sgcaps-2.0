@@ -51,17 +51,17 @@ class PeopleController extends AppController
         $this->layout = 'devoops_complete';
         $person = $this->People->newEntity();
         if ($this->request->is('post')) {
-            $person = $this->People->patchEntity($person, $this->request->data);
-            if ($this->People->save($person)) {
+            $person = $this->People->patchEntity($person, $this->request->data,  ['associated' => 'Patients']);
+            $person->patients = $this->request->data['patient'];
+            if ($this->People->save($person, ['associated' => true])) {
                 $this->Flash->success('The person has been saved.');
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error('The person could not be saved. Please, try again.');
             }
         }
-        $users = $this->People->Users->find('list', ['limit' => 200]);
-        $states = $this->People->States->find('list', ['limit' => 200]);
-        $this->set(compact('person', 'users', 'states'));
+        $states = $this->People->States->find('list');
+        $this->set(compact('person', 'states'));
         $this->set('_serialize', ['person']);
     }
     

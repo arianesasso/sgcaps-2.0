@@ -53,6 +53,10 @@ div.ui-datepicker{
    margin-left: 0.2em;
 }
 
+.some-height {
+    height: 5.4em;
+}
+
 #user-type-professional {
     margin-right: 5px;
 }

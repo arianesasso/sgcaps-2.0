@@ -1,6 +1,6 @@
 /**
  * Após o documento HTML estar 'pronto' (com todos os elementos do DOM),
- * executo os scripts abaixo
+ * executo as ações abaixo
  * 
  * @param {type} param
  */
@@ -8,10 +8,10 @@ $(document).ready(function () {
     /** 
      * Defino uma ação de click para os elementos que possuírem a classe 
      * .link-ajax. Esse evento fará com que determinada página chamada 
-     * por meio de um link seja carregada via ajax. 
+     * por meio de um link seja carregada via ajax
      * 
      * Obs.: o on/off são necesários para que não ocorra dois 'binds' de um
-     * mesmo evento de clique
+     * mesmo evento de clique no mesmo elemento
      */
     $('.link-ajax').off('click').on('click', function (event) {
         event.preventDefault();
@@ -27,27 +27,12 @@ $(document).ready(function () {
     });
 
     /**
-     * Carrego organizações que não são usuários via clase 
-     * .load-organizations
+     * Carrego organizações que não são usuários via clase .load-organizations
+     * Tanto no evento de click quanto quando o radio button estiver selecionado
      */
     $('.load-organizations').on('click', function () {
         $.ajax({
             url: '../organizations/showNoUserList',
-            type: 'get',
-            success: function (result) {
-                $(".users-list").html(result);
-            }
-        });
-    });
-
-    /**
-     * Carrego profissionais que não são usuários via clase 
-     * .load-professionals. Tanto no evento de click quanto quando
-     * o radio button estiver selecionado.
-     */
-    $('.load-professionals').on('click', function () {
-        $.ajax({
-            url: '../professionals/showNoUserList',
             type: 'get',
             success: function (result) {
                 $(".users-list").html(result);
@@ -63,7 +48,22 @@ $(document).ready(function () {
                 $(".users-list").html(result);
             }
         });
-    };
+    }
+    ;
+
+    /**
+     * Carrego profissionais que não são usuários via clase .load-professionals 
+     * Tanto no evento de click quanto quando o radio button estiver selecionado
+     */
+    $('.load-professionals').on('click', function () {
+        $.ajax({
+            url: '../professionals/showNoUserList',
+            type: 'get',
+            success: function (result) {
+                $(".users-list").html(result);
+            }
+        });
+    });
 
     if ($('.load-professionals').is(':checked')) {
         $.ajax({
@@ -73,12 +73,13 @@ $(document).ready(function () {
                 $(".users-list").html(result);
             }
         });
-    };
-    
+    }
+    ;
+
     /**
      * Configurações do plugin DataTable
-     * Linguagem: Português (language)
-     * Default: Não deixar a última coluna ordenável (columnDefs)
+     * Linguagem (language): Português 
+     * Default (columnDefs): Não deixar a última coluna ordenável
      */
     $('#data-table').DataTable({
         columnDefs: [
@@ -108,17 +109,22 @@ $(document).ready(function () {
             }
         }
     });
-    
-    //Jquery Datepicker - Data de Nascimento
+
+    //Jquery Datepicker - Configurações para Data de Nascimento
     $("#birthdate").datepicker({
-      showOn: "button",
-      buttonImage: "../img/icons/splashy_icons/calendar_month.png",
-      maxDate: '-1Y',
-      buttonImageOnly: true,
-      buttonText: "Selecione uma data",
-      changeMonth: true,
-      changeYear: true
+        showOn: "button",
+        buttonImage: "../img/icons/splashy_icons/calendar_month.png",
+        maxDate: '-1Y',
+        buttonImageOnly: true,
+        buttonText: "Selecione uma data",
+        changeMonth: true,
+        changeYear: true
     }, $.datepicker.regional[ "pt-BR" ]);
+
+    //Usando o plugin jquery.inpumask para criar máscaras
+    $('.date-mask').inputmask("date");
+    $('.cpf-mask').inputmask('999.999.999-99');
+
 });
 
 /**
@@ -130,10 +136,10 @@ $(document).ajaxComplete(function () {
     /** 
      * Defino uma ação de click para os elementos que possuírem a classe 
      * 'link-ajax'. Esse evento fará com que determinada página chamada 
-     * por meio de um link seja carregada via ajax.
+     * por meio de um link seja carregada via ajax
      * 
      * Obs.: o on/off são necesários para que não ocorra dois 'binds' de um
-     * mesmo evento de clique
+     * mesmo evento de clique no mesmo elemento
      */
     $('.link-ajax').off('click').on('click', function (event) {
         event.preventDefault();

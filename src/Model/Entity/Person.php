@@ -36,5 +36,10 @@ class Person extends Entity {
         $data = new Time($value);
         return $data->format('Y-m-d');
     }
+    
+    protected function _setCpf($value) {
+        $cpf = str_replace(".", "", $value);
+        return $cpf;
+    }
 
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Person;
@@ -10,8 +11,7 @@ use Cake\Validation\Validator;
 /**
  * People Model
  */
-class PeopleTable extends Table
-{
+class PeopleTable extends Table {
 
     /**
      * Initialize method
@@ -57,29 +57,26 @@ class PeopleTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
-            
+                ->add('id', 'valid', ['rule' => 'numeric'])
+                ->allowEmpty('id', 'create');
+
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
-            
+                ->requirePresence('name')
+                ->notEmpty('name', 'Campo obrigatório');
+
         $validator
-            ->allowEmpty('gender');
-            
+                ->requirePresence('gender')
+                ->notEmpty('gender', 'Campo obrigatório');
+
         $validator
-            ->add('cpf', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('cpf');
-            
+                ->allowEmpty('rg');
+
         $validator
-            ->allowEmpty('rg');
-            
+                ->add('birthdate', 'valid', ['rule' => ['date', 'dmy']])
+                ->allowEmpty('birthdate');
+
         $validator
-            ->add('birthdate', 'valid', ['rule' => ['date', 'dmy']])
-            ->allowEmpty('birthdate');
-            
-        $validator
-            ->allowEmpty('occupation');
+                ->allowEmpty('occupation');
 
         return $validator;
     }
@@ -91,10 +88,11 @@ class PeopleTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['rg_state_id'], 'States'));
+    public function buildRules(RulesChecker $rules) {
+        $rules->add($rules->existsIn(['user_id'], 'Users', 'O usuário precisa existir'));
+        $rules->add($rules->existsIn(['rg_state_id'], 'States', 'O estado precisa existir'));
+        $rules->add($rules->isUnique(['cpf'], 'CPF já existente'));
         return $rules;
     }
+
 }

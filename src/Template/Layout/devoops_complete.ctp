@@ -29,6 +29,9 @@
         <?= $this->Html->script('devoops/devoops') ?>
         <?= $this->Html->script('jquery.dataTables.min') ?>
         <?= $this->Html->script('dataTables.bootstrap') ?>
+        <?= $this->Html->script('inputmask') ?>
+        <?= $this->Html->script('jquery.inputmask') ?>
+        <?= $this->Html->script('inputmask.date.extensions') ?>
         <?= $this->Html->script('sgcaps') ?>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
