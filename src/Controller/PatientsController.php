@@ -12,12 +12,13 @@ class PatientsController extends AppController
 {
 
     /**
-     * Index method
+     * Método para listar todos os pacientes
      *
      * @return void
      */
     public function index()
     {
+        $this->layout = 'devoops_complete';
         $this->paginate = [
             'contain' => ['People']
         ];
@@ -26,7 +27,7 @@ class PatientsController extends AppController
     }
 
     /**
-     * View method
+     * Método para visualizar um paciente específico
      *
      * @param string|null $id Patient id.
      * @return void
@@ -42,29 +43,30 @@ class PatientsController extends AppController
     }
 
     /**
-     * Add method
+     * Método para cadastrar um novo paciente
      *
-     * @return void Redirects on successful add, renders view otherwise.
+     * @return void Redireciona se houver sucesso, caso contrário exibe uma
+     *              mensagem de erro
      */
-    public function add()
-    {
+    public function add() {
+        $this->layout = 'devoops_complete';
         $patient = $this->Patients->newEntity();
         if ($this->request->is('post')) {
             $patient = $this->Patients->patchEntity($patient, $this->request->data);
             if ($this->Patients->save($patient)) {
-                $this->Flash->success('The patient has been saved.');
+                $this->Flash->bootstrapSuccess('O paciente foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('The patient could not be saved. Please, try again.');
+                $this->Flash->bootstrapError('O paciente não foi salvo, tente novamente.');
             }
         }
-        $people = $this->Patients->People->find('list', ['limit' => 200]);
-        $this->set(compact('patient', 'people'));
+        $states = $this->Patients->People->States->find('list');
+        $this->set(compact('patient', 'states'));
         $this->set('_serialize', ['patient']);
     }
 
     /**
-     * Edit method
+     * Método para editar dados de um paciente
      *
      * @param string|null $id Patient id.
      * @return void Redirects on successful edit, renders view otherwise.

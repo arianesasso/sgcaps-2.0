@@ -33,8 +33,12 @@ class Person extends Entity {
     ];
 
     protected function _setBirthdate($value) {
-        $data = new Time($value);
-        return $data->format('Y-m-d');
+        $data = null;
+        if($value) {
+            $data = new Time(trim($value));
+            $data->format('Y-m-d');
+        }
+        return $data;
     }
     
     protected function _setCpf($value) {
