@@ -124,8 +124,30 @@ $(document).ready(function () {
     //Usando o plugin jquery.inpumask para criar máscaras
     $('.date-mask').inputmask("date");
     $('.cpf-mask').inputmask('999.999.999-99');
+    // http://cartaonet.datasus.gov.br/
+    $('.cns-mask').inputmask('999999999999999');
+    $('.rg-mask').inputmask('[9|a{1,15}]');
+    
+    validateAproxAge();
+    $('#birthdate').change(validateAproxAge);
 
 });
+
+// Liberar o campo 'Idade Aproximada' (aprox_age) se o campo 'Data de Nascimento' 
+// (birthdate) estiver vazio e também torná-lo obrigatório nesse caso
+function validateAproxAge() {
+    if ($('#birthdate').val().length === 0) {
+        $("#aprox_age").prop("disabled", false);
+        $("#aprox_age").prop("required", true);
+        $("#mandatory_aprox_age").css("display", "inline");
+    }
+    else {
+        $("#aprox_age").prop("disabled", true);
+        $("#aprox_age").prop("required", false);
+        $("#mandatory_aprox_age").css("display", "none");
+        $("#aprox_age").val(null);        
+    }
+}
 
 /**
  * Executo os scripts abaixo após realizar uma chamada ajax

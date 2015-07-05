@@ -45,5 +45,9 @@ class Person extends Entity {
         $cpf = str_replace(".", "", $value);
         return $cpf;
     }
-
+    
+    protected function _setName($value) {
+        return trim($value);
+    }
+    
 }

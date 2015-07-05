@@ -50,7 +50,7 @@ class PatientsTable extends Table
             ->allowEmpty('marital_status');
             
         $validator
-            ->add('approximate_age', 'valid', ['rule' => 'numeric'])
+            ->add('approximate_age', ['range' => ['rule' => ['range', 1, 150], 'message' => 'Valor inválido'], 'valid' => ['rule' => 'numeric', 'message' => 'Valor inválido']])
             ->allowEmpty('approximate_age');
             
         $validator

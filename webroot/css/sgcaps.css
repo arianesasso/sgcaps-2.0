@@ -2,6 +2,11 @@
     Created on : May 27, 2015, 10:44:06 PM
     Author     : ariane
 */
+
+.error{
+    color: red;
+}
+
 div.ui-datepicker{
  font-size:11px;
 }

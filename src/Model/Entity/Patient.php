@@ -23,4 +23,8 @@ class Patient extends Entity
         'observation' => true,
         'person' => true,
     ];
+    
+    protected function _setObservation($value) {
+        return trim($value);
+    }
 }

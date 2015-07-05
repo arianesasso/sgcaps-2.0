@@ -69,10 +69,11 @@ class PeopleTable extends Table {
                 ->notEmpty('gender', 'Campo obrigatório');
 
         $validator
+                ->add('rg', 'valid', ['rule' => 'alphaNumeric', 'message' => 'Digite somente números e letras'])
                 ->allowEmpty('rg');
 
         $validator
-                ->add('birthdate', 'valid', ['rule' => ['date', 'dmy']])
+                ->add('birthdate', 'valid', ['rule' => ['date', 'dmy'], 'message' => 'Data inválida'])
                 ->allowEmpty('birthdate');
 
         $validator
