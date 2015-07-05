@@ -72,6 +72,7 @@ class PatientsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['person_id'], 'People'));
+        $rules->add($rules->isUnique(['cns'], 'CNS já existente'));
         return $rules;
     }
 }
