@@ -2,8 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class CreatePeopleTable extends AbstractMigration
-{
+class CreatePeopleTable extends AbstractMigration {
     /**
      * Change Method.
      *
@@ -12,17 +11,16 @@ class CreatePeopleTable extends AbstractMigration
      *
      * Uncomment this method if you would like to use it.
      *
-    public function change()
-    {
-    }
-    */
-    
+      public function change()
+      {
+      }
+     */
+
     /**
      * Migrate Up.
      */
-    public function up()
-    {
-         $this->table('people')
+    public function up() {
+        $this->table('people')
                 ->addColumn('user_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('name', 'string', ['length' => 255, 'null' => false])
                 ->addColumn('gender', 'string', ['length' => 1, 'null' => true, 'default' => null])
@@ -44,8 +42,8 @@ class CreatePeopleTable extends AbstractMigration
     /**
      * Migrate Down.
      */
-    public function down()
-    {
-         $this->dropTable('people');
+    public function down() {
+        $this->dropTable('people');
     }
+
 }
