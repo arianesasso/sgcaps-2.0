@@ -23,7 +23,7 @@ the setup traffic lights.
 Read and edit `config/app.php` and setup the 'Datasources' and any other
 configuration relevant for your application.
 
- ## Run the migrations
+## Run the migrations
 
- 1. Access `cd app/bin`
- 2. Run `./cake migrations migrate`
+1. Access `cd app/bin`
+2. Run `./cake migrations migrate`
