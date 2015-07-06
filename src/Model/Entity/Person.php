@@ -42,12 +42,18 @@ class Person extends Entity {
     }
     
     protected function _setCpf($value) {
-        $cpf = str_replace(".", "", $value);
-        return $cpf;
+        return empty($value)? null : str_replace([".","-"], ["",""], $value);
     }
     
     protected function _setName($value) {
-        return trim($value);
+        return strtoupper(trim($value));
     }
     
+    protected function _setRg($value) {
+        return empty($value)? null : str_replace("_", "", $value);
+    }
+    
+    protected function _setOccupation($value) {
+        return empty($value)? null : $value;
+    }
 }

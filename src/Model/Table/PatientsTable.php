@@ -44,8 +44,8 @@ class PatientsTable extends Table
             ->allowEmpty('id', 'create');
             
         $validator
-            ->allowEmpty('cns')
-            ->add('cns', 'custom', ['rule' => [$this,'validateCns'], 'message' => 'CNS inválido']);
+            ->add('cns', 'custom', ['rule' => [$this,'validateCns'], 'message' => 'CNS inválido'])
+            ->allowEmpty('cns');
             
         $validator
             ->allowEmpty('marital_status');
@@ -180,7 +180,6 @@ class PatientsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['person_id'], 'People'));
-        $rules->add($rules->isUnique(['cns'], 'CNS já existente'));
         return $rules;
     }
 }

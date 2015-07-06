@@ -25,10 +25,18 @@ class Patient extends Entity
     ];
     
     protected function _setObservation($value) {
-        return trim($value);
+        return empty($value)? null : trim($value);
+    }
+    
+    protected function _setMaritalStatus($value) {
+        return empty($value)? null : $value;
+    }
+    
+    protected function _setEthnicity($value) {
+        return empty($value)? null : $value;
     }
     
     protected function _setCns($value) {
-        return str_replace('_','',trim($value));
+        return empty($value)? null : str_replace('_','',trim($value));
     }
 }

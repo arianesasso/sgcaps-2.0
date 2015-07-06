@@ -95,8 +95,8 @@ class PeopleTable extends Table {
      * @return boolean
      */
     public function validateCpf($field) {
-        //O campo vem com __ por causa da máscara do jquery
-        $cpf = str_replace(['.','-'], '', $field);
+        //O campo vem com _ por causa da máscara do jquery
+        $cpf = str_replace(['.','-'], ['',''], $field);
         //Verifico se o CPF tem exatamente 11 dígitos
         if ((strlen(trim($cpf))) != 11) {
             return false;
