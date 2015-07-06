@@ -34,7 +34,7 @@ class CreatePeopleTable extends AbstractMigration
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
                 ->addIndex('user_id')
-                ->addIndex('rg_state_id')
+                ->addIndex(['rg', 'rg_state_id'], ['unique' => true])
                 ->addIndex(['cpf'], ['unique' => true])
                 ->addForeignKey('user_id', 'users', 'id')
                 ->addForeignKey('rg_state_id', 'states', 'id')

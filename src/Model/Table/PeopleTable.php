@@ -144,6 +144,7 @@ class PeopleTable extends Table {
         $rules->add($rules->existsIn(['user_id'], 'Users', 'O usuário precisa existir'));
         $rules->add($rules->existsIn(['rg_state_id'], 'States', 'O estado precisa existir'));
         $rules->add($rules->isUnique(['cpf'], 'CPF já existente'));
+        $rules->add($rules->isUnique(['rg' , 'rg_state_id'], 'RG já existente'));
         return $rules;
     }
 

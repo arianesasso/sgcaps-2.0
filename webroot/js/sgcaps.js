@@ -126,7 +126,7 @@ $(document).ready(function () {
     $('.cpf-mask').inputmask('999.999.999-99');
     // http://cartaonet.datasus.gov.br/
     $('.cns-mask').inputmask('999999999999999');
-    $('.rg-mask').inputmask('[9|a{1,15}]');
+    $('.rg-mask').inputmask({mask: '*{7}[*{1,8}]', greedy: false});
     
     validateAproxAge();
     $('#birthdate').change(validateAproxAge);
