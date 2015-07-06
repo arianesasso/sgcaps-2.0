@@ -24,7 +24,7 @@ class CreatePatientsTable extends AbstractMigration
     {
         $this->table('patients')
                 ->addColumn('person_id', 'integer', ['null' => false])
-                ->addColumn('cns', 'integer', ['length' => 20, 'null' => true, 'default' => null])
+                ->addColumn('cns', 'string', ['length' => 20, 'null' => true, 'default' => null])
                 ->addColumn('marital_status', 'string', ['length' => 45, 'null' => true, 'default' => null])
                 ->addColumn('approximate_age', 'integer', ['length' => 3, 'null' => true, 'default' => null])
                 ->addColumn('ethnicity', 'string', ['length' => 45, 'null' => true, 'default' => null])
