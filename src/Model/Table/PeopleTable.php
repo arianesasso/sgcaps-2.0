@@ -62,11 +62,11 @@ class PeopleTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->requirePresence('name')
+                ->requirePresence('name', 'create')
                 ->notEmpty('name', 'Campo obrigatório');
 
         $validator
-                ->requirePresence('gender')
+                ->requirePresence('gender', 'create')
                 ->notEmpty('gender', 'Campo obrigatório');
 
         $validator
