@@ -7,7 +7,7 @@ foreach($professionals as $professional) :
 endforeach;
 ?>
 
-<label class="control-label"><?= __('Escolha um profissional: ') ?> *</label>
+<label class="control-label"><?= __('Escolha um profissional') ?> *</label>
 <ul class="list-inline">
     <li>
         <?php

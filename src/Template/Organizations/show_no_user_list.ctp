@@ -1,4 +1,4 @@
-<label class="control-label"><?= __('Escolha uma unidade: ') ?> *</label>
+<label class="control-label"><?= __('Escolha uma unidade') ?> *</label>
 <ul class="list-inline">
     <li>
         <?php
