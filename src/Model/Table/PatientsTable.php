@@ -53,7 +53,8 @@ class PatientsTable extends Table
         $validator
             ->add('approximate_age', 
                     ['valid' => ['rule' => 'numeric', 'message' => 'Valor inválido', 'last' => true],
-                     'range' => ['rule' => ['range', 1, 150], 'message' => 'Valor inválido']
+                     'range' => ['rule' => ['range', 1, 150], 'message' => 'Valor inválido'],
+                     'required' => ['rule' => [$this, 'requiredAge'], 'message' => 'Campo obrigatório']
                     ])
             ->allowEmpty('approximate_age');
             
@@ -66,6 +67,22 @@ class PatientsTable extends Table
         return $validator;
     }
     
+    /**
+     * Verifica se o campo data de nascimento e idade_aproximada estão vazios
+     * Se ambos estiverem, retorna false, pois caso a data de nascimento não seja
+     * preenchida, a idade aproximada deve ser preenchida obrigatoriamente
+     * 
+     * @param integer $aproxAge Idade aproximada do paciente
+     * @param array $record Todas as informações do paciente
+     * @return boolean
+     */
+    public function requiredAge($aproxAge, $record) {
+        if (empty($record['data']['person']['birthdate']) && empty($aproxAge)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Função para validar CNS segundo rotina de validação definida no site
      * abaixo
