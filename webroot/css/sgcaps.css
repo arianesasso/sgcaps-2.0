@@ -43,6 +43,17 @@ div.ui-datepicker{
     color: #3366CC;
 }
 
+.white-box {
+    background-color: white; 
+    border-radius: 5px; 
+    border: 1px solid white; 
+    padding: 5px;
+    
+    -webkit-box-shadow: 4px -4px 3px 0px rgba(112,108,112,1);
+    -moz-box-shadow: 4px -4px 3px 0px rgba(112,108,112,1);
+    box-shadow: 4px -4px 3px 0px rgba(112,108,112,1);  
+}
+
 .gray-frame {
     border: 2px solid white; 
     border-radius: 5px; 
