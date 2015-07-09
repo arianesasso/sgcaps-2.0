@@ -26,7 +26,7 @@ $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
             </div>
             <div class="form-group some-height">
                 <label class="control-label"><?= __('Idade aproximada') ?><span id="mandatory_aprox_age"> *</span></label>
-                <?php echo $this->Form->input('approximate_age', ['id' => 'aprox_age' , 'class' => 'form-control', 'label' => false, 'max' => 150, 'min' => '1']); ?>
+                <?php echo $this->Form->input('approximate_age', ['id' => 'aprox_age' , 'class' => 'form-control', 'label' => false, 'max' => 150, 'min' => 1]); ?>
             </div>
             <div class="form-group some-height">
                 <label class="control-label"><?= __('CPF') ?></label>
