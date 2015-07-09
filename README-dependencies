@@ -11,7 +11,7 @@ Used plugins (all plugins licensed under appropriate license of authors)
 
 1.1) Twitter Bootstrap 3.2.0 - http://getbootstrap.com 
 1.2) jQuery 2.1.1 - http://jquery.com
-1.3) jQuery UI - 1.11.1
+1.3) jQuery UI 1.11.1
 1.4) jQuery UI datepicker (pt-BR) - https://github.com/jquery/jquery-ui/tree/master/ui/i18n
 
 2) Other Dependencies
@@ -19,3 +19,19 @@ Used plugins (all plugins licensed under appropriate license of authors)
 2.1) Font Awesome 4.2.0 - http://fortawesome.github.io/Font-Awesome/
 2.2) Data Tables (Table plug-in for jQuery) 1.10.7 - https://www.datatables.net/
 2.3) jQuery InputMask 3.x - https://plugins.jquery.com/jquery.inputmask/
+
+Development Environment
+
+1) Linux: Ubuntu - 14.04 LT
+
+2) Using: [2014-11-19] XAMPP for Linux 64bit 5.6.3-0
+   This version of XAMPP includes:
+    - Use PHP version for the XAMPP version
+    - Updated PHP to 5.6.3
+    - Updated MySQL to 5.6.21
+    - Updated phpMyAdmin 4.2.11
+    - Update OpenSSL to 1.0.1
+
+3) Using: IDE - Netbeans, project details:
+    - Encoding - UTF-8
+    - PHP - 5.6
