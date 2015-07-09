@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\I18n\Time;
 
 /**
  * People Model
@@ -73,7 +74,7 @@ class PeopleTable extends Table {
                 ->allowEmpty('rg');
 
         $validator
-                ->add('birthdate', 'valid', ['rule' => ['date', 'dmy'], 'message' => 'Data inválida'])
+                ->add('birthdate', ['isDate' => ['rule' => ['date', 'dmy'], 'message' => 'Data inválida', 'last' => true], 'validateBirhdate' => ['rule' => [$this,'validateBirhdate'], 'message' => 'Data inválida']])
                 ->allowEmpty('birthdate');
         
         $validator
@@ -131,6 +132,26 @@ class PeopleTable extends Table {
         }
         //Retorna Verdadeiro se os dígitos de verificação são os esperados.
         return ($digits[0] == $cpf[9] && $digits[1] == $cpf[10]) ? true : false;
+    }
+    
+    /**
+     * Valida se o ano da data de nascimento não é menor do que 100 anos no
+     * passado ou maior que um ano atrás
+     * 
+     * @param type $field O campo a ser validado (no caso a data de nascimento)
+     * @return boolean
+     */
+    public function validateBirhdate($field) {
+        if(empty($field)) {
+            return true;
+        }
+        $date = Time::createFromFormat('d/m/Y', trim($field));
+        $year = $date->format('Y');
+        $currentYear = Time::now()->format('Y');
+        if($year > ($currentYear-1) || $year <=  ($currentYear-120)) {
+            return false;
+        }
+        return true;
     }
 
     /**
