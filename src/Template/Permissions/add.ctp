@@ -11,7 +11,7 @@
         <fieldset>
             <?php if ($user_type === 'people') { ?>
                 <div class="form-group" >
-                    <label class="control-label"><?= __('Unidade:') ?> *</label>
+                    <label class="control-label"><?= __('Unidade') ?> *</label>
                     <?php
                     echo $this->Form->input(
                             'organization_id', ['options' => $organizations, 'class' => 'form-control', 'label' => false, 'empty' => true]);
@@ -21,11 +21,11 @@
                 echo $this->Form->input('organization_id', ['type' => 'hidden', 'value' => $organization_id]);
             } ?>
                 <div class="form-group" >
-                    <label class="control-label"><?= __('Papel:') ?> *</label>
+                    <label class="control-label"><?= __('Papel') ?> *</label>
     <?php echo $this->Form->input('role_id', ['options' => $roles, 'class' => 'form-control', 'label' => false, 'empty' => true]); ?>
                 </div>
                 <div class="form-group" >
-                    <label class="control-label"><?= __('Início da Validade:') ?> *</label>
+                    <label class="control-label"><?= __('Início da Validade') ?> *</label>
                     <?php
                     echo $this->Form->input('beginning', ['type' => 'date',
                         'minYear' => date('Y'),
@@ -36,7 +36,7 @@
                     ?>
                 </div>
                 <div class="form-group" >
-                    <label class="control-label"><?= __('Fim da Validade:') ?></label>
+                    <label class="control-label"><?= __('Fim da Validade') ?></label>
                     <?php
                     echo $this->Form->input('ending', ['type' => 'date',
                         'minYear' => date('Y'),
