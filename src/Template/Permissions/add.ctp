@@ -4,9 +4,9 @@
         <?php echo $this->element('user_info', ['user' => $user])?>
     </div>
 </div>
-<br/>
 <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">
+        <h6>(*) Campos Obrigatórios</h6>
         <?= $this->Form->create($permission); ?>
         <fieldset>
             <?php if ($user_type === 'people') { ?>
