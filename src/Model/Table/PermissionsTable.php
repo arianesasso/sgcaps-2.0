@@ -194,9 +194,9 @@ class PermissionsTable extends Table {
                                  'AND' =>['OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
                                                   ['Permissions.ending IS' => null]]],
                                  'OR' => [['AND' => ['Permissions.ending >=' => $ending],
-                                                    ['Permissions.beginning <=' => $ending]
+                                                    ['Permissions.beginning <' => $ending]
                                           ],
-                                          ['AND' => ['Permissions.ending >=' => $beginning],
+                                          ['AND' => ['Permissions.ending >' => $beginning],
                                                     ['Permissions.ending <' => $ending]
                                           ]
                                          ],
