@@ -110,7 +110,7 @@ $(document).ready(function () {
         }
     });
 
-    //Jquery Datepicker - Configurações para Data de Nascimento
+    // Jquery Datepicker - Configurações para Data de Nascimento
     $("#birthdate").datepicker({
         showOn: "button",
         buttonImage: "../img/icons/splashy_icons/calendar_month.png",
@@ -121,7 +121,7 @@ $(document).ready(function () {
         changeYear: true
     }, $.datepicker.regional[ "pt-BR" ]);
 
-    //Usando o plugin jquery.inpumask para criar máscaras
+    // Usando o plugin jquery.inpumask para criar máscaras
     $('.date-mask').inputmask("date");
     $('.cpf-mask').inputmask('999.999.999-99');
     // http://cartaonet.datasus.gov.br/
@@ -130,13 +130,44 @@ $(document).ready(function () {
     
     validateAproxAge();
     $('#birthdate').change(validateAproxAge);
+    
+    // Funções para tratar o input de ocupação
+    $(".basic-select").select2({language: "pt"});
+    changeOccupationsInput();
+    $('#not_found').click(changeOccupationsInput);
 
 });
 
-// Liberar o campo 'Idade Aproximada' (aprox_age) se o campo 'Data de Nascimento' 
-// (birthdate) estiver vazio e também torná-lo obrigatório nesse caso
+/**
+ * Função para ativar o input de ocupação dependendo da opção 
+ * que o usuário escolher. Se ele escolher 'outro', o select 
+ * com as ocupações da classificação brasileira de ocupações é
+ * desabilitado e é habilitado um input do tipo texto no local.
+ * 
+ * @returns {undefined}
+ */
+function changeOccupationsInput() {
+    if ($('#not_found').is(':checked')) {
+        $('#occupations_text').css("display", "inline");
+        $('#occupations_text').prop("disabled", false);
+        $('#occupations_select').prop("disabled", true);
+        $('#occupations_select').parent().hide();
+    } else {
+        $('#occupations_text').css("display", "none");
+        $('#occupations_text').prop("disabled", true);
+        $('#occupations_select').prop("disabled", false);
+        $('#occupations_select').parent().show();
+    }
+}
+
+/**
+ * Liberar o campo 'Idade Aproximada' (aprox_age) se o campo 'Data de Nascimento' 
+ * (birthdate) estiver vazio e também torná-lo obrigatório nesse caso
+ * 
+ * @returns {undefined}
+ */
 function validateAproxAge() {
-    if ($('#birthdate').val().length === 0) {
+    if (!$('#birthdate').val()) {
         $("#aprox_age").prop("disabled", false);
         $("#aprox_age").prop("required", true);
         $("#mandatory_aprox_age").css("display", "inline");

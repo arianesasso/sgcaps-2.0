@@ -8,7 +8,7 @@ $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
 ?>  
 <legend><?= __('Cadastrar Novo Paciente') ?></legend>
 <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
         <h6>(*) Campos Obrigatórios</h6>
         <?= $this->Form->create($patient, ['class' => 'form-inline']); ?>
         <fieldset>  
@@ -46,16 +46,18 @@ $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
                 <?php echo $this->Form->input('person.rg_state_id', ['options' => $states, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
             </div>
             <div class="form-group some-height">
-                <label class="control-label"><?= __('Ocupação') ?></label>
-                <?php echo $this->Form->input('person.occupation', ['class' => 'form-control', 'label' => false]); ?>
-            </div>
-            <div class="form-group some-height">
                 <label class="control-label"><?= __('Estado Civil') ?></label>
                 <?php echo $this->Form->input('marital_status', ['options' => $maritalStatus, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
             </div>
             <div class="form-group some-height">
                 <label class="control-label"><?= __('Etnia') ?></label>
                 <?php echo $this->Form->input('ethnicity', ['options' => $ethnicities, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
+            </div>
+            <div class="form-group some-height">
+                <label class="control-label"><?php echo __('Ocupação');?></label>
+                <span class="not-found"><?php echo "( " . __('Outra') . " " .$this->Form->checkbox('not_found', ['id' => 'not_found']) . " )"; ?></span>
+                <?php echo $this->Form->input('person.occupation', ['id' => 'occupations_select', 'options' => $occupations, 'empty' => true, 'class' => 'form-control basic-select', 'label' => false]); ?>
+                <?php echo $this->Form->input('person.occupation', ['type' => 'text', 'id' => 'occupations_text', 'class' => 'form-control', 'label' => false, 'disabled']); ?>
             </div>
             <div class="form-group">
                 <label class="control-label"><?= __('Observação') ?></label>

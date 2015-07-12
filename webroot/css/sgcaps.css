@@ -81,3 +81,20 @@ div.ui-datepicker{
     margin-left: 10px;
     margin-right: 5px;
 }
+
+#occupations_select {
+    width: 430px;
+}
+
+#occupations_text {
+    display: none;
+}
+
+.not-found {
+    font-size: 1em; 
+    margin-left: 5px;
+}
+
+#not_found {
+    margin: 0 0 0 0;
+}

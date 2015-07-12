@@ -20,6 +20,7 @@
         <?= $this->Html->css('devoops/style_v1') ?>
         <?= $this->Html->css('dataTables.bootstrap') ?>
         <?= $this->Html->css('dataTables.fontAwesome') ?>
+        <?= $this->Html->css('select2.min') ?>
         <?= $this->Html->css('sgcaps') ?>
 
         <?= $this->Html->script('devoops/jquery.min') ?>
@@ -32,6 +33,7 @@
         <?= $this->Html->script('inputmask') ?>
         <?= $this->Html->script('jquery.inputmask') ?>
         <?= $this->Html->script('inputmask.date.extensions') ?>
+        <?= $this->Html->script('select2.min') ?>
         <?= $this->Html->script('sgcaps') ?>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

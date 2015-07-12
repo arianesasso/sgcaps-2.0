@@ -93,8 +93,7 @@ class AppController extends Controller {
         //forem modificadas é preciso atualizar o Auth.User.roles
         if ($sessionRoles != $userRoles) {
             $this->request->session()->write('Auth.User.roles', $userRoles);
-        }
-        
+        }       
         return true;
     }
 }

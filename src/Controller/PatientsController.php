@@ -60,8 +60,9 @@ class PatientsController extends AppController
                 $this->Flash->bootstrapError('O paciente não foi salvo, tente novamente.');
             }
         }
+        $occupations = $this->Patients->People->Occupations->find('list', ['keyField' => 'id','valueField' => 'description', 'order' => ['description' => 'ASC']]);
         $states = $this->Patients->People->States->find('list');
-        $this->set(compact('patient', 'states'));
+        $this->set(compact('patient', 'states', 'occupations'));
         $this->set('_serialize', ['patient']);
     }
 

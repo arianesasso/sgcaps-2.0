@@ -32,6 +32,10 @@ class PeopleTable extends Table {
         $this->belongsTo('States', [
             'foreignKey' => 'rg_state_id'
         ]);
+        $this->belongsTo('Occupations', [
+            'foreignKey' => 'occupation',
+            'joinType' => 'LEFT',
+        ]);
         $this->hasMany('Addresses', [
             'foreignKey' => 'person_id'
         ]);
