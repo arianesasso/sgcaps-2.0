@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\I18n\Time;
 
 /**
  * Permissions Model
@@ -63,12 +64,17 @@ class PermissionsTable extends Table {
                 ->notEmpty('role_id', 'Campo obrigatório');
 
         $validator
-                ->add('beginning', 'valid', ['rule' => 'date'])
+                ->add('beginning', ['isDate' => ['rule' => 'date'],
+                                    'validateDate' => ['rule' => [$this,'validateDate'], 'message' => 'Data inválida', 'last' => true]
+                                   ])
                 ->requirePresence('beginning', 'create')
                 ->notEmpty('beginning', 'Campo obrigatório');
 
         $validator
-                ->add('ending', 'valid', ['rule' => 'date', 'on' => 'create'])
+                ->add('ending', ['isDate' => ['rule' => 'date', 'on' => 'create'],
+                                 'validateDate' => ['rule' => [$this,'validateDate'], 'on' => 'create', 'message' => 'Data inválida', 'last' => true],
+                                 'biggerThanBeginning' => ['rule' => [$this, 'compareDates'],  'on'=> 'create', 'message' => 'Esta data deve ser maior que a data de início']
+                                ])
                 ->allowEmpty('ending');
         
         return $validator;
@@ -87,6 +93,38 @@ class PermissionsTable extends Table {
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
         $rules->add($rules->existsIn(['admin_id'], 'Users'));
         return $rules;
+    }
+    
+    /**
+     * Verifica se a data escolhida para início ou fim de uma dada permissão
+     * não é menor do que a data atual
+     * 
+     * @param type $field Data de início ou fim de uma dada permissão
+     * @return boolean
+     */
+    public function validateDate($field) {
+        $date = Time::createFromFormat('Y-m-d', trim(implode("-", $field)));
+        $currentDate = Time::now();
+        if($date < $currentDate) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Verifica se a data final da validade é maior que a data de início
+     * 
+     * @param type $field Data de fim da validade
+     * @param type $record Todas as informações relativas a permissão
+     * @return boolean
+     */
+    public function compareDates($field, $record) {
+        $ending = Time::createFromFormat('Y-m-d', trim(implode("-", $field)));
+        $beginning = Time::createFromFormat('Y-m-d', trim(implode("-", $record['data']['beginning'])));
+        if($ending <= $beginning) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -147,14 +185,22 @@ class PermissionsTable extends Table {
      * @return type
      */
     public function findStillValid(Query $query, array $options) {
+        $beginning = Time::createFromFormat('Y-m-d', trim(implode("-", $options['beginning'])))->format('Y-m-d');
+        $ending = Time::createFromFormat('Y-m-d', trim(implode("-", $options['ending'])))->format('Y-m-d');
         return $this->find()
                         ->where(['user_id' => $options['user_id'],
                                  'role_id' => $options['role_id'],
                                  'organization_id' => $options['organization_id'],
-                                 'Permissions.beginning <=' => date('Y-m-d H:i:s'),
-                                 'OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
-                                          ['Permissions.ending IS' => null]],
-                                ]);
+                                 'AND' =>['OR' => [['Permissions.ending >' => date('Y-m-d H:i:s')],
+                                                  ['Permissions.ending IS' => null]]],
+                                 'OR' => [['AND' => ['Permissions.ending >=' => $ending],
+                                                    ['Permissions.beginning <=' => $ending]
+                                          ],
+                                          ['AND' => ['Permissions.ending >=' => $beginning],
+                                                    ['Permissions.ending <' => $ending]
+                                          ]
+                                         ],
+                                  ]);
     }
     
     /**
