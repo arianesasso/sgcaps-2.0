@@ -29,7 +29,7 @@ class CreateTests extends AbstractMigration
         //papéis
         $this->execute("INSERT INTO `roles` VALUES (1,'Gestor Caps','gestor','caps','2015-06-14 00:00:00'),(2,'Gestor Sisam','gestor','geral','2015-06-14 00:00:00'),(3,'Técnico Caps','tecnico','caps','2015-06-14 00:00:00'),(4,'Gestor RT','gestor','residencia_terapeutica','2015-06-14 00:00:00'),(5,'Secretaria do Caps','secretaria','caps','2015-06-14 00:00:00'),(6,'Secretaria da UBS','secretaria','ubs','2015-06-14 00:00:00')");
         //pessoas
-        $this->execute("INSERT INTO `people` VALUES (1,1,'Administrador','F',NULL,NULL,NULL,NULL,NULL,'2015-06-13 00:00:00','2015-06-13 21:27:17'),(2,NULL,'Profissional 1','M',NULL,NULL,NULL,NULL,NULL,'2015-06-13 00:00:00','2015-06-14 14:14:52'),(3,NULL,'Profissional 2','M',NULL,NULL,NULL,NULL,NULL,'2015-06-13 00:00:00','2015-06-14 14:15:37')");
+        $this->execute("INSERT INTO `people` VALUES (1,1,'ADMINISTRADOR','F',NULL,NULL,NULL,NULL,NULL,'2015-06-13 00:00:00','2015-06-13 21:27:17'),(2,NULL,'PROFISSIONAL 1','M',NULL,NULL,NULL,NULL,NULL,'2015-06-13 00:00:00','2015-06-14 14:14:52'),(3,NULL,'PROFISSIONAL 2','M',NULL,NULL,NULL,NULL,NULL,'2015-06-13 00:00:00','2015-06-14 14:15:37')");
         //profissionais
         $this->execute("INSERT INTO `professionals` VALUES (1,1,'CIBM','1234',NULL),(2,2,'CIBM','1235',NULL),(3,3,'CIBM','1235',NULL)");
         //permissões
