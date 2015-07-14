@@ -12,12 +12,11 @@
         </a>
         <ul class="dropdown-menu">
             <li><a class="" href="<?php
-                echo $this->Url->build([
-                    "controller" => "paciente",
-                    "action" => "cadastrar"]);
+                echo $this->Url->build(["controller" => "paciente", "action" => "cadastrar"]);
                 ?>">Cadastrar</a></li>
-            <li><a class="" href="#">Acolhimento</a></li>
-            <li><a class="" href="#">Projeto Terapêutico</a></li>
+            <li><a class="" href="<?php
+                echo $this->Url->build(["controller" => "paciente", "action" => "listar"]);
+                ?>">Listar</a></li>
         </ul>
     </li>
     <li class="dropdown">

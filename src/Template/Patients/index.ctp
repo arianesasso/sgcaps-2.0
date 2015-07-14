@@ -1,53 +1,58 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('New Patient'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List People'), ['controller' => 'People', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Person'), ['controller' => 'People', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="patients index large-10 medium-9 columns">
-    <table cellpadding="0" cellspacing="0">
-    <thead>
-        <tr>
-            <th><?= $this->Paginator->sort('id') ?></th>
-            <th><?= $this->Paginator->sort('person_id') ?></th>
-            <th><?= $this->Paginator->sort('cns') ?></th>
-            <th><?= $this->Paginator->sort('marital_status') ?></th>
-            <th><?= $this->Paginator->sort('approximate_age') ?></th>
-            <th><?= $this->Paginator->sort('ethnicity') ?></th>
-            <th><?= $this->Paginator->sort('created') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($patients as $patient): ?>
-        <tr>
-            <td><?= $this->Number->format($patient->id) ?></td>
-            <td>
-                <?= $patient->has('person') ? $this->Html->link($patient->person->name, ['controller' => 'People', 'action' => 'view', $patient->person->id]) : '' ?>
-            </td>
-            <td><?= h($patient->cns) ?></td>
-            <td><?= h($patient->marital_status) ?></td>
-            <td><?= $this->Number->format($patient->approximate_age) ?></td>
-            <td><?= h($patient->ethnicity) ?></td>
-            <td><?= h($patient->created) ?></td>
-            <td class="actions">
-                <?= $this->Html->link(__('View'), ['action' => 'view', $patient->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $patient->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $patient->id], ['confirm' => __('Are you sure you want to delete # {0}?', $patient->id)]) ?>
-            </td>
-        </tr>
+<?php
 
-    <?php endforeach; ?>
-    </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+function verifyData($patient) {
+    $result = array();
+    if (empty($patient->person->birthdate)) {
+        $result['age'] = $patient->approximate_age . " (aproximada)";
+    } else {
+        $birthdate = DateTime::createFromFormat("Y-m-d", $patient->person->birthdate->format('Y-m-d'));
+        $result['age'] = $birthdate->diff(new DateTime())->format('%Y');
+    }
+
+    if ($patient->person->gender == "M") {
+        $result['gender'] = 'Masculino';
+    } elseif ($patient->person->gender == "F") {
+        $result['gender'] = 'Feminino';
+    } else {
+        $result['gender'] = 'Transsexual';
+    }
+    return $result;
+}
+?>
+
+<legend><?= __('Visualizar Pacientes') ?></legend>
+<br/>
+<div class="row">
+    <div class="col-xs-12">
+        <table id="data-table" class="table table-striped" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th><?= __('Nome') ?></th>
+                    <th><?= __('Sexo') ?></th>
+                    <th><?= __('CNS') ?></th>
+                    <th><?= __('CPF') ?></th>
+                    <th><?= __('Idade (anos)') ?></th>
+                    <th class="actions"><?= __('Ações') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($patients as $patient):
+                    $value = verifyData($patient);
+                    ?>
+                    <tr>
+                        <td><?= h($patient->person->name); ?></td>
+                        <td><?= h($value['gender']); ?></td>
+                        <td><?= h($patient->cns) ?></td>
+                        <td><?= h($patient->person->cpf) ?></td>
+                        <td><?= h($value['age']) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Ver informaćões'), ['controller' => 'paciente', 'action' => 'visualizar', $patient->id], ['class' => 'btn btn-default']) ?>
+                            <?php //echo $this->Form->postLink(($user->active? __('Desativar') : __('Ativar')), ['controller' => 'users', 'action' => 'changeActivation', $user->id, $user->active], ['confirm' => __('Tem certeza que deseja mudar o status do usuário: {0}?', $user->username), 'class' => 'btn btn-default'])  ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </div>

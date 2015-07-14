@@ -19,10 +19,7 @@ class PatientsController extends AppController
     public function index()
     {
         $this->layout = 'devoops_complete';
-        $this->paginate = [
-            'contain' => ['People']
-        ];
-        $this->set('patients', $this->paginate($this->Patients));
+        $this->set('patients', $this->Patients->find('all', ['contain' => ['People']]));
         $this->set('_serialize', ['patients']);
     }
 
