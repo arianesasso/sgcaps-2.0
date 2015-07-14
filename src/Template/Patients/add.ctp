@@ -1,5 +1,4 @@
 <?php
-
 //http://www.saude.sp.gov.br/resources/ses/perfil/profissional-da-saude/grupo-tecnico-de-acoes-estrategicas-gtae/saude-da-populacao-negra/livros-e-revistas/manual_quesito_cor.pdf
 $ethnicities = ["branca" => "Branca", "parda" => "Parda", "negra" => "Negra", 'amarela' => 'Amarela', "indigena" => 'Indígena'];
 
@@ -8,7 +7,6 @@ $ethnicities = ["branca" => "Branca", "parda" => "Parda", "negra" => "Negra", 'a
 $maritalStatus = ["solteiro" => "Solteiro(a)", "casado" => "Casado(a)", "desquitado" => "Desquitado(a) ou separado(a) judicialmente ", "divorciado" => "Divorciado(a)", "viuvo" => "Viúvo(a)"];
 
 $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
-
 ?>  
 
 <legend><?= __('Cadastrar Novo Paciente') ?></legend>
