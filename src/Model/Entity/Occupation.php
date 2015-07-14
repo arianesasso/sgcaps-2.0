@@ -19,5 +19,6 @@ class Occupation extends Entity
         'description' => true,
         'version' => true,
         'cbo' => true,
+        'people' => true,
     ];
 }

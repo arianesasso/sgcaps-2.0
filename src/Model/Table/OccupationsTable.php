@@ -26,8 +26,7 @@ class OccupationsTable extends Table
         $this->primaryKey('id');
         
         $this->hasMany('People', [
-            'foreignKey' => 'occupation',
-            'joinType' => 'LEFT',
+            'foreignKey' => 'occupation_id'
         ]);      
     }
 

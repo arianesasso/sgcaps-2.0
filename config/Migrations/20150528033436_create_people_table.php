@@ -28,7 +28,7 @@ class CreatePeopleTable extends AbstractMigration {
                 ->addColumn('rg', 'string', ['length' => 20, 'null' => true, 'default' => null])
                 ->addColumn('rg_state_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('birthdate', 'date', ['null' => true, 'default' => null])
-                ->addColumn('occupation', 'string', ['length' => 255, 'null' => true, 'default' => null])
+                ->addColumn('occupation_id', 'string', ['length' => 255, 'null' => true, 'default' => null])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
                 ->addIndex('user_id')

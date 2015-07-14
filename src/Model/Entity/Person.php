@@ -23,6 +23,7 @@ class Person extends Entity {
         'rg' => true,
         'rg_state_id' => true,
         'birthdate' => true,
+        'occupation_id' => true,
         'occupation' => true,
         'user' => true,
         'state' => true,
