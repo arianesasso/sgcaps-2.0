@@ -73,8 +73,8 @@ $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
                     <div class="form-group some-height">
                         <label class="control-label"><?php echo __('Ocupação'); ?></label>
                         <span class="not-found"><?php echo "( " . __('Outra') . " " . $this->Form->checkbox('not_found', ['id' => 'not_found']) . " )"; ?></span>
-                        <?php echo $this->Form->input('person.occupation', ['id' => 'occupations_select', 'options' => $occupations, 'empty' => true, 'class' => 'form-control basic-select', 'label' => false]); ?>
-                        <?php echo $this->Form->input('person.occupation', ['type' => 'text', 'id' => 'occupations_text', 'class' => 'form-control', 'label' => false, 'disabled']); ?>
+                        <?php echo $this->Form->input('person.occupation_id', ['id' => 'occupations_select', 'options' => $occupations, 'empty' => true, 'class' => 'form-control basic-select', 'label' => false]); ?>
+                        <?php echo $this->Form->input('person.occupation_id', ['type' => 'text', 'id' => 'occupations_text', 'class' => 'form-control', 'label' => false, 'disabled']); ?>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">

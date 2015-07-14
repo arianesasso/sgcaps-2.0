@@ -33,10 +33,11 @@ class PatientsController extends AppController
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
+        $this->layout = 'devoops_complete';
+        
         $patient = $this->Patients->get($id, [
-            'contain' => ['People']
+            'contain' => ['People', 'People.States', 'People.Occupations']
         ]);
         $this->set('patient', $patient);
         $this->set('_serialize', ['patient']);
@@ -55,7 +56,7 @@ class PatientsController extends AppController
             $patient = $this->Patients->patchEntity($patient, $this->request->data);
             if ($this->Patients->save($patient)) {
                 $this->Flash->bootstrapSuccess('O paciente foi salvo com sucesso.');
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'paciente', 'action' => 'visualizar', $patient->id]);
             } else {
                 $this->Flash->bootstrapError('O paciente não foi salvo, tente novamente.');
             }

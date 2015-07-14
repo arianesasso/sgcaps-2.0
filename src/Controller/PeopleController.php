@@ -23,8 +23,8 @@ class PeopleController extends AppController {
             return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
         $this->autoRender = false;
-        $people = $this->People->patchEntity($this->People->get($id), ['user_id' => $userId]);
-        if ($this->People->save($people)) {
+        $person = $this->People->patchEntity($this->People->get($id), ['user_id' => $userId]);
+        if ($this->People->save($person)) {
             $this->Flash->bootstrapSuccess('O usuário foi criado com sucesso.');
             $controller = strtolower($this->request->params['controller']);
             $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $userId, $controller]);

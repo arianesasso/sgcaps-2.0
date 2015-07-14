@@ -69,6 +69,10 @@ div.ui-datepicker{
    margin-left: 0.2em;
 }
 
+.fixed-width-button {
+    width: 150px;
+}
+
 .some-height {
     height: 5.4em;
 }
@@ -83,7 +87,7 @@ div.ui-datepicker{
 }
 
 #occupations_select {
-    width: 430px;
+    max-width: 200px;
 }
 
 #occupations_text {
