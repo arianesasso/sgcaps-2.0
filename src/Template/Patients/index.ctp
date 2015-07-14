@@ -47,7 +47,7 @@ function verifyData($patient) {
                         <td><?= h($patient->person->cpf) ?></td>
                         <td><?= h($value['age']) ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('Ver informaćões'), ['controller' => 'paciente', 'action' => 'visualizar', $patient->id], ['class' => 'btn btn-default']) ?>
+                            <?= $this->Html->link(__('Ver informações'), ['controller' => 'paciente', 'action' => 'visualizar', $patient->id], ['class' => 'btn btn-default']) ?>
                             <?php //echo $this->Form->postLink(($user->active? __('Desativar') : __('Ativar')), ['controller' => 'users', 'action' => 'changeActivation', $user->id, $user->active], ['confirm' => __('Tem certeza que deseja mudar o status do usuário: {0}?', $user->username), 'class' => 'btn btn-default'])  ?>
                         </td>
                     </tr>

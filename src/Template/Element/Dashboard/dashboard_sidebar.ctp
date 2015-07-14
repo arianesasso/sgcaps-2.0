@@ -8,7 +8,7 @@
     <li class="dropdown">
         <a href="#" class="dropdown-toggle">
             <i class="fa fa-user"></i>
-            <span class="hidden-xs">Paciente</span>
+            <span class="hidden-xs">Pacientes</span>
         </a>
         <ul class="dropdown-menu">
             <li><a class="" href="<?php
