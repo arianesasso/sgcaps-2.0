@@ -76,7 +76,7 @@ if (empty($patient->person->occupation_id)) {
         </div> 
     </div>
     <div class="col-xs-2 col-xs-offset-2">
-        <a href="<?= $this->Url->build(["controller" => "#"]) ?>" class="btn btn-success action-button fixed-width-button">
+        <a href="#" class="btn btn-success action-button fixed-width-button">
             <i class="fa fa-plus-square"></i> Novo contato
         </a>
         <a href="#" class="btn btn-success action-button fixed-width-button">
