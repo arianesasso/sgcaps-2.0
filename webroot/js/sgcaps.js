@@ -127,6 +127,8 @@ $(document).ready(function () {
     // http://cartaonet.datasus.gov.br/
     $('.cns-mask').inputmask('999999999999999');
     $('.rg-mask').inputmask({mask: '*{7}[*{1,8}]', greedy: false});
+    $('.board-number-mask').inputmask({mask: '*{3}[*{1,7}]'});
+    $('.board-mask').inputmask({mask: 'a{2}[a{1,8}]'});
     
     validateAproxAge();
     $('#birthdate').change(validateAproxAge);
