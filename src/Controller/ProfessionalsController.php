@@ -61,21 +61,21 @@ class ProfessionalsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
+        $this->layout = "devoops_complete";
         $professional = $this->Professionals->newEntity();
         if ($this->request->is('post')) {
             $professional = $this->Professionals->patchEntity($professional, $this->request->data);
             if ($this->Professionals->save($professional)) {
-                $this->Flash->success('The professional has been saved.');
+                $this->Flash->bootstrapSuccess('O profissional foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('The professional could not be saved. Please, try again.');
+                $this->Flash->bootstrapError('O profissional não pode ser salvo.');
             }
         }
-        $people = $this->Professionals->People->find('list', ['limit' => 200]);
-        $states = $this->Professionals->States->find('list', ['limit' => 200]);
-        $this->set(compact('professional', 'people', 'states'));
+        $occupations = $this->Professionals->People->Occupations->find('list', ['keyField' => 'id','valueField' => 'description', 'order' => ['description' => 'ASC']]);
+        $states = $this->Professionals->States->find('list');
+        $this->set(compact('professional', 'states', 'occupations'));
         $this->set('_serialize', ['professional']);
     }
 
