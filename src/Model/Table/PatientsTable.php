@@ -44,7 +44,10 @@ class PatientsTable extends Table
             ->allowEmpty('id', 'create');
             
         $validator
-            ->add('cns', 'custom', ['rule' => [$this,'validateCns'], 'message' => 'CNS inválido'])
+            ->add('cns', 
+                    ['isNumeric' => ['rule' => 'numeric', 'message' => 'Digite somente números', 'last' => true],
+                     'custom' => ['rule' => [$this,'validateCns'], 'message' => 'CNS inválido'],
+                    ])
             ->allowEmpty('cns');
             
         $validator
@@ -194,8 +197,7 @@ class PatientsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['person_id'], 'People'));
         return $rules;
     }
