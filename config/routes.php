@@ -58,6 +58,13 @@ Router::scope('/paciente', ['controller' => 'Patients'], function ($routes) {
     $routes->connect('/editar/*', ['action' => 'edit']);
 });
 
+Router::scope('/profissional', ['controller' => 'Professionals'], function ($routes) {
+    $routes->connect('/cadastrar', ['action' => 'add']);
+    $routes->connect('/listar', ['action' => 'index']);
+    $routes->connect('/visualizar/*', ['action' => 'view']);
+    $routes->connect('/editar/*', ['action' => 'edit']);
+});
+
 Router::scope('/permissao', ['controller' => 'Permissions'], function ($routes) {
     $routes->connect('/unidade', ['action' => 'organizations']);
     $routes->connect('/adicionar/*', ['action' => 'add']);
