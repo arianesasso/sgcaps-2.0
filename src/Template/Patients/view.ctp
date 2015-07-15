@@ -51,7 +51,7 @@ if (empty($patient->person->occupation_id)) {
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Etnia') ?></label>
-                <p><?= empty($patient->ethnicity) ? "Não preenchido" : strtoupper(h($patient->ethnicity)) ?></p>  
+                <p><?= empty($patient->ethnicity) ? "Não preenchido" : mb_strtoupper(h($patient->ethnicity)) ?></p>  
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Date de Cadastro') ?></label>
@@ -59,13 +59,13 @@ if (empty($patient->person->occupation_id)) {
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Estado Civil') ?></label>
-                <p><?= empty($patient->marital_status) ? "Não preenchido" : strtoupper(h($patient->marital_status)) ?></p>
+                <p><?= empty($patient->marital_status) ? "Não preenchido" : mb_strtoupper(h($patient->marital_status)) ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
                 <label><?= __('Ocupação') ?></label>
-                <p><?= strtoupper($occupation) ?></p>  
+                <p><?= mb_strtoupper($occupation) ?></p>  
             </div>
         </div>
         <div class="row">
