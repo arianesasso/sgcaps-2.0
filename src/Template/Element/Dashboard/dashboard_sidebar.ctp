@@ -21,6 +21,20 @@
     </li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle">
+            <i class="fa fa-user"></i>
+            <span class="hidden-xs">Profissionais</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="" href="<?php
+                echo $this->Url->build(["controller" => "profissional", "action" => "cadastrar"]);
+                ?>">Cadastrar</a></li>
+            <li><a class="" href="<?php
+                echo $this->Url->build(["controller" => "profissional", "action" => "listar"]);
+                ?>">Listar</a></li>
+        </ul>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle">
             <i class="fa fa-users"></i>
             <span class="hidden-xs">Usuários</span>
         </a>
