@@ -46,11 +46,12 @@ class ProfessionalsTable extends Table
             ->allowEmpty('id', 'create');
             
         $validator
-            ->allowEmpty('board_acronym');
+            ->allowEmpty('board_acronym', 'valid', ['rule' => 'string', 'message' => 'Digite somente letras']);
             
         $validator
+            ->add('board_number', 'valid', ['rule' => 'alphaNumeric', 'message' => 'Digite somente números e letras'])
             ->allowEmpty('board_number');
-
+      
         return $validator;
     }
 
