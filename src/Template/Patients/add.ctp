@@ -1,10 +1,10 @@
 <?php
 //http://www.saude.sp.gov.br/resources/ses/perfil/profissional-da-saude/grupo-tecnico-de-acoes-estrategicas-gtae/saude-da-populacao-negra/livros-e-revistas/manual_quesito_cor.pdf
-$ethnicities = ["branca" => "Branca", "parda" => "Parda", "negra" => "Negra", 'amarela' => 'Amarela', "indigena" => 'Indígena'];
+$ethnicities = ["BRANCA" => "Branca", "PARDA" => "Parda", "NEGRA" => "Negra", 'AMARELA' => 'Amarela', "INDIGENA" => 'Indígena'];
 
 //http://www.ibge.gov.br/home/estatistica/populacao/trabalhoerendimento/pnad2012/sintese_defaultpdf_dados.shtm
 //http://seriesestatisticas.ibge.gov.br/glossario.aspx
-$maritalStatus = ["solteiro" => "Solteiro(a)", "casado" => "Casado(a)", "desquitado" => "Desquitado(a) ou separado(a) judicialmente ", "divorciado" => "Divorciado(a)", "viuvo" => "Viúvo(a)"];
+$maritalStatus = ["SOLTEIRO" => "Solteiro(a)", "CASADO" => "Casado(a)", "DESQUITADO" => "Desquitado(a) ou separado(a) judicialmente ", "DIVORCIADO" => "Divorciado(a)", "VIUVO" => "Viúvo(a)"];
 
 $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
 ?>  
