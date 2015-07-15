@@ -35,26 +35,27 @@ class Person extends Entity {
 
     protected function _setBirthdate($value) {
         $date = null;
-        if(!empty($value)) {
+        if (!empty($value)) {
             $date = Time::createFromFormat('d/m/Y', trim($value));
             $date->format('Y-m-d');
         }
         return $date;
     }
-    
+
     protected function _setCpf($value) {
-        return empty($value)? null : str_replace([".","-"], ["",""], $value);
+        return empty($value) ? null : str_replace([".", "-"], ["", ""], $value);
     }
-    
+
     protected function _setName($value) {
-        return strtoupper(trim($value));
+        return mb_strtoupper(trim($value));
     }
-    
+
     protected function _setRg($value) {
-        return empty($value)? null : str_replace("_", "", $value);
+        return empty($value) ? null : str_replace("_", "", $value);
     }
-    
-    protected function _setOccupation($value) {
-        return empty($value)? null : $value;
+
+    protected function _setOccupationId($value) {
+        return empty($value) ? null : mb_strtoupper($value);
     }
+
 }
