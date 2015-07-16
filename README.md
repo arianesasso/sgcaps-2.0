@@ -8,35 +8,35 @@
 $ sudo apt-get install git
 ```
 
-1.1. Clone esse repositório, no Linux (Ubuntu):
+2. Clone esse repositório, no Linux (Ubuntu):
 
 ```
 $ git clone https://arianesasso@bitbucket.org/arianesasso/sgcaps-2.0.git
 ```
 
-2. Baixe o [Composer](http://getcomposer.org/doc/00-intro.md)
+3. Baixe o [Composer](http://getcomposer.org/doc/00-intro.md)
 
-2.1. Se a instalação do composer for local, execute dentro da pasta do sgcaps-2.0: 
+4. Se a instalação do composer for local, execute dentro da pasta do sgcaps-2.0: 
 
 ```
 $ php composer.phar install
 
 ```
-2.2. Se for global, execute:
+5. Se for global, execute:
 
 ```
 $ composer install
 ```
 
-3. Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, Mysql e PHP, atualmente uso o: ...
+6. Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, Mysql e PHP, atualmente uso o: ...
 
-4. Depois de instalar o xampp, para executá-lo, no Linux (Ubuntu):
+7. Depois de instalar o xampp, para executá-lo, no Linux (Ubuntu):
 
 ```
 $ .../lampp/lampp start
 ```
 
-5. Sugiro criar um link simbólico na pasta htdocs do seu lampp para o projeto sgcaps-2.0, no Linux (Ubuntu):
+8. Sugiro criar um link simbólico na pasta htdocs do seu lampp para o projeto sgcaps-2.0, no Linux (Ubuntu):
 ```
 $ ln -s /link/para/sgcaps-2.0 sgcaps
 ```
