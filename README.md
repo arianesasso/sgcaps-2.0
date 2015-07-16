@@ -6,7 +6,7 @@
 
 ```
 $ sudo apt-get install git
-``
+```
 
 * Clone esse repositório, no Linux (Ubuntu):
 
