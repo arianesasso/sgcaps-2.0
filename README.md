@@ -28,7 +28,7 @@ $ php composer.phar install
 $ composer install
 ```
 
-* Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, MySQL e PHP, atualmente uso a versão: [2014-11-19] XAMPP for Linux 64bit 5.6.3-0
+* Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, MySQL e PHP, atualmente uso a versão: XAMPP for Linux 64bit 5.6.3-0
 
 * Depois de instalar o xampp, para executá-lo, no Linux (Ubuntu):
 
