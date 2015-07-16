@@ -8,7 +8,7 @@
 $ sudo apt-get install git
 ```
 
-2. Clone esse repositório, no Linux (Ubuntu):
+1.1. Clone esse repositório, no Linux (Ubuntu):
 
 ```
 $ git clone https://arianesasso@bitbucket.org/arianesasso/sgcaps-2.0.git
@@ -16,13 +16,13 @@ $ git clone https://arianesasso@bitbucket.org/arianesasso/sgcaps-2.0.git
 
 3. Baixe o [Composer](http://getcomposer.org/doc/00-intro.md)
 
-4. Se a instalação do composer for local, execute dentro da pasta do sgcaps-2.0: 
+3.1. Se a instalação do composer for local, execute dentro da pasta do sgcaps-2.0: 
 
 ```
 $ php composer.phar install
 
 ```
-Se for global, execute:
+3.2. Se for global, execute:
 
 ```
 $ composer install
