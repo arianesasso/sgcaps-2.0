@@ -50,7 +50,7 @@ $ mysql> create database sgcaps;
 
 * Para executar as migrations, accesse dentro da aplicação sgcaps-2.0:
 ```
-$ cd app/bin
+$ cd bin
 ```
 
 * Execute:
