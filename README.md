@@ -28,7 +28,7 @@ $ php composer.phar install
 $ composer install
 ```
 
-* Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, Mysql e PHP, atualmente uso o: ...
+* Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, MySQL e PHP, atualmente uso a versão: [2014-11-19] XAMPP for Linux 64bit 5.6.3-0
 
 * Depois de instalar o xampp, para executá-lo, no Linux (Ubuntu):
 
@@ -43,12 +43,12 @@ $ ln -s /link/para/sgcaps-2.0 sgcaps
 
 ## Configurações
 
-* No seu SGBD criei um banco para o sgcaps-2.0, sugestão: sgcaps, no MySQL:
+* No seu SGBD criei um banco para o sgcaps-2.0, sugestão no MySQL:
 ```
 $ mysql> create database sgcaps;
 ```
 
-* Accesse dentro da aplicação sgcaps-2.0:
+* Para executar as migrations, accesse dentro da aplicação sgcaps-2.0:
 ```
 $ cd app/bin
 ```
@@ -58,12 +58,12 @@ $ cd app/bin
 $ ./cake migrations migrate`
 ```
 
-* Accesse dentro da aplicação sgcaps-2.0:
+* Por fim, para configurar o datasource default, accesse dentro da aplicação sgcaps-2.0:
 ```
 $ cd config/app.php
 ```
 
-* Altere os dados de conexão default em 'Datasources' para acessar o banco sgcaps, exemplo:
+* Altere os dados de conexão default em 'Datasources', exemplo:
 
 ``` 
 'Datasources' => [
