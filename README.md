@@ -14,29 +14,29 @@ $ sudo apt-get install git
 $ git clone https://arianesasso@bitbucket.org/arianesasso/sgcaps-2.0.git
 ```
 
-3. Baixe o [Composer](http://getcomposer.org/doc/00-intro.md)
+2. Baixe o [Composer](http://getcomposer.org/doc/00-intro.md)
 
-3.1. Se a instalação do composer for local, execute dentro da pasta do sgcaps-2.0: 
+2.1. Se a instalação do composer for local, execute dentro da pasta do sgcaps-2.0: 
 
 ```
 $ php composer.phar install
 
 ```
-3.2. Se for global, execute:
+2.2. Se for global, execute:
 
 ```
 $ composer install
 ```
 
-4. Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, Mysql e PHP, atualmente uso o: ...
+3. Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, Mysql e PHP, atualmente uso o: ...
 
-5. Depois de instalar o xampp, para executá-lo, no Linux (Ubuntu):
+4. Depois de instalar o xampp, para executá-lo, no Linux (Ubuntu):
 
 ```
 $ .../lampp/lampp start
 ```
 
-6. Sugiro criar um link simbólico na pasta htdocs do seu lampp para o projeto sgcaps-2.0, no Linux (Ubuntu):
+5. Sugiro criar um link simbólico na pasta htdocs do seu lampp para o projeto sgcaps-2.0, no Linux (Ubuntu):
 ```
 $ ln -s /link/para/sgcaps-2.0 sgcaps
 ```
@@ -54,17 +54,17 @@ $ mysql> create database sgcaps;
 $ cd app/bin
 ```
 
-2. Execute:
+3. Execute:
 
 ```
 $ ./cake migrations migrate`
 ```
 
-3. Accesse dentro da aplicação sgcaps-2.0:
+4. Accesse dentro da aplicação sgcaps-2.0:
 ```
 $ cd config/app.php
 ```
-4. Altere os dados de conexão default em 'Datasources' para acessar o banco sgcaps, exemplo:
+5. Altere os dados de conexão default em 'Datasources' para acessar o banco sgcaps, exemplo:
 ``` 
 'Datasources' => [
         'default' => [
