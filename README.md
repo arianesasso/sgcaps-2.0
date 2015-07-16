@@ -91,3 +91,4 @@ $ cd config/app.php
 ```
 nome: admin
 senha: 1234
+```
