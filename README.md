@@ -86,3 +86,8 @@ $ cd config/app.php
             'cacheMetadata' => true,
 	    ...
 ```
+
+* Usuário inicial para acessar o sistema:
+```
+nome: admin
+senha: 1234
