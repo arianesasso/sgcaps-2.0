@@ -28,9 +28,9 @@ Se for global, execute:
 $ composer install
 ```
 
-4. Recomendo o uso do [lampp](), pois é um pacote que já vem com Apache, Mysql e PHP, atualmente uso o: ...
+4. Recomendo o uso do [xampp](https://www.apachefriends.org/download.html), pois é um pacote que já vem com Apache, Mysql e PHP, atualmente uso o: ...
 
-5. Depois de instalar o lampp, para executá-lo, no Linux (Ubuntu):
+5. Depois de instalar o xampp, para executá-lo, no Linux (Ubuntu):
 
 ```
 $ .../lampp/lampp start
@@ -43,10 +43,46 @@ $ ln -s /link/para/sgcaps-2.0 sgcaps
 
 ## Configurações
 
-Read and edit `config/app.php` and setup the 'Datasources' and any other
-configuration relevant for your application.
+1. No seu SGBD criei um banco para o sgcaps-2.0, sugestão: sgcaps, no MySQL:
+```
+$ mysql> create database sgcaps;
+```
 
-## Execute as migrations
+2. Accesse dentro da aplicação sgcaps-2.0:
 
-1. Access `cd app/bin`
-2. Run `./cake migrations migrate`
+```
+$ cd app/bin
+```
+
+2. Execute:
+
+```
+$ ./cake migrations migrate`
+```
+
+3. Accesse dentro da aplicação sgcaps-2.0:
+```
+$ cd config/app.php
+```
+4. Altere os dados de conexão default em 'Datasources' para acessar o banco sgcaps, exemplo:
+``` 
+'Datasources' => [
+        'default' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'localhost',
+            /**
+             * CakePHP will use the default DB port based on the driver selected
+             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
+             * the following line and set the port accordingly
+             */
+            //'port' => 'nonstandard_port_number',
+            'username' => 'meu_usuario',
+            'password' => 'minha_senha',
+            'database' => 'sgcaps',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
+	    ...
+```
