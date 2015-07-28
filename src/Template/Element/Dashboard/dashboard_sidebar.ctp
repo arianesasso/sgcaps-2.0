@@ -61,11 +61,17 @@
                 ?>">Listar</a></li>
         </ul>
     </li>
-    <li>
-        <a href="<?php echo $this->Url->build(["controller" => "dashboard", "action" => "index"]); ?>">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle">
             <i class="fa fa-bar-chart"></i>
             <span class="hidden-xs">Indicadores</span>
         </a>
+        <ul class="dropdown-menu">
+            <li><a class="" href="<?php echo $this->Url->build(["controller" => "indicadores", "action" => "demograficos"]); ?>">
+                    Demográficos
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle">

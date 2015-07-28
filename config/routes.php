@@ -70,6 +70,10 @@ Router::scope('/permissao', ['controller' => 'Permissions'], function ($routes) 
     $routes->connect('/adicionar/*', ['action' => 'add']);
 });
 
+Router::scope('/indicadores', ['controller' => 'Indicators'], function ($routes) {
+    $routes->connect('/demograficos', ['action' => 'demographic']);
+});
+
 Router::scope('/', function ($routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',

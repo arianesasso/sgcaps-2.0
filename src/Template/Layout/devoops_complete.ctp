@@ -28,6 +28,8 @@
         <?= $this->Html->script('devoops/jquery.ui.datepicker-pt-BR') ?>
         <?= $this->Html->script('devoops/bootstrap') ?>
         <?= $this->Html->script('devoops/devoops') ?>
+        <?= $this->Html->script('devoops/raphael') ?>
+        <?= $this->Html->script('devoops/morris') ?>
         <?= $this->Html->script('jquery.dataTables.min') ?>
         <?= $this->Html->script('dataTables.bootstrap') ?>
         <?= $this->Html->script('inputmask') ?>

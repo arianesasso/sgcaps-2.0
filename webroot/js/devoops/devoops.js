@@ -192,7 +192,7 @@ function LoadFlotScripts(callback){
 function LoadMorrisScripts(callback){
 	function LoadMorrisScript(){
 		if(!$.fn.Morris){
-			$.getScript('plugins/morris/morris.min.js', callback);
+			$.getScript('../js/devoops/morris.js', callback);
 		}
 		else {
 			if (callback && typeof(callback) === "function") {
@@ -201,7 +201,7 @@ function LoadMorrisScripts(callback){
 		}
 	}
 	if (!$.fn.raphael){
-		$.getScript('plugins/raphael/raphael-min.js', LoadMorrisScript);
+		$.getScript('../js/devoops/raphael.js', LoadMorrisScript);
 	}
 	else {
 		LoadMorrisScript();
@@ -1861,23 +1861,20 @@ function FlotGraph4(){
 //
 function MorrisChart1(){
 	var day_data = [
-		{"period": "2013-10-01", "licensed": 3407, "sorned": 660},
-		{"period": "2013-09-30", "licensed": 3351, "sorned": 629},
-		{"period": "2013-09-29", "licensed": 3269, "sorned": 618},
-		{"period": "2013-09-20", "licensed": 3246, "sorned": 661},
-		{"period": "2013-09-19", "licensed": 3257, "sorned": 667},
-		{"period": "2013-09-18", "licensed": 3248, "sorned": 627},
-		{"period": "2013-09-17", "licensed": 3171, "sorned": 660},
-		{"period": "2013-09-16", "licensed": 3171, "sorned": 676},
-		{"period": "2013-09-15", "licensed": 3201, "sorned": 656},
-		{"period": "2013-09-10", "licensed": 3215, "sorned": 622}
+		{"period": "2015-01", "licensed": 12, "sorned": 13},
+		{"period": "2015-02", "licensed": 5, "sorned": 5},
+		{"period": "2015-03", "licensed": 3, "sorned": 2},
+		{"period": "2015-04", "licensed": 3, "sorned": 2},
+		{"period": "2015-05", "licensed": 4, "sorned": 1},
+		{"period": "2015-06", "licensed": 3, "sorned": 1},
+		{"period": "2015-07", "licensed": 2, "sorned": 1},
 	];
 	Morris.Bar({
 		element: 'morris-chart-1',
 		data: day_data,
 		xkey: 'period',
 		ykeys: ['licensed', 'sorned'],
-		labels: ['Licensed', 'SORN'],
+		labels: ['Homens', 'Mulheres'],
 		xLabelAngle: 60
 	});
 }
@@ -1932,19 +1929,13 @@ function MorrisChart4(){
 	Morris.Bar({
 		element: 'morris-chart-4',
 		data: [
-			{x: '2011 Q1', y: 0},
-			{x: '2011 Q2', y: 1},
-			{x: '2011 Q3', y: 2},
-			{x: '2011 Q4', y: 3},
-			{x: '2012 Q1', y: 4},
-			{x: '2012 Q2', y: 5},
-			{x: '2012 Q3', y: 6},
-			{x: '2012 Q4', y: 7},
-			{x: '2013 Q1', y: 8},
-			{x: '2013 Q2', y: 7},
-			{x: '2013 Q3', y: 6},
-			{x: '2013 Q4', y: 5},
-			{x: '2014 Q1', y: 9}
+			{x: '01/2015', y: 20},
+			{x: '02/2015', y: 1},
+			{x: '03/2015', y: 2},
+			{x: '04/2015', y: 3},
+			{x: '05/2015', y: 4},
+			{x: '06/2015', y: 10},
+			{x: '07/2015', y: 2}
 		],
 		xkey: 'x',
 		ykeys: ['y'],
