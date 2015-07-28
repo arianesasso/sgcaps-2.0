@@ -52,12 +52,12 @@
                                         <span>Calendário</span>
                                     </a>
                                 </li>
-                                <li>
+<!--                            <li>
                                     <a href="#" class="ajax-link">
                                         <i class="fa fa-envelope"></i>
                                         <span><?= __('Mensagens') ?></span>
                                     </a>
-                                </li>
+                                </li>-->
                                 <li>
                                     <a href="#" class="ajax-link">
                                         <i class="fa fa-tasks"></i>
