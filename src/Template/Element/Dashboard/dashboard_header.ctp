@@ -7,24 +7,24 @@
             <div class="row">
                 <div class="col-xs-12 top-panel-right">
                     <ul class="nav navbar-nav pull-right panel-menu">
-                        <li class="hidden-xs">
+<!--                        <li class="hidden-xs">
                             <a href="#" class="modal-link">
                                 <i class="fa fa-bell"></i>
                                 <span class="badge">7</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="hidden-xs">
                             <a class="ajax-link" href="#">
                                 <i class="fa fa-calendar"></i>
-                                <span class="badge">7</span>
+                                <span class="badge">1</span>
                             </a>
                         </li>
-                        <li class="hidden-xs">
+<!--                        <li class="hidden-xs">
                             <a href="#" class="ajax-link">
                                 <i class="fa fa-envelope"></i>
                                 <span class="badge">7</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
                                 <div class="avatar">
@@ -33,7 +33,7 @@
                                 <i class="fa fa-angle-down pull-right"></i>
                                 <div class="user-mini pull-right">
                                     <span class="welcome"><?= __('Seja bem-vindo') ?>,</span>
-                                    <span><?php echo $user['username'] ?></span>
+                                    <span><?php echo 'ADMINISTRADOR' ?></span>
                                 </div>
                             </a>
                             <ul class="dropdown-menu">

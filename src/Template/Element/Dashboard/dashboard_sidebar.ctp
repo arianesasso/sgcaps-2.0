@@ -7,7 +7,7 @@
     </li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle">
-            <i class="fa fa-user"></i>
+            <i class="fa fa-medkit"></i>
             <span class="hidden-xs">Pacientes</span>
         </a>
         <ul class="dropdown-menu">
@@ -16,6 +16,20 @@
                 ?>">Cadastrar</a></li>
             <li><a class="" href="<?php
                 echo $this->Url->build(["controller" => "paciente", "action" => "listar"]);
+                ?>">Listar</a></li>
+        </ul>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle">
+            <i class="fa fa-list-alt"></i>
+            <span class="hidden-xs">Atividades</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="" href="<?php
+                echo $this->Url->build(["controller" => "profissional", "action" => "cadastrar"]);
+                ?>">Cadastrar</a></li>
+            <li><a class="" href="<?php
+                echo $this->Url->build(["controller" => "profissional", "action" => "listar"]);
                 ?>">Listar</a></li>
         </ul>
     </li>
@@ -35,6 +49,26 @@
     </li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle">
+            <i class="fa fa-hospital-o"></i>
+            <span class="hidden-xs">Unidades</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="" href="<?php
+                echo $this->Url->build(["controller" => "profissional", "action" => "cadastrar"]);
+                ?>">Cadastrar</a></li>
+            <li><a class="" href="<?php
+                echo $this->Url->build(["controller" => "profissional", "action" => "listar"]);
+                ?>">Listar</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="<?php echo $this->Url->build(["controller" => "dashboard", "action" => "index"]); ?>">
+            <i class="fa fa-bar-chart"></i>
+            <span class="hidden-xs">Indicadores</span>
+        </a>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle">
             <i class="fa fa-users"></i>
             <span class="hidden-xs">Usuários</span>
         </a>
@@ -43,7 +77,7 @@
             <li><?php echo $this->Html->link('Listar', ['controller' => 'usuario', 'action' => 'listar']) ?></li>
         </ul>
     </li>
-    <li class="dropdown">
+<!--    <li class="dropdown">
         <a href="#" class="dropdown-toggle">
             <i class="fa fa-picture-o"></i>
             <span class="hidden-xs">Multilevel menu</span>
@@ -103,5 +137,5 @@
                 </ul>
             </li>
         </ul>
-    </li>
+    </li>-->
 </ul>
