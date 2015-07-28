@@ -1,10 +1,10 @@
 <!-- Start Dashboard -->
 <div id="dashboard-header" class="row">
     <div class="col-xs-12 col-sm-4 col-md-5 col-md-offset-1">
-        <h3>Olá, Dashboard!</h3>
+        <h3>Olá, Dashboard.</h3>
     </div>
     <div class="clearfix visible-xs"></div>
-    <div class="col-xs-12 col-sm-8 col-md-7 pull-right">
+<!--    <div class="col-xs-12 col-sm-8 col-md-7 pull-right">
         <div class="row">
             <div class="col-xs-4">
                 <div class="sparkline-dashboard" id="sparkline-1"></div>
@@ -28,6 +28,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 <!-- End Dashboard -->

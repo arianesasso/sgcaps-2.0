@@ -25,12 +25,8 @@
             <span class="hidden-xs">Atividades</span>
         </a>
         <ul class="dropdown-menu">
-            <li><a class="" href="<?php
-                echo $this->Url->build(["controller" => "profissional", "action" => "cadastrar"]);
-                ?>">Cadastrar</a></li>
-            <li><a class="" href="<?php
-                echo $this->Url->build(["controller" => "profissional", "action" => "listar"]);
-                ?>">Listar</a></li>
+            <li><a class="" href="#">Cadastrar</a></li>
+            <li><a class="" href="#">Listar</a></li>
         </ul>
     </li>
     <li class="dropdown">
@@ -42,9 +38,7 @@
             <li><a class="" href="<?php
                 echo $this->Url->build(["controller" => "profissional", "action" => "cadastrar"]);
                 ?>">Cadastrar</a></li>
-            <li><a class="" href="<?php
-                echo $this->Url->build(["controller" => "profissional", "action" => "listar"]);
-                ?>">Listar</a></li>
+            <li><a class="" href="#">Listar</a></li>
         </ul>
     </li>
     <li class="dropdown">
@@ -53,12 +47,8 @@
             <span class="hidden-xs">Unidades</span>
         </a>
         <ul class="dropdown-menu">
-            <li><a class="" href="<?php
-                echo $this->Url->build(["controller" => "profissional", "action" => "cadastrar"]);
-                ?>">Cadastrar</a></li>
-            <li><a class="" href="<?php
-                echo $this->Url->build(["controller" => "profissional", "action" => "listar"]);
-                ?>">Listar</a></li>
+            <li><a class="" href="#">Cadastrar</a></li>
+            <li><a class="" href="#">Listar</a></li>
         </ul>
     </li>
     <li class="dropdown">
