@@ -54,7 +54,7 @@ class PermissionsController extends AppController {
             $this->request->session()->write('Auth.User.organization.name', $organization['name']);
             return $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
         }
-        //Esta porcão de código está relacionada a criacão da interface
+        //Esta porção de código está relacionada a criacão da interface
         $permissions = $this->Permissions->find('validyorganizations', ['user_id' => $userId]);
         $this->set(compact('permissions'));
     }
@@ -74,7 +74,8 @@ class PermissionsController extends AppController {
         $permission = $this->Permissions->newEntity();
         if ($this->request->is('post')) {
             //Se a permissão em questão for válida atualmente
-            if (!empty($this->Permissions->find('stillValid', $this->request->data)->first())) {
+            $stillValid = $this->Permissions->find('stillValid', $this->request->data)->first();
+            if (!empty($stillValid)) {
                 $this->Flash->bootstrapError('O usuário já possui essa permissão.');
                 return $this->redirect(['action' => 'add', $userId, $userType, $organizationId]);
             }
