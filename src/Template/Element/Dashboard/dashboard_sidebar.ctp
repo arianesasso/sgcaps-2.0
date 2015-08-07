@@ -1,7 +1,7 @@
 <ul class="nav main-menu">
     <li>
-        <a href="<?php echo $this->Url->build(["controller" => "dashboard", "action" => "index"]);
-?>">
+        <a href="<?php echo $this->Url->build(["controller" => "dashboard", 
+                                               "action" => "index"]); ?>">
             <i class="fa fa-dashboard"></i>
             <span class="hidden-xs">Dashboard</span>
         </a>
@@ -12,15 +12,13 @@
             <span class="hidden-xs">Pacientes</span>
         </a>
         <ul class="dropdown-menu">
-            <li><?php
-                echo $this->Html->Link("Cadastrar", ["controller" => "paciente",
-                    "action" => "cadastrar"]);
-                ?>
+            <li>
+                <?php echo $this->Html->Link("Cadastrar", ["controller" => "paciente", 
+                                                           "action" => "cadastrar"]); ?>
             </li>
-            <li><?php
-                echo $this->Html->Link("Listar", ["controller" => "paciente",
-                    "action" => "listar"])
-                ?>
+            <li>
+                <?php echo $this->Html->Link("Listar", ["controller" => "paciente", 
+                                                        "action" => "listar"]) ?>
             </li>
         </ul>
     </li>
@@ -40,15 +38,13 @@
             <span class="hidden-xs">Profissionais</span>
         </a>
         <ul class="dropdown-menu">
-            <li><?php
-                echo $this->Html->link("Cadastrar", ["controller" => "profissional",
-                    "action" => "cadastrar"]);
-                ?>
+            <li>
+                <?php echo $this->Html->link("Cadastrar", ["controller" => "profissional", 
+                                                           "action" => "cadastrar"]); ?>
             </li>
-            <li><?php
-                echo $this->Html->link("Listar", ["controller" => "profissional",
-                    "action" => "listar"]);
-                ?>
+            <li>
+                <?php echo $this->Html->link("Listar", ["controller" => "profissional", 
+                                                        "action" => "listar"]); ?>
             </li>
         </ul>
     </li>
@@ -69,10 +65,8 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <?php
-                echo $this->Html->Link("Demográficos", ["controller" => "indicadores",
-                    "action" => "demograficos"]);
-                ?>
+                <?php echo $this->Html->Link("Demográficos", ["controller" => "indicadores", 
+                                                              "action" => "demograficos"]); ?>
             </li>
         </ul>
     </li>
@@ -82,8 +76,14 @@
             <span class="hidden-xs">Usuários</span>
         </a>
         <ul class="dropdown-menu">
-            <li><?php echo $this->Html->link('Cadastrar', ['controller' => 'usuario', 'action' => 'cadastrar']) ?></li>
-            <li><?php echo $this->Html->link('Listar', ['controller' => 'usuario', 'action' => 'listar']) ?></li>
+            <li>
+                <?php echo $this->Html->link("Cadastrar", ["controller" => "usuario", 
+                                                           "action" => "cadastrar"]) ?>
+            </li>
+            <li>
+                <?php echo $this->Html->link("Listar", ["controller" => "usuario", 
+                                                        "action" => "listar"]) ?>
+            </li>
         </ul>
     </li>
     <!--    <li class="dropdown">
