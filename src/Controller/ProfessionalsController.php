@@ -1,45 +1,42 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
 
 /**
  * Professionals Controller
- *
+ * 
  * @property \App\Model\Table\ProfessionalsTable $Professionals
  */
-class ProfessionalsController extends AppController
-{
+class ProfessionalsController extends AppController {
 
     /**
-     * Index method
+     * Métododo que lista todos os profissionais cadastrados pelos Caps
+     * Method that lists all the professionals registered by all the Caps
      *
      * @return void
      */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['People', 'States']
-        ];
-        $this->set('professionals', $this->paginate($this->Professionals));
+    public function index() {
+        $this->layout = 'devoops_complete';
+        $this->set('professionals', $this->Professionals->find('all', ['contain' => ['People', 'States']]));
         $this->set('_serialize', ['professionals']);
     }
-    
-     /**
+
+    /**
      * Shows a list of professionals that are not users yet
      * Mostra uma lista de profissionais que ainda não são usuários
      *
      * @return void
      */
-    public function showNoUserList()
-    {  
+    public function showNoUserList() {
         $this->layout = 'ajax';
         $roles = $this->request->session()->read('Auth.User.roles');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
-        $this->set('professionals', $this->Professionals->find('NoUsers', ['roles' =>  $roles, 'organization_id' => $organizationId]));
+        $this->set('professionals', $this->Professionals->find('NoUsers', ['roles' => $roles, 'organization_id' => $organizationId]));
         $this->set('_serialize', ['professionals']);
     }
-    
+
     /**
      * View method
      *
@@ -47,8 +44,7 @@ class ProfessionalsController extends AppController
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $professional = $this->Professionals->get($id, [
             'contain' => ['People', 'States']
         ]);
@@ -73,7 +69,7 @@ class ProfessionalsController extends AppController
                 $this->Flash->bootstrapError('O profissional não pode ser salvo.');
             }
         }
-        $occupations = $this->Professionals->People->Occupations->find('list', ['keyField' => 'id','valueField' => 'description', 'order' => ['description' => 'ASC']]);
+        $occupations = $this->Professionals->People->Occupations->find('list', ['keyField' => 'id', 'valueField' => 'description', 'order' => ['description' => 'ASC']]);
         $states = $this->Professionals->States->find('list');
         $this->set(compact('professional', 'states', 'occupations'));
         $this->set('_serialize', ['professional']);
@@ -86,8 +82,7 @@ class ProfessionalsController extends AppController
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $professional = $this->Professionals->get($id, [
             'contain' => []
         ]);
@@ -113,8 +108,7 @@ class ProfessionalsController extends AppController
      * @return void Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $professional = $this->Professionals->get($id);
         if ($this->Professionals->delete($professional)) {
@@ -124,4 +118,5 @@ class ProfessionalsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
 }
