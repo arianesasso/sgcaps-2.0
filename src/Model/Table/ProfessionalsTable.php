@@ -70,12 +70,8 @@ class ProfessionalsTable extends Table
     }
        
     /**
-     * Se o usuário logado for um 'gestor.geral' o método busca
-     * todos os profissionais que não são usuários ainda
-     * 
-     * Caso o gestor seja mais restrito o método busca os profissionais que 
-     * não são usuários e que estão vinculados à unidade na qual o usuário atual 
-     * está logado
+     * O método busca os profissionais que ainda não são usuários e que estão 
+     * vinculados atualmente a unidade na qual o usuário atual está logado
      * 
      * @param Query $query
      * @param array $options
@@ -86,18 +82,16 @@ class ProfessionalsTable extends Table
             'People.id',
             'People.name'
         ];
-        $condition = ['People.user_id IS' => null];
-        $matching = 'People';
 
-        if(array_search('gestor.geral', $options['roles']) === false) {
-            $condition[] = ['OrganizationsPeople.organization_id' => $options['organization_id'],
-                            'OR' => ['OrganizationsPeople.ended IS' => null, 
-                                     'OrganizationsPeople.ended >=' => date('Y-m-d H:i:s')]];
-            $matching = $matching . '.Organizations';          
-        }
-              
+        $condition[] = ['Professionals.person_id NOT IN' => $this->People->Users->find('all', ['fields' => 'person_id']), 
+                        'OrganizationsPeople.organization_id' => $options['organization_id'],
+                        'OR' => ['OrganizationsPeople.ended IS' => null,
+                        'OrganizationsPeople.ended >=' => date('Y-m-d H:i:s')]];
+        $matching = 'People.Organizations';
+
         return $this->find()
                         ->select($fields)
+                        ->contain('People')
                         ->matching($matching)
                         ->where($condition);
     }
