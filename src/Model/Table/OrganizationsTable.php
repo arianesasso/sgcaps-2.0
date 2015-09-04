@@ -102,10 +102,9 @@ class OrganizationsTable extends Table
         $condition[] = ['Organizations.id NOT IN' => $this->People->Users->find('all', ['fields' => 'organization_id', 
                         'conditions' => ['organization_id IS NOT' => null]])];
         
-        if(array_search('gestor.geral', $options['roles']) === false) {
+        if (array_search('gestor.geral', $options['roles']) === false) {
             $condition[] = ['id =' => $options['organization_id']];         
-        }    
-        pr($this->find('list')->where($condition));
+        }
         return $this->find('list')->where($condition);
     }
     
