@@ -25,6 +25,7 @@ class CreateContactsTable extends AbstractMigration
         $this->table('contacts')
                 ->addColumn('contact_type', 'string', ['length' => 45, 'null' => true, 'default' => null])
                 ->addColumn('value', 'string', ['length' => 45, 'null' => false])
+                ->addColumn('observation', 'text', ['null' => true, 'default' => null])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
                 ->addColumn('person_id', 'integer', ['null' => true, 'default' => null])

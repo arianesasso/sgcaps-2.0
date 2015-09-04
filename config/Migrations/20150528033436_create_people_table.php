@@ -21,7 +21,6 @@ class CreatePeopleTable extends AbstractMigration {
      */
     public function up() {
         $this->table('people')
-                ->addColumn('user_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('name', 'string', ['length' => 255, 'null' => false])
                 ->addColumn('gender', 'string', ['length' => 1, 'null' => true, 'default' => null])
                 ->addColumn('cpf', 'string', ['length' => 20, 'null' => true, 'default' => null])
@@ -31,10 +30,8 @@ class CreatePeopleTable extends AbstractMigration {
                 ->addColumn('occupation_id', 'string', ['length' => 255, 'null' => true, 'default' => null])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
-                ->addIndex('user_id')
                 ->addIndex(['rg', 'rg_state_id'], ['unique' => true])
                 ->addIndex(['cpf'], ['unique' => true])
-                ->addForeignKey('user_id', 'users', 'id')
                 ->addForeignKey('rg_state_id', 'states', 'id')
                 ->save();
     }

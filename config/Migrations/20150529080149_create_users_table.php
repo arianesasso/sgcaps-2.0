@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class CreateOrganizationsTable extends AbstractMigration {
+class CreateUsersTable extends AbstractMigration {
     /**
      * Change Method.
      *
@@ -20,15 +20,21 @@ class CreateOrganizationsTable extends AbstractMigration {
      * Migrate Up.
      */
     public function up() {
-        $this->table('organizations')
+        $this->table('users')
+                ->addColumn('person_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('organization_id', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('name', 'string', ['length' => 255, 'null' => false])
-                ->addColumn('region', 'string', ['length' => 255, 'null' => true, 'default' => null])
-                ->addColumn('care_type', 'string', ['length' => 45, 'null' => true, 'default' => null])
+                ->addColumn('username', 'string', ['length' => 60, 'null' => false])
+                ->addColumn('password', 'string', ['length' => 256, 'null' => false])
                 ->addColumn('active', 'boolean', ['null' => false, 'default' => 1])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
+                ->addColumn('admin_id', 'integer', ['null' => true, 'default' => null])
+                ->addIndex('admin_id')
+                ->addIndex('person_id')
                 ->addIndex('organization_id')
+                ->addIndex('username', ['unique' => true])
+                ->addForeignKey('admin_id', 'users', 'id')
+                ->addForeignKey('person_id', 'people', 'id')
                 ->addForeignKey('organization_id', 'organizations', 'id')
                 ->save();
     }
@@ -37,7 +43,7 @@ class CreateOrganizationsTable extends AbstractMigration {
      * Migrate Down.
      */
     public function down() {
-        $this->dropTable('organizations');
+        $this->dropTable('users');
     }
 
 }

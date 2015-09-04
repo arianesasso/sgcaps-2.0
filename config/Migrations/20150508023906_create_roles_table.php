@@ -25,6 +25,7 @@ class CreateRolesTable extends AbstractMigration {
                 ->addColumn('alias', 'string', ['length' => 45, 'null' => false])
                 ->addColumn('domain', 'string', ['length' => 45, 'null' => false])
                 ->addColumn('created', 'datetime', ['null' => false])
+                ->addColumn('modified', 'datetime', ['null' => false])
                 ->addIndex(['alias', 'domain'], ['unique' => true])
                 ->save();
     }
