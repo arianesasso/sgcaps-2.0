@@ -132,22 +132,19 @@ class UsersController extends AppController {
         $this->layout = 'devoops_complete';
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-            if (!empty($this->request->data['professional_id'])) {
-                $id = $this->request->data['professional_id'];
-                $controller = 'people';
-            } elseif (!empty($this->request->data['organization_id'])) {
-                $id = $this->request->data['organization_id'];
-                $controller = 'organizations';
-            } else {
+            if (empty($this->request->data['person_id']) && empty($this->request->data['organization_id'])) {
                 $this->Flash->bootstrapError('Não foi possível criar o usuário.');
                 return $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
             }
+            
             $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                return $this->redirect(['controller' => $controller, 'action' => 'addUser', $id, $user->id]);
-            } else {
+            $organizationId = $this->request->data['organization_id'];
+            $userType = empty($this->request->data['person_id']) ? 'organization' : 'person'; 
+            if (!$this->Users->save($user)) {
                 $this->Flash->bootstrapError('Não foi possível criar o usuário.');
+                return $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
             }
+            $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $user->id, $userType, $organizationId]);
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
