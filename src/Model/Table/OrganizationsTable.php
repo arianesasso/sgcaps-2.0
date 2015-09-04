@@ -28,8 +28,8 @@ class OrganizationsTable extends Table
         $this->belongsTo('Organizations', [
             'foreignKey' => 'organization_id'
         ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
+        $this->hasOne('Users', [
+            'foreignKey' => 'organization_id'
         ]);
         $this->hasMany('Addresses', [
             'foreignKey' => 'organization_id'
@@ -84,7 +84,6 @@ class OrganizationsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['organization_id'], 'Organizations'));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
     
@@ -100,6 +99,9 @@ class OrganizationsTable extends Table
      * @return type
      */
     public function findNoUsers(Query $query, array $options) {
+        /**
+         * @TODO: reproduzir a seguinte query agora: select * from professionals where person_id IN (select person_id from users join people on (users.person_id = people.id));
+         */
         $condition = ['user_id IS' => null];
         
         if(array_search('gestor.geral', $options['roles']) === false) {

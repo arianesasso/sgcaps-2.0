@@ -16,14 +16,16 @@ class Organization extends Entity
      */
     protected $_accessible = [
         'organization_id' => true,
-        'user_id' => true,
         'name' => true,
         'region' => true,
         'care_type' => true,
-        'organizations' => true,
+        'active' => true,
+        'organization' => true,
         'user' => true,
         'addresses' => true,
         'contacts' => true,
+        'sectors' => true,
         'permissions' => true,
+        'people' => true,
     ];
 }
