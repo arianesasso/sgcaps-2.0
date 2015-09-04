@@ -26,8 +26,8 @@ class PeopleTable extends Table {
         $this->displayField('name');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
+        $this->hasOne('Users', [
+            'foreignKey' => 'person_id'
         ]);
         $this->belongsTo('States', [
             'foreignKey' => 'rg_state_id'
@@ -166,7 +166,6 @@ class PeopleTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->existsIn(['user_id'], 'Users', 'O usuário precisa existir'));
         $rules->add($rules->existsIn(['rg_state_id'], 'States', 'O estado precisa existir'));
         $rules->add($rules->isUnique(['cpf'], 'CPF já existente'));
         $rules->add($rules->isUnique(['rg' , 'rg_state_id'], 'RG já existente'));

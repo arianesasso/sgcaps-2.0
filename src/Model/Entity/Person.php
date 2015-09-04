@@ -16,7 +16,6 @@ class Person extends Entity {
      * @var array
      */
     protected $_accessible = [
-        'user_id' => true,
         'name' => true,
         'gender' => true,
         'cpf' => true,
@@ -31,6 +30,7 @@ class Person extends Entity {
         'contacts' => true,
         'patients' => true,
         'professionals' => true,
+        'organizations' => true,
     ];
 
     protected function _setBirthdate($value) {
