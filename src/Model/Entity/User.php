@@ -16,14 +16,16 @@ class User extends Entity {
      * @var array
      */
     protected $_accessible = [
+        'person_id' => true,
+        'organization_id' => true,
         'username' => true,
         'password' => true,
         'active' => true,
         'admin_id' => true,
-        'users' => true,
-        'organizations' => true,
+        'organization' => true,
+        'person' => true,
         'permissions' => true,
-        'validities' => true,
+        'admin' => true,
     ];
 
     /**

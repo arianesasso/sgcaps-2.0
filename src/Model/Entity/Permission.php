@@ -24,5 +24,6 @@ class Permission extends Entity
         'user' => true,
         'organization' => true,
         'role' => true,
+        'admin' => true,
     ];
 }

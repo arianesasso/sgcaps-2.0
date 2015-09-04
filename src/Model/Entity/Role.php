@@ -16,6 +16,8 @@ class Role extends Entity
      */
     protected $_accessible = [
         'name' => true,
+        'alias' => true,
+        'domain' => true,
         'permissions' => true,
     ];
 }
