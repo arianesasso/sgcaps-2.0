@@ -9,7 +9,7 @@
         <h6>(*) Campos Obrigatórios</h6>
         <?= $this->Form->create($permission); ?>
         <fieldset>
-            <?php if ($user_type === 'people') { ?>
+            <?php if ($user_type === 'person') { ?>
                 <div class="form-group" >
                     <label class="control-label"><?= __('Unidade') ?> *</label>
                     <?php

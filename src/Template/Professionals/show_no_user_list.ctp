@@ -11,7 +11,7 @@ endforeach;
 <ul class="list-inline">
     <li>
         <?php
-        echo $this->Form->input('professional_id', ['options' => $people, 'empty' => true,
+        echo $this->Form->input('person_id', ['options' => $people, 'empty' => true,
             'label' => false,
             'class' => 'form-control',
             'required' => true]);
