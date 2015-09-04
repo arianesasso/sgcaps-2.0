@@ -25,11 +25,11 @@ class UsersTable extends Table {
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
 
-        $this->hasOne('Organizations', [
-            'foreignKey' => 'user_id'
+        $this->belongsTo('Organizations', [
+            'foreignKey' => 'organization_id'
         ]);
-        $this->hasOne('People', [
-            'foreignKey' => 'user_id'
+        $this->belongsTo('People', [
+            'foreignKey' => 'person_id'
         ]);
         $this->hasMany('Permissions', [
             'foreignKey' => 'user_id'
@@ -52,6 +52,14 @@ class UsersTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
+                ->add('person_id', 'valid', ['rule' => 'numeric'])
+                ->allowEmpty('person_id', 'create');
+
+        $validator
+                ->add('organization_id', 'valid', ['rule' => 'numeric'])
+                ->allowEmpty('organization_id', 'create');
+
+        $validator
                 ->requirePresence('username', 'create')
                 ->notEmpty('username', 'Campo obrigatório', 'create');
 
@@ -70,6 +78,8 @@ class UsersTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
+        $rules->add($rules->existsIn(['person_id'], 'People', 'O profissionals precisa existir'));
+        $rules->add($rules->existsIn(['organization_id'], 'Organizations', 'A unidade precisa existir'));
         $rules->add($rules->isUnique(['username'], 'Usuário já existente'));
         return $rules;
     }
@@ -86,17 +96,17 @@ class UsersTable extends Table {
      */
     public function findAllowed(Query $query, array $options) {
         $fields = ['Users.id'];
-        
+
         $query = $this->find()
-                      ->distinct($fields)
-                      ->contain(['People', 'Organizations']);
+                ->distinct($fields)
+                ->contain(['People', 'Organizations']);
 
         if (array_search('gestor.geral', $options['roles']) === false) {
             $query = $this->find()->distinct($fields)
                     ->contain(['People', 'Organizations'])
                     ->matching('Permissions', function ($q) use ($options) {
                         return $q->where(['Permissions.organization_id' => $options['organization_id']])
-                    ->distinct();
+                                 ->distinct();
             });
         }
         return $query;

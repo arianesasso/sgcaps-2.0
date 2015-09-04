@@ -99,14 +99,13 @@ class OrganizationsTable extends Table
      * @return type
      */
     public function findNoUsers(Query $query, array $options) {
-        /**
-         * @TODO: reproduzir a seguinte query agora: select * from professionals where person_id IN (select person_id from users join people on (users.person_id = people.id));
-         */
-        $condition = ['user_id IS' => null];
+        $condition[] = ['Organizations.id NOT IN' => $this->People->Users->find('all', ['fields' => 'organization_id', 
+                        'conditions' => ['organization_id IS NOT' => null]])];
         
         if(array_search('gestor.geral', $options['roles']) === false) {
             $condition[] = ['id =' => $options['organization_id']];         
-        }       
+        }    
+        pr($this->find('list')->where($condition));
         return $this->find('list')->where($condition);
     }
     
