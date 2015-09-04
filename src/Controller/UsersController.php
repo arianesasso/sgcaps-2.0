@@ -188,11 +188,8 @@ class UsersController extends AppController {
      */
     public function changeActivation($id, $active) {
         $this->autoRender = false;
-        if (empty($active)) {
-            $change = 1;
-        } else {
-            $change = 0;
-        }
+        $change = empty($active) ? 1 : 0;
+        
         $permission = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $permission = $this->Users->patchEntity($permission, ['active' => $change]);
