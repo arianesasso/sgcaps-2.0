@@ -18,7 +18,8 @@ endforeach;
         ?>
     </li>
     <li>
-        <a href="#">
+        <a href="<?php echo $this->Url->build(["controller" => "profissional", 
+                                               "action" => "cadastrar"]); ?>">
             <i class="fa fa-plus-square txt-success" data-toggle="tooltip" data-placement="right" title="Clique para adicionar um novo profissional"></i>
         </a>
     </li>
