@@ -13,6 +13,10 @@
                 <label class="control-label"><?= __('Senha') ?> *</label>
                 <?php echo $this->Form->input('password', ['class' => 'form-control', 'label' => false]); ?>
             </div>
+            <div class="form-group" name="retype_password_div">
+                <label class="control-label"><?= __('Digita a senha novamente') ?> *</label>
+                <?php echo $this->Form->input('retype_password', ['type' => 'password', 'class' => 'form-control', 'label' => false]); ?>
+            </div>
             <div class="form-group" name="user_type_div">
                 <?php
                 echo $this->Form->radio('user_type', 
