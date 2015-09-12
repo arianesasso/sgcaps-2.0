@@ -33,7 +33,7 @@ class CreateTests extends AbstractMigration
         //usuários
         $this->execute("INSERT INTO `users` VALUES (1, 1, NULL, 'admin'," . "'$2y$10\$SCrZo/RtBtXV2CZVqArVzOvmEkH7qAbLZHsZQmIfIW8fsBAS25BEy', 1, '2015-06-13 20:49:28','2015-06-15 01:13:53', NULL)");
         //permissões
-        $this->execute("INSERT INTO `permissions` VALUES (1,1,1,2,'2015-06-13 00:00:00','2020-06-14 00:00:00','2015-06-14 00:00:00','2015-06-14 16:56:43',1)");
+        $this->execute("INSERT INTO `permissions` VALUES (1,1,1,1,'2015-06-13 00:00:00','2020-06-14 00:00:00','2015-06-14 00:00:00','2015-06-14 16:56:43',1)");
         //pessoas vinculadas à uma organizaćão
         $this->execute("INSERT INTO `organizations_people` VALUES (1,1,1,'2015-06-14 00:00:00',NULL)");
         //estado
