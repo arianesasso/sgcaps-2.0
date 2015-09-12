@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
+ * Controller para gerenciar profissionais
  * Professionals Controller
  * 
  * @property \App\Model\Table\ProfessionalsTable $Professionals
@@ -12,8 +13,8 @@ use App\Controller\AppController;
 class ProfessionalsController extends AppController {
 
     /**
-     * Métododo que lista todos os profissionais cadastrados pelos Caps
-     * Method that lists all the professionals registered by all the Caps
+     * Métododo que lista todos os profissionais cadastrados
+     * Method that lists all the registered professionals
      *
      * @return void
      */
@@ -24,8 +25,8 @@ class ProfessionalsController extends AppController {
     }
 
     /**
-     * Shows a list of professionals that are not users yet
      * Mostra uma lista de profissionais que ainda não são usuários
+     * Shows a list of professionals that are not users yet
      *
      * @return void
      */
@@ -53,15 +54,24 @@ class ProfessionalsController extends AppController {
     }
 
     /**
+     * Método para adicionar um novo profissional
      * Add method
      *
-     * @return void Redirects on successful add, renders view otherwise.
+     * @return void Redireciona em caso de sucesso, renderiza view caso contrário
+     *              Redirects on successful add, renders view otherwise.
      */
     public function add() {
         $this->layout = "devoops_complete";
         $professional = $this->Professionals->newEntity();
+        // Se for um POST irá salvar o registro
         if ($this->request->is('post')) {
-            $professional = $this->Professionals->patchEntity($professional, $this->request->data);
+            // Necessário para vincular o profissional a organização no momento do cadastro
+            $this->request->data['person']['organizations'] = [['id' => $this->request->session()->read('Auth.User.organization.id')]];
+            // É preciso declarar a assoçiacão para que se salve corretamente
+            // na tabela organizations_people
+            $professional = $this->Professionals->patchEntity($professional, 
+                    $this->request->data, ['associated' => ['People.Organizations']]);
+            // Salva o registro
             if ($this->Professionals->save($professional)) {
                 $this->Flash->bootstrapSuccess('O profissional foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
@@ -69,6 +79,7 @@ class ProfessionalsController extends AppController {
                 $this->Flash->bootstrapError('O profissional não pode ser salvo.');
             }
         }
+        // Caso não seja um POST irá renderizar o formulário de cadastro
         $occupations = $this->Professionals->People->Occupations->find('list', ['keyField' => 'id', 'valueField' => 'description', 'order' => ['description' => 'ASC']]);
         $states = $this->Professionals->States->find('list');
         $this->set(compact('professional', 'states', 'occupations'));
