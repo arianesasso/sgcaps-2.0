@@ -133,7 +133,7 @@ class UsersController extends AppController {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             if (empty($this->request->data['person_id']) && empty($this->request->data['organization_id'])) {
-                $this->Flash->bootstrapError('Não foi possível criar o usuário.');
+                $this->Flash->bootstrapError('É obrigatório escolher um profissional ou unidade.');
                 return $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
             }
             
