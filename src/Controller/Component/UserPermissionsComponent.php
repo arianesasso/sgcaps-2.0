@@ -8,11 +8,12 @@ use Cake\ORM\TableRegistry;
 class UserPermissionsComponent extends Component {
 
     public $Permissions;
+    
     /**
      * Encontra os papéis válidos para um usuário em uma dada unidade
      * 
-     * @param type $userId
-     * @param type $organizationId
+     * @param int $userId
+     * @param int $organizationId
      * @return string
      */
     public function validyRoles($userId, $organizationId) {
@@ -31,8 +32,8 @@ class UserPermissionsComponent extends Component {
      * Encontra as organizaćÕes na qual o usuário tem permissões
      * válidass
      * 
-     * @param type $userId
-     * @param type $organizationId
+     * @param int $userId
+     * @param int $organizationId
      * @return string
      */
     public function validyOrganizations($userId) {
@@ -41,5 +42,23 @@ class UserPermissionsComponent extends Component {
         }
         return $this->Permissions->find('validyorganizations', ['user_id' => $userId])->toArray();
     }
-
+    
+    /**
+     * Verifica se o usuário tem um dado papel na unidade em que está logado
+     * Verifies wheter the user has a specific role in the organization in which
+     * it is logged
+     * 
+     * @param array $roles Array com os papéis do usuário nessa unidade
+     * @param array $roleName Nome do papel procurado
+     * @return boolean
+     */
+    public function hasRole($roles, $roleName) {
+        foreach ($roles as $role) {
+            $roleNames[] = explode('.', $role)[0];
+        }
+        if (array_search($roleName, $roleNames) === false) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -173,6 +173,11 @@ class UsersController extends AppController {
                 $this->Flash->bootstrapError('Os dados não foram salvos, tente novamente.');
             }
         }
+        $disableUsernameEdition = true;
+        if ($this->UserPermissions->hasRole($this->request->session()->read('Auth.User.roles'), 'gestor')) {
+            $disableUsernameEdition = false;
+        };
+        $this->set('disable_username_edition', $disableUsernameEdition);
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
     }

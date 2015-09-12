@@ -6,10 +6,10 @@
             <br/>
             <div class="form-group" name="username_div">
                 <label class="control-label"><?= __('Nome de Usuário') ?></label>
-                <?php echo $this->Form->input('username', ['class' => 'form-control', 'label' => false, 'disabled' => true]); ?>
+                <?php echo $this->Form->input('username', ['class' => 'form-control', 'label' => false, 'disabled' => $disable_username_edition]); ?>
             </div>
             <div class="form-group" name="password_div">
-                <label class="control-label"><?= __('Nova senha') ?></label>
+                <label class="control-label"><?= __('Nova senha') ?> *</label>
                 <?php echo $this->Form->input('password', ['class' => 'form-control', 'label' => false]); ?>
             </div>
             <div class="form-group" name="retype_password_div">
