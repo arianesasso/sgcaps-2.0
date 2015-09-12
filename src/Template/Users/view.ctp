@@ -6,7 +6,7 @@
                 <?php echo $this->element('user_info', ['user' => $user])?>
             </div>
             <div class="col-xs-4 action-bar">
-                <a href="<?= $this->Url->build(["controller" => "permissao", "action" => "adicionar", $user->id, ($user->person ? 'people' : 'organizations'), ($user->organization ? $user->organization->id : false)]) ?>" class="btn btn-success action-button">
+                <a href="<?= $this->Url->build(["controller" => "permissao", "action" => "adicionar", $user->id, ($user->person ? 'person' : 'organization'), ($user->organization ? $user->organization->id : false)]) ?>" class="btn btn-success action-button">
                     <i class="fa fa-plus-square"></i> Nova permissão
                 </a>
                 <a href="#" class="btn btn-success action-button">
