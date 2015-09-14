@@ -138,7 +138,7 @@ class UsersController extends AppController {
             }
             
             $user = $this->Users->patchEntity($user, $this->request->data);
-            $organizationId = $this->request->data['organization_id'];
+            $organizationId = empty($this->request->data['organization_id']) ? "" : $this->request->data['organization_id'];
             $userType = empty($this->request->data['person_id']) ? 'organization' : 'person'; 
             if (!$this->Users->save($user)) {
                 $this->Flash->bootstrapError('Não foi possível criar o usuário.');

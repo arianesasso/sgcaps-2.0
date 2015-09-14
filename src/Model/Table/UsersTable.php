@@ -71,6 +71,11 @@ class UsersTable extends Table {
                 ->add('retype_password', ['isEqual' => ['rule' => ['compareWith', 'password'], 'message' => 'As senhas devem ser idênticas']])
                 ->requirePresence('retype_password')
                 ->notEmpty('retype_password', 'Campo obrigatório');
+        
+        $validator
+                ->add('active', 'valid', ['rule' => 'boolean'])
+                ->requirePresence('active', 'create')
+                ->notEmpty('active', 'create');
 
         return $validator;
     }
