@@ -115,11 +115,9 @@ class UsersController extends AppController {
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
         $permissions = $this->Users->Permissions->find(
                 'AllowedValidy', ['id' => $id, 'roles' => $roles, 'organization_id' => $organizationId]);
-
-        $this->set('user', $user);
-        $this->set('_serialize', ['user']);
-        $this->set('permissions', $permissions);
-        $this->set('_serialize', ['permissions']);
+        
+        $this->set(compact(['user', 'permissions']));
+        $this->set('_serialize', ['user', 'permissions']);
     }
 
     /**
