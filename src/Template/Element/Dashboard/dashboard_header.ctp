@@ -33,7 +33,10 @@
                                 <i class="fa fa-angle-down pull-right"></i>
                                 <div class="user-mini pull-right">
                                     <span class="welcome"><?= __('Seja bem-vindo') ?>,</span>
-                                    <span><?php echo 'ADMINISTRADOR' ?></span>
+                                    <span><?php echo !empty($this->request->session()->read('Auth.User.person.name'))?
+                                                        $this->request->session()->read('Auth.User.person.name') :
+                                                        $this->request->session()->read('Auth.User.organization.name');
+                                          ?></span>
                                 </div>
                             </a>
                             <ul class="dropdown-menu">

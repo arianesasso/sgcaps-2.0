@@ -46,6 +46,11 @@ class UsersController extends AppController {
             //Redireciona o usuário para que ele possa escolher a unidade para logar
             if ($user) {
                 $this->Auth->setUser($user);
+                $id = !empty($user['person_id'])? $user['person_id'] :  $user['organization_id'];
+                $table = !empty($user['person_id'])? 'People' :  'Organizations';
+                $variable = !empty($user['person_id'])? 'person' :  'organization';
+                $entity = $this->Users->$table->findById($id)->select('name')->first()->toArray();
+                $this->request->session()->write("Auth.User.$variable.name", $entity['name']);              
                 return $this->redirect($this->Auth->redirectUrl());
             }
             //Verifica se o problema é o nome de usuário, usuário inativo ou a senha
@@ -139,9 +144,11 @@ class UsersController extends AppController {
             $organizationId = empty($this->request->data['organization_id']) ? "" : $this->request->data['organization_id'];
             $userType = empty($this->request->data['person_id']) ? 'organization' : 'person'; 
             if ($this->Users->save($user)) {
+                $this->Flash->bootstrapSuccess('Usuário criado com sucesso');
                 $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $user->id, $userType, $organizationId]);
+            } else {
+                $this->Flash->bootstrapError('Não foi possível criar o usuário');  
             }
-            $this->Flash->bootstrapError('Não foi possível criar o usuário.');           
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
