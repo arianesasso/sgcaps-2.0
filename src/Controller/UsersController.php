@@ -143,8 +143,7 @@ class UsersController extends AppController {
             if ($this->Users->save($user)) {
                 $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $user->id, $userType, $organizationId]);
             }
-            $this->Flash->bootstrapError('Não foi possível criar o usuário.');
-            
+            $this->Flash->bootstrapError('Não foi possível criar o usuário.');           
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
