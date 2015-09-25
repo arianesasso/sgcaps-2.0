@@ -67,6 +67,8 @@ class PatientsController extends AppController
     /**
      * Método para editar dados de um paciente
      *
+     * @TODO esse método ainda precisa ser construído (o código abaixo é proveniente do bake)
+     * 
      * @param string|null $id Patient id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
@@ -88,24 +90,5 @@ class PatientsController extends AppController
         $people = $this->Patients->People->find('list', ['limit' => 200]);
         $this->set(compact('patient', 'people'));
         $this->set('_serialize', ['patient']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Patient id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $patient = $this->Patients->get($id);
-        if ($this->Patients->delete($patient)) {
-            $this->Flash->success('The patient has been deleted.');
-        } else {
-            $this->Flash->error('The patient could not be deleted. Please, try again.');
-        }
-        return $this->redirect(['action' => 'index']);
     }
 }
