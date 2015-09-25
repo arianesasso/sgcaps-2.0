@@ -39,15 +39,16 @@ class ProfessionalsController extends AppController {
     }
 
     /**
-     * View method
+     *  Método para visualizar um profissional específico
      *
-     * @param string|null $id Professional id.
+     * @param string|null $id Professional id | Id do Profissional
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
+        $this->layout = "devoops_complete";
         $professional = $this->Professionals->get($id, [
-            'contain' => ['People', 'States']
+            'contain' => ['People', 'States', 'People.States', 'People.Occupations']
         ]);
         $this->set('professional', $professional);
         $this->set('_serialize', ['professional']);

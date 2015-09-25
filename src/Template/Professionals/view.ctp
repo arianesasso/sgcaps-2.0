@@ -1,32 +1,82 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('Edit Professional'), ['action' => 'edit', $professional->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Professional'), ['action' => 'delete', $professional->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professional->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Professionals'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Professional'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List People'), ['controller' => 'People', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Person'), ['controller' => 'People', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List States'), ['controller' => 'States', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New State'), ['controller' => 'States', 'action' => 'add']) ?> </li>
-    </ul>
+<?php
+if (empty($professional->person->occupation_id)) {
+    $occupation = 'Não preenchido';
+} else {
+    if (empty($professional->person->occupation->description)) {
+        $occupation = $professional->person->occupation_id;
+    } else {
+        $occupation = $professional->person->occupation->description;
+    }
+}
+?>
+<legend><?= __('Visualizar Informações do Profissional') ?></legend>
+<div class="row">
+    <div class="col-xs-12 gray-frame">
+<?php echo $this->element('professional_info', ['professional' => $professional]) ?>
+    </div>
 </div>
-<div class="professionals view large-10 medium-9 columns">
-    <h2><?= h($professional->id) ?></h2>
-    <div class="row">
-        <div class="large-5 columns strings">
-            <h6 class="subheader"><?= __('Person') ?></h6>
-            <p><?= $professional->has('person') ? $this->Html->link($professional->person->name, ['controller' => 'People', 'action' => 'view', $professional->person->id]) : '' ?></p>
-            <h6 class="subheader"><?= __('Board Acronym') ?></h6>
-            <p><?= h($professional->board_acronym) ?></p>
-            <h6 class="subheader"><?= __('Board Number') ?></h6>
-            <p><?= h($professional->board_number) ?></p>
-            <h6 class="subheader"><?= __('State') ?></h6>
-            <p><?= $professional->has('state') ? $this->Html->link($professional->state->name, ['controller' => 'States', 'action' => 'view', $professional->state->id]) : '' ?></p>
+</div>
+<div class ="row">
+    <div class="col-xs-12">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">Dados Gerais</a></li>
+            <li><a href="#">Contatos</a></li>
+            <li><a href="#">Endereços</a></li>
+        </ul>
+    </div>
+</div>
+<div class ="row">
+    <div class="col-xs-8">
+        <br/>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                <label><?= __('Data de Nascimento') ?></label>
+                <p><?= empty($professional->person->birthdate) ? "Não preenchido" : h($professional->person->birthdate->format('d/m/Y')) ?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                <label><?= __('CPF') ?></label>
+                <p><?= empty($professional->person->cpf) ? "Não preenchido" : h($professional->person->cpf) ?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                <label><?= __('RG') ?></label>
+                <p><?= empty($professional->person->rg) ? "Não preenchido" : h($professional->person->rg) ?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                <label><?= __('RG - UF') ?></label>
+                <p><?= empty($professional->person->rg_state_id) ? "Não preenchido" : h($professional->person->state->name) ?></p>
+            </div>
         </div>
-        <div class="large-2 columns numbers end">
-            <h6 class="subheader"><?= __('Id') ?></h6>
-            <p><?= $this->Number->format($professional->id) ?></p>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <label><?= __('Sigla do Conselho') ?></label>
+                <p><?= empty($professional->board_acronym) ? "Não preenchido" : mb_strtoupper(h($professional->board_acronym)) ?></p>  
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <label><?= __('Número do conselho') ?></label>
+                <p><?= empty($professional->board_number) ? "Não preenchido" : mb_strtoupper(h($professional->board_number)) ?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <label><?= __('UF - Conselho') ?></label>
+                <p><?= empty($professional->state->name) ? "Não preenchido" : mb_strtoupper(h($professional->state->name)) ?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <label><?= __('Date de Cadastro') ?></label>
+                <p><?= h($professional->person->created->format('d/m/Y')) ?></p>  
+            </div>
         </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <label><?= __('Ocupação') ?></label>
+                <p><?= mb_strtoupper($occupation) ?></p>  
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-2 col-xs-offset-2">
+        <a href="#" class="btn btn-success action-button fixed-width-button">
+            <i class="fa fa-plus-square"></i> Novo contato
+        </a>
+        <a href="#" class="btn btn-success action-button fixed-width-button">
+            <i class="fa fa-plus-square"></i> Novo endereço
+        </a>
     </div>
 </div>
