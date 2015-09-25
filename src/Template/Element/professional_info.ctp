@@ -1,5 +1,4 @@
 <?php
-
 if ($professional->person->gender == "M") {
     $gender = 'Masculino';
 } elseif ($professional->person->gender == "F") {
