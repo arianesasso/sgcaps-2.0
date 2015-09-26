@@ -1,6 +1,7 @@
 <?php
+$empty = __('NÃO PREENCHIDO');
 if (empty($patient->person->occupation_id)) {
-    $occupation = 'Não preenchido';
+    $occupation = $empty;
 } else {
     if (empty($patient->person->occupation->description)) {
         $occupation = $patient->person->occupation_id;
@@ -33,25 +34,25 @@ if (empty($patient->person->occupation_id)) {
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <label><?= __('Data de Nascimento') ?></label>
-                <p><?= empty($patient->person->birthdate) ? "Não preenchido" : h($patient->person->birthdate->format('d/m/Y')) ?></p>
+                <p><?= empty($patient->person->birthdate) ?  $empty : h($patient->person->birthdate->format('d/m/Y')) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <label><?= __('CPF') ?></label>
-                <p><?= empty($patient->person->cpf) ? "Não preenchido" : h($patient->person->cpf) ?></p>
+                <p><?= empty($patient->person->cpf) ? $empty : h($patient->person->cpf) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <label><?= __('RG') ?></label>
-                <p><?= empty($patient->person->rg) ? "Não preenchido" : h($patient->person->rg) ?></p>
+                <p><?= empty($patient->person->rg) ? $empty : h($patient->person->rg) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <label><?= __('RG - UF') ?></label>
-                <p><?= empty($patient->person->rg_state_id) ? "Não preenchido" : h($patient->person->state->name) ?></p>
+                <p><?= empty($patient->person->rg_state_id) ? $empty :  mb_strtoupper(h($patient->person->state->name)) ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Etnia') ?></label>
-                <p><?= empty($patient->ethnicity) ? "Não preenchido" : mb_strtoupper(h($patient->ethnicity)) ?></p>  
+                <p><?= empty($patient->ethnicity) ? $empty : mb_strtoupper(h($patient->ethnicity)) ?></p>  
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Date de Cadastro') ?></label>
@@ -59,7 +60,7 @@ if (empty($patient->person->occupation_id)) {
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Estado Civil') ?></label>
-                <p><?= empty($patient->marital_status) ? "Não preenchido" : mb_strtoupper(h($patient->marital_status)) ?></p>
+                <p><?= empty($patient->marital_status) ? $empty : mb_strtoupper(h($patient->marital_status)) ?></p>
             </div>
         </div>
         <div class="row">

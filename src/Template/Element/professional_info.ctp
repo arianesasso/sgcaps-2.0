@@ -1,10 +1,10 @@
 <?php
 if ($professional->person->gender == "M") {
-    $gender = 'Masculino';
+    $gender = 'MASCULINO';
 } elseif ($professional->person->gender == "F") {
-    $gender = 'Feminino';
+    $gender = 'FEMININO';
 } else {
-    $gender = 'Transsexual';
+    $gender = 'TRANSSEXUAL';
 }
 ?>
 

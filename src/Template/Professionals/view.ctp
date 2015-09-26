@@ -1,6 +1,7 @@
 <?php
+$empty = __('NÃO PREENCHIDO');
 if (empty($professional->person->occupation_id)) {
-    $occupation = 'Não preenchido';
+    $occupation = $empty;
 } else {
     if (empty($professional->person->occupation->description)) {
         $occupation = $professional->person->occupation_id;
@@ -31,33 +32,33 @@ if (empty($professional->person->occupation_id)) {
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <label><?= __('Data de Nascimento') ?></label>
-                <p><?= empty($professional->person->birthdate) ? "Não preenchido" : h($professional->person->birthdate->format('d/m/Y')) ?></p>
+                <p><?= empty($professional->person->birthdate) ? $empty : h($professional->person->birthdate->format('d/m/Y')) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <label><?= __('CPF') ?></label>
-                <p><?= empty($professional->person->cpf) ? "Não preenchido" : h($professional->person->cpf) ?></p>
+                <p><?= empty($professional->person->cpf) ? $empty : h($professional->person->cpf) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <label><?= __('RG') ?></label>
-                <p><?= empty($professional->person->rg) ? "Não preenchido" : h($professional->person->rg) ?></p>
+                <p><?= empty($professional->person->rg) ? $empty : h($professional->person->rg) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <label><?= __('RG - UF') ?></label>
-                <p><?= empty($professional->person->rg_state_id) ? "Não preenchido" : h($professional->person->state->name) ?></p>
+                <p><?= empty($professional->person->rg_state_id) ? $empty :  mb_strtoupper(h($professional->person->state->name)) ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Sigla do Conselho') ?></label>
-                <p><?= empty($professional->board_acronym) ? "Não preenchido" : mb_strtoupper(h($professional->board_acronym)) ?></p>  
+                <p><?= empty($professional->board_acronym) ? $empty : mb_strtoupper(h($professional->board_acronym)) ?></p>  
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Número do conselho') ?></label>
-                <p><?= empty($professional->board_number) ? "Não preenchido" : mb_strtoupper(h($professional->board_number)) ?></p>
+                <p><?= empty($professional->board_number) ? $empty : mb_strtoupper(h($professional->board_number)) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('UF - Conselho') ?></label>
-                <p><?= empty($professional->state->name) ? "Não preenchido" : mb_strtoupper(h($professional->state->name)) ?></p>
+                <p><?= empty($professional->state->name) ? $empty : mb_strtoupper(h($professional->state->name)) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Date de Cadastro') ?></label>

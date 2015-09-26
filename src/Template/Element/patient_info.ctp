@@ -1,17 +1,17 @@
 <?php
 if (empty($patient->person->birthdate)) {
-    $age = $patient->approximate_age . " anos (aproximada)";
+    $age = $patient->approximate_age . " ANOS (aproximada)";
 } else {
     $birthdate = DateTime::createFromFormat("Y-m-d", $patient->person->birthdate->format('Y-m-d'));
-    $age = $birthdate->diff(new DateTime())->format('%Y') . " anos";
+    $age = $birthdate->diff(new DateTime())->format('%Y') . " ANOS";
 }
 
 if ($patient->person->gender == "M") {
-    $gender = 'Masculino';
+    $gender = 'MASCULINO';
 } elseif ($patient->person->gender == "F") {
-    $gender = 'Feminino';
+    $gender = 'FEMININO';
 } else {
-    $gender = 'Transsexual';
+    $gender = 'TRANSSEXUAL';
 }
 ?>
 
@@ -22,7 +22,7 @@ if ($patient->person->gender == "M") {
     </li>
     <li>
         <h4><?= __('CNS') ?></h4>
-        <p class="blue-text white-box"><?php echo empty($patient->cns) ? 'Não disponível' : $patient->cns; ?></p>
+        <p class="blue-text white-box"><?php echo empty($patient->cns) ? __('NÃO DISPONÍVEL') : $patient->cns; ?></p>
     </li>
     <li>
         <h4><?= __('Sexo') ?></h4>
