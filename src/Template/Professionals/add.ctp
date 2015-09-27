@@ -36,13 +36,13 @@
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <div class="form-group some-height">
                         <label class="control-label"><?= __('RG') ?></label>
-                        <?php echo $this->Form->input('person.rg', ['class' => 'form-control rg-mask', 'label' => false, 'placeholder' => 'Somente números e letras']); ?>
+                        <?php echo $this->Form->input('person.rg', ['id' => 'rg', 'class' => 'form-control rg-mask', 'label' => false, 'placeholder' => 'Somente números e letras']); ?>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <div class="form-group some-height">
-                        <label class="control-label"><?= __('RG - UF') ?></label>
-                        <?php echo $this->Form->input('person.rg_state_id', ['options' => $states, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
+                        <label class="control-label"><?= __('RG - UF') ?></label><span id="mandatory_rg_state"> *</span>
+                        <?php echo $this->Form->input('person.rg_state_id', ['id' => 'rg_state_id', 'options' => $states, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
                     </div>
                 </div>
             </div>
