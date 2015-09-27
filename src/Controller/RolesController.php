@@ -25,7 +25,7 @@ class RolesController extends AppController {
      */
     public function index() {
         $this->layout = 'devoops_complete';
-        $this->set('roles', $this->paginate($this->Roles));
+        $this->set('roles', $this->Roles->find('all'));
         $this->set('_serialize', ['roles']);
     }
 

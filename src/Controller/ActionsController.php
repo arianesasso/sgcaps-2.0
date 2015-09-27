@@ -25,7 +25,7 @@ class ActionsController extends AppController {
      */
     public function index() {
         $this->layout = 'devoops_complete';
-        $this->set('actions', $this->paginate($this->Actions));
+        $this->set('actions', $this->Actions->find('all'));
         $this->set('_serialize', ['actions']);
     }
 
