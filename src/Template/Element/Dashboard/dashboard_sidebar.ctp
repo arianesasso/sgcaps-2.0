@@ -104,7 +104,7 @@
             <span class="hidden-xs">Usuários</span>
         </a>
         <ul class="dropdown-menu">
-            <?php if (in_array('cadastrar_usuario', $actions)) { ?>
+            <?php if (in_array('cadastrar_qualquer_usuario', $actions) || in_array('cadastrar_usuario_local', $actions)) { ?>
             <li>
                 <?php echo $this->Html->link("Cadastrar", ["controller" => "usuario", 
                                                            "action" => "cadastrar"]) ?>

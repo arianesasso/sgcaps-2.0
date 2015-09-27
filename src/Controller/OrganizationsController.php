@@ -45,9 +45,15 @@ class OrganizationsController extends AppController {
             $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         } 
         $this->layout = 'ajax';
-        $roles = $this->request->session()->read('Auth.User.roles');
+        $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
-        $this->set('organizations', $this->Organizations->find('NoUsers', ['roles' => $roles, 'organization_id' => $organizationId]));
+        if(in_array('cadastrar_usuario_local', $actions)) {
+            $localOnly = true;
+        }
+        if(in_array('cadastrar_qualquer_usuario', $actions)) {
+            $localOnly = false;
+        }
+        $this->set('organizations', $this->Organizations->find('noUsers', ['local_only' => $localOnly, 'organization_id' => $organizationId]));
         $this->set('_serialize', ['organizations']);
     }
 

@@ -88,11 +88,12 @@ class OrganizationsTable extends Table
     }
     
     /**
-     * Finds the organzations that are not users yet
-     * Encontra as organizacões que ainda não são usuários
+     * Finds the organzations that have no users yet
+     * Encontra as organizacões que ainda não possuem usuários
      * 
-     * Se o usuário for um gestor 'geral' ele poderá dar permissões à todas as unidades
-     * Caso contrário, ele poderá dar permissões somente à sua unidade
+     * Um usuário pode ter permissão de criar um usuário para
+     * qualquer organizacão ($local_only = false)
+     * ou somente para a unidade local ($local_only = true)
      * 
      * @param Query $query
      * @param array $options
@@ -102,7 +103,7 @@ class OrganizationsTable extends Table
         $condition[] = ['Organizations.id NOT IN' => $this->People->Users->find('all', ['fields' => 'organization_id', 
                         'conditions' => ['organization_id IS NOT' => null]])];
         
-        if (array_search('gestor.geral', $options['roles']) === false) {
+        if ($options['local_only']) {
             $condition[] = ['id =' => $options['organization_id']];         
         }
         return $this->find('list')->where($condition);
