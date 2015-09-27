@@ -49,7 +49,7 @@ class ActionsController extends AppController {
                 $this->Flash->bootstrapError('A ação não foi salva. Por favor, tente novamente.');
             }
         }
-        $roles = $this->Actions->Roles->find('list');
+        $roles = $this->Actions->Roles->find('list',['order' => ['name' => 'asc']]);
         $this->set(compact('action', 'roles'));
         $this->set('_serialize', ['action']);
     }
@@ -76,7 +76,7 @@ class ActionsController extends AppController {
                 $this->Flash->bootstrapError('A ação não foi salva. Por favor, tente novamente.');
             }
         }
-        $roles = $this->Actions->Roles->find('list', ['limit']);
+        $roles = $this->Actions->Roles->find('list',['order' => ['name' => 'asc']]);
         $this->set(compact('action', 'roles'));
         $this->set('_serialize', ['action']);
     }

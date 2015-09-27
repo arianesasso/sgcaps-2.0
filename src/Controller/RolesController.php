@@ -54,7 +54,7 @@ class RolesController extends AppController {
                 }
             }
         }
-        $actions = $this->Roles->Actions->find('list');
+        $actions = $this->Roles->Actions->find('list',['order' => ['name' => 'asc']]);
         $this->set(compact('role', 'actions'));
         $this->set('_serialize', ['role']);
     }
@@ -81,7 +81,7 @@ class RolesController extends AppController {
                 $this->Flash->bootstrapError('O papel não foi salvo. Por favor, tente novamente');
             }
         }
-        $actions = $this->Roles->Actions->find('list', ['limit']);
+        $actions = $this->Roles->Actions->find('list',['order' => ['name' => 'asc']]);
         $this->set(compact('role', 'actions'));
         $this->set('_serialize', ['role']);
     }
