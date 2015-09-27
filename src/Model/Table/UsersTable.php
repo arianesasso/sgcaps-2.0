@@ -39,6 +39,20 @@ class UsersTable extends Table {
             'foreignKey' => 'admin_id'
         ]);
     }
+    
+    /**
+     * Verifica se as duas senhas digitadas são idênticas
+     * 
+     * @param type $field  Primeira senha digitada
+     * @param type $record Todas as informações relativas ao usuário
+     * @return boolean
+     */
+    public function requireVerification($field, $record) {
+        if(!empty($field) && $field != $record['data']['retype_password']) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Default validation rules.
@@ -64,13 +78,14 @@ class UsersTable extends Table {
                 ->notEmpty('username', 'Campo obrigatório', 'create');
 
         $validator
-                ->requirePresence('password')
-                ->notEmpty('password', 'Campo obrigatório');
+                ->add('password', ['require_verification' => ['rule' => [$this,'requireVerification'], 'message' => 'Preenhca o campo abaixo']])
+                ->requirePresence('password', 'create')
+                ->notEmpty('password', 'Campo obrigatório', 'create');
               
         $validator
                 ->add('retype_password', ['isEqual' => ['rule' => ['compareWith', 'password'], 'message' => 'As senhas devem ser idênticas']])
-                ->requirePresence('retype_password')
-                ->notEmpty('retype_password', 'Campo obrigatório');
+                ->requirePresence('retype_password', 'create')
+                ->notEmpty('retype_password', 'Campo obrigatório', 'create');
         
         $validator
                 ->add('active', 'valid', ['rule' => 'boolean'])
