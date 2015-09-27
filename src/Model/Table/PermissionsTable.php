@@ -205,13 +205,13 @@ class PermissionsTable extends Table {
     }
     
     /**
-     * Finds the validy permissions a manager can see.
-     * If the user is a 'gestor.geral' he/she can see all the users permissions
+     * Finds the validy permissions a user can see.
+     * If $option['local_only'] == false the user can see all permissions an user 
      * Otherwise he/she can only see the permissions that the user has in 
      * her/his current unit.
      * 
      * Encontra as permissões válidas que um gestor pode ver.
-     * Se ele for um 'gestor.geral' poderá ver todas as permissões de um usuário.
+     * Se $option['local_only'] == true o usuário poderá ver todas as permissões de um usuário.
      * Caso contrário, ele só poderá ver as permissões do usuário na unidade na qual
      * está logado.
      * 
@@ -229,7 +229,7 @@ class PermissionsTable extends Table {
                 ->contain(['Roles', 'Organizations', 'Admins.People', 'Admins.Organizations'])
                 ->order(['Organizations.name', 'Permissions.beginning']);
         
-        if (array_search('gestor.geral', $options['roles']) === false) {
+        if ($options['local_only']) {
             $query = $this->find()->where(['Permissions.user_id' => $options['id'],
                              'Permissions.organization_id' => $options['organization_id'],
                              'OR' => ['Permissions.ending IS' => null,

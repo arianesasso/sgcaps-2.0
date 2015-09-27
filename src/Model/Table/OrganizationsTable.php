@@ -111,9 +111,6 @@ class OrganizationsTable extends Table
     
     /**
      * Encontra a organização na qual um gestor pode dar permissões
-     * Se o gestor for um 'gestor.geral' ele poderá dar permissões em qualquer unidade,
-     * se ele for um gestor mais restrito (ex.: gestor.caps) só poderá dar permissões
-     * para a sua unidade
      * 
      * @param Query $query
      * @param array $options
@@ -122,7 +119,7 @@ class OrganizationsTable extends Table
     public function findAllowed(Query $query, array $options) {
         $condition = ['name IS NOT' => null];
         
-        if(array_search('gestor.geral', $options['roles']) === false) {
+        if($options['local_only']) {
             $condition = ['id' => $options['organization_id']];         
         }
         return $this->find('list')->where($condition);

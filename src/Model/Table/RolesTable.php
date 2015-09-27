@@ -82,10 +82,9 @@ class RolesTable extends Table
     }
     
      /**
-     * Finds the roles a manager user can give
-     * If the manager is a 'gestor.caps' it can only give Caps permissions
-     * If the manager is a 'gestor.geral' it can give all kinds of permissions
+     * Finds the roles a user user can give
      * 
+     * @TODO  Melhorar esse método, pois ele só recupera permissões de CAPS para o caso local
      * @param Query $query
      * @param array $options
      * @return type
@@ -93,7 +92,7 @@ class RolesTable extends Table
     public function findAllowed(Query $query, array $options) {
         $condition = ['name IS NOT' => null];
         
-        if(array_search('gestor.geral', $options['roles']) === false && array_search('gestor.caps', $options['roles']) !== false) {
+        if($options['local_only']) {
             $condition = ['domain' => 'caps'];         
         }
         return $this->find('list')->where($condition);

@@ -94,10 +94,17 @@ class PermissionsController extends AppController {
                 $this->Flash->bootstrapError('A permissão não pode ser salva. Por favor, tente novamente.');
             }
         }
+        $actions = $this->request->session()->read('Auth.User.actions');
+        if(in_array('adicionar_permissao_local', $actions)) {
+            $localOnly = true;
+        }
+        if(in_array('adicionar_qualquer_permissao', $actions)) {
+            $localOnly = false;
+        }
         //Encontra as organizações para as quais um determinado usuário pode garantir permissões
-        $organizations = $this->Permissions->Organizations->find('Allowed', ['roles' => $this->request->session()->read('Auth.User.roles'), 'organization_id' => $this->request->session()->read('Auth.User.organization.id')]);
+        $organizations = $this->Permissions->Organizations->find('allowed', ['local_only' => $localOnly, 'organization_id' => $this->request->session()->read('Auth.User.organization.id')]);
         //Encontra os papéis que um determinado usuário pode garantir
-        $roles = $this->Permissions->Roles->find('Allowed', ['roles' => $this->request->session()->read('Auth.User.roles')]);
+        $roles = $this->Permissions->Roles->find('allowed', ['local_only' => $localOnly]);
         //Recupera dados do usuário que está tendo a permissão garantida
         $user = $this->Permissions->Users->get($userId, ['contain' => ['People', 'Organizations']]);
         

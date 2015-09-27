@@ -142,11 +142,18 @@ class UsersController extends AppController {
     public function view($id) {
         $this->layout = 'devoops_complete';
         $user = $this->Users->get($id, ['contain' => ['People', 'Organizations']]);
-
-        $roles = $this->request->session()->read('Auth.User.roles');
+        $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
+       
+        if(in_array('visualizar_permissoes_locais', $actions)) {     
+            $localOnly = true;
+           
+        }
+        if(in_array('visualizar_qualquer_permissao', $actions)) {
+            $localOnly = false;
+        }
         $permissions = $this->Users->Permissions->find(
-                'AllowedValidy', ['id' => $id, 'roles' => $roles, 'organization_id' => $organizationId]);
+                'allowedValidy', ['id' => $id, 'local_only' => $localOnly, 'organization_id' => $organizationId]);
         
         $this->set(compact(['user', 'permissions']));
         $this->set('_serialize', ['user', 'permissions']);
