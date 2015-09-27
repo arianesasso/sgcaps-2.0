@@ -110,7 +110,7 @@
                                                            "action" => "cadastrar"]) ?>
             </li>
             <?php } 
-            if (in_array('listar_usuarios', $actions)) { ?>
+            if (in_array('listar_todos_usuarios', $actions) || in_array('listar_usuarios_locais', $actions)) { ?>
             <li>
                 <?php echo $this->Html->link("Listar", ["controller" => "usuario", 
                                                         "action" => "listar"]) ?>
