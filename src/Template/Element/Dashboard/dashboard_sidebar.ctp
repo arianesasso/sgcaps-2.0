@@ -99,13 +99,31 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <?php echo $this->Html->link("Cadastrar", ["controller" => "roles",
-                            "action" => "add"])
+                        <?php echo $this->Html->link("Cadastrar", ["controller" => "papel",
+                            "action" => "cadastrar"])
                         ?>
                     </li>
                     <li>
-                        <?php echo $this->Html->link("Visualizar", ["controller" => "roles",
-                            "action" => "add"])
+                        <?php echo $this->Html->link("Listar", ["controller" => "papel",
+                            "action" => "listar"])
+                        ?>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-briefcase"></i>
+                    <span class="hidden-xs">Ações</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <?php echo $this->Html->link("Cadastrar", ["controller" => "acao",
+                            "action" => "cadastrar"])
+                        ?>
+                    </li>
+                    <li>
+                        <?php echo $this->Html->link("Listar", ["controller" => "acao",
+                            "action" => "listar"])
                         ?>
                     </li>
                 </ul>

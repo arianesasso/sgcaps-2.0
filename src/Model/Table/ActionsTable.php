@@ -45,6 +45,15 @@ class ActionsTable extends Table
             ->allowEmpty('id', 'create');
             
         $validator
+            ->add('name', ['maxLength' => [
+                            'rule' => ['maxLength', 250],
+                            'message' => 'O nome ultrapassou o tamanho máximo permitido'
+                          ],
+                          'onlyLettersAndSpaces' => [
+                            'rule' => array('custom', '/^[\pL\s]+$/u'),
+                            'message' => 'O nome deve conter somente letras e espaços'
+                          ]
+             ])
             ->requirePresence('name', 'create')
             ->notEmpty('name');
             
@@ -61,11 +70,6 @@ class ActionsTable extends Table
             ->notEmpty('action');
 
         return $validator;
-    }
-    
-    public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->isUnique(['alias'], 'Uma ação com esse nome já existe'));
-        return $rules;
     }
     
     /**
@@ -87,5 +91,15 @@ class ActionsTable extends Table
                                         return $q->where(['Roles.id IN' => $options['roles_ids']]);
         });
         return $allowedActions->toArray();
+    }
+    
+    /** 
+     * @TODO   Fazer com que essa validação seja exibida
+     * @param  RulesChecker $rules
+     * @return RulesChecker
+     */
+    public function buildRules(RulesChecker $rules) {
+        $rules->add($rules->isUnique(['alias'], 'Uma ação com esse nome já existe'));
+        return $rules;
     }
 }

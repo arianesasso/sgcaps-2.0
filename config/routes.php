@@ -74,6 +74,16 @@ Router::scope('/indicadores', ['controller' => 'Indicators'], function ($routes)
     $routes->connect('/demograficos', ['action' => 'demographic']);
 });
 
+Router::scope('/papel', ['controller' => 'Roles'], function ($routes) {
+    $routes->connect('/cadastrar', ['action' => 'add']);
+    $routes->connect('/listar', ['action' => 'index']);
+});
+
+Router::scope('/acao', ['controller' => 'Actions'], function ($routes) {
+    $routes->connect('/cadastrar', ['action' => 'add']);
+    $routes->connect('/listar', ['action' => 'index']);
+});
+
 Router::scope('/', function ($routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
