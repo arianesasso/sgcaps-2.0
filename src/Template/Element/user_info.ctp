@@ -9,6 +9,6 @@
     </li>
     <li>
         <h4><?= __('Ativo') ?></h4>
-        <p class="blue-text white-box"><?= $user->active ? __('Sim') : __('Não'); ?></p>
+        <p class="blue-text white-box"><?= $user->active ? __('SIM') : __('NÃO'); ?></p>
     </li>
 </ul>
