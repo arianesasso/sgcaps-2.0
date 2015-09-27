@@ -110,10 +110,11 @@ class UsersTable extends Table {
     }
 
     /**
-     * Encontra os usuários que um gestor pode ver.
-     * Se o gestor for do tipo 'gestor.geral' poderá ver todos os usuários.
-     * Se não, só poderá ver os usuários que tem ou já tiveram permissões na sua
-     * unidade.
+     * Encontra os usuários que um usuário pode ver.
+     * Existem duas formas de visualização:
+     * 
+     * Somente ususários locais $local_only = true ou
+     * todos os usuários, nesse caso, $local_only = false
      * 
      * @param Query $query
      * @param array $options
@@ -125,8 +126,7 @@ class UsersTable extends Table {
         $query = $this->find()
                 ->distinct($fields)
                 ->contain(['People', 'Organizations']);
-
-        if (array_search('gestor.geral', $options['roles']) === false) {
+        if ($options['local_only']) {
             $query = $this->find()->distinct($fields)
                     ->contain(['People', 'Organizations'])
                     ->matching('Permissions', function ($q) use ($options) {

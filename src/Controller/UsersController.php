@@ -119,9 +119,15 @@ class UsersController extends AppController {
      */
     public function index() {
         $this->layout = 'devoops_complete';
-        $roles = $this->request->session()->read('Auth.User.roles');
+        $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
-        $this->set('users', $this->Users->find('Allowed', ['roles' => $roles, 'organization_id' => $organizationId]));
+        if(in_array('listar_usuarios_locais', $actions)) {
+            $localOnly = true;
+        }
+        if(in_array('listar_todos_usuarios', $actions)) {
+            $localOnly = false;
+        }
+        $this->set('users', $this->Users->find('allowed', ['local_only' => $localOnly, 'organization_id' => $organizationId]));
         $this->set('_serialize', ['users']);
     }
 
