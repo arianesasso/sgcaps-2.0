@@ -213,13 +213,14 @@ class UsersController extends AppController {
     }
 
     /**
+     * Changes the user activation to active or inactive
      * Muda a ativação de um usuário
      * Se está inativo fica ativo e vice-versa
      *
-     * @param integer $id Id do Usuário
-     * @param bool $active Status do Usuário (ativo/inativo)
-     * @return void Redireciona para a página de visualizacão 
-     *              das Permissões do usário
+     * @param integer $id   Id do Usuário
+     * @param bool $active  Status do Usuário (ativo/inativo)
+     * @return void         Redireciona para a página de visualizacão 
+     *                      das Permissões do usário
      */
     public function changeActivation($id, $active) {
         $this->autoRender = false;
