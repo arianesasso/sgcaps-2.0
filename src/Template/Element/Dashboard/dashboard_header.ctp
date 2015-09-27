@@ -1,3 +1,15 @@
+<?php
+if(!empty($user['person_id'])) {
+    $userDataUrl = $this->Url->build(["controller" => "profissional",
+                                      "action" => "visualizar", 
+                                      $user['person_id'], 'person']);
+} else {
+    $userDataUrl = $this->Url->build(["controller" => "organizacao",
+                                      "action" => "visualizar", 
+                                      $user['organization_id']]);
+}
+
+?>
 <div class="container-fluid expanded-panel">
     <div class="row">
         <div id="logo" class="col-xs-12 col-sm-3 col-md-2">
@@ -12,19 +24,20 @@
                                 <i class="fa fa-bell"></i>
                                 <span class="badge">7</span>
                             </a>
-                        </li>-->
+                        </li>
                         <li class="hidden-xs">
                             <a class="ajax-link" href="#">
                                 <i class="fa fa-calendar"></i>
                                 <span class="badge">1</span>
                             </a>
                         </li>
-<!--                        <li class="hidden-xs">
+                        <li class="hidden-xs">
                             <a href="#" class="ajax-link">
                                 <i class="fa fa-envelope"></i>
                                 <span class="badge">7</span>
                             </a>
-                        </li>-->
+                        </li>
+-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
                                 <div class="avatar">
@@ -42,31 +55,39 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="<?php echo $this->Url->build([
-                                                    "controller" => "usuario",
-                                                    "action" => "editar", $user['id']]);
+                                                    "controller" => "profissional",
+                                                    "action" => "visualizar", $user['person_id'], 'person']);
                                              ?>">
                                         <i class="fa fa-user"></i>
                                         <span><?= __('Meus Dados') ?></span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="<?= $userDataUrl ?>">
+                                        <i class="fa fa-key"></i>
+                                        <span><?= __('Mudar senha') ?></span>
+                                    </a>
+                                </li>
+<!-- 
                                  <li>
                                     <a href="#">
                                         <i class="fa fa-calendar"></i>
                                         <span>Calendário</span>
                                     </a>
                                 </li>
-<!--                            <li>
+                           <li>
                                     <a href="#" class="ajax-link">
                                         <i class="fa fa-envelope"></i>
                                         <span><?= __('Mensagens') ?></span>
                                     </a>
-                                </li>-->
+                                </li>
                                 <li>
                                     <a href="#" class="ajax-link">
                                         <i class="fa fa-tasks"></i>
                                         <span>Tarefas</span>
                                     </a>
-                                </li>                               
+                                </li>
+-->
                                 <li>
                                     <a href="<?php echo $this->Url->build([
                                                     "controller" => "usuario",

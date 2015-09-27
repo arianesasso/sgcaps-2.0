@@ -31,6 +31,9 @@ class ProfessionalsController extends AppController {
      * @return void
      */
     public function showNoUserList() {
+        if (!$this->request->is('ajax')) {
+            $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
+        }
         $this->layout = 'ajax';
         $roles = $this->request->session()->read('Auth.User.roles');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
@@ -39,17 +42,26 @@ class ProfessionalsController extends AppController {
     }
 
     /**
-     *  Método para visualizar um profissional específico
+     * Método para visualizar um profissional específico
+     * Method to visualize a specific professional
      *
      * @param string|null $id Professional id | Id do Profissional
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null) {
+    public function view($id = null, $type = null) {
         $this->layout = "devoops_complete";
-        $professional = $this->Professionals->get($id, [
-            'contain' => ['People', 'States', 'People.States', 'People.Occupations']
-        ]);
+        
+        if(empty($type)) {
+            $professional = $this->Professionals->get($id, [
+                'contain' => ['People', 'States', 'People.States', 'People.Occupations']
+            ]);
+        } else {
+            $professional = $this->Professionals->findByPersonId($id)  
+                                 ->contain(['People', 'States', 'People.States', 
+                                            'People.Occupations'])
+                                 ->first();
+        }
         $this->set('professional', $professional);
         $this->set('_serialize', ['professional']);
     }
@@ -112,23 +124,4 @@ class ProfessionalsController extends AppController {
         $this->set(compact('professional', 'people', 'states'));
         $this->set('_serialize', ['professional']);
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Professional id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $professional = $this->Professionals->get($id);
-        if ($this->Professionals->delete($professional)) {
-            $this->Flash->success('The professional has been deleted.');
-        } else {
-            $this->Flash->error('The professional could not be deleted. Please, try again.');
-        }
-        return $this->redirect(['action' => 'index']);
-    }
-
 }
