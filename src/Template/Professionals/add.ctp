@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="form-group some-height">
-                        <label class="control-label"><?= __('Número do conselho') ?></label>
+                        <label class="control-label"><?= __('Número do Conselho') ?></label>
                         <?php echo $this->Form->input('board_number', ['class' => 'form-control board-number-mask', 'label' => false, 'placeholder' => 'Somente números e letras']); ?>
                     </div>
                 </div>
