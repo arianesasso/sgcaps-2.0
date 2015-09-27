@@ -133,6 +133,9 @@ $(document).ready(function () {
     validateAproxAge();
     $('#birthdate').change(validateAproxAge);
     
+    validateRgState();
+    $('#rg').change(validateRgState);
+    
     // Funções para tratar o input de ocupação
     $(".basic-select").select2({
         language: {
@@ -223,6 +226,26 @@ function validateAproxAge() {
         $("#aprox_age").prop("required", false);
         $("#mandatory_aprox_age").css("display", "none");
         $("#aprox_age").val(null);        
+    }
+}
+
+/**
+ * Liberar o campo 'RG - UF' se o campo 'RG' 
+ * estiver preenhcido e também torná-lo obrigatório nesse caso
+ * 
+ * @returns {undefined}
+ */
+function validateRgState() {
+    if ($('#rg').val()) {
+        $("#rg_state_id").prop("disabled", false);
+        $("#rg_state_id").prop("required", true);
+        $("#mandatory_rg_state").css("display", "inline");
+    }
+    else {
+        $("#rg_state_id").prop("disabled", true);
+        $("#rg_state_id").prop("required", false);
+        $("#rg_state_id").val(null);
+        $("#mandatory_rg_state").css("display", "none");
     }
 }
 
