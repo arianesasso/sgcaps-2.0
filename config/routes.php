@@ -77,11 +77,13 @@ Router::scope('/indicadores', ['controller' => 'Indicators'], function ($routes)
 Router::scope('/papel', ['controller' => 'Roles'], function ($routes) {
     $routes->connect('/cadastrar', ['action' => 'add']);
     $routes->connect('/listar', ['action' => 'index']);
+    $routes->connect('/editar/*', ['action' => 'edit']);
 });
 
 Router::scope('/acao', ['controller' => 'Actions'], function ($routes) {
     $routes->connect('/cadastrar', ['action' => 'add']);
     $routes->connect('/listar', ['action' => 'index']);
+    $routes->connect('/editar/*', ['action' => 'edit']);
 });
 
 Router::scope('/', function ($routes) {

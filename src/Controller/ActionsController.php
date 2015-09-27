@@ -24,6 +24,7 @@ class ActionsController extends AppController {
      * @return void
      */
     public function index() {
+        $this->layout = 'devoops_complete';
         $this->set('actions', $this->paginate($this->Actions));
         $this->set('_serialize', ['actions']);
     }
@@ -36,6 +37,7 @@ class ActionsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
+        $this->layout = 'devoops_complete';
         $action = $this->Actions->get($id, [
             'contain' => ['Roles']
         ]);
@@ -67,6 +69,7 @@ class ActionsController extends AppController {
     }
 
     /**
+     * Método para editar uma ação
      * Edit method
      *
      * @param string|null $id Action id.
@@ -74,24 +77,26 @@ class ActionsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
+        $this->layout = 'devoops_complete';
         $action = $this->Actions->get($id, [
             'contain' => ['Roles']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $action = $this->Actions->patchEntity($action, $this->request->data);
             if ($this->Actions->save($action)) {
-                $this->Flash->success('The action has been saved.');
+                $this->Flash->bootstrapSuccess('A ação foi salva.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('The action could not be saved. Please, try again.');
+                $this->Flash->bootstrapError('A ação não foi salva. Por favor, tente novamente.');
             }
         }
-        $roles = $this->Actions->Roles->find('list', ['limit' => 200]);
+        $roles = $this->Actions->Roles->find('list', ['limit']);
         $this->set(compact('action', 'roles'));
         $this->set('_serialize', ['action']);
     }
 
     /**
+     * Método para deletar uma ação
      * Delete method
      *
      * @param string|null $id Action id.
