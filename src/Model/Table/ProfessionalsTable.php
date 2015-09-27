@@ -67,12 +67,12 @@ class ProfessionalsTable extends Table {
     }
 
     /**
-     * Se o usuário logado for um 'gestor.geral' o método busca
-     * todos os profissionais que não são usuários ainda
+     * Finds the professionals that have no users yet
+     * Encontra os profissionais que ainda não possuem usuários
      * 
-     * Caso o gestor seja mais restrito o método busca os profissionais que 
-     * não são usuários e que estão vinculados à unidade na qual o usuário atual 
-     * está logado
+     * Um usuário pode ter permissão de criar um usuário para
+     * qualquer profissional ($local_only = false)
+     * ou somente para profissionais da unidade local ($local_only = true)
      * 
      * @param Query $query
      * @param array $options
@@ -89,7 +89,7 @@ class ProfessionalsTable extends Table {
                                                              'conditions' => ['person_id IS NOT' => null]])];
         $matching = 'People';
 
-        if (array_search('gestor.geral', $options['roles']) === false) {
+        if ($options['local_only']) {
             $condition[] = ['OrganizationsPeople.organization_id' => $options['organization_id'],
                            'OR' => ['OrganizationsPeople.ended IS' => null,
                            'OrganizationsPeople.ended >=' => date('Y-m-d H:i:s')]];
