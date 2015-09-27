@@ -68,6 +68,7 @@ class ActionsController extends AppController {
             'contain' => ['Roles']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->request->data['alias'] = $this->request->data['name'];
             $action = $this->Actions->patchEntity($action, $this->request->data);
             if ($this->Actions->save($action)) {
                 $this->Flash->bootstrapSuccess('A ação foi salva.');

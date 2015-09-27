@@ -73,6 +73,7 @@ class RolesController extends AppController {
             'contain' => ['Actions']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->request->data['alias'] = $this->request->data['name'];
             $role = $this->Roles->patchEntity($role, $this->request->data);
             if ($this->Roles->save($role)) {
                 $this->Flash->bootstrapSuccess('O papel foi salvo.');
