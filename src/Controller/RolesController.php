@@ -32,30 +32,38 @@ class RolesController extends AppController
     public function view($id = null)
     {
         $role = $this->Roles->get($id, [
-            'contain' => ['Permissions']
+            'contain' => ['Actions', 'Permissions']
         ]);
         $this->set('role', $role);
         $this->set('_serialize', ['role']);
     }
 
     /**
+     * Método para adicionar um novo papel
      * Add method
      *
      * @return void Redirects on successful add, renders view otherwise.
+     *              Redireciona em caso de sucesso, renderiza a view caso contrário
      */
-    public function add()
-    {
+    public function add() {
+        $this->layout = 'devoops_complete';
         $role = $this->Roles->newEntity();
         if ($this->request->is('post')) {
-            $role = $this->Roles->patchEntity($role, $this->request->data);
-            if ($this->Roles->save($role)) {
-                $this->Flash->success('The role has been saved.');
-                return $this->redirect(['action' => 'index']);
+            if (empty($this->request->data['actions']['_ids'])) {
+                $this->Flash->bootstrapError('Deve ser escolhida ao menos uma ação');
             } else {
-                $this->Flash->error('The role could not be saved. Please, try again.');
+                $this->request->data['alias'] = $this->request->data['name'];
+                $role = $this->Roles->patchEntity($role, $this->request->data);
+                if ($this->Roles->save($role)) {
+                    $this->Flash->bootstrapSuccess('O papel foi salvo.');
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->bootstrapError('O papel não foi salvo. Por favor, tente novamente.');
+                }
             }
         }
-        $this->set(compact('role'));
+        $actions = $this->Roles->Actions->find('list');
+        $this->set(compact('role', 'actions'));
         $this->set('_serialize', ['role']);
     }
 
@@ -69,7 +77,7 @@ class RolesController extends AppController
     public function edit($id = null)
     {
         $role = $this->Roles->get($id, [
-            'contain' => []
+            'contain' => ['Actions']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $role = $this->Roles->patchEntity($role, $this->request->data);
@@ -80,7 +88,8 @@ class RolesController extends AppController
                 $this->Flash->error('The role could not be saved. Please, try again.');
             }
         }
-        $this->set(compact('role'));
+        $actions = $this->Roles->Actions->find('list', ['limit' => 200]);
+        $this->set(compact('role', 'actions'));
         $this->set('_serialize', ['role']);
     }
 

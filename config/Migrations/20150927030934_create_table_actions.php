@@ -25,11 +25,9 @@ class CreateTableActions extends AbstractMigration {
                 ->addColumn('alias', 'string', ['length' => 255, 'null' => false])
                 ->addColumn('controller', 'string', ['length' => 255, 'null' => false])
                 ->addColumn('action', 'string', ['length' => 255, 'null' => false])
-                ->addColumn('role_id', 'integer', ['null' => false])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
-                ->addIndex('role_id')
-                ->addForeignKey('role_id', 'roles', 'id')
+                ->addIndex(['alias'], ['unique' => true])
                 ->save();
     }
 

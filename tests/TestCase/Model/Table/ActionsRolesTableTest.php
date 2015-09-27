@@ -1,13 +1,14 @@
 <?php
-namespace App\Test\TestCase\Controller;
+namespace App\Test\TestCase\Model\Table;
 
-use App\Controller\RolesController;
-use Cake\TestSuite\IntegrationTestCase;
+use App\Model\Table\ActionsRolesTable;
+use Cake\ORM\TableRegistry;
+use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\RolesController Test Case
+ * App\Model\Table\ActionsRolesTable Test Case
  */
-class RolesControllerTest extends IntegrationTestCase
+class ActionsRolesTableTest extends TestCase
 {
 
     /**
@@ -16,6 +17,7 @@ class RolesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
+        'app.actions_roles',
         'app.roles',
         'app.permissions',
         'app.users',
@@ -29,56 +31,59 @@ class RolesControllerTest extends IntegrationTestCase
         'app.professionals',
         'app.organizations_people',
         'app.admins',
-        'app.actions',
-        'app.actions_roles'
+        'app.actions'
     ];
 
     /**
-     * Test index method
+     * setUp method
      *
      * @return void
      */
-    public function testIndex()
+    public function setUp()
+    {
+        parent::setUp();
+        $config = TableRegistry::exists('ActionsRoles') ? [] : ['className' => 'App\Model\Table\ActionsRolesTable'];
+        $this->ActionsRoles = TableRegistry::get('ActionsRoles', $config);
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        unset($this->ActionsRoles);
+
+        parent::tearDown();
+    }
+
+    /**
+     * Test initialize method
+     *
+     * @return void
+     */
+    public function testInitialize()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
-     * Test view method
+     * Test validationDefault method
      *
      * @return void
      */
-    public function testView()
+    public function testValidationDefault()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
-     * Test add method
+     * Test buildRules method
      *
      * @return void
      */
-    public function testAdd()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test edit method
-     *
-     * @return void
-     */
-    public function testEdit()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test delete method
-     *
-     * @return void
-     */
-    public function testDelete()
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

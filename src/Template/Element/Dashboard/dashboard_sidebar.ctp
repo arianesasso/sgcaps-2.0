@@ -86,6 +86,33 @@
             </li>
         </ul>
     </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle">
+            <i class="fa fa-cogs"></i>
+            <span class="hidden-xs">Administração</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fa fa-archive"></i>
+                    <span class="hidden-xs">Papéis</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <?php echo $this->Html->link("Cadastrar", ["controller" => "roles",
+                            "action" => "add"])
+                        ?>
+                    </li>
+                    <li>
+                        <?php echo $this->Html->link("Visualizar", ["controller" => "roles",
+                            "action" => "add"])
+                        ?>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+
     <!--    <li class="dropdown">
             <a href="#" class="dropdown-toggle">
                 <i class="fa fa-picture-o"></i>

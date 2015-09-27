@@ -25,7 +25,7 @@ class CreateTableActionsRoles extends AbstractMigration
                 ->addColumn('role_id', 'integer', ['null' => false])
                 ->addColumn('action_id', 'integer', ['null' => false])
                 ->addColumn('created', 'datetime', ['null' => false])
-                ->addColumn('modifieds', 'datetime', ['null' => false])
+                ->addColumn('modified', 'datetime', ['null' => false])
                 ->addIndex('role_id')
                 ->addIndex('action_id')
                 ->addForeignKey('role_id', 'roles', 'id')

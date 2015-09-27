@@ -27,6 +27,31 @@ class UsersController extends AppController {
         $this->Auth->allow(['noPermission']);
         return parent::beforeFilter($event);
     }
+    
+    /**
+     * Esse método irá autorizar o usuário mediante as ações
+     * que ele pode realizar na unidade em que está logado
+     * 
+     * As ações são vinculadas aos papéis que ele possui na unidade
+     * corrente
+     * 
+     * @param type $user
+     * @return boolean
+     */
+    public function isAuthorized($user) {
+        parent::isAuthorized($user);
+        $roles = $this->request->session()->read('Auth.User.roles');
+        $controller = $this->request->controller;
+        $action = $this->request->action;
+        if($this->request->action == 'logout') {
+            return true;
+        }
+        if($this->UserPermissions->isAuthorized($roles, $controller, $action)) {  
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Login method (using Auth component)
@@ -156,6 +181,7 @@ class UsersController extends AppController {
 
     /**
      * Edit method
+     * Método para editar um usuário
      *
      * @param string|null $id User id.
      * @return void Redirects on successful edit, renders view otherwise.

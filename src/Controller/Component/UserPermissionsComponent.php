@@ -8,6 +8,7 @@ use Cake\ORM\TableRegistry;
 class UserPermissionsComponent extends Component {
 
     public $Permissions;
+    public $Actions;
     
     /**
      * Encontra os papéis válidos para um usuário em uma dada unidade
@@ -23,7 +24,7 @@ class UserPermissionsComponent extends Component {
         $permissions = $this->Permissions->find('validyroles', ['user_id' => $userId, 'organization_id' => $organizationId]);
         $userRoles = array();
         foreach ($permissions as $permission):
-            $userRoles[] = $permission['Roles']['alias'] . '.' . $permission['Roles']['domain'];
+            $userRoles[$permission['Roles']['id']] = $permission['Roles']['alias'] . '.' . $permission['Roles']['domain'];
         endforeach;
         return $userRoles;
     }
@@ -60,5 +61,28 @@ class UserPermissionsComponent extends Component {
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Verifica se um usuário está autorizado a realizar determinada
+     * ação no sistema
+     * 
+     * @param type $roles           | Os papéis que o usuário possui na unidade atual
+     * @param type $controller      | O controller para o qual se deseja verificar a autorização
+     * @param type $action          | A ação para a qual se deseja verificar a autorização
+     * @return boolean
+     */
+    public function isAuthorized($roles, $controller, $action) {
+        if(empty($this->Actions)) {
+            $this->Actions = TableRegistry::get('Actions');
+        }
+        $rolesIds = array_keys($roles);
+        $allowedActions = $this->Actions->find('allowedActions', 
+                                ['controller' => $controller, 'roles_ids' => $rolesIds]);
+        if(array_search($action, $allowedActions)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

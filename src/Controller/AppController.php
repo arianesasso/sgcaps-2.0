@@ -42,7 +42,7 @@ class AppController extends Controller {
         //Componente customizado para facilitar algumas verificações de permissão
         $this->loadComponent('UserPermissions');
         $this->loadComponent('Auth', [
-            'authorize' => 'Controller',
+            'authorize' => ['Controller'],
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username' => 'username', 'password' => 'password'],

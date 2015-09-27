@@ -1,19 +1,26 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('List Roles'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="roles form large-10 medium-9 columns">
-    <?= $this->Form->create($role); ?>
-    <fieldset>
-        <legend><?= __('Add Role') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<?php
+    $domains = ['caps' => 'Caps', 'sisam' => 'Sisam', 'ubs' => 'UBS', 'residencia_terapeutica' => 'Residência Terapêutica'];
+?>
+<legend><?= __('Adicionar um Novo Papel') ?></legend>
+<?php echo $this->Form->create($role); ?>
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">
+        <fieldset>
+            <br/>
+            <div class="form-group">
+                <label class="control-label"><?= __('Nome do Papel') ?> *</label>
+                <?php echo $this->Form->input('name', ['class' => 'form-control', 'label' => false]); ?>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><?= __('Domínio') ?> *</label>
+                <?php echo $this->Form->input('domain', ['options' => $domains, 'class' => 'form-control', 'label' => false]); ?>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><?= __('Ações permitidas') ?> *</label>
+                <?php echo $this->Form->input('actions._ids', ['options' => $actions, 'class' => 'form-control', 'label' => false]); ?>
+            </div>
+        </fieldset>
+        <?= $this->Form->submit(__('Salvar'), ['class' => 'btn btn-success']) ?>
+        <?= $this->Form->end() ?>
+    </div>
 </div>

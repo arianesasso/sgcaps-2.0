@@ -137,6 +137,7 @@ class PermissionsTable extends Table {
      */
     public function findValidyRoles(Query $query, array $options) {
         $fields = [
+            'Roles.id',
             'Roles.alias',
             'Roles.domain'
         ];

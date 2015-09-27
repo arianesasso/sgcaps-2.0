@@ -28,6 +28,11 @@ class RolesTable extends Table
         $this->hasMany('Permissions', [
             'foreignKey' => 'role_id'
         ]);
+        $this->belongsToMany('Actions', [
+            'foreignKey' => 'role_id',
+            'targetForeignKey' => 'action_id',
+            'joinTable' => 'actions_roles'
+        ]);
     }
 
     /**
@@ -44,9 +49,36 @@ class RolesTable extends Table
             
         $validator
             ->requirePresence('name', 'create')
+            ->add('name', ['maxLength' => [
+                            'rule' => ['maxLength', 250],
+                            'message' => 'O nome ultrapassou o tamanho máximo permitido'
+                          ],
+                          'onlyLettersAndSpaces' => [
+                            'rule' => array('custom', '/^[\pL\s]+$/u'),
+                            'message' => 'O nome deve conter somente letras e espaços'
+                          ]
+             ])
             ->notEmpty('name');
+        
+        $validator
+            ->requirePresence('alias', 'create')
+            ->notEmpty('alias');
+        
+        $validator
+            ->requirePresence('domain', 'create')
+            ->notEmpty('domain');
 
         return $validator;
+    }
+    
+    /**
+     * @TODO   Exibir esse tipo de validação com dois campos corretamente na tela
+     * @param  RulesChecker $rules
+     * @return RulesChecker
+     */
+    public function buildRules(RulesChecker $rules) {
+        $rules->add($rules->isUnique(['alias' , 'domain'], 'Esse papel já existe'));
+        return $rules;
     }
     
      /**
@@ -65,5 +97,5 @@ class RolesTable extends Table
             $condition = ['domain' => 'caps'];         
         }
         return $this->find('list')->where($condition);
-    }
+    }  
 }

@@ -25,7 +25,7 @@ class CreateTests extends AbstractMigration
         //organizations
         $this->execute("INSERT INTO `organizations` VALUES (1,NULL,'Caps I','DRS XIII','Atenção Especializada','1','2015-05-14 00:00:00','2015-05-14 00:00:00'),(2,NULL,'Caps II','DRS XIII','Atenção Especializada','1','2015-05-14 00:00:00','2015-05-14 00:00:00')");
         //papéis
-        $this->execute("INSERT INTO `roles` VALUES (1,'Gestor(a) Caps','gestor','caps','2015-06-14 00:00:00','2015-06-14 00:00:00'),(2,'Técnico(a) Caps','tecnico','caps','2015-06-14 00:00:00','2015-06-14 00:00:00'),(3,'Secretário(a) Caps','secretario','caps','2015-06-14 00:00:00','2015-06-14 00:00:00'),(4,'Gestor(a) RT','gestor','residencia_terapeutica','2015-06-14 00:00:00','2015-06-14 00:00:00'),(5,'Gestor Sisam','gestor','sisam','2015-06-14 00:00:00','2015-06-14 00:00:00'),(6,'Secretário(a) da UBS','secretario','ubs','2015-06-14 00:00:00','2015-06-14 00:00:00')");
+        $this->execute("INSERT INTO `roles` VALUES (1,'Gestor Caps','gestor','caps','2015-06-14 00:00:00','2015-06-14 00:00:00'),(2,'Técnico Caps','tecnico','caps','2015-06-14 00:00:00','2015-06-14 00:00:00'),(3,'Secretário Caps','secretario','caps','2015-06-14 00:00:00','2015-06-14 00:00:00'),(4,'Gestor RT','gestor','residencia_terapeutica','2015-06-14 00:00:00','2015-06-14 00:00:00'),(5,'Gestor Sisam','gestor','sisam','2015-06-14 00:00:00','2015-06-14 00:00:00'),(6,'Secretário UBS','secretario','ubs','2015-06-14 00:00:00','2015-06-14 00:00:00')");
         //pessoas
         $this->execute("INSERT INTO `people` VALUES (1,'ADMINISTRADOR','F',NULL,NULL,NULL,NULL,NULL,'2015-06-13 00:00:00','2015-06-13 21:27:17')");
         //estado
@@ -38,6 +38,10 @@ class CreateTests extends AbstractMigration
         $this->execute("INSERT INTO `permissions` VALUES (1,1,1,1,'2015-06-13 00:00:00','2020-06-14 00:00:00','2015-06-14 00:00:00','2015-06-14 16:56:43',1)");
         //pessoas vinculadas à uma organizaćão
         $this->execute("INSERT INTO `organizations_people` VALUES (1,1,1,'2015-06-14 00:00:00',NULL)");  
+        //ações
+        $this->execute("INSERT INTO `actions` VALUES (1,'Cadastrar Usário', 'cadastrar_usuario', 'Users', 'add', now(), now()), (2,'Listar Usários', 'listar_usuario', 'Users', 'index', now(), now()), (3,'Visualizar Usário', 'visualizar_usuario', 'Users', 'view', now(), now()), (4,'Editar Usário', 'editar_usuario', 'Users', 'edit', now(), now()), (5,'Mudar Status do Usário', 'mudar_status_usuario', 'Users', 'changeActivation', now(), now())");
+       //ações que um papel pode executar
+        $this->execute("INSERT INTO `actions_roles` VALUES (1,1,1,now(),now()), (2,1,2,now(),now()), (3,1,3,now(),now())    , (4,1,4,now(),now()), (5,1,5,now(),now())");
     }
 
     /**
