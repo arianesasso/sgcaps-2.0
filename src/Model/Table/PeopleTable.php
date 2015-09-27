@@ -52,6 +52,24 @@ class PeopleTable extends Table {
             'through' => 'OrganizationsPeople',
         ]);
     }
+    
+    /**
+     * Verifica se todas as infos relativas ao rgh estão preenchidas
+     * simultaneamente
+     * 
+     * @param type $field  RG ou RG - UF
+     * @param type $record Todas as informações relativas ao usuário
+     * @return boolean
+     */
+    public function requireRgInfo($field, $record) {
+        if(!empty($field) && empty($record['data']['rg'])) {
+            return false;
+        }
+        if(!empty($field) && empty($record['data']['rg_state_id'])) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Default validation rules.
@@ -74,8 +92,17 @@ class PeopleTable extends Table {
                 ->notEmpty('gender', 'Campo obrigatório');
 
         $validator
-                ->add('rg', 'valid', ['rule' => 'alphaNumeric', 'message' => 'Digite somente números e letras'])
+                ->add('rg', 
+                        ['valid' => ['rule' => 'alphaNumeric', 'message' => 'Digite somente números e letras', 'last' => true],
+                         'require_verification' => ['rule' => [$this,'requireRgInfo'], 'message' => 'Preencha o estado do RG']
+                        ])
                 ->allowEmpty('rg');
+        
+        $validator
+                ->add('rg_state_id', [                  
+                         'require_verification' => ['rule' => [$this,'requireRgInfo'], 'message' => 'Preencha o RG']
+                     ])
+                ->allowEmpty('rg_state_id');
 
         $validator
                 ->add('birthdate', ['isDate' => ['rule' => ['date', 'dmy'], 'message' => 'Data inválida', 'last' => true], 'validateBirhdate' => ['rule' => [$this,'validateBirhdate'], 'message' => 'Data inválida']])
