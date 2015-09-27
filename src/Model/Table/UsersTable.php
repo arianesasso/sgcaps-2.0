@@ -78,7 +78,7 @@ class UsersTable extends Table {
                 ->notEmpty('username', 'Campo obrigatório', 'create');
 
         $validator
-                ->add('password', ['require_verification' => ['rule' => [$this,'requireVerification'], 'message' => 'Preenhca o campo abaixo']])
+                ->add('password', ['require_verification' => ['rule' => [$this,'requireVerification'], 'message' => 'Preencha o campo abaixo']])
                 ->requirePresence('password', 'create')
                 ->notEmpty('password', 'Campo obrigatório', 'create');
               
