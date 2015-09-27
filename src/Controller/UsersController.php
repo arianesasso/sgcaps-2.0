@@ -213,7 +213,8 @@ class UsersController extends AppController {
             }
         }
         $disableUsernameEdition = true;
-        if ($this->UserPermissions->hasRole($this->request->session()->read('Auth.User.roles'), 'gestor')) {
+        $actions = $this->request->session()->read('Auth.User.actions');
+        if (in_array('editar_usuario', $actions)) {
             $disableUsernameEdition = false;
         };
         $this->set('disable_username_edition', $disableUsernameEdition);
