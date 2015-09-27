@@ -19,6 +19,7 @@ class ActionsController extends AppController {
     }
     
     /**
+     * Método para listar todas as ações disponíveis
      * Index method
      *
      * @return void
@@ -30,22 +31,7 @@ class ActionsController extends AppController {
     }
 
     /**
-     * View method
-     *
-     * @param string|null $id Action id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function view($id = null) {
-        $this->layout = 'devoops_complete';
-        $action = $this->Actions->get($id, [
-            'contain' => ['Roles']
-        ]);
-        $this->set('action', $action);
-        $this->set('_serialize', ['action']);
-    }
-
-    /**
+     * Método para criar uma nova ação
      * Add method
      *
      * @return void Redirects on successful add, renders view otherwise.
@@ -107,9 +93,9 @@ class ActionsController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $action = $this->Actions->get($id);
         if ($this->Actions->delete($action)) {
-            $this->Flash->success('The action has been deleted.');
+            $this->Flash->bootstrapSuccess('A ação foi deletada.');
         } else {
-            $this->Flash->error('The action could not be deleted. Please, try again.');
+            $this->Flash->bootstrapError('A ação não foi deletada. Por favor, tente novamente');
         }
         return $this->redirect(['action' => 'index']);
     }

@@ -19,6 +19,7 @@ class RolesController extends AppController {
     }
     
     /**
+     * Método para listar todos os papéis disponíveis
      * Index method
      *
      * @return void
@@ -59,6 +60,7 @@ class RolesController extends AppController {
     }
 
     /**
+     * Método para editar um papel existente
      * Edit method
      *
      * @param string|null $id Role id.
@@ -85,6 +87,7 @@ class RolesController extends AppController {
     }
 
     /**
+     * Método para deletar um papel existente
      * Delete method
      *
      * @param string|null $id Role id.
