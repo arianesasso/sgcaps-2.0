@@ -65,24 +65,40 @@ class UserPermissionsComponent extends Component {
     
     /**
      * Verifica se um usuário está autorizado a realizar determinada
-     * ação no sistema
+     * ação em um controller
      * 
      * @param type $roles           | Os papéis que o usuário possui na unidade atual
      * @param type $controller      | O controller para o qual se deseja verificar a autorização
      * @param type $action          | A ação para a qual se deseja verificar a autorização
      * @return boolean
      */
-    public function isAuthorized($roles, $controller, $action) {
-        if(empty($this->Actions)) {
-            $this->Actions = TableRegistry::get('Actions');
-        }
-        $rolesIds = array_keys($roles);
-        $allowedActions = $this->Actions->find('allowedActions', 
-                                ['controller' => $controller, 'roles_ids' => $rolesIds]);
-        if(array_search($action, $allowedActions)) {
+    public function isAuthorized($actions, $controller, $action) {
+        $authorization = "{$controller}.{$action}";
+        $actionsKeys = array_keys($actions);
+        if(array_search($authorization, $actionsKeys) !== false) {
             return true;
         } else {
             return false;
         }
+    }
+    
+    /**
+     * Verifica quais acões um usuário pode realizar no sistema
+     * dado os papéis que possui na unidade em que está logado
+     * 
+     * @param  type $roles | Os papéis que o usuário possui na unidade atual
+     * @return array       | Array com as acões que o usuário pode realizar no sistema
+     */
+    public function allowedActions($roles) {
+        $actions = array();
+        if(empty($this->Actions)) {
+            $this->Actions = TableRegistry::get('Actions');
+        }
+        $rolesIds = array_keys($roles);
+        $allowedActions = $this->Actions->find('allowedActions', ['roles_ids' => $rolesIds]);
+        foreach($allowedActions as $allowedAction) {
+           $actions[$allowedAction->controller . '.' . $allowedAction->action] = $allowedAction->alias;
+        }
+        return $actions;
     }
 }

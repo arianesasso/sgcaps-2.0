@@ -72,26 +72,24 @@ class ActionsTable extends Table
         return $validator;
     }
     
-    /**
+     /**
      * Método para encontrar as ações que um determinado usuário pode realizar
-     * em um controller dadas suas permissões correntes
+     * dadas suas permissões correntes
      * 
      * @param Query $query
-     * @param array $options | controller => controller para o qual se deseja verificar
-     *                       |               as ações para as quais o usuário tem autorização
-     *                       | roles_ids => ids dos papéis/roles que o usuário possui na unidade atual
+     * @param array $options | roles_ids => ids dos papéis/roles que o usuário possui na unidade atual
      * @return type
      */
     public function findAllowedActions(Query $query, array $options) {
-        $allowedActions = $this->find('list', ['keyField' => 'id',
-                                                'valueField' => 'action',
-                                                'contidions' => [
-                                                    'controller' => $options['controller']]])
+        $fields = ['alias', 'controller', 'action'];
+        $allowedActions = $this->find('all', ['fields' => $fields])
+                               ->distinct()
                                ->matching('Roles', function ($q) use ($options) {
                                         return $q->where(['Roles.id IN' => $options['roles_ids']]);
         });
-        return $allowedActions->toArray();
+        return $allowedActions;
     }
+    
     
     /** 
      * @TODO   Fazer com que essa validação seja exibida

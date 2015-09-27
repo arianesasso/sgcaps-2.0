@@ -9,6 +9,14 @@ use App\Controller\AppController;
  *
  */
 class IndicatorsController extends AppController {
+    
+    public function isAuthorized($user) {
+        parent::isAuthorized($user);
+        $actions = $this->request->session()->read('Auth.User.actions');
+        $controller = $this->request->controller;
+        $action = $this->request->action;
+        return $this->UserPermissions->isAuthorized($actions, $controller, $action);
+    }
 
     /**
      * Index method

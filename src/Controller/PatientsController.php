@@ -8,16 +8,22 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\PatientsTable $Patients
  */
-class PatientsController extends AppController
-{
+class PatientsController extends AppController {
+    
+    public function isAuthorized($user) {
+        parent::isAuthorized($user);
+        $actions = $this->request->session()->read('Auth.User.actions');
+        $controller = $this->request->controller;
+        $action = $this->request->action;
+        return $this->UserPermissions->isAuthorized($actions, $controller, $action);
+    }
 
     /**
      * Método para listar todos os pacientes
      *
      * @return void
      */
-    public function index()
-    {
+    public function index() {
         $this->layout = 'devoops_complete';
         $this->set('patients', $this->Patients->find('all', ['contain' => ['People']]));
         $this->set('_serialize', ['patients']);
@@ -73,8 +79,7 @@ class PatientsController extends AppController
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $patient = $this->Patients->get($id, [
             'contain' => []
         ]);

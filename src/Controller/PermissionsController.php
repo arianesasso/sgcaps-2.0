@@ -21,8 +21,10 @@ class PermissionsController extends AppController {
      * @return boolean
      */
     public function isAuthorized($user) {
-        $action = $this->request->params['action'];
-        if (in_array($action, ['organizations'])) {
+        $actions = $this->request->session()->read('Auth.User.actions');
+        $controller = $this->request->controller;
+        $action = $this->request->action;
+        if ($action == 'organizations') {
             $organizations = $this->UserPermissions->validyOrganizations($user['id']);
             //Se o usuário não possuir permissões válidas em nenhuma organização
             if (empty($organizations)) {
@@ -31,7 +33,8 @@ class PermissionsController extends AppController {
                 return true;
             }
         }
-        return parent::isAuthorized($user);
+        parent::isAuthorized($user);
+        return $this->UserPermissions->isAuthorized($actions, $controller, $action);
     }
 
     /**
@@ -42,6 +45,7 @@ class PermissionsController extends AppController {
      */
     public function organizations() {
         $this->layout = 'devoops_minimal';
+        $this->loadModel('Actions');
         $userId = $this->request->session()->read('Auth.User.id');
         //Caso seja uma requisicão do tipo POST, salvar dados da organizacão e os papéis do usuário
         if ($this->request->is('post')) {
@@ -49,6 +53,9 @@ class PermissionsController extends AppController {
             $userRoles = $this->UserPermissions->validyRoles($userId, $organization['id']);
             //Array com as Permissões do Usuário  
             $this->request->session()->write('Auth.User.roles', $userRoles);
+            //Ações que o usuário pode realizar no sistema
+            $allowedActions = $this->UserPermissions->allowedActions($userRoles);
+            $this->request->session()->write('Auth.User.actions', $allowedActions);
             //Variável com o nome e o id da unidade atual do usuário
             $this->request->session()->write('Auth.User.organization.id', $organization['id']);
             $this->request->session()->write('Auth.User.organization.name', $organization['name']);

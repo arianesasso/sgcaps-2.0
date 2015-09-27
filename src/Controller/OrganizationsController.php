@@ -8,8 +8,18 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\OrganizationsTable $Organizations
  */
-class OrganizationsController extends AppController
-{
+class OrganizationsController extends AppController {
+    
+    public function isAuthorized($user) {
+        parent::isAuthorized($user);
+        $actions = $this->request->session()->read('Auth.User.actions');
+        $controller = $this->request->controller;
+        $action = $this->request->action;
+        if($this->request->action == 'showNoUserList') {
+            return true;
+        }
+        return $this->UserPermissions->isAuthorized($actions, $controller, $action);
+    }
 
     /**
      * Index method
@@ -100,23 +110,5 @@ class OrganizationsController extends AppController
         $users = $this->Organizations->Users->find('list', ['limit' => 200]);
         $this->set(compact('organization', 'users'));
         $this->set('_serialize', ['organization']);
-    }
-    
-    /**
-     * Delete method
-     *
-     * @param string|null $id Organization id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $organization = $this->Organizations->get($id);
-        if ($this->Organizations->delete($organization)) {
-            $this->Flash->success('The organization has been deleted.');
-        } else {
-            $this->Flash->error('The organization could not be deleted. Please, try again.');
-        }
-        return $this->redirect(['action' => 'index']);
     }
 }

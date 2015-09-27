@@ -93,7 +93,18 @@ class AppController extends Controller {
         //forem modificadas é preciso atualizar o Auth.User.roles
         if ($sessionRoles != $userRoles) {
             $this->request->session()->write('Auth.User.roles', $userRoles);
-        }       
+        }
+        
+        //Ações que o usuário pode realizar no sistema
+        $allowedActions = $this->UserPermissions->allowedActions($userRoles);
+    
+        //Array com as Acões permitidas ao Usuário
+        $sessionActions = $this->request->session()->read('Auth.User.actions');
+        //Se em algum momento as acões válidas para uma dada unidade
+        //forem modificadas é preciso atualizar o Auth.User.actions
+        if ($sessionActions != $allowedActions) {
+            $this->request->session()->write('Auth.User.actions', $allowedActions);
+        }     
         return true;
     }
 }

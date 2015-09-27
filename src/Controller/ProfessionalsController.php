@@ -12,6 +12,17 @@ use App\Controller\AppController;
  */
 class ProfessionalsController extends AppController {
 
+    public function isAuthorized($user) {
+        parent::isAuthorized($user);
+        $actions = $this->request->session()->read('Auth.User.actions');
+        $controller = $this->request->controller;
+        $action = $this->request->action;
+        if($this->request->action == 'showNoUserList') {
+            return true;
+        }
+        return $this->UserPermissions->isAuthorized($actions, $controller, $action);
+    }
+    
     /**
      * Métododo que lista todos os profissionais cadastrados
      * Method that lists all the registered professionals

@@ -9,6 +9,11 @@ use App\Controller\AppController;
  *
  */
 class DashboardController extends AppController {
+    
+    public function isAuthorized($user) {
+        parent::isAuthorized($user);
+        return true;
+    }
 
     /**
      * Creates the main structure of the page

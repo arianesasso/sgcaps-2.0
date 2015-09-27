@@ -40,17 +40,13 @@ class UsersController extends AppController {
      */
     public function isAuthorized($user) {
         parent::isAuthorized($user);
-        $roles = $this->request->session()->read('Auth.User.roles');
+        $actions = $this->request->session()->read('Auth.User.actions');
         $controller = $this->request->controller;
         $action = $this->request->action;
         if($this->request->action == 'logout') {
             return true;
         }
-        if($this->UserPermissions->isAuthorized($roles, $controller, $action)) {  
-            return true;
-        } else {
-            return false;
-        }
+        return $this->UserPermissions->isAuthorized($actions, $controller, $action);
     }
 
     /**

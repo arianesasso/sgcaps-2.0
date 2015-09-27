@@ -8,16 +8,22 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\ActionsTable $Actions
  */
-class ActionsController extends AppController
-{
+class ActionsController extends AppController {
 
+    public function isAuthorized($user) {
+        parent::isAuthorized($user);
+        $actions = $this->request->session()->read('Auth.User.actions');
+        $controller = $this->request->controller;
+        $action = $this->request->action;
+        return $this->UserPermissions->isAuthorized($actions, $controller, $action);
+    }
+    
     /**
      * Index method
      *
      * @return void
      */
-    public function index()
-    {
+    public function index() {
         $this->set('actions', $this->paginate($this->Actions));
         $this->set('_serialize', ['actions']);
     }
@@ -29,8 +35,7 @@ class ActionsController extends AppController
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $action = $this->Actions->get($id, [
             'contain' => ['Roles']
         ]);
@@ -68,8 +73,7 @@ class ActionsController extends AppController
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $action = $this->Actions->get($id, [
             'contain' => ['Roles']
         ]);
@@ -94,8 +98,7 @@ class ActionsController extends AppController
      * @return void Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $action = $this->Actions->get($id);
         if ($this->Actions->delete($action)) {
