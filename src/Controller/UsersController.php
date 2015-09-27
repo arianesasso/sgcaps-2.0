@@ -144,10 +144,10 @@ class UsersController extends AppController {
             $organizationId = empty($this->request->data['organization_id']) ? "" : $this->request->data['organization_id'];
             $userType = empty($this->request->data['person_id']) ? 'organization' : 'person'; 
             if ($this->Users->save($user)) {
-                $this->Flash->bootstrapSuccess('Usuário criado com sucesso');
+                $this->Flash->bootstrapSuccess('Usuário criado com sucesso.');
                 $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $user->id, $userType, $organizationId]);
             } else {
-                $this->Flash->bootstrapError('Não foi possível criar o usuário');  
+                $this->Flash->bootstrapError('Não foi possível criar o usuário.');  
             }
         }
         $this->set(compact('user'));
@@ -203,7 +203,7 @@ class UsersController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $permission = $this->Users->patchEntity($permission, ['active' => $change]);
             if (!$this->Users->save($permission)) {
-                $this->Flash->bootstrapError('O status do usuário não foi modificado, por favor, tente novamente,');
+                $this->Flash->bootstrapError('O status do usuário não foi modificado, por favor, tente novamente.');
                 $this->redirect(['controller' => 'usuario', 'action' => 'listar']);
             }
             $this->Flash->bootstrapSuccess('Status do usuário modificado com sucesso.');
