@@ -1,43 +1,31 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('New Role'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="roles index large-10 medium-9 columns">
-    <table cellpadding="0" cellspacing="0">
-    <thead>
-        <tr>
-            <th><?= $this->Paginator->sort('id') ?></th>
-            <th><?= $this->Paginator->sort('name') ?></th>
-            <th><?= $this->Paginator->sort('created') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($roles as $role): ?>
-        <tr>
-            <td><?= $this->Number->format($role->id) ?></td>
-            <td><?= h($role->name) ?></td>
-            <td><?= h($role->created) ?></td>
-            <td class="actions">
-                <?= $this->Html->link(__('View'), ['action' => 'view', $role->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $role->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $role->id], ['confirm' => __('Are you sure you want to delete # {0}?', $role->id)]) ?>
-            </td>
-        </tr>
-
-    <?php endforeach; ?>
-    </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+<legend><?= __('Visualizar Papéis') ?></legend>
+<br/>
+<div class="row">
+    <div class="col-xs-12">
+        <table id="data-table" class="table table-striped" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th><?= __('Nome') ?></th>
+                    <th><?= __('Alias') ?></th>
+                    <th><?= __('Domínio') ?></th>
+                    <th><?= __('Data de Cadastro') ?></th>
+                    <th class="actions"><?= __('Ações') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($roles as $role): ?>
+                    <tr>
+                        <td><?= h($role->name); ?></td>
+                        <td><?= h($role->alias) ?></td>
+                        <td><?= h($role->domain) ?></td>
+                        <td><?= h($role->created->format('d/m/Y')) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Editar'), ['controller' => 'papel', 'action' => 'editar', $role->id], ['class' => 'btn btn-default']) ?>
+                            <?= $this->Form->postLink(__('Apagar'), ['action' => 'delete', $role->id], ['class' => 'btn btn-default', 'confirm' => __('Tem certeza que deseja apagar # {0}?', $role->alias)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </div>

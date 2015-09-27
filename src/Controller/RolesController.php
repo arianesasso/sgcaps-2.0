@@ -8,8 +8,7 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\RolesTable $Roles
  */
-class RolesController extends AppController
-{
+class RolesController extends AppController {
 
     public function isAuthorized($user) {
         parent::isAuthorized($user);
@@ -24,26 +23,10 @@ class RolesController extends AppController
      *
      * @return void
      */
-    public function index()
-    {
+    public function index() {
+        $this->layout = 'devoops_complete';
         $this->set('roles', $this->paginate($this->Roles));
         $this->set('_serialize', ['roles']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Role id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $role = $this->Roles->get($id, [
-            'contain' => ['Actions', 'Permissions']
-        ]);
-        $this->set('role', $role);
-        $this->set('_serialize', ['role']);
     }
 
     /**
@@ -82,21 +65,21 @@ class RolesController extends AppController
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
+        $this->layout = 'devoops_complete';
         $role = $this->Roles->get($id, [
             'contain' => ['Actions']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $role = $this->Roles->patchEntity($role, $this->request->data);
             if ($this->Roles->save($role)) {
-                $this->Flash->success('The role has been saved.');
+                $this->Flash->bootstrapSuccess('O papel foi salvo.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('The role could not be saved. Please, try again.');
+                $this->Flash->bootstrapError('O papel não foi salvo. Por favor, tente novamente');
             }
         }
-        $actions = $this->Roles->Actions->find('list', ['limit' => 200]);
+        $actions = $this->Roles->Actions->find('list', ['limit']);
         $this->set(compact('role', 'actions'));
         $this->set('_serialize', ['role']);
     }
@@ -108,14 +91,13 @@ class RolesController extends AppController
      * @return void Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
         if ($this->Roles->delete($role)) {
-            $this->Flash->success('The role has been deleted.');
+            $this->Flash->bootstrapSuccess('O papel foi deletado.');
         } else {
-            $this->Flash->error('The role could not be deleted. Please, try again.');
+            $this->Flash->bootstrapError('O papel não foi deletado. Por favor, tente novamente.');
         }
         return $this->redirect(['action' => 'index']);
     }
