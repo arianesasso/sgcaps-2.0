@@ -54,16 +54,16 @@ if(!empty($user['person_id'])) {
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="<?php echo $this->Url->build([
-                                                    "controller" => "profissional",
-                                                    "action" => "visualizar", $user['person_id'], 'person']);
-                                             ?>">
+                                    <a href="<?= $userDataUrl ?>">
                                         <i class="fa fa-user"></i>
                                         <span><?= __('Meus Dados') ?></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= $userDataUrl ?>">
+                                    <a href="<?php echo $this->Url->build([
+                                                    "controller" => "usuario",
+                                                    "action" => "editar", $user['id']]);
+                                             ?>">
                                         <i class="fa fa-key"></i>
                                         <span><?= __('Mudar senha') ?></span>
                                     </a>
