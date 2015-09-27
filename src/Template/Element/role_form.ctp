@@ -1,5 +1,5 @@
 <?php
-    $domains = ['caps' => 'Caps', 'sisam' => 'Sisam', 'ubs' => 'UBS', 'residencia_terapeutica' => 'Residência Terapêutica'];
+    $domains = ['sistema' => 'Sistema', 'caps' => 'Caps', 'sisam' => 'Sisam', 'ubs' => 'UBS', 'residencia_terapeutica' => 'Residência Terapêutica'];
 ?>
 <?php echo $this->Form->create($role); ?>
 <div class="row">
