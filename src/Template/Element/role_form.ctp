@@ -12,7 +12,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label"><?= __('Domínio') ?> *</label>
-                <?php echo $this->Form->input('domain', ['options' => $domains, 'class' => 'form-control', 'label' => false]); ?>
+                <?php echo $this->Form->input('domain', ['options' => $domains, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
             </div>
             <div class="form-group">
                 <label class="control-label"><?= __('Ações permitidas') ?> *</label>
