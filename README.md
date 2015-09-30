@@ -94,6 +94,5 @@ senha: 1234
 ```
 
 * Instalação em fase de testes:
-```
+
 [SIS CAPS no Heroku](http://sgcaps.herokuapp.com/)
-```
