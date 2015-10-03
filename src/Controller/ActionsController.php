@@ -5,6 +5,7 @@ use App\Controller\AppController;
 
 /**
  * Actions Controller
+ * Controller responsável por gerenciar as ações
  *
  * @property \App\Model\Table\ActionsTable $Actions
  */
@@ -35,6 +36,7 @@ class ActionsController extends AppController {
      * Add method
      *
      * @return void Redirects on successful add, renders view otherwise.
+     *              Redireciona em caso de sucesso, renderiza view caso contrário
      */
     public function add() {
         $this->layout = 'devoops_complete';
@@ -60,6 +62,7 @@ class ActionsController extends AppController {
      *
      * @param string|null $id Action id.
      * @return void Redirects on successful edit, renders view otherwise.
+     *              Redireciona em caso de sucesso, renderiza view caso contrário
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
@@ -88,6 +91,7 @@ class ActionsController extends AppController {
      *
      * @param string|null $id Action id.
      * @return void Redirects to index.
+     *              Redireciona para o index
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function delete($id = null) {
