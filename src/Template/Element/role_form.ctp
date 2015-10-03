@@ -4,6 +4,7 @@
 <?php echo $this->Form->create($role); ?>
 <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4">
+        <h6>(*) Campos Obrigatórios</h6>
         <fieldset>
             <br/>
             <div class="form-group">
