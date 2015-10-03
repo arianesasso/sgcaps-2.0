@@ -30,7 +30,7 @@ class ProfessionalsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $this->set('professionals', $this->Professionals->find('all', ['contain' => ['People', 'States']]));
         $this->set('_serialize', ['professionals']);
     }
@@ -45,7 +45,7 @@ class ProfessionalsController extends AppController {
         if (!$this->request->is('ajax')) {
             $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
-        $this->layout = 'ajax';
+        $this->viewBuilder()->layout('ajax');
         $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
         if(in_array('cadastrar_usuario_local', $actions)) {
@@ -67,7 +67,7 @@ class ProfessionalsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null, $type = null) {
-        $this->layout = "devoops_complete";
+        $this->viewBuilder()->layout('devoops_complete');
         
         if(empty($type)) {
             $professional = $this->Professionals->get($id, [
@@ -91,7 +91,7 @@ class ProfessionalsController extends AppController {
      *              Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $this->layout = "devoops_complete";
+        $this->viewBuilder()->layout('devoops_complete');
         $professional = $this->Professionals->newEntity();
         // Se for um POST irá salvar o registro
         if ($this->request->is('post')) {

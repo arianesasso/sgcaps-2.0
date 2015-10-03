@@ -60,7 +60,7 @@ class UsersController extends AppController {
         //O atributo redirectUrl precisa ser null, assim o usuário semprre
         //será redirecionado do login para a página de escolha de unidades
         $this->Auth->redirectUrl(null);
-        $this->layout = 'devoops_minimal';
+        $this->viewBuilder()->layout('devoops_minimal');
 
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -108,7 +108,7 @@ class UsersController extends AppController {
      *              Exibe uma página estática
      */
     public function noPermission() {
-        $this->layout = 'devoops_minimal';
+        $this->viewBuilder()->layout('devoops_minimal');
     }
 
     /**
@@ -118,7 +118,7 @@ class UsersController extends AppController {
      * @return void
      */
     public function index() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
         if(in_array('listar_usuarios_locais', $actions)) {
@@ -140,7 +140,7 @@ class UsersController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id) {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $user = $this->Users->get($id, ['contain' => ['People', 'Organizations']]);
         $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
@@ -166,7 +166,7 @@ class UsersController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             if (empty($this->request->data['person_id']) && empty($this->request->data['organization_id'])) {
@@ -197,7 +197,7 @@ class UsersController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $user = $this->Users->get($id, ['fields' => 'username']);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $userComplete = $this->Users->get($id);

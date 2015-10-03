@@ -24,7 +24,7 @@ class IndicatorsController extends AppController {
      * @return void
      */
     public function demographic() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
     }
 
 }

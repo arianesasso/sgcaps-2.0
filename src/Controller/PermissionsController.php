@@ -44,7 +44,7 @@ class PermissionsController extends AppController {
      * @return void Redireciona o usuário para o dashboard após escolha da organização
      */
     public function organizations() {
-        $this->layout = 'devoops_minimal';
+        $this->viewBuilder()->layout('devoops_minimal');
         $this->loadModel('Actions');
         $userId = $this->request->session()->read('Auth.User.id');
         //Caso seja uma requisicão do tipo POST, salvar dados da organizacão e os papéis do usuário
@@ -77,7 +77,7 @@ class PermissionsController extends AppController {
      *              garantir a permissão
      */
     public function add($userId, $userType, $organizationId = null) {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $permission = $this->Permissions->newEntity();
         if ($this->request->is('post')) {
             //Se a permissão em questão for válida atualmente

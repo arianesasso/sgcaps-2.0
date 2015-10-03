@@ -22,7 +22,7 @@ class DashboardController extends AppController {
      * @return void
      */
     public function index() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
     }
 
 }

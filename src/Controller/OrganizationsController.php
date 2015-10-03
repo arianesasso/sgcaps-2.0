@@ -44,7 +44,7 @@ class OrganizationsController extends AppController {
         if (!$this->request->is('ajax')) {
             $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         } 
-        $this->layout = 'ajax';
+        $this->viewBuilder()->layout('ajax');
         $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
         if(in_array('cadastrar_usuario_local', $actions)) {

@@ -25,7 +25,7 @@ class RolesController extends AppController {
      * @return void
      */
     public function index() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $this->set('roles', $this->Roles->find('all'));
         $this->set('_serialize', ['roles']);
     }
@@ -38,7 +38,7 @@ class RolesController extends AppController {
      *              Redireciona em caso de sucesso, renderiza a view caso contrário
      */
     public function add() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $role = $this->Roles->newEntity();
         if ($this->request->is('post')) {
             if (empty($this->request->data['actions']['_ids'])) {
@@ -68,7 +68,7 @@ class RolesController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $role = $this->Roles->get($id, [
             'contain' => ['Actions']
         ]);

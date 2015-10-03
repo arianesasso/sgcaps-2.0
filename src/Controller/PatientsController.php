@@ -24,7 +24,7 @@ class PatientsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $this->set('patients', $this->Patients->find('all', ['contain' => ['People']]));
         $this->set('_serialize', ['patients']);
     }
@@ -37,7 +37,7 @@ class PatientsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         
         $patient = $this->Patients->get($id, [
             'contain' => ['People', 'People.States', 'People.Occupations']
@@ -53,7 +53,7 @@ class PatientsController extends AppController {
      *              mensagem de erro
      */
     public function add() {
-        $this->layout = 'devoops_complete';
+        $this->viewBuilder()->layout('devoops_complete');
         $patient = $this->Patients->newEntity();
         if ($this->request->is('post')) {
             $patient = $this->Patients->patchEntity($patient, $this->request->data);

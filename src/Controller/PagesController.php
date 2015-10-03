@@ -38,7 +38,7 @@ class PagesController extends AppController {
      *   be found or \Cake\View\Exception\MissingTemplateException in debug mode.
      */
     public function display() {
-        $this->layout = 'devoops_minimal';
+        $this->viewBuilder()->layout('devoops_minimal');
         
         $path = func_get_args();
 
