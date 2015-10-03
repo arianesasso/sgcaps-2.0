@@ -77,7 +77,7 @@ class ActionsTable extends Table
      * dadas suas permissões correntes
      * 
      * @param Query $query
-     * @param array $options | roles_ids => ids dos papéis/roles que o usuário possui na unidade atual
+     * @param array $options | $options['roles_ids'] => ids dos papéis/roles que o usuário possui na unidade atual
      * @return type
      */
     public function findAllowedActions(Query $query, array $options) {
