@@ -95,13 +95,18 @@ class RolesController extends AppController {
      * @return void Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null) {
+    public function delete($id = null) {      
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
         if ($this->Roles->delete($role)) {
             $this->Flash->bootstrapSuccess('O papel foi deletado.');
         } else {
-            $this->Flash->bootstrapError('O papel não foi deletado. Por favor, tente novamente.');
+            $count = $this->Roles->Permissions->find("all", ["conditions" => ["role_id" => $id]])->count();
+            if ($count == 0) {
+                $this->Flash->bootstrapError('O papel não foi deletado. Por favor, tente novamente.');
+            } else {
+                $this->Flash->bootstrapError('O papel não foi deletado, pois existem permissões associadas.');
+            }         
         }
         return $this->redirect(['action' => 'index']);
     }

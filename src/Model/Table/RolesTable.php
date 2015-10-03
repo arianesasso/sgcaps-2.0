@@ -78,6 +78,14 @@ class RolesTable extends Table
      */
     public function buildRules(RulesChecker $rules) {
         $rules->add($rules->isUnique(['alias' , 'domain'], 'Esse papel já existe'));
+        $rules->addDelete(function ($entity, $options) {
+            $count = $this->Permissions->find("all", ["conditions" => ["role_id" => $entity->id]])->count();
+            if ($count == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }, 'preventDelete');
         return $rules;
     }
     
