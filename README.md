@@ -36,19 +36,19 @@ $ composer install
 $ .../lampp/lampp start
 ```
 
-* Sugiro criar um link simbólico na pasta htdocs do seu lampp para o projeto sgcaps-2.0, no Linux (Ubuntu): / Creating a symbolic link from the htdocs lampp folder to the sgcaps-2.0 project (Linux)
+* Sugiro criar um link simbólico na pasta htdocs do seu lampp para o projeto sgcaps-2.0, no Linux (Ubuntu) / Creating a symbolic link from the htdocs lampp folder to the sgcaps-2.0 project (Linux):
 ```
 $ ln -s /link/para/sgcaps-2.0 sgcaps
 ```
 
 ## Configurações / Configurations
 
-* No seu SGBD criei um banco para o sgcaps-2.0, sugestão no MySQL: / Database Creation using MySQL
+* No seu SGBD criei um banco para o sgcaps-2.0, sugestão no MySQL / Database Creation using MySQL:
 ```
 $ mysql> create database sgcaps;
 ```
 
-* Para executar as migrations, accesse dentro da aplicação sgcaps-2.0: / To execute the Migrations access the bin folder:
+* Para executar as migrations, accesse dentro da aplicação sgcaps-2.0 / To execute the Migrations access the bin folder:
 ```
 $ cd bin
 ```
@@ -63,7 +63,7 @@ $ ./cake migrations migrate`
 $ cd config/app.php
 ```
 
-* Altere os dados de conexão default em 'Datasources', exemplo: / Change the default connection configuration in 'Datasources', example:
+* Altere os dados de conexão default em 'Datasources', exemplo / Change the default connection configuration in 'Datasources', example:
 
 ``` 
 'Datasources' => [
@@ -87,7 +87,7 @@ $ cd config/app.php
 	    ...
 ```
 
-* Usuário inicial para acessar o sistema: / Initial User
+* Usuário inicial para acessar o sistema / Initial User:
 ```
 nome: admin
 senha: 1234
@@ -95,4 +95,4 @@ senha: 1234
 
 * Teste o sistema no Heroku: [SGCaps no Heroku](http://sgcaps.herokuapp.com/) / Try the system on Heroku
 
-* Note: most of the comments in the repository and in the code are in Portuguese
+* **Note:** most of the comments in the repository and in the code are in Portuguese
