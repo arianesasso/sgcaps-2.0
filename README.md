@@ -55,7 +55,7 @@ $ cd bin
 
 * Execute / Execute:
 ```
-$ ./cake migrations migrate`
+$ ./cake migrations migrate
 ```
 
 * Por fim, para configurar o datasource default, accesse dentro da aplicação sgcaps-2.0 / To alter the default datasource, access:
