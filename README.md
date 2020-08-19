@@ -58,9 +58,10 @@ $ cd bin
 $ ./cake migrations migrate
 ```
 
-* Por fim, para configurar o datasource default, accesse dentro da aplicação sgcaps-2.0 / To alter the default datasource, access:
+* Por fim, para configurar o datasource default, crie dentro da aplicação sgcaps-2.0 um novo arquivo `app.php` / To alter the default datasource, create a new `app.php`:
 ```
-$ cd config/app.php
+$ cd config
+$ mv app.default.php app.php
 ```
 
 * Altere os dados de conexão default em 'Datasources', exemplo / Change the default connection configuration in 'Datasources', example:
