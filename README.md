@@ -1,4 +1,5 @@
-# Como executar o SGcaps 2.0 na sua máquina / How to Execute SGcaps 2.0 in your machine
+# Como executar o SGcaps 2.0 na sua máquina 
+# How to Execute SGcaps 2.0 in your machine
 
 ## Instalação / Installation
 
