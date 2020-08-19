@@ -50,7 +50,7 @@ if (empty($professional->person->occupation_id)) {
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Sigla do Conselho') ?></label>
-                <p><?= empty($professional->board_acronym) ? $empty : mb_strtoupper(h($professional->board_acronym)) ?></p>  
+                <p><?= empty($professional->board_acronym) ? $empty : mb_strtoupper(h($professional->board_acronym)) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Número do conselho') ?></label>
@@ -62,13 +62,13 @@ if (empty($professional->person->occupation_id)) {
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Date de Cadastro') ?></label>
-                <p><?= h($professional->person->created->format('d/m/Y')) ?></p>  
+                <p><?= h($professional->person->created->format('d/m/Y')) ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
                 <label><?= __('Ocupação') ?></label>
-                <p><?= mb_strtoupper($occupation) ?></p>  
+                <p><?= mb_strtoupper($occupation) ?></p>
             </div>
         </div>
     </div>

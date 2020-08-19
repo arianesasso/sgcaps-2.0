@@ -25,7 +25,7 @@ class CreateOrganizationsTable extends AbstractMigration {
                 ->addColumn('name', 'string', ['length' => 255, 'null' => false])
                 ->addColumn('region', 'string', ['length' => 255, 'null' => true, 'default' => null])
                 ->addColumn('care_type', 'string', ['length' => 45, 'null' => true, 'default' => null])
-                ->addColumn('active', 'boolean', ['null' => false, 'default' => 1])
+                ->addColumn('active', 'boolean', ['null' => false, 'default' => true])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
                 ->addIndex('organization_id')

@@ -20,10 +20,10 @@ class Action extends Entity {
         'action' => true,
         'roles' => true,
     ];
-    
+
     /**
      * Define o alias para o nome da ação baseado em algumas regras
-     * 
+     *
      * @param string $value
      * @return string
      */

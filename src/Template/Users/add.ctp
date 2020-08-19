@@ -19,7 +19,7 @@
             </div>
             <div class="form-group" name="user_type_div">
                 <?php
-                echo $this->Form->radio('user_type', 
+                echo $this->Form->radio('user_type',
                     [
                         ['value' => 'professional', 'text' => 'Profissional', 'class' => 'load-professionals', 'checked' => 'checked'],
                         ['value' => 'organization', 'text' => 'Unidade', 'class' => 'load-organizations'],

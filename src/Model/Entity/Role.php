@@ -21,10 +21,10 @@ class Role extends Entity
         'permissions' => true,
         'actions' => true,
     ];
-    
+
     /**
      * Define o alias para o nome do papel baseado em algumas regras
-     * 
+     *
      * @param string $value
      * @return string
      */

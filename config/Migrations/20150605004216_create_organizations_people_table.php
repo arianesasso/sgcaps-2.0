@@ -16,7 +16,7 @@ class CreateOrganizationsPeopleTable extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

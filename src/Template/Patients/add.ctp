@@ -7,7 +7,7 @@ $ethnicities = ["BRANCA" => "Branca", "PARDA" => "Parda", "NEGRA" => "Negra", 'A
 $maritalStatus = ["SOLTEIRO" => "Solteiro(a)", "CASADO" => "Casado(a)", "DESQUITADO" => "Desquitado(a) ou separado(a) judicialmente ", "DIVORCIADO" => "Divorciado(a)", "VIUVO" => "Viúvo(a)"];
 
 $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
-?>  
+?>
 
 <legend><?= __('Cadastrar Novo Paciente') ?></legend>
 <div class="row">
@@ -33,7 +33,7 @@ $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
                         <label class="control-label"><?= __('Data de Nascimento') ?></label>
                         <?php echo $this->Form->input('person.birthdate', ['id' => 'birthdate', 'type' => 'text', 'class' => 'form-control date-mask', 'placeholder' => 'dd/mm/yyyy', 'label' => false]); ?>
                     </div>
-                </div>            
+                </div>
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <div class="form-group some-height">
                         <label class="control-label"><?= __('Idade aproximada') ?><span id="mandatory_aprox_age"> *</span></label>
@@ -88,7 +88,7 @@ $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual'];
                         <label class="control-label"><?= __('Estado Civil') ?></label>
                         <?php echo $this->Form->input('marital_status', ['options' => $maritalStatus, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
                     </div>
-                </div>             
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">

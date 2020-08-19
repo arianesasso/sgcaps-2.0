@@ -1,7 +1,7 @@
 <?php $actions = $this->request->session()->read('Auth.User.actions'); ?>
 <ul class="nav main-menu">
     <li>
-        <a href="<?php echo $this->Url->build(["controller" => "dashboard", 
+        <a href="<?php echo $this->Url->build(["controller" => "dashboard",
                                                "action" => "index"]); ?>">
             <i class="fa fa-dashboard"></i>
             <span class="hidden-xs">Dashboard</span>
@@ -16,13 +16,13 @@
         <ul class="dropdown-menu">
             <?php if (in_array('cadastrar_paciente', $actions)) { ?>
             <li>
-                <?php echo $this->Html->Link("Cadastrar", ["controller" => "paciente", 
+                <?php echo $this->Html->Link("Cadastrar", ["controller" => "paciente",
                                                            "action" => "cadastrar"]); ?>
             </li>
             <?php }
             if (in_array('listar_pacientes', $actions)) { ?>
             <li>
-                <?php echo $this->Html->Link("Listar", ["controller" => "paciente", 
+                <?php echo $this->Html->Link("Listar", ["controller" => "paciente",
                                                         "action" => "listar"]) ?>
             </li>
             <?php } ?>
@@ -38,7 +38,7 @@
         <ul class="dropdown-menu">
             <?php if (in_array('cadastrar_atividade', $actions)) { ?>
             <li><a class="" href="#">Cadastrar</a></li>
-            <?php } 
+            <?php }
             if (in_array('listar_atividades', $actions)) { ?>
             <li><a class="" href="#">Listar</a></li>
             <?php } ?>
@@ -54,19 +54,19 @@
         <ul class="dropdown-menu">
             <?php if (in_array('cadastrar_profissional', $actions)) { ?>
             <li>
-                <?php echo $this->Html->link("Cadastrar", ["controller" => "profissional", 
+                <?php echo $this->Html->link("Cadastrar", ["controller" => "profissional",
                                                            "action" => "cadastrar"]); ?>
             </li>
             <?php }
             if (in_array('listar_profissionais', $actions)) { ?>
             <li>
-                <?php echo $this->Html->link("Listar", ["controller" => "profissional", 
+                <?php echo $this->Html->link("Listar", ["controller" => "profissional",
                                                         "action" => "listar"]); ?>
             </li>
             <?php } ?>
         </ul>
     </li>
-    <?php } 
+    <?php }
     if (in_array('menu_organizacoes', $actions)) { ?>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle">
@@ -76,7 +76,7 @@
         <ul class="dropdown-menu">
             <?php if (in_array('cadastrar_organizacao', $actions)) { ?>
             <li><a class="" href="#">Cadastrar</a></li>
-            <?php } 
+            <?php }
             if (in_array('listar_organizacoes', $actions)) { ?>
             <li><a class="" href="#">Listar</a></li>
             <?php } ?>
@@ -91,8 +91,7 @@
         <ul class="dropdown-menu">
             <?php if (in_array('visualizar_indicadores_demograficos', $actions)) { ?>
             <li>
-                <?php echo $this->Html->Link("Demográficos", ["controller" => "indicadores", 
-                                                              "action" => "demograficos"]); ?>
+                <?php echo $this->Html->Link("Demográficos", ["controller" => "indicadores", "action" => "demograficos"]); ?>
             </li>
             <?php } ?>
         </ul>
@@ -106,14 +105,12 @@
         <ul class="dropdown-menu">
             <?php if (in_array('cadastrar_qualquer_usuario', $actions) || in_array('cadastrar_usuario_local', $actions)) { ?>
             <li>
-                <?php echo $this->Html->link("Cadastrar", ["controller" => "usuario", 
-                                                           "action" => "cadastrar"]) ?>
+                <?php echo $this->Html->link("Cadastrar", ["controller" => "usuario", "action" => "cadastrar"]) ?>
             </li>
-            <?php } 
+            <?php }
             if (in_array('listar_todos_usuarios', $actions) || in_array('listar_usuarios_locais', $actions)) { ?>
             <li>
-                <?php echo $this->Html->link("Listar", ["controller" => "usuario", 
-                                                        "action" => "listar"]) ?>
+                <?php echo $this->Html->link("Listar", ["controller" => "usuario", "action" => "listar"]) ?>
             </li>
             <?php } ?>
         </ul>
@@ -123,7 +120,7 @@
         <a href="#" class="dropdown-toggle">
             <i class="fa fa-cogs"></i>
             <span class="hidden-xs">Administração</span>
-        </a>   
+        </a>
         <ul class="dropdown-menu">
             <?php if (in_array('submenu_papeis', $actions)) { ?>
             <li class="dropdown">
@@ -138,7 +135,7 @@
                             "action" => "cadastrar"])
                         ?>
                     </li>
-                    <?php } 
+                    <?php }
                     if (in_array('listar_papeis', $actions)) { ?>
                     <li>
                         <?php echo $this->Html->link("Listar", ["controller" => "papel",
@@ -174,66 +171,4 @@
         </ul>
     </li>
     <?php } ?>
-
-    <!--    <li class="dropdown">
-            <a href="#" class="dropdown-toggle">
-                <i class="fa fa-picture-o"></i>
-                <span class="hidden-xs">Multilevel menu</span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="#">First level menu</a></li>
-                <li><a href="#">First level menu</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">
-                        <i class="fa fa-plus-square"></i>
-                        <span class="hidden-xs">Second level menu group</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Second level menu</a></li>
-                        <li><a href="#">Second level menu</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle">
-                                <i class="fa fa-plus-square"></i>
-                                <span class="hidden-xs">Three level menu group</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Three level menu</a></li>
-                                <li><a href="#">Three level menu</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle">
-                                        <i class="fa fa-plus-square"></i>
-                                        <span class="hidden-xs">Four level menu group</span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Four level menu</a></li>
-                                        <li><a href="#">Four level menu</a></li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle">
-                                                <i class="fa fa-plus-square"></i>
-                                                <span class="hidden-xs">Five level menu group</span>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">Five level menu</a></li>
-                                                <li><a href="#">Five level menu</a></li>
-                                                <li class="dropdown">
-                                                    <a href="#" class="dropdown-toggle">
-                                                        <i class="fa fa-plus-square"></i>
-                                                        <span class="hidden-xs">Six level menu group</span>
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#">Six level menu</a></li>
-                                                        <li><a href="#">Six level menu</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Three level menu</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>-->
 </ul>

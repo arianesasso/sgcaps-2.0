@@ -20,9 +20,9 @@ class ProfessionalsTable extends Table {
      * @return void
      */
     public function initialize(array $config) {
-        $this->table('professionals');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('professionals');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
         $this->belongsTo('People', [
             'foreignKey' => 'person_id',
             'joinType' => 'INNER'
@@ -69,11 +69,11 @@ class ProfessionalsTable extends Table {
     /**
      * Finds the professionals that have no users yet
      * Encontra os profissionais que ainda não possuem usuários
-     * 
+     *
      * Um usuário pode ter permissão de criar um usuário para
      * qualquer profissional ($local_only = false)
      * ou somente para profissionais da unidade local ($local_only = true)
-     * 
+     *
      * @param Query $query
      * @param array $options
      * @return type
@@ -84,7 +84,7 @@ class ProfessionalsTable extends Table {
             'People.name'
         ];
 
-        $condition[] = ['Professionals.person_id NOT IN' => $this->People->Users->find('all', 
+        $condition[] = ['Professionals.person_id NOT IN' => $this->People->Users->find('all',
                                                             ['fields' => 'person_id',
                                                              'conditions' => ['person_id IS NOT' => null]])];
         $matching = 'People';

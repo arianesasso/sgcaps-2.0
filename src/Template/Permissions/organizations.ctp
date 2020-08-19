@@ -6,15 +6,18 @@
                     <div class="text-center page-header">
                         <ul class="list-inline">
                             <li><?= $this->Html->image('icons/sisam_icons/health_unity.png', ['alt' => 'Unidade de Saúde']); ?></li>
-                            <li><h3><?= __('Escolha uma Unidade') ?></h3></li>  
+                            <li><h3><?= __('Escolha uma Unidade') ?></h3></li>
                         </ul>
                     </div>
                     <?= $this->Form->create() ?>
                     <div class="form-group">
                         <select class="form-control" name="unidade" id="unidade" />
-                        <?php foreach ($permissions as $permission): ?>
-                            <option value="<?= $permission->Organizations->id ?>/<?= $permission->Organizations->name ?>"><?= $permission->Organizations->name ?></option>
-                        <?php endforeach; ?>
+                        <?php
+                            if(isset($permissions)) {
+                                foreach ($permissions as $permission): ?>
+                                    <option value="<?= $permission->organization->id ?>/<?= $permission->organization->name ?>"><?= $permission->organization->name ?></option>
+                                <?php endforeach;
+                            }?>
                         </select>
                     </div>
                     <div class="text-center">

@@ -1,5 +1,9 @@
-/vendor/*
-/config/app.php
-/tmp/*
-/logs/*
+# Pastas
 /nbproject/*
+/vendor/*
+/logs/*
+/tmp/*
+ 
+# Arquivos específicos
+config/Migrations/schema-dump-default.lock
+/config/app.php

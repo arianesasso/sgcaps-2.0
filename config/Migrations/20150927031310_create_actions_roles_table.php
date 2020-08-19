@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class CreateTableActionsRoles extends AbstractMigration
+class CreateActionsRolesTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -16,7 +16,7 @@ class CreateTableActionsRoles extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

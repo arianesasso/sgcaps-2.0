@@ -17,7 +17,7 @@ class RolesController extends AppController {
         $action = $this->request->action;
         return $this->UserPermissions->isAuthorized($actions, $controller, $action);
     }
-    
+
     /**
      * Método para listar todos os papéis disponíveis
      * Index method
@@ -25,7 +25,7 @@ class RolesController extends AppController {
      * @return void
      */
     public function index() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $this->set('roles', $this->Roles->find('all'));
         $this->set('_serialize', ['roles']);
     }
@@ -38,7 +38,7 @@ class RolesController extends AppController {
      *              Redireciona em caso de sucesso, renderiza a view caso contrário
      */
     public function add() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $role = $this->Roles->newEntity();
         if ($this->request->is('post')) {
             if (empty($this->request->data['actions']['_ids'])) {
@@ -68,7 +68,7 @@ class RolesController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $role = $this->Roles->get($id, [
             'contain' => ['Actions']
         ]);
@@ -95,7 +95,7 @@ class RolesController extends AppController {
      * @return void Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null) {      
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
         if ($this->Roles->delete($role)) {
@@ -106,7 +106,7 @@ class RolesController extends AppController {
                 $this->Flash->bootstrapError('O papel não foi deletado. Por favor, tente novamente.');
             } else {
                 $this->Flash->bootstrapError('O papel não foi deletado, pois existem permissões associadas.');
-            }         
+            }
         }
         return $this->redirect(['action' => 'index']);
     }

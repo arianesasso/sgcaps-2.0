@@ -22,9 +22,9 @@ class PeopleTable extends Table {
      */
     public function initialize(array $config)
     {
-        $this->table('people');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('people');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->hasOne('Users', [
             'foreignKey' => 'person_id'
@@ -52,11 +52,11 @@ class PeopleTable extends Table {
             'through' => 'OrganizationsPeople',
         ]);
     }
-    
+
     /**
      * Verifica se todas as infos relativas ao rgh estão preenchidas
      * simultaneamente
-     * 
+     *
      * @param type $field  RG ou RG - UF
      * @param type $record Todas as informações relativas ao usuário
      * @return boolean
@@ -92,36 +92,32 @@ class PeopleTable extends Table {
                 ->notEmpty('gender', 'Campo obrigatório');
 
         $validator
-                ->add('rg', 
+                ->add('rg',
                         ['valid' => ['rule' => 'alphaNumeric', 'message' => 'Digite somente números e letras', 'last' => true],
                          'require_verification' => ['rule' => [$this,'requireRgInfo'], 'message' => 'Preencha o estado do RG']
                         ])
                 ->allowEmpty('rg');
-        
         $validator
-                ->add('rg_state_id', [                  
+                ->add('rg_state_id', [
                          'require_verification' => ['rule' => [$this,'requireRgInfo'], 'message' => 'Preencha o RG']
                      ])
                 ->allowEmpty('rg_state_id');
-
         $validator
                 ->add('birthdate', ['isDate' => ['rule' => ['date', 'dmy'], 'message' => 'Data inválida', 'last' => true], 'validateBirhdate' => ['rule' => [$this,'validateBirhdate'], 'message' => 'Data inválida']])
                 ->allowEmpty('birthdate');
-        
         $validator
                 ->add('cpf', 'custom', ['rule' => [$this,'validateCpf'], 'message' => 'CPF inválido'])
                 ->allowEmpty('cpf');
-
         $validator
                 ->allowEmpty('occupation');
 
         return $validator;
     }
-    
+
     /**
      * Função para validar CPF segundo rotina de validação definida no site
      * abaixo
-     * 
+     *
      * @see http://www.geradorcpf.com/algoritmo_do_cpf.htm
      * @param type $field O campo que está sendo validado
      * @return boolean
@@ -133,7 +129,7 @@ class PeopleTable extends Table {
         if ((strlen(trim($cpf))) != 11) {
             return false;
         }
-        
+
         $digits = ['0','0'];
         //Calcula o primeiro dígito de verificação.
         $j = 0;
@@ -164,11 +160,11 @@ class PeopleTable extends Table {
         //Retorna Verdadeiro se os dígitos de verificação são os esperados.
         return ($digits[0] == $cpf[9] && $digits[1] == $cpf[10]) ? true : false;
     }
-    
+
     /**
      * Valida se o ano da data de nascimento não é menor do que 100 anos no
      * passado ou maior que um ano atrás
-     * 
+     *
      * @param type $field O campo a ser validado (no caso a data de nascimento)
      * @return boolean
      */

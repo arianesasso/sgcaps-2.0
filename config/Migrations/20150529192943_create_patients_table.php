@@ -16,7 +16,7 @@ class CreatePatientsTable extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

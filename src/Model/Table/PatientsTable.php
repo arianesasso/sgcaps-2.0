@@ -21,9 +21,9 @@ class PatientsTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('patients');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('patients');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('People', [
             'foreignKey' => 'person_id',
@@ -42,39 +42,34 @@ class PatientsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
         $validator
-            ->add('cns', 
+            ->add('cns',
                     ['isNumeric' => ['rule' => 'numeric', 'message' => 'Digite somente números', 'last' => true],
                      'custom' => ['rule' => [$this,'validateCns'], 'message' => 'CNS inválido'],
                     ])
             ->allowEmpty('cns');
-            
         $validator
             ->allowEmpty('marital_status');
-            
         $validator
-            ->add('approximate_age', 
+            ->add('approximate_age',
                     ['valid' => ['rule' => 'numeric', 'message' => 'Valor inválido', 'last' => true],
                      'range' => ['rule' => ['range', 1, 150], 'message' => 'Valor inválido'],
                      'required' => ['rule' => [$this, 'requiredAge'], 'message' => 'Campo obrigatório']
                     ])
             ->allowEmpty('approximate_age');
-            
         $validator
             ->allowEmpty('ethnicity');
-            
         $validator
             ->allowEmpty('observation');
 
         return $validator;
     }
-    
+
     /**
      * Verifica se o campo data de nascimento e idade_aproximada estão vazios
      * Se ambos estiverem, retorna false, pois caso a data de nascimento não seja
      * preenchida, a idade aproximada deve ser preenchida obrigatoriamente
-     * 
+     *
      * @param integer $aproxAge Idade aproximada do paciente
      * @param array $record Todas as informações do paciente
      * @return boolean
@@ -89,7 +84,7 @@ class PatientsTable extends Table
     /**
      * Função para validar CNS segundo rotina de validação definida no site
      * abaixo
-     * 
+     *
      * @see http://cartaonet.datasus.gov.br/
      * @param type $field O campo que está sendo validado
      * @return boolean
@@ -104,16 +99,16 @@ class PatientsTable extends Table
         //Caso tenha 15 dígitos, uso as regras de validação do site do cartão SUS
         if($cns[0] == 1 || $cns[0] == 2) {
             return $this->__validateCns12($cns);
-        } 
+        }
         if($cns[0] == 7 || $cns[0] == 8 || $cns[0] == 9) {
             return $this->__validateCns789($cns);
         }
         return false;
     }
-    
+
     /**
      * Função que valida números começados em 1 ou 2
-     * 
+     *
      * @param type $cns Número do CNS
      * @return boolean
      */
@@ -159,10 +154,10 @@ class PatientsTable extends Table
             return true;
         }
     }
-    
+
     /**
      * Função que valida números começados em 7 ou 8 ou 9
-     * 
+     *
      * @param type $cns Número do CNS
      * @return boolean
      */

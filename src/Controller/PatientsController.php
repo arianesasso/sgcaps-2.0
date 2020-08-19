@@ -9,7 +9,7 @@ use App\Controller\AppController;
  * @property \App\Model\Table\PatientsTable $Patients
  */
 class PatientsController extends AppController {
-    
+
     public function isAuthorized($user) {
         parent::isAuthorized($user);
         $actions = $this->request->session()->read('Auth.User.actions');
@@ -24,7 +24,7 @@ class PatientsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $this->set('patients', $this->Patients->find('all', ['contain' => ['People']]));
         $this->set('_serialize', ['patients']);
     }
@@ -37,8 +37,8 @@ class PatientsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
-        $this->viewBuilder()->layout('devoops_complete');
-        
+        $this->viewBuilder()->setLayout('devoops_complete');
+
         $patient = $this->Patients->get($id, [
             'contain' => ['People', 'People.States', 'People.Occupations']
         ]);
@@ -53,7 +53,7 @@ class PatientsController extends AppController {
      *              mensagem de erro
      */
     public function add() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $patient = $this->Patients->newEntity();
         if ($this->request->is('post')) {
             $patient = $this->Patients->patchEntity($patient, $this->request->data);
@@ -74,7 +74,7 @@ class PatientsController extends AppController {
      * Método para editar dados de um paciente
      *
      * @TODO esse método ainda precisa ser construído (o código abaixo é proveniente do bake)
-     * 
+     *
      * @param string|null $id Patient id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.

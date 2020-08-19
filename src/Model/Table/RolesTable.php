@@ -21,9 +21,9 @@ class RolesTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('roles');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('roles');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->hasMany('Permissions', [
             'foreignKey' => 'role_id'
@@ -46,7 +46,7 @@ class RolesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
+
         $validator
             ->requirePresence('name', 'create')
             ->add('name', ['maxLength' => [
@@ -59,18 +59,18 @@ class RolesTable extends Table
                           ]
              ])
             ->notEmpty('name');
-        
+
         $validator
             ->requirePresence('alias', 'create')
             ->notEmpty('alias');
-        
+
         $validator
             ->requirePresence('domain', 'create')
             ->notEmpty('domain');
 
         return $validator;
     }
-    
+
     /**
      * @TODO   Exibir esse tipo de validação com dois campos corretamente na tela
      * @param  RulesChecker $rules
@@ -88,10 +88,10 @@ class RolesTable extends Table
         }, 'preventDelete');
         return $rules;
     }
-    
+
      /**
      * Finds the roles a user user can give
-     * 
+     *
      * @TODO  Melhorar esse método, pois ele só recupera permissões de CAPS para o caso local
      * @param Query $query
      * @param array $options
@@ -99,10 +99,10 @@ class RolesTable extends Table
      */
     public function findAllowed(Query $query, array $options) {
         $condition = ['name IS NOT' => null];
-        
+
         if($options['local_only']) {
-            $condition = ['domain' => 'caps'];         
+            $condition = ['domain' => 'caps'];
         }
         return $this->find('list')->where($condition);
-    }  
+    }
 }

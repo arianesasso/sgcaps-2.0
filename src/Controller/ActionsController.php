@@ -18,7 +18,7 @@ class ActionsController extends AppController {
         $action = $this->request->action;
         return $this->UserPermissions->isAuthorized($actions, $controller, $action);
     }
-    
+
     /**
      * Método para listar todas as ações disponíveis
      * Index method
@@ -26,7 +26,7 @@ class ActionsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $this->set('actions', $this->Actions->find('all'));
         $this->set('_serialize', ['actions']);
     }
@@ -39,7 +39,7 @@ class ActionsController extends AppController {
      *              Redireciona em caso de sucesso, renderiza view caso contrário
      */
     public function add() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $action = $this->Actions->newEntity();
         if ($this->request->is('post')) {
             $this->request->data['alias'] = $this->request->data['name'];
@@ -66,7 +66,7 @@ class ActionsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $action = $this->Actions->get($id, [
             'contain' => ['Roles']
         ]);

@@ -21,9 +21,9 @@ class ActionsRolesTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('actions_roles');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('actions_roles');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
@@ -46,7 +46,6 @@ class ActionsRolesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
         $validator
             ->add('modifieds', 'valid', ['rule' => 'datetime'])
             ->requirePresence('modifieds', 'create')

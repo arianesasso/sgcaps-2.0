@@ -21,13 +21,12 @@ class OccupationsTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('occupations');
-        $this->displayField('id');
-        $this->primaryKey('id');
-        
+        $this->setTable('occupations');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
         $this->hasMany('People', [
             'foreignKey' => 'occupation_id'
-        ]);      
+        ]);
     }
 
     /**
@@ -41,11 +40,9 @@ class OccupationsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
         $validator
             ->requirePresence('description', 'create')
             ->notEmpty('description');
-            
         $validator
             ->requirePresence('version', 'create')
             ->notEmpty('version');

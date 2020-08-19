@@ -20,9 +20,9 @@ class UsersTable extends Table {
      * @return void
      */
     public function initialize(array $config) {
-        $this->table('users');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('users');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Organizations', [
@@ -39,10 +39,10 @@ class UsersTable extends Table {
             'foreignKey' => 'admin_id'
         ]);
     }
-    
+
     /**
      * Verifica se as duas senhas digitadas são idênticas
-     * 
+     *
      * @param type $field  Primeira senha digitada
      * @param type $record Todas as informações relativas ao usuário
      * @return boolean
@@ -81,12 +81,12 @@ class UsersTable extends Table {
                 ->add('password', ['require_verification' => ['rule' => [$this,'requireVerification'], 'message' => 'Preencha o campo abaixo']])
                 ->requirePresence('password', 'create')
                 ->notEmpty('password', 'Campo obrigatório', 'create');
-              
+
         $validator
                 ->add('retype_password', ['isEqual' => ['rule' => ['compareWith', 'password'], 'message' => 'As senhas devem ser idênticas']])
                 ->requirePresence('retype_password', 'create')
                 ->notEmpty('retype_password', 'Campo obrigatório', 'create');
-        
+
         $validator
                 ->add('active', 'valid', ['rule' => 'boolean'])
                 ->requirePresence('active', 'create')
@@ -112,10 +112,10 @@ class UsersTable extends Table {
     /**
      * Encontra os usuários que um usuário pode ver.
      * Existem duas formas de visualização:
-     * 
+     *
      * Somente ususários locais $local_only = true ou
      * todos os usuários, nesse caso, $local_only = false
-     * 
+     *
      * @param Query $query
      * @param array $options
      * @return type

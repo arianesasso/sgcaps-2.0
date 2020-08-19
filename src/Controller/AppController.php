@@ -30,8 +30,8 @@ class AppController extends Controller {
 
     /**
      * Método de inicialização
-     * 
-     * Este método pode ser utilizado para adicionar alguns códigos comums 
+     *
+     * Este método pode ser utilizado para adicionar alguns códigos comums
      * de inicialização. Por exemplo: carregar componentes como o Auth e o Flash
      *
      * @return void
@@ -45,8 +45,8 @@ class AppController extends Controller {
             'authorize' => ['Controller'],
             'authenticate' => [
                 'Form' => [
-                    'fields' => ['username' => 'username', 'password' => 'password'],
-                    'scope' => ['active' => 1]
+                    'fields' => ['username' => 'username', 'password' => 'password']
+                    #, 'finder' => ['active' => 1]
                 ]
             ],
             'loginAction' => ['controller' => 'Users', 'action' => 'login'],
@@ -61,10 +61,10 @@ class AppController extends Controller {
      * Esta função será a responsável pela autorização após a autenticação do usuário
      * Em resumo: se o usuário não possuir id, não possuir permissões válidas
      * em nenhuma unidade ou na unidade em que está logado, ele será deslogado
-     * 
+     *
      * Ainda, se os papéis do mesmo forem atualizados para a unidade em que está logado
      * o seu conjunto de papéis deve ser atualizado em Auth.User.roles
-     * 
+     *
      * @param type $user
      * @return boolean
      */
@@ -78,7 +78,7 @@ class AppController extends Controller {
         if (empty($organizationId)) {
            return $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
-        
+
         $userRoles = $this->UserPermissions->validyRoles($user['id'], $organizationId);
         //Se o usuário não possuir papéis válidos na unidade em questão
         //Ex.: o gestor cancelou a permissão do usuário enquanto ele ainda estava logado
@@ -94,17 +94,17 @@ class AppController extends Controller {
         if ($sessionRoles != $userRoles) {
             $this->request->session()->write('Auth.User.roles', $userRoles);
         }
-        
+
         //Ações que o usuário pode realizar no sistema
         $allowedActions = $this->UserPermissions->allowedActions($userRoles);
-    
+
         //Array com as Acões permitidas ao Usuário
         $sessionActions = $this->request->session()->read('Auth.User.actions');
         //Se em algum momento as acões válidas para uma dada unidade
         //forem modificadas é preciso atualizar o Auth.User.actions
         if ($sessionActions != $allowedActions) {
             $this->request->session()->write('Auth.User.actions', $allowedActions);
-        }     
+        }
         return true;
     }
 }

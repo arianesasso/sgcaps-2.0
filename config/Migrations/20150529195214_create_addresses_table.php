@@ -16,7 +16,7 @@ class CreateAddressesTable extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

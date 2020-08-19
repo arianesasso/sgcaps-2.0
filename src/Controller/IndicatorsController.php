@@ -9,7 +9,7 @@ use App\Controller\AppController;
  *
  */
 class IndicatorsController extends AppController {
-    
+
     public function isAuthorized($user) {
         parent::isAuthorized($user);
         $actions = $this->request->session()->read('Auth.User.actions');
@@ -24,7 +24,7 @@ class IndicatorsController extends AppController {
      * @return void
      */
     public function demographic() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
     }
 
 }

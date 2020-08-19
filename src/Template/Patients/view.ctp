@@ -52,11 +52,11 @@ if (empty($patient->person->occupation_id)) {
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Etnia') ?></label>
-                <p><?= empty($patient->ethnicity) ? $empty : mb_strtoupper(h($patient->ethnicity)) ?></p>  
+                <p><?= empty($patient->ethnicity) ? $empty : mb_strtoupper(h($patient->ethnicity)) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Date de Cadastro') ?></label>
-                <p><?= h($patient->created->format('d/m/Y')) ?></p>  
+                <p><?= h($patient->created->format('d/m/Y')) ?></p>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <label><?= __('Estado Civil') ?></label>
@@ -66,15 +66,15 @@ if (empty($patient->person->occupation_id)) {
         <div class="row">
             <div class="col-xs-12">
                 <label><?= __('Ocupação') ?></label>
-                <p><?= mb_strtoupper($occupation) ?></p>  
+                <p><?= mb_strtoupper($occupation) ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
                 <label><?= __('Observação') ?></label>
-                <p><?php echo wordwrap("$patient->observation", 60, '<br />', true); ?></p>              
+                <p><?php echo wordwrap("$patient->observation", 60, '<br />', true); ?></p>
             </div>
-        </div> 
+        </div>
     </div>
     <div class="col-xs-2 col-xs-offset-2">
         <a href="#" class="btn btn-success action-button fixed-width-button">

@@ -21,9 +21,9 @@ class OrganizationsPeopleTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('organizations_people');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('organizations_people');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('People', [
             'foreignKey' => 'person_id',
@@ -46,7 +46,6 @@ class OrganizationsPeopleTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
         $validator
             ->add('ended', 'valid', ['rule' => 'datetime'])
             ->allowEmpty('ended');

@@ -7,7 +7,7 @@
                     <div class="text-center page-header">
                         <ul class="list-inline">
                             <li><?= $this->Html->image('icons/sisam_icons/health_unity.png', ['alt' => 'Unidade de Saúde']); ?></li>
-                            <li><h3><?= __('SGCaps Login') ?></h3></li>  
+                            <li><h3><?= __('SGCaps Login') ?></h3></li>
                         </ul>
                     </div>
                     <?= $this->Form->create() ?>

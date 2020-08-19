@@ -16,7 +16,7 @@ class CreateCitiesTable extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

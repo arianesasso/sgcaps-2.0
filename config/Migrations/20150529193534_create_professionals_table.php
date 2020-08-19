@@ -16,7 +16,7 @@ class CreateProfessionalsTable extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

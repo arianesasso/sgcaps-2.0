@@ -1,4 +1,4 @@
-<?php $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual']; ?>  
+<?php $genders = ['F' => 'Femnino', 'M' => 'Masculino', 'T' => 'Transsexual']; ?>
 
 <legend><?= __('Cadastrar Novo Profissional') ?></legend>
 <div class="row">
@@ -24,7 +24,7 @@
                         <label class="control-label"><?= __('Data de Nascimento') ?></label>
                         <?php echo $this->Form->input('person.birthdate', ['id' => 'birthdate', 'type' => 'text', 'class' => 'form-control date-mask', 'placeholder' => 'dd/mm/yyyy', 'label' => false]); ?>
                     </div>
-                </div>            
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">

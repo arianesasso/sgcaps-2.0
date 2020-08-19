@@ -33,13 +33,13 @@ class PagesController extends AppController {
      * Displays a view
      * Exibe uma página estática
      *
-     * @return void|\Cake\Network\Response
+     * @return void|Cake\Http\Response
      * @throws \Cake\Network\Exception\NotFoundException When the view file could not
      *   be found or \Cake\View\Exception\MissingTemplateException in debug mode.
      */
     public function display() {
-        $this->viewBuilder()->layout('devoops_minimal');
-        
+        $this->viewBuilder()->setLayout('devoops_minimal');
+
         $path = func_get_args();
 
         $count = count($path);

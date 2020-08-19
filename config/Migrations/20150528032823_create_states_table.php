@@ -16,7 +16,7 @@ class CreateStatesTable extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

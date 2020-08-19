@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class CreateTableActions extends AbstractMigration {
+class CreateActionsTable extends AbstractMigration {
     /**
      * Change Method.
      *

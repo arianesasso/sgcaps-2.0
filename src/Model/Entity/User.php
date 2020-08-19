@@ -30,9 +30,9 @@ class User extends Entity {
 
     /**
      * Receives the user inputted password and encrypts it with bycript
-     * Recebe a senha inserida pelo usuário e a encripta utilizando 
+     * Recebe a senha inserida pelo usuário e a encripta utilizando
      * o algoritmo bycript
-     * 
+     *
      * @param string $value
      * @return string
      */

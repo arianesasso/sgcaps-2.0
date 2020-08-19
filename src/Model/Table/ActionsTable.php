@@ -21,9 +21,9 @@ class ActionsTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('actions');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('actions');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Roles', [
             'foreignKey' => 'action_id',
@@ -43,7 +43,6 @@ class ActionsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
         $validator
             ->add('name', ['maxLength' => [
                             'rule' => ['maxLength', 250],
@@ -56,26 +55,23 @@ class ActionsTable extends Table
              ])
             ->requirePresence('name', 'create')
             ->notEmpty('name');
-            
         $validator
             ->requirePresence('alias', 'create')
             ->notEmpty('alias');
-            
         $validator
             ->requirePresence('controller', 'create')
             ->notEmpty('controller');
-            
         $validator
             ->requirePresence('action', 'create')
             ->notEmpty('action');
 
         return $validator;
     }
-    
+
      /**
      * Método para encontrar as ações que um determinado usuário pode realizar
      * dadas suas permissões correntes
-     * 
+     *
      * @param Query $query
      * @param array $options | $options['roles_ids'] => ids dos papéis/roles que o usuário possui na unidade atual
      * @return type
@@ -89,9 +85,8 @@ class ActionsTable extends Table
         });
         return $allowedActions;
     }
-    
-    
-    /** 
+
+    /**
      * @TODO   Fazer com que essa validação seja exibida
      * @param  RulesChecker $rules
      * @return RulesChecker

@@ -9,10 +9,10 @@ class UserPermissionsComponent extends Component {
 
     public $Permissions;
     public $Actions;
-    
+
     /**
      * Encontra os papéis válidos para um usuário em uma dada unidade
-     * 
+     *
      * @param int $userId
      * @param int $organizationId
      * @return string
@@ -24,15 +24,15 @@ class UserPermissionsComponent extends Component {
         $permissions = $this->Permissions->find('validyroles', ['user_id' => $userId, 'organization_id' => $organizationId]);
         $userRoles = array();
         foreach ($permissions as $permission):
-            $userRoles[$permission['Roles']['id']] = $permission['Roles']['alias'] . '.' . $permission['Roles']['domain'];
+            $userRoles[$permission['role']['id']] = $permission['role']['alias'] . '.' . $permission['role']['domain'];
         endforeach;
         return $userRoles;
     }
-    
+
     /**
      * Encontra as organizaćÕes na qual o usuário tem permissões
      * válidass
-     * 
+     *
      * @param int $userId
      * @param int $organizationId
      * @return string
@@ -43,12 +43,12 @@ class UserPermissionsComponent extends Component {
         }
         return $this->Permissions->find('validyorganizations', ['user_id' => $userId])->toArray();
     }
-    
+
     /**
      * Verifica se o usuário tem um dado papel na unidade em que está logado
      * Verifies wheter the user has a specific role in the organization in which
      * it is logged
-     * 
+     *
      * @param array $roles Array com os papéis do usuário nessa unidade
      * @param array $roleName Nome do papel procurado
      * @return boolean
@@ -62,11 +62,11 @@ class UserPermissionsComponent extends Component {
         }
         return true;
     }
-    
+
     /**
      * Verifica se um usuário está autorizado a realizar determinada
      * ação em um controller
-     * 
+     *
      * @param type $roles           | Os papéis que o usuário possui na unidade atual
      * @param type $controller      | O controller para o qual se deseja verificar a autorização
      * @param type $action          | A ação para a qual se deseja verificar a autorização
@@ -81,11 +81,11 @@ class UserPermissionsComponent extends Component {
             return false;
         }
     }
-    
+
     /**
      * Verifica quais acões um usuário pode realizar no sistema
      * dado os papéis que possui na unidade em que está logado
-     * 
+     *
      * @param  type $roles | Os papéis que o usuário possui na unidade atual
      * @return array       | Array com as acões que o usuário pode realizar no sistema
      */

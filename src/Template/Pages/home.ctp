@@ -4,7 +4,7 @@
             <h3>Bem vindo ao projeto SGCaps</h3>
             <br/>
             <p>Este projeto foi desenvolvido por Ariane Morassi Sasso.</p>
-            <p>   
+            <p>
                 <?php
                 echo $this->Html->link('Login', ['controller' => 'Users', 'action' => 'login'], ['class' => 'btn btn-primary']);
                 ?>

@@ -12,14 +12,14 @@ use App\Controller\AppController;
 class UsersController extends AppController {
 
     /**
-     * Action that is executed before the user authentication. 
-     * This is needed so the user that is not active may see 
+     * Action that is executed before the user authentication.
+     * This is needed so the user that is not active may see
      * the page for the users with no permissions
-     * 
+     *
      * Ação que é executada antes da autenticação do usuário.
      * Ela é necessária para que o usuário que não está ativo
      * veja a página de usuário sem permissão
-     * 
+     *
      * @param \Cake\Event\Event $event
      * @return type
      */
@@ -27,14 +27,14 @@ class UsersController extends AppController {
         $this->Auth->allow(['noPermission']);
         return parent::beforeFilter($event);
     }
-    
+
     /**
      * Esse método irá autorizar o usuário mediante as ações
      * que ele pode realizar na unidade em que está logado
-     * 
+     *
      * As ações são vinculadas aos papéis que ele possui na unidade
      * corrente
-     * 
+     *
      * @param type $user
      * @return boolean
      */
@@ -52,15 +52,15 @@ class UsersController extends AppController {
     /**
      * Login method (using Auth component)
      * Método de Login (estamos usando o componente Auth do Cake)
-     * 
-     * @return void Redirects on successful login 
+     *
+     * @return void Redirects on successful login
      *              Redireciona em caso de sucesso no login
      */
     public function login() {
         //O atributo redirectUrl precisa ser null, assim o usuário semprre
         //será redirecionado do login para a página de escolha de unidades
         $this->Auth->redirectUrl(null);
-        $this->viewBuilder()->layout('devoops_minimal');
+        $this->viewBuilder()->setLayout('devoops_minimal');
 
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -71,7 +71,7 @@ class UsersController extends AppController {
                 $table = !empty($user['person_id'])? 'People' :  'Organizations';
                 $variable = !empty($user['person_id'])? 'person' :  'organization';
                 $entity = $this->Users->$table->findById($id)->select('name')->first()->toArray();
-                $this->request->session()->write("Auth.User.$variable.name", $entity['name']);              
+                $this->request->session()->write("Auth.User.$variable.name", $entity['name']);
                 return $this->redirect($this->Auth->redirectUrl());
             }
             //Verifica se o problema é o nome de usuário, usuário inativo ou a senha
@@ -91,7 +91,7 @@ class UsersController extends AppController {
     /**
      * Logout method (using Auth component)
      * Método de logout (estamos utilizando o componente Auth do Cake)
-     * 
+     *
      * @return void Redirects on successful logout
      *              Redireciona em caso de sucesso no logout
      */
@@ -103,12 +103,12 @@ class UsersController extends AppController {
     /**
      * Displays a message when the user has no access permission
      * Mostra uma mensagem quando o usuário não possui permissão de acesso
-     * 
+     *
      * @return void Shows a static page
      *              Exibe uma página estática
      */
     public function noPermission() {
-        $this->viewBuilder()->layout('devoops_minimal');
+        $this->viewBuilder()->setLayout('devoops_minimal');
     }
 
     /**
@@ -118,7 +118,7 @@ class UsersController extends AppController {
      * @return void
      */
     public function index() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
         if(in_array('listar_usuarios_locais', $actions)) {
@@ -140,21 +140,19 @@ class UsersController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id) {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $user = $this->Users->get($id, ['contain' => ['People', 'Organizations']]);
         $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
-       
-        if(in_array('visualizar_permissoes_locais', $actions)) {     
+
+        if(in_array('visualizar_permissoes_locais', $actions)) {
             $localOnly = true;
-           
         }
         if(in_array('visualizar_qualquer_permissao', $actions)) {
             $localOnly = false;
         }
         $permissions = $this->Users->Permissions->find(
                 'allowedValidy', ['id' => $id, 'local_only' => $localOnly, 'organization_id' => $organizationId]);
-        
         $this->set(compact(['user', 'permissions']));
         $this->set('_serialize', ['user', 'permissions']);
     }
@@ -166,22 +164,22 @@ class UsersController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             if (empty($this->request->data['person_id']) && empty($this->request->data['organization_id'])) {
                 $this->Flash->bootstrapError('É obrigatório escolher um profissional ou unidade.');
                 return $this->redirect(['controller' => 'usuario', 'action' => 'cadastrar']);
             }
-            
+
             $user = $this->Users->patchEntity($user, $this->request->data);
             $organizationId = empty($this->request->data['organization_id']) ? "" : $this->request->data['organization_id'];
-            $userType = empty($this->request->data['person_id']) ? 'organization' : 'person'; 
+            $userType = empty($this->request->data['person_id']) ? 'organization' : 'person';
             if ($this->Users->save($user)) {
                 $this->Flash->bootstrapSuccess('Usuário criado com sucesso.');
                 $this->redirect(['controller' => 'permissao', 'action' => 'adicionar', $user->id, $userType, $organizationId]);
             } else {
-                $this->Flash->bootstrapError('Não foi possível criar o usuário.');  
+                $this->Flash->bootstrapError('Não foi possível criar o usuário.');
             }
         }
         $this->set(compact('user'));
@@ -197,7 +195,7 @@ class UsersController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $user = $this->Users->get($id, ['fields' => 'username']);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $userComplete = $this->Users->get($id);
@@ -229,13 +227,13 @@ class UsersController extends AppController {
      *
      * @param integer $id   Id do Usuário
      * @param bool $active  Status do Usuário (ativo/inativo)
-     * @return void         Redireciona para a página de visualizacão 
+     * @return void         Redireciona para a página de visualizacão
      *                      das Permissões do usário
      */
     public function changeActivation($id, $active) {
         $this->autoRender = false;
         $change = empty($active) ? 1 : 0;
-        
+
         $permission = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $permission = $this->Users->patchEntity($permission, ['active' => $change]);

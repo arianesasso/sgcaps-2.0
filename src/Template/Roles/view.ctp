@@ -7,6 +7,8 @@
         <li><?= $this->Html->link(__('New Role'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Actions'), ['controller' => 'Actions', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Action'), ['controller' => 'Actions', 'action' => 'add']) ?> </li>
     </ul>
 </div>
 <div class="roles view large-10 medium-9 columns">
@@ -15,6 +17,10 @@
         <div class="large-5 columns strings">
             <h6 class="subheader"><?= __('Name') ?></h6>
             <p><?= h($role->name) ?></p>
+            <h6 class="subheader"><?= __('Alias') ?></h6>
+            <p><?= h($role->alias) ?></p>
+            <h6 class="subheader"><?= __('Domain') ?></h6>
+            <p><?= h($role->domain) ?></p>
         </div>
         <div class="large-2 columns numbers end">
             <h6 class="subheader"><?= __('Id') ?></h6>
@@ -23,6 +29,8 @@
         <div class="large-2 columns dates end">
             <h6 class="subheader"><?= __('Created') ?></h6>
             <p><?= h($role->created) ?></p>
+            <h6 class="subheader"><?= __('Modified') ?></h6>
+            <p><?= h($role->modified) ?></p>
         </div>
     </div>
 </div>
@@ -61,6 +69,46 @@
                 <?= $this->Html->link(__('Edit'), ['controller' => 'Permissions', 'action' => 'edit', $permissions->id]) ?>
 
                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Permissions', 'action' => 'delete', $permissions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permissions->id)]) ?>
+
+            </td>
+        </tr>
+
+        <?php endforeach; ?>
+    </table>
+    <?php endif; ?>
+    </div>
+</div>
+<div class="related row">
+    <div class="column large-12">
+    <h4 class="subheader"><?= __('Related Actions') ?></h4>
+    <?php if (!empty($role->actions)): ?>
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th><?= __('Id') ?></th>
+            <th><?= __('Name') ?></th>
+            <th><?= __('Alias') ?></th>
+            <th><?= __('Controller') ?></th>
+            <th><?= __('Action') ?></th>
+            <th><?= __('Created') ?></th>
+            <th><?= __('Modified') ?></th>
+            <th class="actions"><?= __('Actions') ?></th>
+        </tr>
+        <?php foreach ($role->actions as $actions): ?>
+        <tr>
+            <td><?= h($actions->id) ?></td>
+            <td><?= h($actions->name) ?></td>
+            <td><?= h($actions->alias) ?></td>
+            <td><?= h($actions->controller) ?></td>
+            <td><?= h($actions->action) ?></td>
+            <td><?= h($actions->created) ?></td>
+            <td><?= h($actions->modified) ?></td>
+
+            <td class="actions">
+                <?= $this->Html->link(__('View'), ['controller' => 'Actions', 'action' => 'view', $actions->id]) ?>
+
+                <?= $this->Html->link(__('Edit'), ['controller' => 'Actions', 'action' => 'edit', $actions->id]) ?>
+
+                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Actions', 'action' => 'delete', $actions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $actions->id)]) ?>
 
             </td>
         </tr>

@@ -16,7 +16,7 @@ class CreateContactsTable extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

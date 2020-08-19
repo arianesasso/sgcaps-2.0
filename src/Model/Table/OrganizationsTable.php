@@ -21,9 +21,9 @@ class OrganizationsTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('organizations');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('organizations');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Organizations', [
             'foreignKey' => 'organization_id'
@@ -60,14 +60,11 @@ class OrganizationsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
-            
         $validator
             ->allowEmpty('region');
-            
         $validator
             ->allowEmpty('care_type');
 
@@ -86,41 +83,41 @@ class OrganizationsTable extends Table
         $rules->add($rules->existsIn(['organization_id'], 'Organizations'));
         return $rules;
     }
-    
+
     /**
      * Finds the organzations that have no users yet
      * Encontra as organizacões que ainda não possuem usuários
-     * 
+     *
      * Um usuário pode ter permissão de criar um usuário para
      * qualquer organizacão ($local_only = false)
      * ou somente para a unidade local ($local_only = true)
-     * 
+     *
      * @param Query $query
      * @param array $options
      * @return type
      */
     public function findNoUsers(Query $query, array $options) {
-        $condition[] = ['Organizations.id NOT IN' => $this->People->Users->find('all', ['fields' => 'organization_id', 
+        $condition[] = ['Organizations.id NOT IN' => $this->People->Users->find('all', ['fields' => 'organization_id',
                         'conditions' => ['organization_id IS NOT' => null]])];
-        
+
         if ($options['local_only']) {
-            $condition[] = ['id =' => $options['organization_id']];         
+            $condition[] = ['id =' => $options['organization_id']];
         }
         return $this->find('list')->where($condition);
     }
-    
+
     /**
      * Encontra a organização na qual um gestor pode dar permissões
-     * 
+     *
      * @param Query $query
      * @param array $options
      * @return type
      */
     public function findAllowed(Query $query, array $options) {
         $condition = ['name IS NOT' => null];
-        
+
         if($options['local_only']) {
-            $condition = ['id' => $options['organization_id']];         
+            $condition = ['id' => $options['organization_id']];
         }
         return $this->find('list')->where($condition);
     }

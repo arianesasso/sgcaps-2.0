@@ -1,11 +1,11 @@
 <?php
 if(!empty($user['person_id'])) {
     $userDataUrl = $this->Url->build(["controller" => "profissional",
-                                      "action" => "visualizar", 
+                                      "action" => "visualizar",
                                       $user['person_id'], 'person']);
 } else {
     $userDataUrl = $this->Url->build(["controller" => "organizacao",
-                                      "action" => "visualizar", 
+                                      "action" => "visualizar",
                                       $user['organization_id']]);
 }
 
@@ -19,25 +19,6 @@ if(!empty($user['person_id'])) {
             <div class="row">
                 <div class="col-xs-12 top-panel-right">
                     <ul class="nav navbar-nav pull-right panel-menu">
-<!--                        <li class="hidden-xs">
-                            <a href="#" class="modal-link">
-                                <i class="fa fa-bell"></i>
-                                <span class="badge">7</span>
-                            </a>
-                        </li>
-                        <li class="hidden-xs">
-                            <a class="ajax-link" href="#">
-                                <i class="fa fa-calendar"></i>
-                                <span class="badge">1</span>
-                            </a>
-                        </li>
-                        <li class="hidden-xs">
-                            <a href="#" class="ajax-link">
-                                <i class="fa fa-envelope"></i>
-                                <span class="badge">7</span>
-                            </a>
-                        </li>
--->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
                                 <div class="avatar">
@@ -68,26 +49,6 @@ if(!empty($user['person_id'])) {
                                         <span><?= __('Mudar senha') ?></span>
                                     </a>
                                 </li>
-<!-- 
-                                 <li>
-                                    <a href="#">
-                                        <i class="fa fa-calendar"></i>
-                                        <span>Calendário</span>
-                                    </a>
-                                </li>
-                           <li>
-                                    <a href="#" class="ajax-link">
-                                        <i class="fa fa-envelope"></i>
-                                        <span><?= __('Mensagens') ?></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ajax-link">
-                                        <i class="fa fa-tasks"></i>
-                                        <span>Tarefas</span>
-                                    </a>
-                                </li>
--->
                                 <li>
                                     <a href="<?php echo $this->Url->build([
                                                     "controller" => "usuario",

@@ -25,7 +25,7 @@ class CreateUsersTable extends AbstractMigration {
                 ->addColumn('organization_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('username', 'string', ['length' => 60, 'null' => false])
                 ->addColumn('password', 'string', ['length' => 256, 'null' => false])
-                ->addColumn('active', 'boolean', ['null' => false, 'default' => 1])
+                ->addColumn('active', 'boolean', ['null' => false, 'default' => true])
                 ->addColumn('created', 'datetime', ['null' => false])
                 ->addColumn('modified', 'datetime', ['null' => false])
                 ->addColumn('admin_id', 'integer', ['null' => true, 'default' => null])

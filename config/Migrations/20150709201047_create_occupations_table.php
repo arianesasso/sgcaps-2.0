@@ -16,7 +16,7 @@ class CreateOccupationsTable extends AbstractMigration
     {
     }
     */
-    
+
     /**
      * Migrate Up.
      */

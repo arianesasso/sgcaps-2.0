@@ -7,14 +7,14 @@
         <?= $this->Html->meta('keywords', 'keywords'); ?>
         <?= $this->Html->meta('viewport', 'width=device-width, initial-scale=1'); ?>
         <?= $this->Html->meta('icon') ?>
-        
+
         <title>
             <?= 'SGCaps' ?>
         </title>
 
         <?= $this->Html->css('devoops/bootstrap') ?>
         <?= $this->Html->css('devoops/jquery-ui.min') ?>
-        <?= $this->Html->css('devoops/font-awesome') ?>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <?= $this->Html->css('devoops/righteous.css') ?>
         <?= $this->Html->css('devoops/jquery.fancybox') ?>
         <?= $this->Html->css('devoops/style_v1') ?>
@@ -62,7 +62,7 @@
                 <div id="content" class="col-xs-12 col-sm-10">
                     <?= $this->element('Dashboard/bread_crumbs', ['user' => $user]); ?>
                     <div id ="ajax-contet">
-                        <?= $this->Flash->render() ?>   
+                        <?= $this->Flash->render() ?>
                         <?= $this->fetch('content') ?>
                     </div>
                 </div>

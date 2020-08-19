@@ -5,7 +5,7 @@
             <i class="fa fa-bars"></i>
         </a>
         <ol class="breadcrumb pull-left">
-            <li>    
+            <li>
                 <span class="breadcrumb-text"><strong>Unidade:</strong></span>
                 <span class="breadcrumb-text"><?php echo $user['organization']['name']; ?></span>
             </li>

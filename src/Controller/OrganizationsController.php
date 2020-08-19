@@ -9,7 +9,7 @@ use App\Controller\AppController;
  * @property \App\Model\Table\OrganizationsTable $Organizations
  */
 class OrganizationsController extends AppController {
-    
+
     public function isAuthorized($user) {
         parent::isAuthorized($user);
         $actions = $this->request->session()->read('Auth.User.actions');
@@ -43,8 +43,8 @@ class OrganizationsController extends AppController {
     public function showNoUserList() {
         if (!$this->request->is('ajax')) {
             $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
-        } 
-        $this->viewBuilder()->layout('ajax');
+        }
+        $this->viewBuilder()->setLayout('ajax');
         $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
         if(in_array('cadastrar_usuario_local', $actions)) {

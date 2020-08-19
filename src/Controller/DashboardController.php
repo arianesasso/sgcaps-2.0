@@ -9,7 +9,7 @@ use App\Controller\AppController;
  *
  */
 class DashboardController extends AppController {
-    
+
     public function isAuthorized($user) {
         parent::isAuthorized($user);
         return true;
@@ -22,7 +22,7 @@ class DashboardController extends AppController {
      * @return void
      */
     public function index() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
     }
 
 }

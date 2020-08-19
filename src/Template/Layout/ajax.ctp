@@ -13,7 +13,5 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<?= $this->Flash->render() ?>   
+<?= $this->Flash->render() ?>
 <?= $this->fetch('content') ?>
-    
-

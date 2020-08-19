@@ -7,7 +7,7 @@ use App\Controller\AppController;
 /**
  * Controller para gerenciar profissionais
  * Professionals Controller
- * 
+ *
  * @property \App\Model\Table\ProfessionalsTable $Professionals
  */
 class ProfessionalsController extends AppController {
@@ -22,7 +22,7 @@ class ProfessionalsController extends AppController {
         }
         return $this->UserPermissions->isAuthorized($actions, $controller, $action);
     }
-    
+
     /**
      * Métododo que lista todos os profissionais cadastrados
      * Method that lists all the registered professionals
@@ -30,7 +30,7 @@ class ProfessionalsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $this->set('professionals', $this->Professionals->find('all', ['contain' => ['People', 'States']]));
         $this->set('_serialize', ['professionals']);
     }
@@ -45,7 +45,7 @@ class ProfessionalsController extends AppController {
         if (!$this->request->is('ajax')) {
             $this->redirect(['controller' => 'usuario', 'action' => 'sem-permissao']);
         }
-        $this->viewBuilder()->layout('ajax');
+        $this->viewBuilder()->setLayout('ajax');
         $actions = $this->request->session()->read('Auth.User.actions');
         $organizationId = $this->request->session()->read('Auth.User.organization.id');
         if(in_array('cadastrar_usuario_local', $actions)) {
@@ -67,18 +67,22 @@ class ProfessionalsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null, $type = null) {
-        $this->viewBuilder()->layout('devoops_complete');
-        
+        $this->viewBuilder()->setLayout('devoops_complete');
+
         if(empty($type)) {
-            $professional = $this->Professionals->get($id, [
-                'contain' => ['People', 'States', 'People.States', 'People.Occupations']
-            ]);
+            $professional = $this->Professionals->find('all',
+                                  ['conditions' => [$id],
+                                   'contain' => ['People', 'States', 'People.States',
+                                            'People.Occupations']
+                                  ])
+                                 ->first();
         } else {
-            $professional = $this->Professionals->findByPersonId($id)  
-                                 ->contain(['People', 'States', 'People.States', 
+            $professional = $this->Professionals->findByPersonId($id)
+                                 ->contain(['People', 'States', 'People.States',
                                             'People.Occupations'])
                                  ->first();
         }
+        pr('fuck this shit');
         $this->set('professional', $professional);
         $this->set('_serialize', ['professional']);
     }
@@ -91,7 +95,7 @@ class ProfessionalsController extends AppController {
      *              Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $this->viewBuilder()->layout('devoops_complete');
+        $this->viewBuilder()->setLayout('devoops_complete');
         $professional = $this->Professionals->newEntity();
         // Se for um POST irá salvar o registro
         if ($this->request->is('post')) {
@@ -99,7 +103,7 @@ class ProfessionalsController extends AppController {
             $this->request->data['person']['organizations'] = [['id' => $this->request->session()->read('Auth.User.organization.id')]];
             // É preciso declarar a assoçiacão para que se salve corretamente
             // na tabela organizations_people
-            $professional = $this->Professionals->patchEntity($professional, 
+            $professional = $this->Professionals->patchEntity($professional,
                     $this->request->data, ['associated' => ['People.Organizations']]);
             // Salva o registro
             if ($this->Professionals->save($professional)) {

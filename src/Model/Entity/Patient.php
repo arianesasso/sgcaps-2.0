@@ -23,19 +23,19 @@ class Patient extends Entity
         'observation' => true,
         'person' => true,
     ];
-    
+
     protected function _setObservation($value) {
         return empty($value)? null : trim($value);
     }
-    
+
     protected function _setMaritalStatus($value) {
         return empty($value)? null : $value;
     }
-    
+
     protected function _setEthnicity($value) {
         return empty($value)? null : $value;
     }
-    
+
     protected function _setCns($value) {
         return empty($value)? null : str_replace('_','',trim($value));
     }

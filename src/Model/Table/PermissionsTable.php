@@ -21,9 +21,9 @@ class PermissionsTable extends Table {
      * @return void
      */
     public function initialize(array $config) {
-        $this->table('permissions');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('permissions');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
@@ -54,11 +54,9 @@ class PermissionsTable extends Table {
         $validator
                 ->add('id', 'valid', ['rule' => 'numeric'])
                 ->allowEmpty('id', 'create');
-        
         $validator
                 ->requirePresence('organization_id', 'create')
                 ->notEmpty('organization_id', 'Campo obrigatório');
-        
         $validator
                 ->requirePresence('role_id', 'create')
                 ->notEmpty('role_id', 'Campo obrigatório');
@@ -76,7 +74,7 @@ class PermissionsTable extends Table {
                                  'biggerThanBeginning' => ['rule' => [$this, 'compareDates'],  'on'=> 'create', 'message' => 'Esta data deve ser maior que a data de início']
                                 ])
                 ->allowEmpty('ending');
-        
+
         return $validator;
     }
 
@@ -94,11 +92,11 @@ class PermissionsTable extends Table {
         $rules->add($rules->existsIn(['admin_id'], 'Users'));
         return $rules;
     }
-    
+
     /**
      * Verifica se a data escolhida para início ou fim de uma dada permissão
      * não é menor do que a data atual
-     * 
+     *
      * @param type $field Data de início ou fim de uma dada permissão
      * @return boolean
      */
@@ -110,10 +108,10 @@ class PermissionsTable extends Table {
         }
         return true;
     }
-    
+
     /**
      * Verifica se a data final da validade é maior que a data de início
-     * 
+     *
      * @param type $field Data de fim da validade
      * @param type $record Todas as informações relativas a permissão
      * @return boolean
@@ -130,7 +128,7 @@ class PermissionsTable extends Table {
     /**
      * Finds the user validy roles for a given organization
      * Encontra os papéis válidos de um usuário em uma dada organização
-     * 
+     *
      * @param Query $query
      * @param array $options
      * @return type
@@ -156,7 +154,7 @@ class PermissionsTable extends Table {
     /**
      * Finds the Organizations in which the user has validy permissions
      * Encontra as organizações nas quais o usuário tem permissões válidas
-     * 
+     *
      * @param Query $query
      * @param array $options
      * @return type
@@ -176,11 +174,11 @@ class PermissionsTable extends Table {
                                 ])
                         ->contain('Organizations');
     }
-    
+
     /**
      * Finds if the permission that is going to be granted is still valid
      * Descobre se a permissão a ser garantida é válida ainda
-     * 
+     *
      * @param Query $query
      * @param array $options
      * @return type
@@ -203,18 +201,18 @@ class PermissionsTable extends Table {
                                          ],
                                   ]);
     }
-    
+
     /**
      * Finds the validy permissions a user can see.
-     * If $option['local_only'] == false the user can see all permissions an user 
-     * Otherwise he/she can only see the permissions that the user has in 
+     * If $option['local_only'] == false the user can see all permissions an user
+     * Otherwise he/she can only see the permissions that the user has in
      * her/his current unit.
-     * 
+     *
      * Encontra as permissões válidas que um gestor pode ver.
      * Se $option['local_only'] == true o usuário poderá ver todas as permissões de um usuário.
      * Caso contrário, ele só poderá ver as permissões do usuário na unidade na qual
      * está logado.
-     * 
+     *
      * @param Query $query
      * @param array $options
      * @return type
@@ -228,7 +226,7 @@ class PermissionsTable extends Table {
                 ])
                 ->contain(['Roles', 'Organizations', 'Admins.People', 'Admins.Organizations'])
                 ->order(['Organizations.name', 'Permissions.beginning']);
-        
+
         if ($options['local_only']) {
             $query = $this->find()->where(['Permissions.user_id' => $options['id'],
                              'Permissions.organization_id' => $options['organization_id'],
