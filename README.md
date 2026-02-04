@@ -95,6 +95,4 @@ nome: admin
 senha: 1234
 ```
 
-* Teste o sistema no Heroku: [SGCaps no Heroku](http://sgcaps.herokuapp.com/) / Try the system on Heroku
-
 * **Note:** most of the comments in the repository and in the code are in Portuguese
